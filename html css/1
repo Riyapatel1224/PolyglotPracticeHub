@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT C</title>
+</head>
+<style>
+     body{
+        background-color: rgba(245, 245, 220, 0.509);
+     }
+     h1{
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.482);
+        color: white;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+      .first{
+        font-size: 25px;
+      }
+      .sec{
+        font-size: 30px;
+        margin-top: 15px; 
+      }
+      .var{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+      ul{
+        font-size: 20px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
+      .third{
+        font-size: 25px;
+        background-color: rgb(68, 45, 45);
+        color: white;
+        width: 530px;
+        height: 30px;
+        border-radius: 20%;
+      }
+      .operaters{
+        margin-left: 40px;
+        font-size: 20px;
+        margin-top: 10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
+</style>
+<body>
+    <h1>INTRODUCTION OF C LANGUAGE</h1>
+    <div>
+         <li class="first">C is very powerful; it has been used to develop operating systems, databases, applications, etc.
+         </li>
+         <li class="sec">Types of Variables:-
+            <ul class="var">* Int</ul>
+            <ul class="var">* Char</ul>
+            <ul class="var">* Float</ul>
+         </li>
+         <li class="third">C devides the operaters in to following groups.
+            <li class="operaters">Arithmetic operators</li>
+            <li class="operaters">Assignment operators</li>
+            <li class="operaters">Comparison operators</li>
+            <li class="operaters">Logical operators</li>
+            <li  class="operaters">Bitwise operators</li>
+         </li>
+    </div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+SQL> 
+SQL> REM NUMBER FUNCTIONS : POWER SQRT  MOD  FLOOR CEIL   TRUNC ROUND
+SQL> 
+SQL> 
+SQL> SELECT 4961.27 , TRUNC(4961.27) FROM DUAL;
+
+   4961.27 TRUNC(4961.27)                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+   4961.27           4961                                                                                                                                                                               
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,0) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,0)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27             4961                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,1) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,1)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27           4961.2                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,2) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,2)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27          4961.27                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,3) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,3)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27          4961.27                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,-1) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,-1)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27              4960                                                                                                                                                                            
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,-2) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,-2)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27              4900                                                                                                                                                                            
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,-3) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,-3)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27              4000                                                                                                                                                                            
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,-4) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,-4)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27                 0                                                                                                                                                                            
+
+SQL> SELECT 4961.27 , TRUNC(4961.27,-5) FROM DUAL;
+
+   4961.27 TRUNC(4961.27,-5)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27                 0                                                                                                                                                                            
+
+SQL> 
+SQL> 
+SQL> REM NUMBER SYSTEM : DECIMAL NUMBER SYSTEM
+SQL> 
+SQL> REM BASE VALUE : 10
+SQL> 
+SQL> REM AVAILABLE DIGITS : 0 - 9
+SQL> 
+SQL> REM FIRST HALF : 0 1 2 3 4
+SQL> 
+SQL> REM SECOND HALF : 5 6 7 8 9
+SQL> 
+SQL> REM IF DIGIT TO BE COMPARED FALLS IN FIRST HALF, NO CHANGE TO PREVIOUS DIGIT
+SQL> 
+SQL> REM IF DIGIT TO BE COMPARED FALLS IN SECOND HALF, ADD 1 TO PREVIOUS DIGIT
+SQL> 
+SQL> 
+SQL> SELECT 4961.27 , ROUND(4961.27) FROM DUAL;
+
+   4961.27 ROUND(4961.27)                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+   4961.27           4961                                                                                                                                                                               
+
+SQL> SELECT 4961.27 , ROUND(4961.27,0) FROM DUAL;
+
+   4961.27 ROUND(4961.27,0)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27             4961                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , ROUND(4961.27,1) FROM DUAL;
+
+   4961.27 ROUND(4961.27,1)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27           4961.3                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , ROUND(4961.27,2) FROM DUAL;
+
+   4961.27 ROUND(4961.27,2)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27          4961.27                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , ROUND(4961.27,3) FROM DUAL;
+
+   4961.27 ROUND(4961.27,3)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4961.27          4961.27                                                                                                                                                                             
+
+SQL> SELECT 4961.27 , ROUND(4961.27,-1) FROM DUAL;
+
+   4961.27 ROUND(4961.27,-1)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27              4960                                                                                                                                                                            
+
+SQL> SELECT 4961.27 , ROUND(4961.27,-2) FROM DUAL;
+
+   4961.27 ROUND(4961.27,-2)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4961.27              5000                                                                                                                                                                            
+
+SQL> SELECT 4861.27 , ROUND(4861.27,-2) FROM DUAL;
+
+   4861.27 ROUND(4861.27,-2)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4861.27              4900                                                                                                                                                                            
+
+SQL> SELECT 4861.27 , ROUND(4861.27,-3) FROM DUAL;
+
+   4861.27 ROUND(4861.27,-3)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4861.27              5000                                                                                                                                                                            
+
+SQL> SELECT 4861.27 , ROUND(4861.27,-4) FROM DUAL;
+
+   4861.27 ROUND(4861.27,-4)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4861.27                 0                                                                                                                                                                            
+
+SQL> SELECT 6861.27 , ROUND(6861.27,-4) FROM DUAL;
+
+   6861.27 ROUND(6861.27,-4)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   6861.27             10000                                                                                                                                                                            
+
+SQL> SELECT TRUNC(67,-2) FROM DUAL;
+
+TRUNC(67,-2)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           0                                                                                                                                                                                            
+
+SQL> SELECT ROUND(67,-2) FROM DUAL;
+
+ROUND(67,-2)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+         100                                                                                                                                                                                            
+
+SQL> SELCT ROUND(9987,-3) FROM DUAL;
+SP2-0734: unknown command beginning "SELCT ROUN..." - rest of line ignored.
+SQL> SELECT ROUND(9987,-3) FROM DUAL;
+
+ROUND(9987,-3)                                                                                                                                                                                          
+--------------                                                                                                                                                                                          
+         10000                                                                                                                                                                                          
+
+SQL> REM POWER  SQRT  MOD   FLOOR   CEIL   TRUNC   ROUND
+SQL> 
+SQL> REM DATE FUNCTIONS :
+SQL> 
+SQL> REM LIST OF DATE FUNCTIONS :
+SQL> 
+SQL> 
+SQL> SPOOL OFF

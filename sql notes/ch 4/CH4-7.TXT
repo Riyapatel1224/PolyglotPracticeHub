@@ -1,0 +1,510 @@
+SQL> 
+SQL> REM TO_DATE : TO CONVERT CHARACTER TYPE VALUE INTO DATE TYPE VALUE
+SQL> 
+SQL> REM TO_DATE SYNTAX : TO_DATE('VALUE' , 'FORMAT')
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : D DD DDD dy Dy DY day Day DAY
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : MM RM Rm rm mon Mon MON month Month MONTH
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : Y YY YYY YYYY RR RRRR YEAR
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : W WW Q J
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID FORMAT CHARACTERS : am Am AM a.m. A.M. pm Pm PM p.m. P.M.
+SQL> 
+SQL> 
+SQL> REM TO_DATE : 1 FOR CALCULATION 2 FOR COMPARISON
+SQL> 
+SQL> REM EXAMPLES OF FOR CALCULATION
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE       DAYS                                                                                                                                                          
+--------------- --------- --------- ----------                                                                                                                                                          
+Steven          11-SEP-23 17-JUL-87 13205.6382                                                                                                                                                          
+Neena           11-SEP-23 21-SEP-89 12408.6382                                                                                                                                                          
+Lex             11-SEP-23 13-JAN-93 11198.6382                                                                                                                                                          
+Alexander       11-SEP-23 03-JAN-90 12304.6382                                                                                                                                                          
+Bruce           11-SEP-23 21-MAY-91 11801.6382                                                                                                                                                          
+Diana           11-SEP-23 07-FEB-99 8982.63823                                                                                                                                                          
+Kevin           11-SEP-23 16-NOV-99 8700.63823                                                                                                                                                          
+Trenna          11-SEP-23 17-OCT-95 10191.6382                                                                                                                                                          
+Curtis          11-SEP-23 29-JAN-97 9721.63823                                                                                                                                                          
+Randall         11-SEP-23 15-MAR-98 9311.63823                                                                                                                                                          
+Peter           11-SEP-23 09-JUL-98 9195.63823                                                                                                                                                          
+Eleni           11-SEP-23 29-JAN-00 8626.63823                                                                                                                                                          
+Ellen           11-SEP-23 11-MAY-96 9984.63823                                                                                                                                                          
+Jonathon        11-SEP-23 24-MAR-98 9302.63823                                                                                                                                                          
+Kimerely        11-SEP-23 24-MAY-99 8876.63823                                                                                                                                                          
+Jennifer        11-SEP-23 17-SEP-87 13143.6382                                                                                                                                                          
+Michael         11-SEP-23 17-FEB-96 10068.6382                                                                                                                                                          
+Pat             11-SEP-23 17-AUG-97 9521.63823                                                                                                                                                          
+Shelley         11-SEP-23 07-JUN-94 10688.6382                                                                                                                                                          
+William         11-SEP-23 07-JUN-94 10688.6382                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) COMPLED_DAYS FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE COMPLED_DAYS                                                                                                                                                        
+--------------- --------- --------- ------------                                                                                                                                                        
+Steven          11-SEP-23 17-JUL-87        13205                                                                                                                                                        
+Neena           11-SEP-23 21-SEP-89        12408                                                                                                                                                        
+Lex             11-SEP-23 13-JAN-93        11198                                                                                                                                                        
+Alexander       11-SEP-23 03-JAN-90        12304                                                                                                                                                        
+Bruce           11-SEP-23 21-MAY-91        11801                                                                                                                                                        
+Diana           11-SEP-23 07-FEB-99         8982                                                                                                                                                        
+Kevin           11-SEP-23 16-NOV-99         8700                                                                                                                                                        
+Trenna          11-SEP-23 17-OCT-95        10191                                                                                                                                                        
+Curtis          11-SEP-23 29-JAN-97         9721                                                                                                                                                        
+Randall         11-SEP-23 15-MAR-98         9311                                                                                                                                                        
+Peter           11-SEP-23 09-JUL-98         9195                                                                                                                                                        
+Eleni           11-SEP-23 29-JAN-00         8626                                                                                                                                                        
+Ellen           11-SEP-23 11-MAY-96         9984                                                                                                                                                        
+Jonathon        11-SEP-23 24-MAR-98         9302                                                                                                                                                        
+Kimerely        11-SEP-23 24-MAY-99         8876                                                                                                                                                        
+Jennifer        11-SEP-23 17-SEP-87        13143                                                                                                                                                        
+Michael         11-SEP-23 17-FEB-96        10068                                                                                                                                                        
+Pat             11-SEP-23 17-AUG-97         9521                                                                                                                                                        
+Shelley         11-SEP-23 07-JUN-94        10688                                                                                                                                                        
+William         11-SEP-23 07-JUN-94        10688                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT '15-AUG-47' - '31-MAY-44' FROM DUAL;
+SELECT '15-AUG-47' - '31-MAY-44' FROM DUAL
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_DATE('15-AUG-47') - TO_DATE('31-MAY-44') FROM DUAL;
+
+TO_DATE('15-AUG-47')-TO_DATE('31-MAY-44')                                                                                                                                                               
+-----------------------------------------                                                                                                                                                               
+                                     1171                                                                                                                                                               
+
+SQL> SELECT TO_DATE('15-AUG-47') - TO_DATE('31-MAY-44') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1171                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15-AUGUST-47') - TO_DATE('31-MAY-44') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1171                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15-AUGUST-1947') - TO_DATE('31-MAY-44') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+    -35354                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15-AUGUST-1947') - TO_DATE('31-MAY-1944') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1171                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15-AugusT-1947') - TO_DATE('31-MAY-1944') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1171                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15\AugusT/1947') - TO_DATE('31-MAY-1944') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1171                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15\08/1947') - TO_DATE('31-MAY-1944') DAYS FROM DUAL;
+SELECT TO_DATE('15\08/1947') - TO_DATE('31-MAY-1944') DAYS FROM DUAL
+               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT TO_DATE('15\08/1947','dd/mm\rrrr') - TO_DATE('31-MAY-1944') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      1171                                                                                                                                                                                              
+
+SQL> REM FOR COMPARISON FORMAT :
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE >= '31-DEC-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-1995';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DECember-1995';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DECember1995';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31DECember1995';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '95DECember31';
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '95DECember31'
+                                                               *
+ERROR at line 1:
+ORA-01847: day of month must be between 1 and last day of month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('95DECember31','YYMONTHDD');
+
+no rows selected
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('95DECember31','RRMONTHDD');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('95-12-31','RRMMDD');
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('95-12-31','RRMMDD')
+                                                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('95-12-31','RR-MM-DD');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> REM 1 FIND AGE DIFFERENCE BETWEEN YOU AND YOUR MOM. (USE DEFAULT FORMATS)
+SQL> 
+SQL> REM 2 FIND AGE DIFFERENCE BETWEEN YOU AND YOUR MOM. (USE DIFFERENT COMPATIBLE FORMATS)
+SQL> 
+SQL> REM 3 FIND AGE DIFFERENCE BETWEEN YOU AND YOUR MOM. (USE DIFFERENT INCOMPATIBLE FORMATS)
+SQL> 
+SQL> REM 4 FIND THOSE WHO WERE HIRED BEFORE YEAR 96. (USE DEFAULT FORMAT)
+SQL> 
+SQL> REM 5 FIND THOSE WHO WERE HIRED IN YEAR 96 OR AFTER. (USE COMPATIBLE FORMAT)
+SQL> 
+SQL> REM 6 FIND THOSE WHO WERE HIRED BETWEEN YEARS 93 AND 98. (USE INCOMPATIBLE FORMATS)
+SQL> 
+SQL> REM 7 FIND ALL OTHER THAN THOSE WHO WERE HIRED BETWEEN YEARS 93 AND 98. (USE COMPATIBLE AND INCOMPATIBLE FORMATS, DON'T USE SPECIAL OPERATOR)
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 FIND AGE DIFFERENCE BETWEEN YOU AND YOUR MOM. (USE DEFAULT FORMATS)
+SQL> 
+SQL> SELECT TO_DATE(15-JAN-71') - TO_DATE('15-AUG-47') DAYS FROM DUAL;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT TO_DATE('15-JAN-71') - TO_DATE('15-AUG-47') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+    -27971                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('15-JAN-1971') - TO_DATE('15-AUG-1947') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      8554                                                                                                                                                                                              
+
+SQL> REM 2 FIND AGE DIFFERENCE BETWEEN YOU AND YOUR MOM. (USE DIFFERENT COMPATIBLE FORMATS)
+SQL> 
+SQL> SELECT TO_DATE('15-JANUARY-1971') - TO_DATE('15august1947') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      8554                                                                                                                                                                                              
+
+SQL> REM 3 FIND AGE DIFFERENCE BETWEEN YOU AND YOUR MOM. (USE DIFFERENT INCOMPATIBLE FORMATS)
+SQL> 
+SQL> SELECT TO_DATE('15-JANUARY-1971') - TO_DATE('15-08-1947','DD-MM-RRRR') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      8554                                                                                                                                                                                              
+
+SQL> REM 4 FIND THOSE WHO WERE HIRED BEFORE YEAR 96. (USE DEFAULT FORMAT)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> REM 5 FIND THOSE WHO WERE HIRED IN YEAR 96 OR AFTER. (USE COMPATIBLE FORMAT)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE >= '01-JANUARY96';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> REM 6 FIND THOSE WHO WERE HIRED BETWEEN YEARS 93 AND 98. (USE INCOMPATIBLE FORMATS)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN TO_DATE('01011993','DDMMRRRR') AND TO_DATE('1998-DEC-31','YYYY-MON-DD');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> REM 7 FIND ALL OTHER THAN THOSE WHO WERE HIRED BETWEEN YEARS 93 AND 98. (USE COMPATIBLE AND INCOMPATIBLE FORMATS, DON'T USE SPECIAL OPERATOR)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('01011993','DDMMRRRR') OR HIRE_DATE > TO_DATE('1998-DEC-31','YYYY-MON-DD');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE NOT (HIRE_DATE < TO_DATE('01011993','DDMMRRRR') AND HIRE_DATE > TO_DATE('1998-DEC-31','YYYY-MON-DD'));
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE NOT (HIRE_DATE > TO_DATE('01011993','DDMMRRRR') AND HIRE_DATE < TO_DATE('1998-DEC-31','YYYY-MON-DD'));
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('01011993','DDMMRRRR') OR HIRE_DATE > TO_DATE('1998-DEC-31','YYYY-MON-DD');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> REM 7 FIND ALL OTHER THAN THOSE WHO WERE HIRED BETWEEN YEARS 93 AND 98. (USE COMPATIBLE AND INCOMPATIBLE FORMATS, DON'T USE SPECIAL OPERATOR)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE NOT HIRE_DATE >= TO_DATE('01011993','DDMMRRRR') OR NOT HIRE_DATE <= TO_DATE('1998-DEC-31','YYYY-MON-DD');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SPOOL OFF

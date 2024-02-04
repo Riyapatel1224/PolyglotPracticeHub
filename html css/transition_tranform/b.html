@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: rgb(210, 225, 210);
+        }
+        .box1{
+            width: 250px;
+            height: 250px;
+            border: 2px  rgb(226, 153, 165);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(220, 115, 83, 0.295);
+        }
+        .box1in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(226, 153, 165);
+            background-color: rgb(226, 153, 165);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+            box-shadow: 2px 2px 2px 2px rgba(220, 115, 83, 0.295);
+        }
+
+        .box1in:hover{
+            background-color: rgb(226, 153, 165);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+
+        .box2{
+            width: 250px;
+            height: 250px;
+            border: 2px  cadetblue;
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(95, 158, 160, 0.291);
+
+        }
+        .box2in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid cadetblue;
+            background-color: cadetblue;
+            box-shadow: 2px 2px 2px 2px rgba(95, 158, 160, 0.291);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box2in:hover{
+            background-color: cadetblue;
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+
+        .box3{
+            width: 250px;
+            height: 250px;
+            border: 2px rgb(68, 115, 209);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(68, 115, 209, 0.295);
+
+        }
+        .box3in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(68, 115, 209);
+            box-shadow: 2px 2px 2px 2px rgba(68, 115, 209, 0.295);
+            background-color: rgb(68, 115, 209);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box3in:hover{
+            background-color: rgb(68, 115, 209);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+
+        .box4{
+            width: 250px;
+            height: 250px;
+            border: 2px rgb(195, 117, 231);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(195, 117, 231, 0.295);
+
+        }
+        .box4in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(195, 117, 231);
+            box-shadow: 2px 2px 2px 2px rgba(195, 117, 231, 0.295);
+            background-color: rgb(195, 117, 231);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box4in:hover{
+            background-color: rgb(195, 117, 231);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+        
+        .box5{
+            width: 250px;
+            height: 250px;
+            border: 2px rgb(90, 49, 108);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(90, 49, 108, 0.295);
+
+        }
+        .box5in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(90, 49, 108);
+            box-shadow: 2px 2px 2px 2px rgba(90, 49, 108, 0.295);
+            background-color: rgb(90, 49, 108);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box5in:hover{
+            background-color: rgb(90, 49, 108);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+
+        .box6{
+            width: 250px;
+            height: 250px;
+            border: 2px rgb(34, 74, 75);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(34, 74, 75, 0.295);
+
+        }
+        .box6in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(34, 74, 75);
+            box-shadow: 2px 2px 2px 2px rgba(34, 74, 75, 0.295);
+            background-color: rgb(34, 74, 75);
+
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box6in:hover{
+            background-color: rgb(34, 74, 75);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+        .box7{
+            width: 250px;
+            height: 250px;
+            border: 2px rgb(115, 176, 106);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(115, 176, 106, 0.295);
+
+        }
+        .box7in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(115, 176, 106);
+            box-shadow: 2px 2px 2px 2px rgba(115, 176, 106, 0.295);
+            background-color: rgb(115, 176, 106);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box7in:hover{
+            background-color: rgb(115, 176, 106);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+
+        .box8{
+            width: 250px;
+            height: 250px;
+            border: 2px rgb(172, 93, 109);
+            float: left;
+            margin: 90px 60px 20px 20px;
+            box-shadow: 3px 3px 3px 3px rgba(172, 93, 109, 0.295);
+
+        }
+        .box8in{
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgb(172, 93, 109);
+            box-shadow: 2px 2px 2px 2px rgba(172, 93, 109, 0.295);
+            background-color: rgb(172, 93, 109);
+            border-radius: 50px;
+            transition-property: 5s;
+            transition-duration: 1s;
+        }
+
+        .box8in:hover{
+            background-color: rgb(172, 93, 109);
+            height: 247px;
+            width: 247px;
+            border-radius: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="box1">
+        <div class="box1in">
+
+        </div>
+    </div>
+
+    <div class="box2">
+        <div class="box2in">
+
+        </div>
+    </div>
+    
+    <div class="box3">
+        <div class="box3in">
+
+        </div>
+    </div>
+
+    <div class="box4">
+        <div class="box4in">
+
+        </div>
+    </div>
+    
+    
+    <div class="box5">
+        <div class="box5in">
+
+        </div>
+    </div>
+
+    <div class="box6">
+        <div class="box6in">
+
+        </div>
+    </div>
+
+    <div class="box7">
+        <div class="box7in">
+
+        </div>
+    </div>
+
+    <div class="box8">
+        <div class="box8in">
+
+        </div>
+    </div>
+    
+</body>
+</html>

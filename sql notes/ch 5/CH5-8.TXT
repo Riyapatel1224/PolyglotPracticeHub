@@ -1,0 +1,437 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM DISPLAY DEPARTMENT_ID WISE SUM_OF_SAL_IT_PROG , SUM_OF_SAL_ST_CLERK , SUM_OF_SAL_SA_REP
+SQL> 
+SQL> 
+SQL> SELECT DEPARTMENT_ID , SUM(CASE WHEN JOB_ID = 'IT_PROG' THEN SALARY END) IT_PROG_SUM_SAL,
+  2                         SUM(CASE WHEN JOB_ID = 'ST_CLERK' THEN SALARY END) ST_CLERK_SUM_SAL,
+  3                         SUM(CASE WHEN JOB_ID = 'SA_REP' THEN SALARY END) SA_REP_SUM_SAL
+  4  FROM EMPLOYEES
+  5  GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID IT_PROG_SUM_SAL ST_CLERK_SUM_SAL SA_REP_SUM_SAL                   
+------------- --------------- ---------------- --------------                   
+                                                         7000                   
+           90                                                                   
+           20                                                                   
+          110                                                                   
+           50                            11700                                  
+           80                                           19600                   
+           60           19200                                                   
+           10                                                                   
+
+8 rows selected.
+
+SQL> REM MANAGER_ID WISE CNT_DEPT_90 , CNT_DEPT_60   , CNT_DEPT_50   , CNT_DEPT_80
+SQL> 
+SQL> SELECT MANAGER_ID , COUNT(CASE WHEN DEPARTMENT_ID = 90 THEN '*' END) CNT_DEPT_90,
+  2                      COUNT(CASE WHEN DEPARTMENT_ID = 60 THEN '*' END) CNT_DEPT_60,
+  3                      COUNT(CASE WHEN DEPARTMENT_ID = 50 THEN '*' END) CNT_DEPT_50,
+  4                      COUNT(CASE WHEN DEPARTMENT_ID = 80 THEN '*' END) CNT_DEPT_80
+  5  FROM EMPLOYEES
+  6  GROUP BY MANAGER_ID
+  7  ORDER BY 1;
+
+MANAGER_ID CNT_DEPT_90 CNT_DEPT_60 CNT_DEPT_50 CNT_DEPT_80                      
+---------- ----------- ----------- ----------- -----------                      
+       100           2           0           1           1                      
+       101           0           0           0           0                      
+       102           0           1           0           0                      
+       103           0           2           0           0                      
+       124           0           0           4           0                      
+       149           0           0           0           2                      
+       201           0           0           0           0                      
+       205           0           0           0           0                      
+                     1           0           0           0                      
+
+9 rows selected.
+
+SQL> REM DEPARTMENT_ID WISE , MGR_100_MIN_SAL , MGR_124_AVG_SAL , MGR_149_MAX_SAL , MGR_103_SUM_SAL
+SQL> 
+SQL> SELECT DEPARTMENT_ID,
+  2      MIN(DECODE (MANAGER_ID,100,SALARY)) MGR_100_MIN_SALARY,
+  3       AVG(DECODE (MANAGER_ID,124,SALARY)) MGR_124_AVG_SALARY,
+  4       MAX(DECODE (MANAGER_ID,149,SALARY)) MGR_149_MAX_SALARY,
+  5      SUM(DECODE (MANAGER_ID,103,SALARY)) MGR_103_SUM_SALARY
+  6      FROM EMPLOYEES GROUP BY DEPARTMENT_ID ORDER BY 1;
+
+DEPARTMENT_ID MGR_100_MIN_SALARY MGR_124_AVG_SALARY MGR_149_MAX_SALARY          
+------------- ------------------ ------------------ ------------------          
+MGR_103_SUM_SALARY                                                              
+------------------                                                              
+           10                                                                   
+                                                                                
+                                                                                
+           20              13000                                                
+                                                                                
+                                                                                
+           50               5800               2925                             
+                                                                                
+                                                                                
+
+DEPARTMENT_ID MGR_100_MIN_SALARY MGR_124_AVG_SALARY MGR_149_MAX_SALARY          
+------------- ------------------ ------------------ ------------------          
+MGR_103_SUM_SALARY                                                              
+------------------                                                              
+           60                                                                   
+             10200                                                              
+                                                                                
+           80              10500                                 11000          
+                                                                                
+                                                                                
+           90              17000                                                
+                                                                                
+                                                                                
+
+DEPARTMENT_ID MGR_100_MIN_SALARY MGR_124_AVG_SALARY MGR_149_MAX_SALARY          
+------------- ------------------ ------------------ ------------------          
+MGR_103_SUM_SALARY                                                              
+------------------                                                              
+          110                                                                   
+                                                                                
+                                                                                
+                                                                  7000          
+                                                                                
+                                                                                
+
+8 rows selected.
+
+SQL> set lines 240 PAGES 24
+SQL> 
+SQL> R
+  1  SELECT DEPARTMENT_ID,
+  2      MIN(DECODE (MANAGER_ID,100,SALARY)) MGR_100_MIN_SALARY,
+  3       AVG(DECODE (MANAGER_ID,124,SALARY)) MGR_124_AVG_SALARY,
+  4       MAX(DECODE (MANAGER_ID,149,SALARY)) MGR_149_MAX_SALARY,
+  5      SUM(DECODE (MANAGER_ID,103,SALARY)) MGR_103_SUM_SALARY
+  6*     FROM EMPLOYEES GROUP BY DEPARTMENT_ID ORDER BY 1
+
+DEPARTMENT_ID MGR_100_MIN_SALARY MGR_124_AVG_SALARY MGR_149_MAX_SALARY MGR_103_SUM_SALARY                                                                                                                                                       
+------------- ------------------ ------------------ ------------------ ------------------                                                                                                                                                       
+           10                                                                                                                                                                                                                                   
+           20              13000                                                                                                                                                                                                                
+           50               5800               2925                                                                                                                                                                                             
+           60                                                                       10200                                                                                                                                                       
+           80              10500                                 11000                                                                                                                                                                          
+           90              17000                                                                                                                                                                                                                
+          110                                                                                                                                                                                                                                   
+                                                                  7000                                                                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_ID,
+  2       MIN(DECODE (MANAGER_ID,100,SALARY)) "100 MGR SAL MIN",
+  3       AVG(DECODE (MANAGER_ID,124,SALARY)) "124 MGR SALAVG",
+  4       MAX(DECODE (MANAGER_ID,149,SALARY)) "149 MGR SALMAX",
+  5       SUM(DECODE (DEPARTMENT_ID,103,SALARY)) "103 MGR SALSUM"
+  6       FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID 100 MGR SAL MIN 124 MGR SALAVG 149 MGR SALMAX 103 MGR SALSUM                                                                                                                                                                      
+------------- --------------- -------------- -------------- --------------                                                                                                                                                                      
+                                                       7000                                                                                                                                                                                     
+           90           17000                                                                                                                                                                                                                   
+           20           13000                                                                                                                                                                                                                   
+          110                                                                                                                                                                                                                                   
+           50            5800           2925                                                                                                                                                                                                    
+           80           10500                         11000                                                                                                                                                                                     
+           60                                                                                                                                                                                                                                   
+           10                                                                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> SELECT
+  2      DEPARTMENT_ID,
+  3      MIN(CASE WHEN MANAGER_ID = 100 THEN SALARY END) "MGR_100_MIN_SAL",
+  4      AVG(CASE WHEN MANAGER_ID = 124 THEN SALARY END) "MGR_124_AVG_SAL",
+  5      MAX(CASE WHEN MANAGER_ID = 149 THEN SALARY END)  "MGR_149_MAX_SAL",
+  6      SUM(CASE WHEN MANAGER_ID = 103 THEN SALARY END) " MGR_103_SUM_SAL"
+  7  FROM EMPLOYEES
+  8  GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID MGR_100_MIN_SAL MGR_124_AVG_SAL MGR_149_MAX_SAL  MGR_103_SUM_SAL                                                                                                                                                                  
+------------- --------------- --------------- --------------- ----------------                                                                                                                                                                  
+                                                         7000                                                                                                                                                                                   
+           90           17000                                                                                                                                                                                                                   
+           20           13000                                                                                                                                                                                                                   
+          110                                                                                                                                                                                                                                   
+           50            5800            2925                                                                                                                                                                                                   
+           80           10500                           11000                                                                                                                                                                                   
+           60                                                            10200                                                                                                                                                                  
+           10                                                                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> REM 1 HIRE_YEAR_WISE , Q1_CNT    Q2_CNT    Q3_CNT     Q4_CNT
+SQL> 
+SQL> REM 2 HIRE_MONTH_WISE ,  "CNT_0-6000_SALARY"    "CNT6001-11000_SALARY"
+SQL> 
+SQL> REM 3 HIRE_MONTH_WISE     W1_MIN_SAL    W2_AVG_SAL    W3_MAX_SAL     W4_SUM_SAL
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'YYYY') , COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '1' THEN '*' END) "Q1_CNT" ,
+  2          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '2' THEN '*' END) "Q2_CNT" ,
+  3          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '3' THEN '*' END) "Q3_CNT" ,
+  4          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') ='4' THEN '*' END) "Q4_CNT"
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YYYY');
+
+TO_C     Q1_CNT     Q2_CNT     Q3_CNT     Q4_CNT                                                                                                                                                                                                
+---- ---------- ---------- ---------- ----------                                                                                                                                                                                                
+1987          0          0          2          0                                                                                                                                                                                                
+1997          1          0          1          0                                                                                                                                                                                                
+2000          1          0          0          0                                                                                                                                                                                                
+1994          0          2          0          0                                                                                                                                                                                                
+1991          0          1          0          0                                                                                                                                                                                                
+1995          0          0          0          1                                                                                                                                                                                                
+1990          1          0          0          0                                                                                                                                                                                                
+1989          0          0          1          0                                                                                                                                                                                                
+1993          1          0          0          0                                                                                                                                                                                                
+1999          1          1          0          1                                                                                                                                                                                                
+1996          1          1          0          0                                                                                                                                                                                                
+1998          2          0          1          0                                                                                                                                                                                                
+
+12 rows selected.
+
+SQL> .SELECT TO_CHAR(HIRE_DATE,'MM') , COUNT(CASE WHEN SALARY BETWEEN 0 AND 6000 THEN '*' END) "CNT_0-6000_SAL" ,
+SP2-0734: unknown command beginning ".SELECT TO..." - rest of line ignored.
+SQL>         COUNT(CASE WHEN SALARY BETWEEN 6001 AND 11000 THEN '*' END) "CNT_6001-11000_SAL"
+SP2-0734: unknown command beginning "COUNT(CASE..." - rest of line ignored.
+SQL> FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM');
+SP2-0734: unknown command beginning "FROM EMPLO..." - rest of line ignored.
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') , COUNT(CASE WHEN SALARY BETWEEN 0 AND 6000 THEN '*' END) "CNT_0-6000_SAL" ,
+  2          COUNT(CASE WHEN SALARY BETWEEN 6001 AND 11000 THEN '*' END) "CNT_6001-11000_SAL"
+  3  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM');
+
+TO CNT_0-6000_SAL CNT_6001-11000_SAL                                                                                                                                                                                                            
+-- -------------- ------------------                                                                                                                                                                                                            
+09              1                  0                                                                                                                                                                                                            
+08              1                  0                                                                                                                                                                                                            
+07              1                  0                                                                                                                                                                                                            
+01              1                  2                                                                                                                                                                                                            
+11              1                  0                                                                                                                                                                                                            
+05              1                  2                                                                                                                                                                                                            
+02              1                  0                                                                                                                                                                                                            
+10              1                  0                                                                                                                                                                                                            
+03              1                  1                                                                                                                                                                                                            
+06              0                  1                                                                                                                                                                                                            
+
+10 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'YYYY') , COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '1' THEN '*' END) 1_CNT ,
+  2          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '2' THEN '*' END) 2_CNT ,
+  3          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '3' THEN '*' END) 3_CNT ,
+  4          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') ='4' THEN '*' END) 4_CNT
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YYYY');
+SELECT TO_CHAR(HIRE_DATE,'YYYY') , COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '1' THEN '*' END) 1_CNT ,
+                                                                                              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') , MIN(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '1' THEN SALARY END) "W1_MIN_SAL" ,
+  2          AVG(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '2' THEN SALARY END) "W2_AVG_SAL" ,
+  3          MAX(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '3' THEN SALARY END) "W3_MAX_SAL" ,
+  4          SUM(CASE WHEN TO_CHAR(HIRE_DATE,'D') ='4' THEN SALARY END) "W4_SUM_SAL"
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM');
+
+TO W1_MIN_SAL W2_AVG_SAL W3_MAX_SAL W4_SUM_SAL                                                                                                                                                                                                  
+-- ---------- ---------- ---------- ----------                                                                                                                                                                                                  
+09                                                                                                                                                                                                                                              
+08       6000                                                                                                                                                                                                                                   
+07                                                                                                                                                                                                                                              
+01                                       29100                                                                                                                                                                                                  
+11                             5800                                                                                                                                                                                                             
+05                  7000       6000                                                                                                                                                                                                             
+02       4200                                                                                                                                                                                                                                   
+10                             3500                                                                                                                                                                                                             
+03       2600                  8600                                                                                                                                                                                                             
+06                            12000                                                                                                                                                                                                             
+
+10 rows selected.
+
+SQL> TO
+SP2-0042: unknown command "TO" - rest of line ignored.
+SQL> --
+SQL> 09
+SP2-0226: Invalid line number 
+SQL> 08
+SP2-0226: Invalid line number 
+SQL> 07
+SP2-0226: Invalid line number 
+SQL> 01
+  1* SELECT TO_CHAR(HIRE_DATE,'MM') , MIN(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '1' THEN SALARY END) "W1_MIN_SAL" ,
+SQL> 11
+SP2-0226: Invalid line number 
+SQL> 05
+  5* FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM')
+SQL> 02
+  2*         AVG(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '2' THEN SALARY END) "W2_AVG_SAL" ,
+SQL> 10
+SP2-0226: Invalid line number 
+SQL> 03
+  3*         MAX(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '3' THEN SALARY END) "W3_MAX_SAL" ,
+SQL> 06
+SP2-0226: Invalid line number 
+SQL> 
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'YYYY') , COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '1' THEN '*' END) "1_CNT" ,
+  2          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '2' THEN '*' END) "2_CNT" ,
+  3          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '3' THEN '*' END) "3_CNT" ,
+  4          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') ='4' THEN '*' END) "4_CNT"
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YYYY');
+
+TO_C      1_CNT      2_CNT      3_CNT      4_CNT                                                                                                                                                                                                
+---- ---------- ---------- ---------- ----------                                                                                                                                                                                                
+1987          0          0          2          0                                                                                                                                                                                                
+1997          1          0          1          0                                                                                                                                                                                                
+2000          1          0          0          0                                                                                                                                                                                                
+1994          0          2          0          0                                                                                                                                                                                                
+1991          0          1          0          0                                                                                                                                                                                                
+1995          0          0          0          1                                                                                                                                                                                                
+1990          1          0          0          0                                                                                                                                                                                                
+1989          0          0          1          0                                                                                                                                                                                                
+1993          1          0          0          0                                                                                                                                                                                                
+1999          1          1          0          1                                                                                                                                                                                                
+1996          1          1          0          0                                                                                                                                                                                                
+1998          2          0          1          0                                                                                                                                                                                                
+
+12 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') , COUNT(CASE WHEN SALARY BETWEEN 0 AND 6000 THEN '*' END) "0-6000_SAL" ,
+  2          COUNT(CASE WHEN SALARY BETWEEN 6001 AND 11000 THEN '*' END) "6001-11000_SAL"
+  3  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM');
+
+TO 0-6000_SAL 6001-11000_SAL                                                                                                                                                                                                                    
+-- ---------- --------------                                                                                                                                                                                                                    
+09          1              0                                                                                                                                                                                                                    
+08          1              0                                                                                                                                                                                                                    
+07          1              0                                                                                                                                                                                                                    
+01          1              2                                                                                                                                                                                                                    
+11          1              0                                                                                                                                                                                                                    
+05          1              2                                                                                                                                                                                                                    
+02          1              0                                                                                                                                                                                                                    
+10          1              0                                                                                                                                                                                                                    
+03          1              1                                                                                                                                                                                                                    
+06          0              1                                                                                                                                                                                                                    
+
+10 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') , MIN(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '1' THEN SALARY END) W1_MIN_SAL ,
+  2          AVG(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '2' THEN SALARY END) W2_AVG ,
+  3          MAX(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '3' THEN SALARY END) W3_MAX ,
+  4          SUM(CASE WHEN TO_CHAR(HIRE_DATE,'D') ='4' THEN SALARY END) W4_SUM
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM');
+
+TO W1_MIN_SAL     W2_AVG     W3_MAX     W4_SUM                                                                                                                                                                                                  
+-- ---------- ---------- ---------- ----------                                                                                                                                                                                                  
+09                                                                                                                                                                                                                                              
+08       6000                                                                                                                                                                                                                                   
+07                                                                                                                                                                                                                                              
+01                                       29100                                                                                                                                                                                                  
+11                             5800                                                                                                                                                                                                             
+05                  7000       6000                                                                                                                                                                                                             
+02       4200                                                                                                                                                                                                                                   
+10                             3500                                                                                                                                                                                                             
+03       2600                  8600                                                                                                                                                                                                             
+06                            12000                                                                                                                                                                                                             
+
+10 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') , COUNT(CASE WHEN SALARY BETWEEN 0 AND 6000 THEN '*' END) "0-6000_SAL" ,
+  2          COUNT(CASE WHEN SALARY BETWEEN 6001 AND 11000 THEN '*' END) "CNT_6001-11000"
+  3  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM');
+
+TO 0-6000_SAL CNT_6001-11000                                                                                                                                                                                                                    
+-- ---------- --------------                                                                                                                                                                                                                    
+09          1              0                                                                                                                                                                                                                    
+08          1              0                                                                                                                                                                                                                    
+07          1              0                                                                                                                                                                                                                    
+01          1              2                                                                                                                                                                                                                    
+11          1              0                                                                                                                                                                                                                    
+05          1              2                                                                                                                                                                                                                    
+02          1              0                                                                                                                                                                                                                    
+10          1              0                                                                                                                                                                                                                    
+03          1              1                                                                                                                                                                                                                    
+06          0              1                                                                                                                                                                                                                    
+
+10 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'YYYY') , COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '1' THEN '*' END) Q1_CNT ,
+  2          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '2' THEN '*' END) Q2_CNT ,
+  3          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '3' THEN '*' END) Q3_CNT ,
+  4          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') ='4' THEN '*' END) Q4_CNT
+  5          FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YYYY') ORDER BY 1;
+
+TO_C     Q1_CNT     Q2_CNT     Q3_CNT     Q4_CNT                                                                                                                                                                                                
+---- ---------- ---------- ---------- ----------                                                                                                                                                                                                
+1987          0          0          2          0                                                                                                                                                                                                
+1989          0          0          1          0                                                                                                                                                                                                
+1990          1          0          0          0                                                                                                                                                                                                
+1991          0          1          0          0                                                                                                                                                                                                
+1993          1          0          0          0                                                                                                                                                                                                
+1994          0          2          0          0                                                                                                                                                                                                
+1995          0          0          0          1                                                                                                                                                                                                
+1996          1          1          0          0                                                                                                                                                                                                
+1997          1          0          1          0                                                                                                                                                                                                
+1998          2          0          1          0                                                                                                                                                                                                
+1999          1          1          0          1                                                                                                                                                                                                
+2000          1          0          0          0                                                                                                                                                                                                
+
+12 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') ,
+  2      COUNT(CASE WHEN SALARY BETWEEN 0 AND 6000 THEN '*' END) CNT_0-6000_SAL ,
+  3          COUNT(CASE WHEN SALARY BETWEEN 6001 AND 11000 THEN '*' END) CNT_6001-11000_SAL
+  4  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM') ORDER BY 1;
+    COUNT(CASE WHEN SALARY BETWEEN 0 AND 6000 THEN '*' END) CNT_0-6000_SAL ,
+                                                                 *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM') , MIN(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '1' THEN SALARY END) W1_MIN_SAL ,
+  2          AVG(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '2' THEN SALARY END) W2_AVG_SAL ,
+  3          MAX(CASE WHEN TO_CHAR(HIRE_DATE,'D') = '3' THEN SALARY END) W3_MAX_SAL ,
+  4          SUM(CASE WHEN TO_CHAR(HIRE_DATE,'D') ='4' THEN SALARY END) W4_SUM_SAL
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MM') ORDER BY 1;
+
+TO W1_MIN_SAL W2_AVG_SAL W3_MAX_SAL W4_SUM_SAL                                                                                                                                                                                                  
+-- ---------- ---------- ---------- ----------                                                                                                                                                                                                  
+01                                       29100                                                                                                                                                                                                  
+02       4200                                                                                                                                                                                                                                   
+03       2600                  8600                                                                                                                                                                                                             
+05                  7000       6000                                                                                                                                                                                                             
+06                            12000                                                                                                                                                                                                             
+07                                                                                                                                                                                                                                              
+08       6000                                                                                                                                                                                                                                   
+09                                                                                                                                                                                                                                              
+10                             3500                                                                                                                                                                                                             
+11                             5800                                                                                                                                                                                                             
+
+10 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'YYYY') , COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '1' THEN '*' END) "Q1_CNT" ,
+  2          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '2' THEN '*' END) "Q2_CNT" ,
+  3          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') = '3' THEN '*' END) "Q3_CNT" ,
+  4          COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'Q') ='4' THEN '*' END) "Q4_CNT"
+  5  FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YYYY');
+
+TO_C     Q1_CNT     Q2_CNT     Q3_CNT     Q4_CNT                                                                                                                                                                                                
+---- ---------- ---------- ---------- ----------                                                                                                                                                                                                
+1987          0          0          2          0                                                                                                                                                                                                
+1997          1          0          1          0                                                                                                                                                                                                
+2000          1          0          0          0                                                                                                                                                                                                
+1994          0          2          0          0                                                                                                                                                                                                
+1991          0          1          0          0                                                                                                                                                                                                
+1995          0          0          0          1                                                                                                                                                                                                
+1990          1          0          0          0                                                                                                                                                                                                
+1989          0          0          1          0                                                                                                                                                                                                
+1993          1          0          0          0                                                                                                                                                                                                
+1999          1          1          0          1                                                                                                                                                                                                
+1996          1          1          0          0                                                                                                                                                                                                
+1998          2          0          1          0                                                                                                                                                                                                
+
+12 rows selected.
+
+SQL> SPOOL OFF

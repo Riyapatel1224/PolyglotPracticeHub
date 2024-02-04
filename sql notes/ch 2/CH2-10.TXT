@@ -1,0 +1,602 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM ASCII : A-> 65 , B-> 66 ... Z-> 90
+SQL> 
+SQL> REM ASCII : a-> 90 , b-> 91 ... z-> 122
+SQL> 
+SQL> REM DISPLAY THOSE WHOSE FIRST_NAME SPELLING STARTS WITH ALPHABETS
+SQL> 
+SQL> REM ASCII : a-> 97 , b-> 98 ... z-> 122
+SQL> 
+SQL> 
+SQL> REM DISPLAY THOSE WHOSE FIRST_NAME SPELLING STARTS WITH ALPHABETS A - H
+SQL> 
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME < 'I' ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME < 'K' ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+
+8 rows selected.
+
+SQL> REM DISPLAY THOSE WHOSE FIRST_NAME SPELLING STARTS WITH ALPHABETS M - Z.
+SQL> 
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME >= 'M' ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME > 'L' ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+10 rows selected.
+
+SQL> REM DISPLAY ALL WHO WERE HIRED AFTER YEAR 95
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '95';
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '95'
+                                                               *
+ERROR at line 1:
+ORA-01847: day of month must be between 1 and last day of month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > 95;
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > 95
+                                                             *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> REM ORACLE SUPPORTS 3 TYPES OF DATE FORMATS : 1 DEFAULT 2 COMPATIBLE 3 INCOMPATIBLE
+SQL> 
+SQL> REM DEFAULT FORMAT : DD-MON-RR (Rounding yeaR)
+SQL> 
+SQL> REM COMPATIBLE FORMATS : DD/MON/RR DD/MON\RR DDMON/RR DDMONRR  DDMONTHRR DDmOnThRR   DDMONRRR
+SQL> 
+SQL> REM INCOMPATIBLE FORMATS :DD-MM-RR RR-MON-DD  MON-DD-RR  MON-RR-DD  (WILL NOT BE SUPPORTED BY DEFAULT, BUT CAN BE SUPPORTED IF WE USE TO_DATE)
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31/DEC/95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31/DEC\95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31DEC\95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31DEC95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31''DEC''95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31&DEC''95';
+Enter value for dec: 
+old   1: SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31&DEC''95'
+new   1: SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31''95'
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31''95'
+                                                               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DECEMBER-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEcembER-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEc-95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEce-95';
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEce-95'
+                                                               *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEc-1995';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> REM DATE AND YEAR VALUE MUST BE IN DIGITS/NUMBERS AND MONTH MUST BE IN SPELLING
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-12-95';
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31-12-95'
+                                                               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > 'DEC-31-95';
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > 'DEC-31-95'
+                                                               *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '95-DEC-31';
+SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '95-DEC-31'
+                                                               *
+ERROR at line 1:
+ORA-01847: day of month must be between 1 and last day of month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31@DEc@95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_dATE FROM EMPLOYEES WHERE HIRE_DATE > '31"DEc"95';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> REM DATE VALUES ARE FORMAT SENSITIVE BUT NOT CASE SENSITIVE
+SQL> 
+SQL> REM DISPLAY THOSE WHO WERE HIRED BEFORE YEAR 98
+SQL> 
+SQL> REM 1 DEFAULT FORMAT 2 COMPATIBLE 3 INCOMPATIBLE
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-98';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+13 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-98' ORDER BY 1;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+13 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY-98' ORDER BY 1;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+13 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY&98' ORDER BY 1;
+Enter value for 98: 
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY&98' ORDER BY 1
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY' ORDER BY 1
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY' ORDER BY 1
+                                                               *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> REM DISPLAY ALL WHO WERE HIRED AFTER SECOND HALF OF YEAR 99
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > `31-DEC-99';
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > `31-DEC-1999';
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > `DEC-31-99';
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-99';
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+29-JAN-00                                                                                                                                                                                               
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-1999';
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+29-JAN-00                                                                                                                                                                                               
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC&1999';
+Enter value for 1999: 
+old   1: SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC&1999'
+new   1: SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC'
+SELECT HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC'
+                                                  *
+ERROR at line 1:
+ORA-01840: input value not long enough for date format 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM DISPLAY THOSE WHO WERE HIRED BEFORE 4th QUARTER OF YEAR 95
+SQL> 
+SQL> REM DISPLAY THOSE WHO WERE HIRED 1St QUARTER OF YEAR 96
+SQL> 
+SQL> REM DISPLAY THOSE WHO WERE HIRED AFTER 1St QUARTER OF YEAR 96
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-OCT-95' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-MAR-96' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+
+10 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE >= '01-APR-96' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+
+10 rows selected.
+
+SQL> SPOOL OFF

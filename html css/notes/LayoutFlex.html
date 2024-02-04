@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            display: flex;
+            padding: 20px;
+            background-color: teal;
+        }
+
+        a {
+            padding: 30px;
+            color: whitesmoke;
+            text-decoration: none;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left {
+            flex: 20%;
+            /* background-color: #008080aa; */
+            height: 90vh;
+            border-right: 1px solid teal;
+            box-shadow: 2px 2px 5px teal;
+
+        }
+
+        .right {
+            flex: 20%;
+            height: 90vh;
+            border-left: 1px solid teal;
+            box-shadow: -2px -2px 5px teal;
+        }
+
+        .cntr {
+            flex: 60%;
+            pad: 50px
+        }
+
+        .box {
+            width: 90%;
+            border: 3px solid teal;
+            margin: 50px;
+            height: 70%;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px teal;
+            padding: 50px;
+
+        }
+
+        .lst {
+            color: teal;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <div><a href="">Home</a></div>
+            <div><a href="">Products</a></div>
+            <div><a href="">Services</a></div>
+            <div><a href="">About US</a></div>
+            <div><a href="">Registration</a></div>
+            <div><a href="">Log out</a></div>
+        </nav>
+    </header>
+    <div class="main">
+        <div class="left">
+            <div><a href="" class="lst">C Lang</a></div>
+            <div><a href="" class="lst">C ++</a></div>
+            <div><a href="" class="lst">DBMS</a></div>
+            <div><a href="" class="lst">HTML</a></div>
+            <div><a href="" class="lst">Java</a></div>
+            <div><a href="" class="lst">Pyhton</a></div>
+        </div>
+        <div class="cntr">
+            <div class="box">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem ipsa quis aut alias, dolor obcaecati
+                voluptate inventore possimus blanditiis autem repudiandae animi laborum eligendi expedita amet aliquam
+                ab perspiciatis soluta! Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ut corporis molestiae tenetur dignissimos ipsam dolor, assumenda et perspiciatis provident quas, inventore odio vitae non eum minima dolorum recusandae quaerat.
+            </div>
+        </div>
+        <div class="right">
+            <div><a href="" class="lst">C Lang</a></div>
+            <div><a href="" class="lst">C ++</a></div>
+            <div><a href="" class="lst">DBMS</a></div>
+            <div><a href="" class="lst">HTML</a></div>
+            <div><a href="" class="lst">Java</a></div>
+            <div><a href="" class="lst">Pyhton</a></div>
+        </div>
+    </div>
+</body>
+
+</html>

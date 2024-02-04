@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Eats | Food Delivery And Services</title>
+    <style>
+      .main{
+        display: flex;
+        flex-direction: row;
+      }
+        .bgimg{
+        height: 900px;
+        width: 1470px;
+        position: absolute;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .lines {
+        flex: 20px;
+        justify-content: left;
+        padding: 25px 20px 20px 20px;
+        height: 95px;
+        position: absolute;
+      }
+
+      .uberText {
+        /* flex: 20px; */
+        justify-content: left;
+        position: absolute;
+        font-size: 40px;
+        padding-top: 25px;
+        margin-left: 80px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+
+      .odny {
+        flex: 2px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 50px;
+        padding-top: 300px;
+        padding-left: 70px;
+        position: relative;
+      }
+
+      .it {
+        padding-left: 30px;
+        padding-top: 30px;
+      }
+
+      .inp {
+        flex: 2px;
+        width: 590px;
+        height: 50px;
+        font-size: 20px;
+        text-align: center;
+        position: relative;
+      }
+
+      /* .imglocation {
+        flex: 2px;
+        position: fixed;
+        padding-top: 7px;
+        padding-left: 8px;
+      } */
+
+      .dd{
+        /* flex: 2px; */
+        width: 150px;
+        height: 50px;
+        justify-content: center;
+        margin-left: 5px;
+        padding-left: 5px;
+        font-size: 15px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        position: relative;
+      }
+
+      /* .imgclock{
+        position: fixed;
+        margin-top: 10px;
+        margin-left: 15px;
+        text-align: center;
+        padding-top: 5px;
+        /* position: fixed; 
+      } */
+      
+      .btn{
+        position: relative;
+        margin-left: 10px;
+        width: 150px;
+        height: 50px;
+        border-radius: 8px;
+        border-color: black;
+        background-color: black;
+        text-align: center;
+        color: aliceblue;
+        font-size: 15px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      .img1{
+        height: 100px;
+        width: 100px;
+      }
+      .m2img1{
+        height: 300px;
+        width: 500px;
+        position: relative;
+        margin-top: 500px;
+        padding-left: 20px;
+
+      }
+      .m2img2{
+        height: 300px;
+        width: 500px;
+        position: relative;
+        margin-top: 500px;
+        padding-left: 20px;
+      }
+      .m2img3{
+        height: 300px;
+        width: 460px;
+        position: relative;
+        margin-top: 450px;
+        padding-left: 20px;
+      }
+
+      .main2-imgInfo{
+        
+      }
+    </style>
+</head>
+<body>
+    <div class="main1">
+      <img src="/UberEats/img/bg4.jpg" class="bgimg" alt="">
+    <div class="a">
+      <img class="lines" src="/UberEats/img/lines.png" alt="" />
+      <font class="uberText">Uber <b>Eats</b></font>
+    </div>
+    <div>
+      <h1 class="odny">Order delivery near you</h1>
+      <div class="it">
+        <img
+          class="imglocation"
+          src="/UberEats/img/location.png"
+          alt=""
+          height="40px"
+        />
+      
+        <input type="text" placeholder="Enter delivery address" class="inp"/>
+      <!-- <img class="imgclock" src="/UberEats/img/clock.png" alt="" height="26px" /> -->
+
+        <select name="opt" class="dd">
+          <option value="dn">Deliver Now</option>
+          <option value="sfl">Schedule for later</option>
+        </select>
+       <button type="button" class="btn">Find Food</button>
+      </div>
+      </div>
+      
+      <div class="main2">
+        <div class="main2-img">
+        <img src="/UberEats/img/imgbg1.webp" class="m2img1" alt="">
+        <img src="/UberEats/img/imgbg2.webp" class="m2img2" alt="">
+        <img src="/UberEats/img/imgbg3.webp" class="m2img3" alt="">
+        </div>
+        <div class="main2-imgInfo">
+          <h1>Feed Your Employees</h1>
+          <h1> Restaurant, Delivered</h1>
+          <h1>Delivery With Uber Eats</h1>
+        </div>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,541 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM SPECIAL OPERATORS :
+SQL> 
+SQL> REM LIST OF SPECIAL OPERATORS : 1 IN 2 BETWEEN 3 LIKE 4 IS NULL
+SQL> 
+SQL> REM ALL SPECIAL OPERATORS CAN BE USED FOR CHECKING CONDITIONS OF ALL 3 BASIC DATA TYPES : 1 CHARACTER 2 NUMBER 3 DATE
+SQL> 
+SQL> REM ALL SPECIAL OPERATORS CAN BE USED FOR 1 POSITIVE CONDITION CHECKING 2 NEGATIVE CONDITION CHECKING
+SQL> 
+SQL> REM 1 IN / NOT IN
+SQL> 
+SQL> REM 2 BETWEEN / NOT BETWEEN
+SQL> 
+SQL> REM 3 LIKE / NOT LIKE
+SQL> 
+SQL> REM 4 IS NULL / IS NOT NULL
+SQL> 
+SQL> 
+SQL> REM IN : IS USED FOR CHECKING MULTIPLE VALUES WITHIN SINGLE CONDITION
+SQL> 
+SQL> REM IN , = ANY AND = SOME HAS SAME/IDETICAL FUNCTIONALITY
+SQL> 
+SQL> REM NOT IN , <> ALL , != ALL AND ^= ALL HAS SAME/IDETICAL FUNCTIONALITY
+SQL> 
+SQL> 
+SQL> REM DISPLAY THOSE WHO WORKS IN DEPARTMENT 20
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 20;
+
+FIRST_NAME      DEPARTMENT_ID                                                   
+--------------- -------------                                                   
+Michael                    20                                                   
+Pat                        20                                                   
+
+SQL> REM DISPLAY THOSE WHO WORKS IN DEPARTMENT 60
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 60;
+
+FIRST_NAME      DEPARTMENT_ID                                                   
+--------------- -------------                                                   
+Alexander                  60                                                   
+Bruce                      60                                                   
+Diana                      60                                                   
+
+SQL> 
+SQL> REM DISPLAY THOSE WHO WORKS IN DEPARTMENT 110
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 110;
+
+FIRST_NAME      DEPARTMENT_ID                                                   
+--------------- -------------                                                   
+Shelley                   110                                                   
+William                   110                                                   
+
+SQL> REM DISPLAY THOSE WHO WORKS IN ANY OF THE DEPARTMENTS 20 , 60 ,  110
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 20 60 110;
+SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 20 60 110
+                                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 20, 60, 110;
+SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 20, 60, 110
+                                                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = (20, 60, 110);
+SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = (20, 60, 110)
+                                                                     *
+ERROR at line 1:
+ORA-01797: this operator must be followed by ANY or ALL 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = ANY (20, 60, 110);
+
+FIRST_NAME      DEPARTMENT_ID                                                   
+--------------- -------------                                                   
+Alexander                  60                                                   
+Bruce                      60                                                   
+Diana                      60                                                   
+Michael                    20                                                   
+Pat                        20                                                   
+Shelley                   110                                                   
+William                   110                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = SOME (20, 60, 110);
+
+FIRST_NAME      DEPARTMENT_ID                                                   
+--------------- -------------                                                   
+Alexander                  60                                                   
+Bruce                      60                                                   
+Diana                      60                                                   
+Michael                    20                                                   
+Pat                        20                                                   
+Shelley                   110                                                   
+William                   110                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID ANY (20, 60, 110);
+SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID ANY (20, 60, 110)
+                                                                     *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID SOME (20, 60, 110);
+SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID SOME (20, 60, 110)
+                                                                     *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID IN (20, 60, 110);
+
+FIRST_NAME      DEPARTMENT_ID                                                   
+--------------- -------------                                                   
+Alexander                  60                                                   
+Bruce                      60                                                   
+Diana                      60                                                   
+Michael                    20                                                   
+Pat                        20                                                   
+Shelley                   110                                                   
+William                   110                                                   
+
+7 rows selected.
+
+SQL> REM DISPLAY THOSE WHO REPORTS TO ANY OF THE MANAGES : 100 124 149
+SQL> 
+SQL> SELECT FIRST_NAME , MANAGER_ID FROM EMPLOYEES
+  2  WHERE MANAGER_ID = ANY (100,124,149);
+
+FIRST_NAME      MANAGER_ID                                                      
+--------------- ----------                                                      
+Neena                  100                                                      
+Lex                    100                                                      
+Kevin                  100                                                      
+Trenna                 124                                                      
+Curtis                 124                                                      
+Randall                124                                                      
+Peter                  124                                                      
+Eleni                  100                                                      
+Ellen                  149                                                      
+Jonathon               149                                                      
+Kimerely               149                                                      
+
+FIRST_NAME      MANAGER_ID                                                      
+--------------- ----------                                                      
+Michael                100                                                      
+
+12 rows selected.
+
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> R
+  1  SELECT FIRST_NAME , MANAGER_ID FROM EMPLOYEES
+  2* WHERE MANAGER_ID = ANY (100,124,149)
+
+FIRST_NAME      MANAGER_ID                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Neena                  100                                                                                                                                                                              
+Lex                    100                                                                                                                                                                              
+Kevin                  100                                                                                                                                                                              
+Trenna                 124                                                                                                                                                                              
+Curtis                 124                                                                                                                                                                              
+Randall                124                                                                                                                                                                              
+Peter                  124                                                                                                                                                                              
+Eleni                  100                                                                                                                                                                              
+Ellen                  149                                                                                                                                                                              
+Jonathon               149                                                                                                                                                                              
+Kimerely               149                                                                                                                                                                              
+Michael                100                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> SELECT FIRST_NAME , MANAGER_ID FROM EMPLOYEES
+  2  WHERE MANAGER_ID = SOME (100,124,149);
+
+FIRST_NAME      MANAGER_ID                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Neena                  100                                                                                                                                                                              
+Lex                    100                                                                                                                                                                              
+Kevin                  100                                                                                                                                                                              
+Trenna                 124                                                                                                                                                                              
+Curtis                 124                                                                                                                                                                              
+Randall                124                                                                                                                                                                              
+Peter                  124                                                                                                                                                                              
+Eleni                  100                                                                                                                                                                              
+Ellen                  149                                                                                                                                                                              
+Jonathon               149                                                                                                                                                                              
+Kimerely               149                                                                                                                                                                              
+Michael                100                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> SELECT FIRST_NAME , MANAGER_ID FROM EMPLOYEES
+  2  WHERE MANAGER_ID IN (100,124,149);
+
+FIRST_NAME      MANAGER_ID                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Neena                  100                                                                                                                                                                              
+Lex                    100                                                                                                                                                                              
+Kevin                  100                                                                                                                                                                              
+Trenna                 124                                                                                                                                                                              
+Curtis                 124                                                                                                                                                                              
+Randall                124                                                                                                                                                                              
+Peter                  124                                                                                                                                                                              
+Eleni                  100                                                                                                                                                                              
+Ellen                  149                                                                                                                                                                              
+Jonathon               149                                                                                                                                                                              
+Kimerely               149                                                                                                                                                                              
+Michael                100                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> REM DISPLAY THOSE WHO WORKS AS IT_PROG , ST_CLERK , SA_REP , AD_VP
+SQL> 
+SQL> REM WORKS IN : DEPARTMENT_ID
+SQL> 
+SQL> REM WORKS AS : JOB_ID
+SQL> 
+SQL> REM REPORTS TO : MANAGER_ID
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID = ANY ('IT_PROG' , 'ST_CLERK' , 'SA_REP' , 'AD_VP');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Trenna          ST_CLERK                                                                                                                                                                                
+Curtis          ST_CLERK                                                                                                                                                                                
+Randall         ST_CLERK                                                                                                                                                                                
+Peter           ST_CLERK                                                                                                                                                                                
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+
+12 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID = SOME ('IT_PROG' , 'ST_CLERK' , 'SA_REP' , 'AD_VP');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Trenna          ST_CLERK                                                                                                                                                                                
+Curtis          ST_CLERK                                                                                                                                                                                
+Randall         ST_CLERK                                                                                                                                                                                
+Peter           ST_CLERK                                                                                                                                                                                
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+
+12 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID IN ('IT_PROG' , 'ST_CLERK' , 'SA_REP' , 'AD_VP');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Trenna          ST_CLERK                                                                                                                                                                                
+Curtis          ST_CLERK                                                                                                                                                                                
+Randall         ST_CLERK                                                                                                                                                                                
+Peter           ST_CLERK                                                                                                                                                                                
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+
+12 rows selected.
+
+SQL> REM DISPLAY AL EXCEPT THOSE WHO WORKS IN DEPARTMENT_ID 10 60 80 110
+SQL> 
+SQL> REM DISPLAY ALL EXCEPT THOSE WHO WORKS IN DEPARTMENT_ID 10 60 80 110
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID <> ALL (10,60,80,110);
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Steven                     90                                                                                                                                                                           
+Neena                      90                                                                                                                                                                           
+Lex                        90                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Michael                    20                                                                                                                                                                           
+Pat                        20                                                                                                                                                                           
+
+10 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID != ALL (10,60,80,110);
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Steven                     90                                                                                                                                                                           
+Neena                      90                                                                                                                                                                           
+Lex                        90                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Michael                    20                                                                                                                                                                           
+Pat                        20                                                                                                                                                                           
+
+10 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID ^= ALL (10,60,80,110);
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Steven                     90                                                                                                                                                                           
+Neena                      90                                                                                                                                                                           
+Lex                        90                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Michael                    20                                                                                                                                                                           
+Pat                        20                                                                                                                                                                           
+
+10 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID NOT IN (10,60,80,110);
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Steven                     90                                                                                                                                                                           
+Neena                      90                                                                                                                                                                           
+Lex                        90                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Michael                    20                                                                                                                                                                           
+Pat                        20                                                                                                                                                                           
+
+10 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARMENT_ID ^= ANY (10,60,80,110);
+SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARMENT_ID ^= ANY (10,60,80,110)
+                                                      *
+ERROR at line 1:
+ORA-00904: "DEPARMENT_ID": invalid identifier 
+
+
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARMENT_ID ^= SOME (10,60,80,110);
+SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARMENT_ID ^= SOME (10,60,80,110)
+                                                      *
+ERROR at line 1:
+ORA-00904: "DEPARMENT_ID": invalid identifier 
+
+
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARMENT_ID  NOT (10,60,80,110);
+SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARMENT_ID  NOT (10,60,80,110)
+                                                                        *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID ^= ANY (10,60,80,110);
+SELECT FIRST_NAME , DEPARMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID ^= ANY (10,60,80,110)
+                    *
+ERROR at line 1:
+ORA-00904: "DEPARMENT_ID": invalid identifier 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID ^= ANY (10,60,80,110);
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Steven                     90                                                                                                                                                                           
+Neena                      90                                                                                                                                                                           
+Lex                        90                                                                                                                                                                           
+Alexander                  60                                                                                                                                                                           
+Bruce                      60                                                                                                                                                                           
+Diana                      60                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Eleni                      80                                                                                                                                                                           
+Ellen                      80                                                                                                                                                                           
+Jonathon                   80                                                                                                                                                                           
+Jennifer                   10                                                                                                                                                                           
+Michael                    20                                                                                                                                                                           
+Pat                        20                                                                                                                                                                           
+Shelley                   110                                                                                                                                                                           
+William                   110                                                                                                                                                                           
+
+19 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID ^= SOME (10,60,80,110);
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Steven                     90                                                                                                                                                                           
+Neena                      90                                                                                                                                                                           
+Lex                        90                                                                                                                                                                           
+Alexander                  60                                                                                                                                                                           
+Bruce                      60                                                                                                                                                                           
+Diana                      60                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Eleni                      80                                                                                                                                                                           
+Ellen                      80                                                                                                                                                                           
+Jonathon                   80                                                                                                                                                                           
+Jennifer                   10                                                                                                                                                                           
+Michael                    20                                                                                                                                                                           
+Pat                        20                                                                                                                                                                           
+Shelley                   110                                                                                                                                                                           
+William                   110                                                                                                                                                                           
+
+19 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID NOT (10,60,80,110);
+SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID NOT (10,60,80,110)
+                                                                         *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> REM DISPLAY ALL OTHER THAN THOSE WHO WORKS AS ST_CLERK MK_MAN SA_MAN AD_ASST
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID <> ALL ('ST_CLERK','MK_MAN','SA_MAN','AD_ASST');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Steven          AD_PRES                                                                                                                                                                                 
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Kevin           ST_MAN                                                                                                                                                                                  
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+Pat             MK_REP                                                                                                                                                                                  
+Shelley         AC_MGR                                                                                                                                                                                  
+William         AC_ACCOUNT                                                                                                                                                                              
+
+13 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID != ALL ('ST_CLERK','MK_MAN','SA_MAN','AD_ASST');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Steven          AD_PRES                                                                                                                                                                                 
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Kevin           ST_MAN                                                                                                                                                                                  
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+Pat             MK_REP                                                                                                                                                                                  
+Shelley         AC_MGR                                                                                                                                                                                  
+William         AC_ACCOUNT                                                                                                                                                                              
+
+13 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID ^= ALL ('ST_CLERK','MK_MAN','SA_MAN','AD_ASST');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Steven          AD_PRES                                                                                                                                                                                 
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Kevin           ST_MAN                                                                                                                                                                                  
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+Pat             MK_REP                                                                                                                                                                                  
+Shelley         AC_MGR                                                                                                                                                                                  
+William         AC_ACCOUNT                                                                                                                                                                              
+
+13 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID FROM EMPLOYEES WHERE JOB_ID NOT IN ('ST_CLERK','MK_MAN','SA_MAN','AD_ASST');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Steven          AD_PRES                                                                                                                                                                                 
+Neena           AD_VP                                                                                                                                                                                   
+Lex             AD_VP                                                                                                                                                                                   
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+Kevin           ST_MAN                                                                                                                                                                                  
+Ellen           SA_REP                                                                                                                                                                                  
+Jonathon        SA_REP                                                                                                                                                                                  
+Kimerely        SA_REP                                                                                                                                                                                  
+Pat             MK_REP                                                                                                                                                                                  
+Shelley         AC_MGR                                                                                                                                                                                  
+William         AC_ACCOUNT                                                                                                                                                                              
+
+13 rows selected.
+
+SQL> SPOOL OFF

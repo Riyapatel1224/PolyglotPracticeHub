@@ -1,0 +1,1060 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM CONCAT   LPAD RPAD   LTRIM RTRIM TRIM   LENGTH   TRANSLATE REPLACE    SUBSTR INSTR
+SQL> 
+SQL> REM REPLACE : IT USED TO REPLACE/REMOVE WORD BY WORD
+SQL> 
+SQL> SELECT HIRE_DATE , REPLACE(HIRE_DATE,'JAN','JANU') FROM EMPLOYEES;
+
+HIRE_DATE REPLACE(HIRE_DATE,'JAN','JANU')                                                                                                                                                               
+--------- ------------------------------------------------------------------------                                                                                                                      
+17-JUL-87 17-JUL-87                                                                                                                                                                                     
+21-SEP-89 21-SEP-89                                                                                                                                                                                     
+13-JAN-93 13-JANU-93                                                                                                                                                                                    
+03-JAN-90 03-JANU-90                                                                                                                                                                                    
+21-MAY-91 21-MAY-91                                                                                                                                                                                     
+07-FEB-99 07-FEB-99                                                                                                                                                                                     
+16-NOV-99 16-NOV-99                                                                                                                                                                                     
+17-OCT-95 17-OCT-95                                                                                                                                                                                     
+29-JAN-97 29-JANU-97                                                                                                                                                                                    
+15-MAR-98 15-MAR-98                                                                                                                                                                                     
+09-JUL-98 09-JUL-98                                                                                                                                                                                     
+29-JAN-00 29-JANU-00                                                                                                                                                                                    
+11-MAY-96 11-MAY-96                                                                                                                                                                                     
+24-MAR-98 24-MAR-98                                                                                                                                                                                     
+24-MAY-99 24-MAY-99                                                                                                                                                                                     
+17-SEP-87 17-SEP-87                                                                                                                                                                                     
+17-FEB-96 17-FEB-96                                                                                                                                                                                     
+17-AUG-97 17-AUG-97                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , REPLACE(HIRE_DATE,'JAN','JANUARY') FROM EMPLOYEES;
+
+HIRE_DATE REPLACE(HIRE_DATE,'JAN','JANUARY')                                                                                                                                                            
+--------- ------------------------------------------------------------------------------------------------------------------------------                                                                
+17-JUL-87 17-JUL-87                                                                                                                                                                                     
+21-SEP-89 21-SEP-89                                                                                                                                                                                     
+13-JAN-93 13-JANUARY-93                                                                                                                                                                                 
+03-JAN-90 03-JANUARY-90                                                                                                                                                                                 
+21-MAY-91 21-MAY-91                                                                                                                                                                                     
+07-FEB-99 07-FEB-99                                                                                                                                                                                     
+16-NOV-99 16-NOV-99                                                                                                                                                                                     
+17-OCT-95 17-OCT-95                                                                                                                                                                                     
+29-JAN-97 29-JANUARY-97                                                                                                                                                                                 
+15-MAR-98 15-MAR-98                                                                                                                                                                                     
+09-JUL-98 09-JUL-98                                                                                                                                                                                     
+29-JAN-00 29-JANUARY-00                                                                                                                                                                                 
+11-MAY-96 11-MAY-96                                                                                                                                                                                     
+24-MAR-98 24-MAR-98                                                                                                                                                                                     
+24-MAY-99 24-MAY-99                                                                                                                                                                                     
+17-SEP-87 17-SEP-87                                                                                                                                                                                     
+17-FEB-96 17-FEB-96                                                                                                                                                                                     
+17-AUG-97 17-AUG-97                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , REPLACE(HIRE_DATE,'JAN','1') FROM EMPLOYEES;
+
+HIRE_DATE REPLACE(HIRE_DATE,                                                                                                                                                                            
+--------- ------------------                                                                                                                                                                            
+17-JUL-87 17-JUL-87                                                                                                                                                                                     
+21-SEP-89 21-SEP-89                                                                                                                                                                                     
+13-JAN-93 13-1-93                                                                                                                                                                                       
+03-JAN-90 03-1-90                                                                                                                                                                                       
+21-MAY-91 21-MAY-91                                                                                                                                                                                     
+07-FEB-99 07-FEB-99                                                                                                                                                                                     
+16-NOV-99 16-NOV-99                                                                                                                                                                                     
+17-OCT-95 17-OCT-95                                                                                                                                                                                     
+29-JAN-97 29-1-97                                                                                                                                                                                       
+15-MAR-98 15-MAR-98                                                                                                                                                                                     
+09-JUL-98 09-JUL-98                                                                                                                                                                                     
+29-JAN-00 29-1-00                                                                                                                                                                                       
+11-MAY-96 11-MAY-96                                                                                                                                                                                     
+24-MAR-98 24-MAR-98                                                                                                                                                                                     
+24-MAY-99 24-MAY-99                                                                                                                                                                                     
+17-SEP-87 17-SEP-87                                                                                                                                                                                     
+17-FEB-96 17-FEB-96                                                                                                                                                                                     
+17-AUG-97 17-AUG-97                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , REPLACE(HIRE_DATE,'JAN') FROM EMPLOYEES;
+
+HIRE_DATE REPLACE(HIRE_DATE,                                                                                                                                                                            
+--------- ------------------                                                                                                                                                                            
+17-JUL-87 17-JUL-87                                                                                                                                                                                     
+21-SEP-89 21-SEP-89                                                                                                                                                                                     
+13-JAN-93 13--93                                                                                                                                                                                        
+03-JAN-90 03--90                                                                                                                                                                                        
+21-MAY-91 21-MAY-91                                                                                                                                                                                     
+07-FEB-99 07-FEB-99                                                                                                                                                                                     
+16-NOV-99 16-NOV-99                                                                                                                                                                                     
+17-OCT-95 17-OCT-95                                                                                                                                                                                     
+29-JAN-97 29--97                                                                                                                                                                                        
+15-MAR-98 15-MAR-98                                                                                                                                                                                     
+09-JUL-98 09-JUL-98                                                                                                                                                                                     
+29-JAN-00 29--00                                                                                                                                                                                        
+11-MAY-96 11-MAY-96                                                                                                                                                                                     
+24-MAR-98 24-MAR-98                                                                                                                                                                                     
+24-MAY-99 24-MAY-99                                                                                                                                                                                     
+17-SEP-87 17-SEP-87                                                                                                                                                                                     
+17-FEB-96 17-FEB-96                                                                                                                                                                                     
+17-AUG-97 17-AUG-97                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+07-JUN-94 07-JUN-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM DEPARTMENT_ID : 90  9ZERO
+SQL> REM DEPARTMENT_ID : 50  5ZERO
+SQL> 
+SQL> SELECT  DEPARTMENT_ID , REPLACE(DEPARTMENT_ID,'0','ZERO')  FROM EMPLOYEES ;
+
+DEPARTMENT_ID REPLACE(DEPARTMENT_ID,'0','ZERO')                                                                                                                                                         
+------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------                          
+           90 9ZERO                                                                                                                                                                                     
+           90 9ZERO                                                                                                                                                                                     
+           90 9ZERO                                                                                                                                                                                     
+           60 6ZERO                                                                                                                                                                                     
+           60 6ZERO                                                                                                                                                                                     
+           60 6ZERO                                                                                                                                                                                     
+           50 5ZERO                                                                                                                                                                                     
+           50 5ZERO                                                                                                                                                                                     
+           50 5ZERO                                                                                                                                                                                     
+           50 5ZERO                                                                                                                                                                                     
+           50 5ZERO                                                                                                                                                                                     
+           80 8ZERO                                                                                                                                                                                     
+           80 8ZERO                                                                                                                                                                                     
+           80 8ZERO                                                                                                                                                                                     
+                                                                                                                                                                                                        
+           10 1ZERO                                                                                                                                                                                     
+           20 2ZERO                                                                                                                                                                                     
+           20 2ZERO                                                                                                                                                                                     
+          110 11ZERO                                                                                                                                                                                    
+          110 11ZERO                                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT TRANSLATE('ORACLE','O','MI') FROM DUAL;
+
+TRANSL                                                                                                                                                                                                  
+------                                                                                                                                                                                                  
+MRACLE                                                                                                                                                                                                  
+
+SQL> SELECT REPLACE('ORACLE','O','MI') FROM DUAL;
+
+REPLACE                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+MIRACLE                                                                                                                                                                                                 
+
+SQL> SELECT REPLACE(TRANSLATE('HIREN','H','J'),'n''NDRA') FROM DUAL;
+
+REPLA                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+JIREN                                                                                                                                                                                                   
+
+SQL> SELECT REPLACE(TRANSLATE('HIREN','H','J'),'n','NDRA') FROM DUAL;
+
+REPLA                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+JIREN                                                                                                                                                                                                   
+
+SQL> REM MK_MAN : Marketing_MAN
+SQL> 
+SQL> REM SA_REP : Sales_REP
+SQL> 
+SQL> SELECT JOB_ID , REPLACE(REPLACE(JOB_ID,'MK','Marketing'),'SA','Sales') FROM EMPLOYEES;
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+REPLACE(REPLACE(JOB_ID,'MK','MARKETING'),'SA','SALES')                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AD_PRES                                                                                                                                                                                                 
+AD_PRES                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+AD_VP                                                                                                                                                                                                   
+AD_VP                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+AD_VP                                                                                                                                                                                                   
+AD_VP                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+IT_PROG                                                                                                                                                                                                 
+IT_PROG                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+IT_PROG                                                                                                                                                                                                 
+IT_PROG                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+IT_PROG                                                                                                                                                                                                 
+IT_PROG                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+ST_MAN                                                                                                                                                                                                  
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+REPLACE(REPLACE(JOB_ID,'MK','MARKETING'),'SA','SALES')                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ST_MAN                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+SA_MAN                                                                                                                                                                                                  
+Sales_MAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+SA_REP                                                                                                                                                                                                  
+Sales_REP                                                                                                                                                                                               
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+REPLACE(REPLACE(JOB_ID,'MK','MARKETING'),'SA','SALES')                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+SA_REP                                                                                                                                                                                                  
+Sales_REP                                                                                                                                                                                               
+                                                                                                                                                                                                        
+SA_REP                                                                                                                                                                                                  
+Sales_REP                                                                                                                                                                                               
+                                                                                                                                                                                                        
+AD_ASST                                                                                                                                                                                                 
+AD_ASST                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+MK_MAN                                                                                                                                                                                                  
+Marketing_MAN                                                                                                                                                                                           
+                                                                                                                                                                                                        
+MK_REP                                                                                                                                                                                                  
+Marketing_REP                                                                                                                                                                                           
+                                                                                                                                                                                                        
+AC_MGR                                                                                                                                                                                                  
+AC_MGR                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+REPLACE(REPLACE(JOB_ID,'MK','MARKETING'),'SA','SALES')                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AC_ACCOUNT                                                                                                                                                                                              
+AC_ACCOUNT                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , REPLACE(REPLACE(JOB_ID,'MK','Marketing'),'SA','Sales') NEW_JOB_ID FROM EMPLOYEES;
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+NEW_JOB_ID                                                                                                                                                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AD_PRES                                                                                                                                                                                                 
+AD_PRES                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+AD_VP                                                                                                                                                                                                   
+AD_VP                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+AD_VP                                                                                                                                                                                                   
+AD_VP                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+IT_PROG                                                                                                                                                                                                 
+IT_PROG                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+IT_PROG                                                                                                                                                                                                 
+IT_PROG                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+IT_PROG                                                                                                                                                                                                 
+IT_PROG                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+ST_MAN                                                                                                                                                                                                  
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+NEW_JOB_ID                                                                                                                                                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ST_MAN                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK                                                                                                                                                                                                
+                                                                                                                                                                                                        
+SA_MAN                                                                                                                                                                                                  
+Sales_MAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+SA_REP                                                                                                                                                                                                  
+Sales_REP                                                                                                                                                                                               
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+NEW_JOB_ID                                                                                                                                                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+SA_REP                                                                                                                                                                                                  
+Sales_REP                                                                                                                                                                                               
+                                                                                                                                                                                                        
+SA_REP                                                                                                                                                                                                  
+Sales_REP                                                                                                                                                                                               
+                                                                                                                                                                                                        
+AD_ASST                                                                                                                                                                                                 
+AD_ASST                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+MK_MAN                                                                                                                                                                                                  
+Marketing_MAN                                                                                                                                                                                           
+                                                                                                                                                                                                        
+MK_REP                                                                                                                                                                                                  
+Marketing_REP                                                                                                                                                                                           
+                                                                                                                                                                                                        
+AC_MGR                                                                                                                                                                                                  
+AC_MGR                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+NEW_JOB_ID                                                                                                                                                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AC_ACCOUNT                                                                                                                                                                                              
+AC_ACCOUNT                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> COL NEW_JOB_ID FORMAT A30
+SQL> 
+SQL> R
+  1* SELECT JOB_ID , REPLACE(REPLACE(JOB_ID,'MK','Marketing'),'SA','Sales') NEW_JOB_ID FROM EMPLOYEES
+
+JOB_ID     NEW_JOB_ID                                                                                                                                                                                   
+---------- ------------------------------                                                                                                                                                               
+AD_PRES    AD_PRES                                                                                                                                                                                      
+AD_VP      AD_VP                                                                                                                                                                                        
+AD_VP      AD_VP                                                                                                                                                                                        
+IT_PROG    IT_PROG                                                                                                                                                                                      
+IT_PROG    IT_PROG                                                                                                                                                                                      
+IT_PROG    IT_PROG                                                                                                                                                                                      
+ST_MAN     ST_MAN                                                                                                                                                                                       
+ST_CLERK   ST_CLERK                                                                                                                                                                                     
+ST_CLERK   ST_CLERK                                                                                                                                                                                     
+ST_CLERK   ST_CLERK                                                                                                                                                                                     
+ST_CLERK   ST_CLERK                                                                                                                                                                                     
+SA_MAN     Sales_MAN                                                                                                                                                                                    
+SA_REP     Sales_REP                                                                                                                                                                                    
+SA_REP     Sales_REP                                                                                                                                                                                    
+SA_REP     Sales_REP                                                                                                                                                                                    
+AD_ASST    AD_ASST                                                                                                                                                                                      
+MK_MAN     Marketing_MAN                                                                                                                                                                                
+MK_REP     Marketing_REP                                                                                                                                                                                
+AC_MGR     AC_MGR                                                                                                                                                                                       
+AC_ACCOUNT AC_ACCOUNT                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 17-JUL-87   17-july-87
+SQL> REM 13-JAN-89   13-JaNuArY-89
+SQL> REM 07-JUN-94   07-juNE-94
+SQL> 
+SQL> 
+SQL> SELECT HIRE_DATE, REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','juLy'),'JAN','JaNuArY'),'JUN','juNE') FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','JULY'),'JAN','JANUARY'),'JUN','JUNE')                                                                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+17-JUL-87                                                                                                                                                                                               
+17-juLy-87                                                                                                                                                                                              
+                                                                                                                                                                                                        
+21-SEP-89                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+                                                                                                                                                                                                        
+13-JAN-93                                                                                                                                                                                               
+13-JaNuArY-93                                                                                                                                                                                           
+                                                                                                                                                                                                        
+03-JAN-90                                                                                                                                                                                               
+03-JaNuArY-90                                                                                                                                                                                           
+                                                                                                                                                                                                        
+21-MAY-91                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+                                                                                                                                                                                                        
+07-FEB-99                                                                                                                                                                                               
+07-FEB-99                                                                                                                                                                                               
+                                                                                                                                                                                                        
+16-NOV-99                                                                                                                                                                                               
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','JULY'),'JAN','JANUARY'),'JUN','JUNE')                                                                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+16-NOV-99                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-OCT-95                                                                                                                                                                                               
+17-OCT-95                                                                                                                                                                                               
+                                                                                                                                                                                                        
+29-JAN-97                                                                                                                                                                                               
+29-JaNuArY-97                                                                                                                                                                                           
+                                                                                                                                                                                                        
+15-MAR-98                                                                                                                                                                                               
+15-MAR-98                                                                                                                                                                                               
+                                                                                                                                                                                                        
+09-JUL-98                                                                                                                                                                                               
+09-juLy-98                                                                                                                                                                                              
+                                                                                                                                                                                                        
+29-JAN-00                                                                                                                                                                                               
+29-JaNuArY-00                                                                                                                                                                                           
+                                                                                                                                                                                                        
+11-MAY-96                                                                                                                                                                                               
+11-MAY-96                                                                                                                                                                                               
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','JULY'),'JAN','JANUARY'),'JUN','JUNE')                                                                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+24-MAR-98                                                                                                                                                                                               
+24-MAR-98                                                                                                                                                                                               
+                                                                                                                                                                                                        
+24-MAY-99                                                                                                                                                                                               
+24-MAY-99                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-SEP-87                                                                                                                                                                                               
+17-SEP-87                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-FEB-96                                                                                                                                                                                               
+17-FEB-96                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-AUG-97                                                                                                                                                                                               
+17-AUG-97                                                                                                                                                                                               
+                                                                                                                                                                                                        
+07-JUN-94                                                                                                                                                                                               
+07-juNE-94                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','JULY'),'JAN','JANUARY'),'JUN','JUNE')                                                                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+07-JUN-94                                                                                                                                                                                               
+07-juNE-94                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE, REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','juLy'),'JAN','JaNuArY'),'JUN','juNE') NEW_HD FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+NEW_HD                                                                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+17-JUL-87                                                                                                                                                                                               
+17-juLy-87                                                                                                                                                                                              
+                                                                                                                                                                                                        
+21-SEP-89                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+                                                                                                                                                                                                        
+13-JAN-93                                                                                                                                                                                               
+13-JaNuArY-93                                                                                                                                                                                           
+                                                                                                                                                                                                        
+03-JAN-90                                                                                                                                                                                               
+03-JaNuArY-90                                                                                                                                                                                           
+                                                                                                                                                                                                        
+21-MAY-91                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+                                                                                                                                                                                                        
+07-FEB-99                                                                                                                                                                                               
+07-FEB-99                                                                                                                                                                                               
+                                                                                                                                                                                                        
+16-NOV-99                                                                                                                                                                                               
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+NEW_HD                                                                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+16-NOV-99                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-OCT-95                                                                                                                                                                                               
+17-OCT-95                                                                                                                                                                                               
+                                                                                                                                                                                                        
+29-JAN-97                                                                                                                                                                                               
+29-JaNuArY-97                                                                                                                                                                                           
+                                                                                                                                                                                                        
+15-MAR-98                                                                                                                                                                                               
+15-MAR-98                                                                                                                                                                                               
+                                                                                                                                                                                                        
+09-JUL-98                                                                                                                                                                                               
+09-juLy-98                                                                                                                                                                                              
+                                                                                                                                                                                                        
+29-JAN-00                                                                                                                                                                                               
+29-JaNuArY-00                                                                                                                                                                                           
+                                                                                                                                                                                                        
+11-MAY-96                                                                                                                                                                                               
+11-MAY-96                                                                                                                                                                                               
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+NEW_HD                                                                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+24-MAR-98                                                                                                                                                                                               
+24-MAR-98                                                                                                                                                                                               
+                                                                                                                                                                                                        
+24-MAY-99                                                                                                                                                                                               
+24-MAY-99                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-SEP-87                                                                                                                                                                                               
+17-SEP-87                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-FEB-96                                                                                                                                                                                               
+17-FEB-96                                                                                                                                                                                               
+                                                                                                                                                                                                        
+17-AUG-97                                                                                                                                                                                               
+17-AUG-97                                                                                                                                                                                               
+                                                                                                                                                                                                        
+07-JUN-94                                                                                                                                                                                               
+07-juNE-94                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+NEW_HD                                                                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+07-JUN-94                                                                                                                                                                                               
+07-juNE-94                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> COL NEW_HD FORMAT A30
+SQL> 
+SQL> R
+  1* SELECT HIRE_DATE, REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','juLy'),'JAN','JaNuArY'),'JUN','juNE') NEW_HD FROM EMPLOYEES
+
+HIRE_DATE NEW_HD                                                                                                                                                                                        
+--------- ------------------------------                                                                                                                                                                
+17-JUL-87 17-juLy-87                                                                                                                                                                                    
+21-SEP-89 21-SEP-89                                                                                                                                                                                     
+13-JAN-93 13-JaNuArY-93                                                                                                                                                                                 
+03-JAN-90 03-JaNuArY-90                                                                                                                                                                                 
+21-MAY-91 21-MAY-91                                                                                                                                                                                     
+07-FEB-99 07-FEB-99                                                                                                                                                                                     
+16-NOV-99 16-NOV-99                                                                                                                                                                                     
+17-OCT-95 17-OCT-95                                                                                                                                                                                     
+29-JAN-97 29-JaNuArY-97                                                                                                                                                                                 
+15-MAR-98 15-MAR-98                                                                                                                                                                                     
+09-JUL-98 09-juLy-98                                                                                                                                                                                    
+29-JAN-00 29-JaNuArY-00                                                                                                                                                                                 
+11-MAY-96 11-MAY-96                                                                                                                                                                                     
+24-MAR-98 24-MAR-98                                                                                                                                                                                     
+24-MAY-99 24-MAY-99                                                                                                                                                                                     
+17-SEP-87 17-SEP-87                                                                                                                                                                                     
+17-FEB-96 17-FEB-96                                                                                                                                                                                     
+17-AUG-97 17-AUG-97                                                                                                                                                                                     
+07-JUN-94 07-juNE-94                                                                                                                                                                                    
+07-JUN-94 07-juNE-94                                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> COL NEW_HD FORMAT A10
+SQL> 
+SQL> R
+  1* SELECT HIRE_DATE, REPLACE(REPLACE(REPLACE(HIRE_DATE,'JUL','juLy'),'JAN','JaNuArY'),'JUN','juNE') NEW_HD FROM EMPLOYEES
+
+HIRE_DATE NEW_HD                                                                                                                                                                                        
+--------- ----------                                                                                                                                                                                    
+17-JUL-87 17-juLy-87                                                                                                                                                                                    
+21-SEP-89 21-SEP-89                                                                                                                                                                                     
+13-JAN-93 13-JaNuArY                                                                                                                                                                                    
+          -93                                                                                                                                                                                           
+                                                                                                                                                                                                        
+03-JAN-90 03-JaNuArY                                                                                                                                                                                    
+          -90                                                                                                                                                                                           
+                                                                                                                                                                                                        
+21-MAY-91 21-MAY-91                                                                                                                                                                                     
+07-FEB-99 07-FEB-99                                                                                                                                                                                     
+16-NOV-99 16-NOV-99                                                                                                                                                                                     
+17-OCT-95 17-OCT-95                                                                                                                                                                                     
+29-JAN-97 29-JaNuArY                                                                                                                                                                                    
+          -97                                                                                                                                                                                           
+                                                                                                                                                                                                        
+15-MAR-98 15-MAR-98                                                                                                                                                                                     
+09-JUL-98 09-juLy-98                                                                                                                                                                                    
+29-JAN-00 29-JaNuArY                                                                                                                                                                                    
+          -00                                                                                                                                                                                           
+                                                                                                                                                                                                        
+11-MAY-96 11-MAY-96                                                                                                                                                                                     
+
+HIRE_DATE NEW_HD                                                                                                                                                                                        
+--------- ----------                                                                                                                                                                                    
+24-MAR-98 24-MAR-98                                                                                                                                                                                     
+24-MAY-99 24-MAY-99                                                                                                                                                                                     
+17-SEP-87 17-SEP-87                                                                                                                                                                                     
+17-FEB-96 17-FEB-96                                                                                                                                                                                     
+17-AUG-97 17-AUG-97                                                                                                                                                                                     
+07-JUN-94 07-juNE-94                                                                                                                                                                                    
+07-JUN-94 07-juNE-94                                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> REM SUBSTR : TO SEPARATE SOME CHARACTERS FROM LEFT, RIGHT OR MIDDLE
+SQL> 
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',1,6) FROM DUAL;
+
+SUBSTR                                                                                                                                                                                                  
+------                                                                                                                                                                                                  
+Laxman                                                                                                                                                                                                  
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',1,20) FROM DUAL;
+
+SUBSTR('LAXMANSHIVRA                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+LaxmanShivRamKrishna                                                                                                                                                                                    
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',1,25) FROM DUAL;
+
+SUBSTR('LAXMANSHIVRAM                                                                                                                                                                                   
+---------------------                                                                                                                                                                                   
+LaxmanShivRamKrishnan                                                                                                                                                                                   
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',7,4) FROM DUAL;
+
+SUBS                                                                                                                                                                                                    
+----                                                                                                                                                                                                    
+Shiv                                                                                                                                                                                                    
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',14,8) FROM DUAL;
+
+SUBSTR('                                                                                                                                                                                                
+--------                                                                                                                                                                                                
+Krishnan                                                                                                                                                                                                
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',14) FROM DUAL;
+
+SUBSTR('                                                                                                                                                                                                
+--------                                                                                                                                                                                                
+Krishnan                                                                                                                                                                                                
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',11) FROM DUAL;
+
+SUBSTR('LAX                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+RamKrishnan                                                                                                                                                                                             
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',-8) FROM DUAL;
+
+SUBSTR('                                                                                                                                                                                                
+--------                                                                                                                                                                                                
+Krishnan                                                                                                                                                                                                
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',-8,5) FROM DUAL;
+
+SUBST                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+Krish                                                                                                                                                                                                   
+
+SQL> REM ShivRam
+SQL> 
+SQL> REM LaxmanShivRamKrishnan
+SQL> 
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',7,7) FROM DUAL;
+
+SUBSTR(                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+ShivRam                                                                                                                                                                                                 
+
+SQL> SELECT SUBSTR('LaxmanShivRamKrishnan',-15,7) FROM DUAL;
+
+SUBSTR(                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+ShivRam                                                                                                                                                                                                 
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+17-JUL-87                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+13-JAN-93                                                                                                                                                                                               
+03-JAN-90                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+07-FEB-99                                                                                                                                                                                               
+16-NOV-99                                                                                                                                                                                               
+17-OCT-95                                                                                                                                                                                               
+29-JAN-97                                                                                                                                                                                               
+15-MAR-98                                                                                                                                                                                               
+09-JUL-98                                                                                                                                                                                               
+29-JAN-00                                                                                                                                                                                               
+11-MAY-96                                                                                                                                                                                               
+24-MAR-98                                                                                                                                                                                               
+24-MAY-99                                                                                                                                                                                               
+17-SEP-87                                                                                                                                                                                               
+17-FEB-96                                                                                                                                                                                               
+17-AUG-97                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM JUL
+SQL> REM SEP
+SQL> 
+SQL> SELECT HIRE_DATE , SUBSTR(HIRE_DATE,4,3) FROM EMPLOYEES;
+
+HIRE_DATE SUBSTR(HIRE_                                                                                                                                                                                  
+--------- ------------                                                                                                                                                                                  
+17-JUL-87 JUL                                                                                                                                                                                           
+21-SEP-89 SEP                                                                                                                                                                                           
+13-JAN-93 JAN                                                                                                                                                                                           
+03-JAN-90 JAN                                                                                                                                                                                           
+21-MAY-91 MAY                                                                                                                                                                                           
+07-FEB-99 FEB                                                                                                                                                                                           
+16-NOV-99 NOV                                                                                                                                                                                           
+17-OCT-95 OCT                                                                                                                                                                                           
+29-JAN-97 JAN                                                                                                                                                                                           
+15-MAR-98 MAR                                                                                                                                                                                           
+09-JUL-98 JUL                                                                                                                                                                                           
+29-JAN-00 JAN                                                                                                                                                                                           
+11-MAY-96 MAY                                                                                                                                                                                           
+24-MAR-98 MAR                                                                                                                                                                                           
+24-MAY-99 MAY                                                                                                                                                                                           
+17-SEP-87 SEP                                                                                                                                                                                           
+17-FEB-96 FEB                                                                                                                                                                                           
+17-AUG-97 AUG                                                                                                                                                                                           
+07-JUN-94 JUN                                                                                                                                                                                           
+07-JUN-94 JUN                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> REM 87/jul\17
+SQL> REM 89/sep\21
+SQL> 
+SQL> REM 1 SUBSTR LOWER || 2 ALTER SESSION + LOWER
+SQL> 
+SQL> SELECT HIRE_DATE , SUBSTR(HIRE_DATE,8)||'/'||LOWER(SUBSTR(HIRE_DATE,4,3))||'\'||SUBSTR(HIRE_DATE,1,2) FROM EMPLOYEES;
+
+HIRE_DATE SUBSTR(HIRE_DATE,8)||'/'||LOWER(SUBSTR(HIRE_DATE,4,3))||'\'||SUBST                                                                                                                            
+--------- ------------------------------------------------------------------                                                                                                                            
+17-JUL-87 87/jul\17                                                                                                                                                                                     
+21-SEP-89 89/sep\21                                                                                                                                                                                     
+13-JAN-93 93/jan\13                                                                                                                                                                                     
+03-JAN-90 90/jan\03                                                                                                                                                                                     
+21-MAY-91 91/may\21                                                                                                                                                                                     
+07-FEB-99 99/feb\07                                                                                                                                                                                     
+16-NOV-99 99/nov\16                                                                                                                                                                                     
+17-OCT-95 95/oct\17                                                                                                                                                                                     
+29-JAN-97 97/jan\29                                                                                                                                                                                     
+15-MAR-98 98/mar\15                                                                                                                                                                                     
+09-JUL-98 98/jul\09                                                                                                                                                                                     
+29-JAN-00 00/jan\29                                                                                                                                                                                     
+11-MAY-96 96/may\11                                                                                                                                                                                     
+24-MAR-98 98/mar\24                                                                                                                                                                                     
+24-MAY-99 99/may\24                                                                                                                                                                                     
+17-SEP-87 87/sep\17                                                                                                                                                                                     
+17-FEB-96 96/feb\17                                                                                                                                                                                     
+17-AUG-97 97/aug\17                                                                                                                                                                                     
+07-JUN-94 94/jun\07                                                                                                                                                                                     
+07-JUN-94 94/jun\07                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD/mon\RR';
+
+Session altered.
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+17/jul\87                                                                                                                                                                                               
+21/sep\89                                                                                                                                                                                               
+13/jan\93                                                                                                                                                                                               
+03/jan\90                                                                                                                                                                                               
+21/may\91                                                                                                                                                                                               
+07/feb\99                                                                                                                                                                                               
+16/nov\99                                                                                                                                                                                               
+17/oct\95                                                                                                                                                                                               
+29/jan\97                                                                                                                                                                                               
+15/mar\98                                                                                                                                                                                               
+09/jul\98                                                                                                                                                                                               
+29/jan\00                                                                                                                                                                                               
+11/may\96                                                                                                                                                                                               
+24/mar\98                                                                                                                                                                                               
+24/may\99                                                                                                                                                                                               
+17/sep\87                                                                                                                                                                                               
+17/feb\96                                                                                                                                                                                               
+17/aug\97                                                                                                                                                                                               
+07/jun\94                                                                                                                                                                                               
+07/jun\94                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'RR/mon\DD';
+
+Session altered.
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+87/jul\17                                                                                                                                                                                               
+89/sep\21                                                                                                                                                                                               
+93/jan\13                                                                                                                                                                                               
+90/jan\03                                                                                                                                                                                               
+91/may\21                                                                                                                                                                                               
+99/feb\07                                                                                                                                                                                               
+99/nov\16                                                                                                                                                                                               
+95/oct\17                                                                                                                                                                                               
+97/jan\29                                                                                                                                                                                               
+98/mar\15                                                                                                                                                                                               
+98/jul\09                                                                                                                                                                                               
+00/jan\29                                                                                                                                                                                               
+96/may\11                                                                                                                                                                                               
+98/mar\24                                                                                                                                                                                               
+99/may\24                                                                                                                                                                                               
+87/sep\17                                                                                                                                                                                               
+96/feb\17                                                                                                                                                                                               
+97/aug\17                                                                                                                                                                                               
+94/jun\07                                                                                                                                                                                               
+94/jun\07                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT LTRIM(LTRIM(HIRE_DATE,'1234567890'),'QWERTYUIOPASDFGHJKLZXCVBNM-') || '/' || RTRIM(LTRIM(LOWER(HIRE_DATE),'1234567890-'),'1234567890-') || '\' || RTRIM(RTRIM(HIRE_DATE,'1234567890'),'QWERTYUIOPASDFGHJKLZXCVBNM-') FROM EMPLOYEES ;
+
+LTRIM(LTRIM(HIRE_DATE,'1234567890'),'QWERTYUIOPASDFGHJKL                                                                                                                                                
+--------------------------------------------------------                                                                                                                                                
+/jul\17//jul\\87/jul\                                                                                                                                                                                   
+/sep\21//sep\\89/sep\                                                                                                                                                                                   
+/jan\13//jan\\93/jan\                                                                                                                                                                                   
+/jan\03//jan\\90/jan\                                                                                                                                                                                   
+/may\21//may\\91/may\                                                                                                                                                                                   
+/feb\07//feb\\99/feb\                                                                                                                                                                                   
+/nov\16//nov\\99/nov\                                                                                                                                                                                   
+/oct\17//oct\\95/oct\                                                                                                                                                                                   
+/jan\29//jan\\97/jan\                                                                                                                                                                                   
+/mar\15//mar\\98/mar\                                                                                                                                                                                   
+/jul\09//jul\\98/jul\                                                                                                                                                                                   
+/jan\29//jan\\00/jan\                                                                                                                                                                                   
+/may\11//may\\96/may\                                                                                                                                                                                   
+/mar\24//mar\\98/mar\                                                                                                                                                                                   
+/may\24//may\\99/may\                                                                                                                                                                                   
+/sep\17//sep\\87/sep\                                                                                                                                                                                   
+/feb\17//feb\\96/feb\                                                                                                                                                                                   
+/aug\17//aug\\97/aug\                                                                                                                                                                                   
+/jun\07//jun\\94/jun\                                                                                                                                                                                   
+/jun\07//jun\\94/jun\                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> SELECT LTRIM(LTRIM(HIRE_DATE,'1234567890'),'QWERTYUIOPASDFGHJKLZXCVBNM-') || '/' || RTRIM(LTRIM(LOWER(HIRE_DATE),'1234567890-'),'1234567890-') || '\' || RTRIM(RTRIM(HIRE_DATE,'1234567890'),'QWERTYUIOPASDFGHJKLZXCVBNM-') FROM EMPLOYEES ;
+
+LTRIM(LTRIM(HIRE_DATE,'1234567890'),'QWERTYUIOPASDFGHJKL                                                                                                                                                
+--------------------------------------------------------                                                                                                                                                
+87/jul\17                                                                                                                                                                                               
+89/sep\21                                                                                                                                                                                               
+93/jan\13                                                                                                                                                                                               
+90/jan\03                                                                                                                                                                                               
+91/may\21                                                                                                                                                                                               
+99/feb\07                                                                                                                                                                                               
+99/nov\16                                                                                                                                                                                               
+95/oct\17                                                                                                                                                                                               
+97/jan\29                                                                                                                                                                                               
+98/mar\15                                                                                                                                                                                               
+98/jul\09                                                                                                                                                                                               
+00/jan\29                                                                                                                                                                                               
+96/may\11                                                                                                                                                                                               
+98/mar\24                                                                                                                                                                                               
+99/may\24                                                                                                                                                                                               
+87/sep\17                                                                                                                                                                                               
+96/feb\17                                                                                                                                                                                               
+97/aug\17                                                                                                                                                                                               
+94/jun\07                                                                                                                                                                                               
+94/jun\07                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM EMAIL    NEW_EMAIL
+SQL> 
+SQL> 
+SQL> SELECT EMAIL , SUBSTR(FIRST_NAME,1,1)||UPPER(SUBSTR(REPLACE(LAST_NAME,' '),1,7)) NEW_EMAIL FROM EMPLOYEES;
+
+EMAIL      NEW_EMAIL                                                                                                                                                                                    
+---------- --------------------------------                                                                                                                                                             
+SKING      SKING                                                                                                                                                                                        
+NKOCHHAR   NKOCHHAR                                                                                                                                                                                     
+LDEHAAN    LDEHAAN                                                                                                                                                                                      
+AHUNOLD    AHUNOLD                                                                                                                                                                                      
+BERNST     BERNST                                                                                                                                                                                       
+DLORENTZ   DLORENTZ                                                                                                                                                                                     
+KMOURGOS   KMOURGOS                                                                                                                                                                                     
+TRAJS      TRAJS                                                                                                                                                                                        
+CDAVIES    CDAVIES                                                                                                                                                                                      
+RMATOS     RMATOS                                                                                                                                                                                       
+PVARGAS    PVARGAS                                                                                                                                                                                      
+EZLOTKEY   EZLOTKEY                                                                                                                                                                                     
+EABEL      EABEL                                                                                                                                                                                        
+JTAYLOR    JTAYLOR                                                                                                                                                                                      
+KGRANT     KGRANT                                                                                                                                                                                       
+JWHALEN    JWHALEN                                                                                                                                                                                      
+MHARTSTE   MHARTSTE                                                                                                                                                                                     
+PFAY       PFAY                                                                                                                                                                                         
+SHIGGINS   SHIGGINS                                                                                                                                                                                     
+WGIETZ     WGIETZ                                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT NULLIF(EMAIL , SUBSTR(FIRST_NAME,1,1)||UPPER(SUBSTR(REPLACE(LAST_NAME,' '),1,7))) NEW_EMAIL FROM EMPLOYEES;
+
+NEW_EMAIL                                                                                                                                                                                               
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SPOOL OFF

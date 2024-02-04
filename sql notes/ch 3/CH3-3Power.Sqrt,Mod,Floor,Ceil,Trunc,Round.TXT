@@ -1,0 +1,604 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM LIST OF NUMBER FUNCTIONS : POWER SQRT  MOD  FLOOR CEIL   TRUNC ROUND
+SQL> 
+SQL> 
+SQL> SELECT POWER(5,2) FROM DUAL;
+
+POWER(5,2)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        25                                                                                                                                                                                              
+
+SQL> SELECT POWER(5,3) FROM DUAL;
+
+POWER(5,3)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       125                                                                                                                                                                                              
+
+SQL> SELECT POWER(5,7) FROM DUAL;
+
+POWER(5,7)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+     78125                                                                                                                                                                                              
+
+SQL> SELECT POWER(5.2,2) FROM DUAL;
+
+POWER(5.2,2)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+       27.04                                                                                                                                                                                            
+
+SQL> SELECT POWER(5.2,2.68) FROM DUAL;
+
+POWER(5.2,2.68)                                                                                                                                                                                         
+---------------                                                                                                                                                                                         
+     82.9638621                                                                                                                                                                                         
+
+SQL> SELECT POWER(-5.2,2.68) FROM DUAL;
+SELECT POWER(-5.2,2.68) FROM DUAL
+             *
+ERROR at line 1:
+ORA-01428: argument '-5.2' is out of range 
+
+
+SQL> SELECT POWER(-5.2,2) FROM DUAL;
+
+POWER(-5.2,2)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+        27.04                                                                                                                                                                                           
+
+SQL> SELECT POWER(-5,2) FROM DUAL;
+
+POWER(-5,2)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         25                                                                                                                                                                                             
+
+SQL> SELECT POWER(-5,3) FROM DUAL;
+
+POWER(-5,3)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+       -125                                                                                                                                                                                             
+
+SQL> SELECT POWER(25,1/2) FROM DUAL;
+
+POWER(25,1/2)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            5                                                                                                                                                                                           
+
+SQL> SELECT POWER(25,.5) FROM DUAL;
+
+POWER(25,.5)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           5                                                                                                                                                                                            
+
+SQL> SELECT POWER(169,1/2) FROM DUAL;
+
+POWER(169,1/2)                                                                                                                                                                                          
+--------------                                                                                                                                                                                          
+            13                                                                                                                                                                                          
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        100 Steven     King       SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                               
+        101 Neena      Kochhar    NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                               
+        102 Lex        De Haan    LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                               
+        103 Alexander  Hunold     AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                               
+        104 Bruce      Ernst      BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                               
+        107 Diana      Lorentz    DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                               
+        124 Kevin      Mourgos    KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                               
+        141 Trenna     Rajs       TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                               
+        142 Curtis     Davies     CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+        144 Peter      Vargas     PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                               
+        149 Eleni      Zlotkey    EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+        200 Jennifer   Whalen     JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                               
+        201 Michael    Hartstein  MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                               
+        202 Pat        Fay        PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                               
+        205 Shelley    Higgins    SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                               
+        206 William    Gietz      WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                               
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES OFFSET POWER(169,1/2) ROWS;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+        200 Jennifer   Whalen     JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                               
+        201 Michael    Hartstein  MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                               
+        202 Pat        Fay        PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                               
+        205 Shelley    Higgins    SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                               
+        206 William    Gietz      WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                               
+
+8 rows selected.
+
+SQL> SET NUMW 40
+SQL> 
+SQL> SELECT POWER(169,1/2) FROM DUAL;
+
+                          POWER(169,1/2)                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                      13                                                                                                                                                                
+
+SQL> SELECT TO_CHAR(POWER(169,1/2),'99.99999999999999999999999999999999999999999999') FROM DUAL;
+
+TO_CHAR(POWER(169,1/2),'99.999999999999999999999                                                                                                                                                        
+------------------------------------------------                                                                                                                                                        
+ 12.99999999999999999999999999999999999997000000                                                                                                                                                        
+
+SQL> SELECT TO_CHAR(POWER(169,.5),'99.99999999999999999999999999999999999999999999') FROM DUAL;
+
+TO_CHAR(POWER(169,.5),'99.9999999999999999999999                                                                                                                                                        
+------------------------------------------------                                                                                                                                                        
+ 12.99999999999999999999999999999999999997000000                                                                                                                                                        
+
+SQL> SELECT TO_CHAR(SQRT(169),'99.99999999999999999999999999999999999999999999') FROM DUAL;
+
+TO_CHAR(SQRT(169),'99.99999999999999999999999999                                                                                                                                                        
+------------------------------------------------                                                                                                                                                        
+ 13.00000000000000000000000000000000000000000000                                                                                                                                                        
+
+SQL> SELECT POWER(5,-2) FROM DUAL;
+
+                             POWER(5,-2)                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                     .04                                                                                                                                                                
+
+SQL> SELECT 1/POWER(5,2) FROM DUAL;
+
+                            1/POWER(5,2)                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                     .04                                                                                                                                                                
+
+SQL> SELECT SQRT(36) FROM DUAL;
+
+                                SQRT(36)                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                       6                                                                                                                                                                
+
+SQL> SELECT SQRT(37) FROM DUAL;
+
+                                SQRT(37)                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+6.08276253029821968899968424520206706209                                                                                                                                                                
+
+SQL> SET NUMW 10
+SQL> 
+SQL> SELECT SQRT(37) FROM DUAL;
+
+  SQRT(37)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+6.08276253                                                                                                                                                                                              
+
+SQL> SELECT SQRT(37.5678) FROM DUAL;
+
+SQRT(37.5678)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+    6.1292577                                                                                                                                                                                           
+
+SQL> SELECT SQRT(-37.5678) FROM DUAL;
+SELECT SQRT(-37.5678) FROM DUAL
+            *
+ERROR at line 1:
+ORA-01428: argument '-37.5678' is out of range 
+
+
+SQL> SELECT POWER(-37.5678,1/2) FROM DUAL;
+SELECT POWER(-37.5678,1/2) FROM DUAL
+             *
+ERROR at line 1:
+ORA-01428: argument '-37.5678' is out of range 
+
+
+SQL> REM MOD : MODULUS
+SQL> 
+SQL> SELECT MOD(10,3) FROM DUAL;
+
+ MOD(10,3)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+
+SQL> SELECT MOD(10.34,3) FROM DUAL;
+
+MOD(10.34,3)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+        1.34                                                                                                                                                                                            
+
+SQL> SELECT MOD(10.34,3.765) FROM DUAL;
+
+MOD(10.34,3.765)                                                                                                                                                                                        
+----------------                                                                                                                                                                                        
+            2.81                                                                                                                                                                                        
+
+SQL> SELECT MOD(-10.34,3.765) FROM DUAL;
+
+MOD(-10.34,3.765)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+            -2.81                                                                                                                                                                                       
+
+SQL> SELECT MOD(-10.34,-3.765) FROM DUAL;
+
+MOD(-10.34,-3.765)                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+             -2.81                                                                                                                                                                                      
+
+SQL> SELECT MOD(10.34,-3.765) FROM DUAL;
+
+MOD(10.34,-3.765)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+             2.81                                                                                                                                                                                       
+
+SQL> 
+SQL> 
+SQL> REM FLOOR , CEIL : BUILDING
+SQL> 
+SQL> REM FLOOR : WILL RETURN PREVIOUS LOWER INTEGER
+SQL> 
+SQL> REM CEIL : WILL RETURN NEXT HIGHER INTEGER
+SQL> 
+SQL> SELECT FLOOR(4), CEIL(4) FROM DUAL;
+
+  FLOOR(4)    CEIL(4)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         4          4                                                                                                                                                                                   
+
+SQL> SELECT FLOOR(4.000000000000000000000000001), CEIL(4.00000000000000000000000000001) FROM DUAL;
+
+FLOOR(4.000000000000000000000000001) CEIL(4.00000000000000000000000000001)                                                                                                                              
+------------------------------------ -------------------------------------                                                                                                                              
+                                   4                                     5                                                                                                                              
+
+SQL> SELECT FLOOR(4.99999999999999999999999999999), CEIL(4.9999999999999999999999999999999) FROM DUAL;
+
+FLOOR(4.99999999999999999999999999999) CEIL(4.9999999999999999999999999999999)                                                                                                                          
+-------------------------------------- ---------------------------------------                                                                                                                          
+                                     4                                       5                                                                                                                          
+
+SQL> SELECT FLOOR(-4.000000000000000000000000001), CEIL(-4.00000000000000000000000000001) FROM DUAL;
+
+FLOOR(-4.000000000000000000000000001) CEIL(-4.00000000000000000000000000001)                                                                                                                            
+------------------------------------- --------------------------------------                                                                                                                            
+                                   -5                                     -4                                                                                                                            
+
+SQL> SELECT FLOOR(-4.99999999999999999999999999999), CEIL(-4.9999999999999999999999999999999) FROM DUAL;
+
+FLOOR(-4.99999999999999999999999999999) CEIL(-4.9999999999999999999999999999999)                                                                                                                        
+--------------------------------------- ----------------------------------------                                                                                                                        
+                                     -5                                       -4                                                                                                                        
+
+SQL> REM TRUNC :
+SQL> 
+SQL> SELECT 4862.19 , TRUNC(4862.19) FROM DUAL;
+
+   4862.19 TRUNC(4862.19)                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+   4862.19           4862                                                                                                                                                                               
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,0) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,0)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4862.19             4862                                                                                                                                                                             
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,1) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,1)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4862.19           4862.1                                                                                                                                                                             
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,2) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,2)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4862.19          4862.19                                                                                                                                                                             
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,3) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,3)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4862.19          4862.19                                                                                                                                                                             
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,-1) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,-1)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4862.19              4860                                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,-2) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,-2)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4862.19              4800                                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,-3) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,-3)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4862.19              4000                                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,-4) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,-4)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4862.19                 0                                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,-5) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,-5)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4862.19                 0                                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,1) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,1)                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+   4862.19           4862.1                                                                                                                                                                             
+
+SQL> SELECT 4862.19 , TRUNC(4862.19,-1) FROM DUAL;
+
+   4862.19 TRUNC(4862.19,-1)                                                                                                                                                                            
+---------- -----------------                                                                                                                                                                            
+   4862.19              4860                                                                                                                                                                            
+
+SQL> SELECT -4862.19 , TRUNC(-4862.19,-1) FROM DUAL;
+
+  -4862.19 TRUNC(-4862.19,-1)                                                                                                                                                                           
+---------- ------------------                                                                                                                                                                           
+  -4862.19              -4860                                                                                                                                                                           
+
+SQL> REM ROUND :
+SQL> 
+SQL> REM NUMBER SYSTEM : DECIMAL
+SQL> 
+SQL> REM BASE VALUE : 10
+SQL> 
+SQL> REM AVAILABLE DIGITS : 0 1 2 3 4 5 6 7 8 9
+SQL> 
+SQL> REM FIRST HALF : 0 1 2 3 4
+SQL> 
+SQL> REM SECOND HALF : 5 6 7 8 9
+SQL> 
+SQL> REM IF DIGIT TO BE COMPARED FALLS IN FIRST HALF, NO CHANGE IN PREVIOUS DIGIT.
+SQL> 
+SQL> REM IF DIGIT TO BE COMPARED FALLS IN SECOND HALF, ADD 1 TO PREVIOUS DIGIT.
+SQL> 
+SQL> SELECT 4862.19 , TRUNC(4862.19) , ROUND(4862.19) FROM DUAL;
+
+   4862.19 TRUNC(4862.19) ROUND(4862.19)                                                                                                                                                                
+---------- -------------- --------------                                                                                                                                                                
+   4862.19           4862           4862                                                                                                                                                                
+
+SQL> SELECT 4862.19 , TRUNC(4862.49) , ROUND(4862.49) FROM DUAL;
+
+   4862.19 TRUNC(4862.49) ROUND(4862.49)                                                                                                                                                                
+---------- -------------- --------------                                                                                                                                                                
+   4862.19           4862           4862                                                                                                                                                                
+
+SQL> SELECT 4862.19 , TRUNC(4862.59) , ROUND(4862.59) FROM DUAL;
+
+   4862.19 TRUNC(4862.59) ROUND(4862.59)                                                                                                                                                                
+---------- -------------- --------------                                                                                                                                                                
+   4862.19           4862           4863                                                                                                                                                                
+
+SQL> SELECT 4862.19 , TRUNC(4862.59,1) , ROUND(4862.59,1) FROM DUAL;
+
+   4862.19 TRUNC(4862.59,1) ROUND(4862.59,1)                                                                                                                                                            
+---------- ---------------- ----------------                                                                                                                                                            
+   4862.19           4862.5           4862.6                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.59,2) , ROUND(4862.59,2) FROM DUAL;
+
+   4862.19 TRUNC(4862.59,2) ROUND(4862.59,2)                                                                                                                                                            
+---------- ---------------- ----------------                                                                                                                                                            
+   4862.19          4862.59          4862.59                                                                                                                                                            
+
+SQL> SELECT 4862.19 , TRUNC(4862.59,-1) , ROUND(4862.59,-1) FROM DUAL;
+
+   4862.19 TRUNC(4862.59,-1) ROUND(4862.59,-1)                                                                                                                                                          
+---------- ----------------- -----------------                                                                                                                                                          
+   4862.19              4860              4860                                                                                                                                                          
+
+SQL> SELECT 4862.19 , TRUNC(4862.59,-2) , ROUND(4862.59,-2) FROM DUAL;
+
+   4862.19 TRUNC(4862.59,-2) ROUND(4862.59,-2)                                                                                                                                                          
+---------- ----------------- -----------------                                                                                                                                                          
+   4862.19              4800              4900                                                                                                                                                          
+
+SQL> SELECT 4862.19 , TRUNC(4862.59,-3) , ROUND(4862.59,-3) FROM DUAL;
+
+   4862.19 TRUNC(4862.59,-3) ROUND(4862.59,-3)                                                                                                                                                          
+---------- ----------------- -----------------                                                                                                                                                          
+   4862.19              4000              5000                                                                                                                                                          
+
+SQL> SELECT 4862.19 , TRUNC(4862.59,-4) , ROUND(4862.59,-4) FROM DUAL;
+
+   4862.19 TRUNC(4862.59,-4) ROUND(4862.59,-4)                                                                                                                                                          
+---------- ----------------- -----------------                                                                                                                                                          
+   4862.19                 0                 0                                                                                                                                                          
+
+SQL> SELECT 5862.19 , TRUNC(5862.59,-4) , ROUND(5862.59,-4) FROM DUAL;
+
+   5862.19 TRUNC(5862.59,-4) ROUND(5862.59,-4)                                                                                                                                                          
+---------- ----------------- -----------------                                                                                                                                                          
+   5862.19                 0             10000                                                                                                                                                          
+
+SQL> SELECT 5992.19 , TRUNC(5992.59,-2) , ROUND(5992.59,-2) FROM DUAL;
+
+   5992.19 TRUNC(5992.59,-2) ROUND(5992.59,-2)                                                                                                                                                          
+---------- ----------------- -----------------                                                                                                                                                          
+   5992.19              5900              6000                                                                                                                                                          
+
+SQL> SELECT TRUNC(67,-2) , ROUND(67,-2) FROM DUAL;
+
+TRUNC(67,-2) ROUND(67,-2)                                                                                                                                                                               
+------------ ------------                                                                                                                                                                               
+           0          100                                                                                                                                                                               
+
+SQL> 
+SQL> SELECT POWER(TRUNC(3.5),ROUND(1.5)) FROM DUAL;
+
+POWER(TRUNC(3.5),ROUND(1.5))                                                                                                                                                                            
+----------------------------                                                                                                                                                                            
+                           9                                                                                                                                                                            
+
+SQL> SELECT POWER(ROUND(3.5),CEIL(1.5)) FROM DUAL;
+
+POWER(ROUND(3.5),CEIL(1.5))                                                                                                                                                                             
+---------------------------                                                                                                                                                                             
+                         16                                                                                                                                                                             
+
+SQL> SELECT POWER(POWER(ROUND(3.5),TRUNC(2.99)),.5) FROM DUAL;
+
+POWER(POWER(ROUND(3.5),TRUNC(2.99)),.5)                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+                                      4                                                                                                                                                                 
+
+SQL> SELECT POWER(16,1/2) FROM DUAL;
+
+POWER(16,1/2)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            4                                                                                                                                                                                           
+
+SQL> SELECT POWER(16,.5) FROM DUAL;
+
+POWER(16,.5)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           4                                                                                                                                                                                            
+
+SQL> SELECT SQRT(16) FROM DUAL;
+
+  SQRT(16)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> SELECT POWER(256,1/3) FROM DUAL;
+
+POWER(256,1/3)                                                                                                                                                                                          
+--------------                                                                                                                                                                                          
+    6.34960421                                                                                                                                                                                          
+
+SQL> SELECT POWER(8,1/3) FROM DUAL;
+
+POWER(8,1/3)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           2                                                                                                                                                                                            
+
+SQL> SELECT POWER(27,1/3) FROM DUAL;
+
+POWER(27,1/3)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            3                                                                                                                                                                                           
+
+SQL> SELECT POWER(64,1/3) FROM DUAL;
+
+POWER(64,1/3)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            4                                                                                                                                                                                           
+
+SQL> REM DATE FUNCTIONS + DATE ARITHMATICS
+SQL> 
+SQL> REM LIST OF DATE FUNCTIONS : SYSDATE CURRENT_DATE   ADD_MONTHS MONTHS_BETWEEN    LAST_DAY NEXT_DAY    TRUNC ROUND
+SQL> 
+SQL> 
+SQL> REM SYSDATE : SYSTEM DATE/SERVER SYSTEM DATE AND TIME INFO.
+SQL> 
+SQL> REM CURRENT_DATE : CLIENT/LOCAL/CURRENT MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE   CURRENT_D                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+26-NOV-22 26-NOV-22                                                                                                                                                                                     
+
+SQL> COL PARAMETER FORMAT A30
+SQL> COL VALUE FORMAT A30
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> REM NLS : NATIONAL LANGUAGE SUPPORT
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RRRR';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RRRR                                                                                                                                                              
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE     CURRENT_DAT                                                                                                                                                                                 
+----------- -----------                                                                                                                                                                                 
+26-NOV-2022 26-NOV-2022                                                                                                                                                                                 
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR';
+
+Session altered.
+
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE           CURRENT_DATE                                                                                                                                                                          
+----------------- -----------------                                                                                                                                                                     
+26-NOVEMBER -2022 26-NOVEMBER -2022                                                                                                                                                                     
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE                       CURRENT_DATE                                                                                                                                                              
+----------------------------- -----------------------------                                                                                                                                             
+26-NOVEMBER -2022 11:45.29 AM 26-NOVEMBER -2022 11:45.29 AM                                                                                                                                             
+
+SQL> SPOOL OFF

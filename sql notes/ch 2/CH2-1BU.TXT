@@ -1,0 +1,477 @@
+SQL> 
+SQL> REM LOGICAL OPERATORS :
+SQL> 
+SQL> REM LIST OF LOGICAL OPERATORS : 1 NOT 2 AND 3 OR
+SQL> 
+SQL> REM NOT : IS USED TO REVERSE/INVERSE THE OUTCOME/RESULT OF FOLLOWING CONDITION(S)
+SQL> 
+SQL> REM AND : IS USED WHEN WE WANT TO PROCESS ROWS WHICH SATISFIES BOTH THE CONDITIONS
+SQL> 
+SQL> REM OR : IS USED WHEN WE WANT TO PROCESS ROWS WHICH SATISFIES AT LEAST ONE CONDITION
+SQL> 
+SQL> 
+SQL> 
+SQL> REM CONDITION SYNTAX : operand1   operator   operand2
+SQL> 
+SQL> REM CONDITION EXAMPLE : JOB_ID = 'IT_PROG'
+SQL> 
+SQL> 
+SQL> 
+SQL> REM NOT IS PLACED BEFORE CONDITION(S)
+SQL> 
+SQL> 
+SQL> REM CONDITION EXAMPLE : NOT JOB_ID = 'IT_PROG'
+SQL> 
+SQL> 
+SQL> REM AND & OR ARE PLACED BETWEEN TWO CONDITIONS.
+SQL> 
+SQL> REM AND & OR ARE USED TO JOIN/COMBINE TWO CONDITIONS.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM CONDITION EXAMPLE : JOB_ID = 'IT_PROG' AND SALARY > 8000
+SQL> 
+SQL> REM CONDITION EXAMPLE : JOB_ID = 'IT_PROG' OR SALARY > 8000
+SQL> 
+SQL> 
+SQL> 
+SQL> REM CONDITION EXAMPLE : SALARY > 8000 AND JOB_ID = 'IT_PROG'
+SQL> 
+SQL> REM CONDITION EXAMPLE : SALARY > 8000 AND NOT JOB_ID = 'IT_PROG'
+SQL> 
+SQL> 
+SQL> SELECT * FROM EXAM;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         33                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> REM GU : 33 PASSING LEVEL
+SQL> 
+SQL> REM DISPLAY THOSE WHO ARE PASS IN ENGLISH SUBJECT
+SQL> 
+SQL> SELECT * FROM EXAM WHERE ENGLISH >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> REM DISPLAY THOSE WHO ARE FAIL IN ENGLISH SUBJECT
+SQL> 
+SQL> SELECT * FROM EXAM WHERE ENGLISH < 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         33                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE NOT ENGLISH >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         33                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         33                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> REM GU : 33 PASSING LEVEL
+SQL> 
+SQL> REM DISPLAY THOSE WHO ARE FAIL IN MATHS SUBJECT
+SQL> 
+SQL> SELECT MATHS FROM EXAM WHERE MATHS<= 33;
+
+     MATHS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        33                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> 
+SQL> SELECT MATHS FROM EXAM WHERE NOT MATHS >= 33;
+
+     MATHS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> 
+SQL> SELECT MATHS FROM EXAM WHERE MATHS < 33 OR NOT MATHS > 33;
+
+     MATHS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        33                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> SELECT MATHS FROM EXAM WHERE MATHS< 33;
+
+     MATHS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> REM DISPLAY THOSE WHOSE RESULT IS 'PASS'
+SQL> 
+SQL> REM AND : IS USED WHEN WE WANT TO PROCESS ROWS WHICH SATISFIES BOTH THE CONDITIONS
+SQL> 
+SQL> SELECT * FROM EXAM WHERE ENGLISH >= 33 AND MATHS >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE NOT ENGLISH < 33 OR NOT MATHS < 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         33                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE NOT ENGLISH < 33 AND NOT MATHS < 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE NOT (ENGLISH < 33 OR MATHS < 33);
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         4         33         70                                                                                                                                                                        
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY SALARY;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 St_ClERk         2500                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 St_Clerk         2600                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 st_clerk         3100                       124            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel                       011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES WHERE SALARY >= 10500 OR JOB_ID LIKE '%REP' ORDER BY SALARY;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel                       011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+
+10 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY SALARY;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 St_ClERk         2500                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 St_Clerk         2600                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 st_clerk         3100                       124            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel                       011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES WHERE NOT SALARY >= 10500 AND JOB_ID LIKE '%REP' ORDER BY SALARY;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+
+SQL> REM LOGICAL OPERATOR PRECEDENCE : 1 () 2 NOT 3 AND 4 OR
+SQL> 
+SQL> REM DISPLAY THOSE WHO WORKS AS IT_PROG OR GETS SALARY HIGHER THAN 8000
+SQL> 
+SQL> SELECT JOB_ID , SALARY FROM EMPLOYEES WHERE JOB_ID = 'IT_PROG' OR SALARY > 8000;
+
+JOB_ID         SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+AD_PRES         24000                                                                                                                                                                                   
+AD_VP           17000                                                                                                                                                                                   
+AD_VP           17000                                                                                                                                                                                   
+IT_PROG          9000                                                                                                                                                                                   
+IT_PROG          6000                                                                                                                                                                                   
+IT_PROG          4200                                                                                                                                                                                   
+SA_MAN          10500                                                                                                                                                                                   
+SA_REP          11000                                                                                                                                                                                   
+SA_REP           8600                                                                                                                                                                                   
+MK_MAN          13000                                                                                                                                                                                   
+AC_MGR          12000                                                                                                                                                                                   
+AC_ACCOUNT       8300                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> REM DISPLAY THOSE WHO WORKS AS IT_PROG WHOE GETS SALARY HIGHER THAN 8000
+SQL> 
+SQL> REM DISPLAY THOSE WHO WORKS AS IT_PROG WHO GETS SALARY HIGHER THAN 8000
+SQL> 
+SQL> SELECT JOB_ID , SALARY FROM EMPLOYEES WHERE JOB_ID = 'IT_PROG' AND SALARY > 8000;
+
+JOB_ID         SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+IT_PROG          9000                                                                                                                                                                                   
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 st_clerk         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 St_Clerk         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 St_ClERk         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel                       011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM DISPLAY THOSE WHO WORKS IN ANY OF THE DEPARTMENTS 20 60 90
+SQL> 
+SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = ANY(20,60,90);
+
+DEPARTMENT_ID                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+
+8 rows selected.
+
+SQL> 
+SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = 20 OR DEPARTMENT_ID = 60 OR DEPARTMENT_ID = 90;
+
+DEPARTMENT_ID                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID = SOME(20,60,90);
+
+DEPARTMENT_ID                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+
+8 rows selected.
+
+SQL> 
+SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE DEPARTMENT_ID IN (20,60,90);
+
+DEPARTMENT_ID                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+
+8 rows selected.
+
+SQL> REM DISPLAY THOSE WHO GETS SALARY IN THE RANGE OF 4400 AND 10500
+SQL> 
+SQL> SELECT SALARY FROM EMPLOYEES WHERE SALARY >= 4400 AND SALARY <= 10500 ORDER BY 1;
+
+    SALARY                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      4400                                                                                                                                                                                              
+      5800                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+      7000                                                                                                                                                                                              
+      8300                                                                                                                                                                                              
+      8600                                                                                                                                                                                              
+      9000                                                                                                                                                                                              
+     10500                                                                                                                                                                                              
+
+9 rows selected.
+
+SQL> SELECT SALARY FROM EMPLOYEES WHERE NOT SALARY < 4400 AND SALARY <= 10500;
+
+    SALARY                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      9000                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+      5800                                                                                                                                                                                              
+     10500                                                                                                                                                                                              
+      8600                                                                                                                                                                                              
+      7000                                                                                                                                                                                              
+      4400                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+      8300                                                                                                                                                                                              
+
+9 rows selected.
+
+SQL> SELECT SALARY FROM EMPLOYEES WHERE NOT SALARY BETWEEN 4400 AND 10500 ORDER BY 1
+  2  
+SQL> SELECT SALARY FROM EMPLOYEES WHERE NOT SALARY BETWEEN 4400 AND 10500 ORDER BY 1;
+
+    SALARY                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      2500                                                                                                                                                                                              
+      2600                                                                                                                                                                                              
+      3100                                                                                                                                                                                              
+      3500                                                                                                                                                                                              
+      4200                                                                                                                                                                                              
+     11000                                                                                                                                                                                              
+     12000                                                                                                                                                                                              
+     13000                                                                                                                                                                                              
+     17000                                                                                                                                                                                              
+     17000                                                                                                                                                                                              
+     24000                                                                                                                                                                                              
+
+11 rows selected.
+
+SQL> SELECT SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 4400 AND 10500 ORDER BY 1;
+
+    SALARY                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      4400                                                                                                                                                                                              
+      5800                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+      6000                                                                                                                                                                                              
+      7000                                                                                                                                                                                              
+      8300                                                                                                                                                                                              
+      8600                                                                                                                                                                                              
+      9000                                                                                                                                                                                              
+     10500                                                                                                                                                                                              
+
+9 rows selected.
+
+SQL> REM IN , = ANY , = SOME , OR
+SQL> 
+SQL> REM BETWEEN , AND
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 st_clerk         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 St_Clerk         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 St_ClERk         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel                       011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM DISPLAY THOSE EMPLOYEES OF DEPARTMENT 20 AND 110 WHO GETS SALARY HIGHER THAN 8000
+SQL> 
+SQL> SELECT DEPARTMENT_ID , SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID = SOME(20,110) AND SALARY > 8000;
+
+DEPARTMENT_ID     SALARY                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           20      13000                                                                                                                                                                                
+          110      12000                                                                                                                                                                                
+          110       8300                                                                                                                                                                                
+
+SQL> 
+SQL> SELECT DEPARTMENT_ID , SALARY FROM EMPLOYEES WHERE (DEPARTMENT_ID = 20 OR DEPARTMENT_ID = 110) AND SALARY > 8000;
+
+DEPARTMENT_ID     SALARY                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           20      13000                                                                                                                                                                                
+          110      12000                                                                                                                                                                                
+          110       8300                                                                                                                                                                                
+
+SQL> SPOOL OFF

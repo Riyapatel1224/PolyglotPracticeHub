@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before and After</title>
+    <style>
+        .box{
+        width: 500px;
+        height: 200px;
+        position: absolute;
+        background-image: url('download.jpeg');
+        background-size: cover;
+        }
+        .box::before{
+            content: '';
+            position: absolute;
+            background-color: rgba(216, 107, 107, 0.65);
+            width: 500px;
+            height: 100px;
+            transition: 2s;
+        }
+
+        .box:hover::before{
+            height: 0;
+        }
+
+        .box::after{
+            content: '';
+            position: absolute;
+            background-color: rgba(216, 107, 107, 0.65);
+            width: 500px;
+            height: 100px;
+            bottom: 0;
+            transition: 2s;
+        }
+        .box:hover::after{
+            height: 0;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+    </div>
+</body>
+</html>

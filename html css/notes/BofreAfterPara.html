@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bofore after para</title>
+    <style>
+        .box{
+            width:300px;
+            height: 200px;
+            border: 5px solid teal;
+        } 
+        /* before - after */
+        /* layer : before box after  */
+        .box::before{
+            content: '..Helloo......';
+            position: relative;
+
+        }
+
+        .box:hover::before{
+            background-color: teal;
+            color: whitesmoke;
+        }
+
+        .box::after{
+            content: '......Bye';
+            position: relative;
+        }
+
+        .box:hover::after{
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident nisi omnis maiores ullam, ipsum sapiente magni illo maxime deserunt, in eos consequuntur. Cumque culpa saepe tenetur animi fugit accusantium a?
+    </div>
+    
+</body>
+</html>

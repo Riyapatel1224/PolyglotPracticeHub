@@ -1,0 +1,1275 @@
+
+SQL> REM EMPLOYEES   DEPARTMENTS  LOCATIONS  COUNTRIES   REGIONS
+SQL>
+SQL> REM E D L C R
+SQL>
+SQL> REM EMPLOYEES   DEPARTMENTS  LOCATIONS  COUNTRIES   REGIONS
+SQL>
+SQL> REM    DEPARTMENT_ID   LOCATION_ID  COUNTRY_ID  REGION_ID
+SQL>
+SQL>
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> REM DEPARTMENT_NAME , CITY
+SQL>
+SQL> REM DEPARTMENTS       LOCATIONS
+SQL>
+SQL> REM E D L C R
+SQL>
+SQL> REM   D L
+SQL>
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Seattle
+Marketing                      Toronto
+Shiping                        South San Francisco
+IT                             Southlake
+Sales                          Oxford
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID
+-- ---------------------------------------- ----------
+CA Canada                                            2
+DE Germany                                           1
+UK United Kingdom                                    1
+US United States of America                          2
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+
+SQL> REM CITY , COUNTRY_NAME
+SQL>
+SQL> REM REGION_NAME , COUNTRY_NAME
+SQL>
+SQL> REM CITY , COUNTRY_NAME , REGION_NAME
+SQL>
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS
+  3  NATURAL JOIN COUNTRIES
+  4  NATURAL JOIN REGIONS;
+
+CITY                           COUNTRY_NAME                             REGION_NAME
+------------------------------ ---------------------------------------- -------------------------
+Southlake                      United States of America                 Americas
+South San Francisco            United States of America                 Americas
+Seattle                        United States of America                 Americas
+Toronto                        Canada                                   Americas
+Oxford                         United Kingdom                           Europe
+
+SQL> REM COMMON COLUMN , DATA TYPE SAME , VALUES SIMILAR , MEANING SAME
+SQL>
+SQL>
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> REM DEPARTMENT_ID , MANAGER_ID
+SQL>
+SQL> REM MANAGER_ID : HAS DIFFERENT MEANING
+SQL>
+SQL> REM E D L C R
+SQL>
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID
+-- ---------------------------------------- ----------
+CA Canada                                            2
+DE Germany                                           1
+UK United Kingdom                                    1
+US United States of America                          2
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+
+SQL> REM 1 DEPARTMENT_NAME , CITY , COUNTRY_NAME
+SQL>
+SQL> REM 2 STATE_PROVINCE , COUNTRY_NAME , REGION_NAME
+SQL>
+SQL> REM 3 REGION_NAME , CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+SQL>
+SQL> SELECT DEPARTMENT_NAME ,CITY, COUNTRY_NAME FROM LOCATIONS  NATURAL JOIN COUNTRIES NATURAL JOIN DEPARTMENTS;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME
+------------------------------ ------------------------------ ----------------------------------------
+Administration                 Seattle                        United States of America
+Marketing                      Toronto                        Canada
+Shiping                        South San Francisco            United States of America
+IT                             Southlake                      United States of America
+Sales                          Oxford                         United Kingdom
+Executive                      Seattle                        United States of America
+Accounting                     Seattle                        United States of America
+Contracting                    Seattle                        United States of America
+
+8 rows selected.
+
+SQL>
+SQL> SELECT STATE_PROVINCE , COUNTRY_NAME,REGION_NAME FROM LOCATIONS  NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS;
+
+STATE_PROVINCE            COUNTRY_NAME                             REGION_NAME
+------------------------- ---------------------------------------- -------------------------
+Texas                     United States of America                 Americas
+California                United States of America                 Americas
+Washington                United States of America                 Americas
+Ontario                   Canada                                   Americas
+Oxford                    United Kingdom                           Europe
+
+SQL>
+SQL> SELECT REGION_NAME,CITY,DEPARTMENT_NAME,COUNTRY_NAME,STATE_PROVINCE FROM LOCATIONS  NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS NATURAL JOIN DEPARTMENTS;
+
+REGION_NAME               CITY                           DEPARTMENT_NAME                COUNTRY_NAME                             STATE_PROVINCE
+------------------------- ------------------------------ ------------------------------ ---------------------------------------- -------------------------
+Americas                  Seattle                        Administration                 United States of America                 Washington
+Americas                  Toronto                        Marketing                      Canada                                   Ontario
+Americas                  South San Francisco            Shiping                        United States of America                 California
+Americas                  Southlake                      IT                             United States of America                 Texas
+Europe                    Oxford                         Sales                          United Kingdom                           Oxford
+Americas                  Seattle                        Executive                      United States of America                 Washington
+Americas                  Seattle                        Accounting                     United States of America                 Washington
+Americas                  Seattle                        Contracting                    United States of America                 Washington
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME ,CITY, COUNTRY_NAME FROM LOCATIONS  NATURAL JOIN DEPARTMENTS NATURAL JOIN COUNTRIES;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME
+------------------------------ ------------------------------ ----------------------------------------
+Administration                 Seattle                        United States of America
+Marketing                      Toronto                        Canada
+Shiping                        South San Francisco            United States of America
+IT                             Southlake                      United States of America
+Sales                          Oxford                         United Kingdom
+Executive                      Seattle                        United States of America
+Accounting                     Seattle                        United States of America
+Contracting                    Seattle                        United States of America
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME ,CITY, COUNTRY_NAME FROM DEPARTMENTS NATURAL JOIN COUNTRIES NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME
+------------------------------ ------------------------------ ----------------------------------------
+Administration                 Seattle                        United States of America
+Marketing                      Toronto                        Canada
+Shiping                        South San Francisco            United States of America
+IT                             Southlake                      United States of America
+Sales                          Oxford                         United Kingdom
+Executive                      Seattle                        United States of America
+Accounting                     Seattle                        United States of America
+Contracting                    Seattle                        United States of America
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME ,CITY, COUNTRY_NAME FROM DEPARTMENTS NATURAL JOIN LOCATIONS NATURAL JOIN COUNTRIES;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME
+------------------------------ ------------------------------ ----------------------------------------
+Administration                 Seattle                        United States of America
+Marketing                      Toronto                        Canada
+Shiping                        South San Francisco            United States of America
+IT                             Southlake                      United States of America
+Sales                          Oxford                         United Kingdom
+Executive                      Seattle                        United States of America
+Accounting                     Seattle                        United States of America
+Contracting                    Seattle                        United States of America
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID
+-- ---------------------------------------- ----------
+CA Canada                                            2
+DE Germany                                           1
+UK United Kingdom                                    1
+US United States of America                          2
+
+SQL> REM DEPARTMENT_NAME , COUNTRY_NAME
+SQL>
+SQL> REM DEPARTMENTS       COUNTRIES
+SQL>
+SQL> REM E D L C R
+SQL>
+SQL> REM   D   C
+SQL>
+SQL> SELECT DEPARTMENT_NAME , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN COUNTRIES;
+
+DEPARTMENT_NAME                COUNTRY_NAME
+------------------------------ ----------------------------------------
+Administration                 Canada
+Marketing                      Canada
+Shiping                        Canada
+IT                             Canada
+Sales                          Canada
+Executive                      Canada
+Accounting                     Canada
+Contracting                    Canada
+Administration                 Germany
+Marketing                      Germany
+Shiping                        Germany
+IT                             Germany
+Sales                          Germany
+Executive                      Germany
+Accounting                     Germany
+Contracting                    Germany
+Administration                 United Kingdom
+Marketing                      United Kingdom
+Shiping                        United Kingdom
+IT                             United Kingdom
+Sales                          United Kingdom
+
+DEPARTMENT_NAME                COUNTRY_NAME
+------------------------------ ----------------------------------------
+Executive                      United Kingdom
+Accounting                     United Kingdom
+Contracting                    United Kingdom
+Administration                 United States of America
+Marketing                      United States of America
+Shiping                        United States of America
+IT                             United States of America
+Sales                          United States of America
+Executive                      United States of America
+Accounting                     United States of America
+Contracting                    United States of America
+
+32 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN COUNTRIES
+  4  NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                COUNTRY_NAME
+------------------------------ ----------------------------------------
+Administration                 United States of America
+Marketing                      Canada
+Shiping                        United States of America
+IT                             United States of America
+Sales                          United Kingdom
+Executive                      United States of America
+Accounting                     United States of America
+Contracting                    United States of America
+
+8 rows selected.
+
+SQL> REM REGION_NAME , DEPARTMENT_NAME
+SQL>
+SQL> SELECT REGION_NAME,DEPARTMENT_NAME FROM  COUNTRIES NATURAL JOIN REGIONS NATURAL JOIN DEPARTMENTS;
+
+REGION_NAME               DEPARTMENT_NAME
+------------------------- ------------------------------
+Europe                    Administration
+Europe                    Marketing
+Europe                    Shiping
+Europe                    IT
+Europe                    Sales
+Europe                    Executive
+Europe                    Accounting
+Europe                    Contracting
+Europe                    Administration
+Europe                    Marketing
+Europe                    Shiping
+Europe                    IT
+Europe                    Sales
+Europe                    Executive
+Europe                    Accounting
+Europe                    Contracting
+Americas                  Administration
+Americas                  Marketing
+Americas                  Shiping
+Americas                  IT
+Americas                  Sales
+
+REGION_NAME               DEPARTMENT_NAME
+------------------------- ------------------------------
+Americas                  Executive
+Americas                  Accounting
+Americas                  Contracting
+Americas                  Administration
+Americas                  Marketing
+Americas                  Shiping
+Americas                  IT
+Americas                  Sales
+Americas                  Executive
+Americas                  Accounting
+Americas                  Contracting
+
+32 rows selected.
+
+SQL> SELECT REGION_NAME,DEPARTMENT_NAME FROM  COUNTRIES NATURAL JOIN REGIONS NATURAL JOIN DEPARTMENTS NATURAL JOIN LOCATIONS;
+
+REGION_NAME               DEPARTMENT_NAME
+------------------------- ------------------------------
+Americas                  Administration
+Americas                  Marketing
+Americas                  Shiping
+Americas                  IT
+Europe                    Sales
+Americas                  Executive
+Americas                  Accounting
+Americas                  Contracting
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> SELECT DEPARTMENT_NAME , CITY FROM DEPARTMENTS
+  2  NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Seattle
+Marketing                      Toronto
+Shiping                        South San Francisco
+IT                             Southlake
+Sales                          Oxford
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY FROM DEPARTMENTS
+  2  CROSS JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Southlake
+Marketing                      Southlake
+Shiping                        Southlake
+IT                             Southlake
+Sales                          Southlake
+Executive                      Southlake
+Accounting                     Southlake
+Contracting                    Southlake
+Administration                 South San Francisco
+Marketing                      South San Francisco
+Shiping                        South San Francisco
+IT                             South San Francisco
+Sales                          South San Francisco
+Executive                      South San Francisco
+Accounting                     South San Francisco
+Contracting                    South San Francisco
+Administration                 Seattle
+Marketing                      Seattle
+Shiping                        Seattle
+IT                             Seattle
+Sales                          Seattle
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+Administration                 Toronto
+Marketing                      Toronto
+Shiping                        Toronto
+IT                             Toronto
+Sales                          Toronto
+Executive                      Toronto
+Accounting                     Toronto
+Contracting                    Toronto
+Administration                 Oxford
+Marketing                      Oxford
+Shiping                        Oxford
+IT                             Oxford
+Sales                          Oxford
+Executive                      Oxford
+Accounting                     Oxford
+Contracting                    Oxford
+
+40 rows selected.
+
+SQL> REM SYNTAX 1 INNER JOIN : FROM TABLE1 INNER JOIN TABLE2 USING (COMMON COLUMN LIST, COMMA SEPARATED)
+SQL>
+SQL> REM SYNTAX 2 INNER JOIN : FROM TABLE1 INNER JOIN TABLE2 ON JOIN CONDITION(S)
+SQL>
+SQL>
+SQL> SELECT DEPARTMENT_NAME , CITY FROM DEPARTMENTS
+  2  NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Seattle
+Marketing                      Toronto
+Shiping                        South San Francisco
+IT                             Southlake
+Sales                          Oxford
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY FROM DEPARTMENTS
+  2  INNER JOIN LOCATIONS USING (LOCATION_ID);
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Seattle
+Marketing                      Toronto
+Shiping                        South San Francisco
+IT                             Southlake
+Sales                          Oxford
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY , COUNTRY_NAME FROM DEPARTMENTS
+  2  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  3  INNER JOIN COUNTRIES USING (COUNTRY_ID);
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME
+------------------------------ ------------------------------ ----------------------------------------
+Administration                 Seattle                        United States of America
+Marketing                      Toronto                        Canada
+Shiping                        South San Francisco            United States of America
+IT                             Southlake                      United States of America
+Sales                          Oxford                         United Kingdom
+Executive                      Seattle                        United States of America
+Accounting                     Seattle                        United States of America
+Contracting                    Seattle                        United States of America
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID
+-- ---------------------------------------- ----------
+CA Canada                                            2
+DE Germany                                           1
+UK United Kingdom                                    1
+US United States of America                          2
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+
+SQL> REM 1 DEPARTMENT_NAME , CITY  2 CITY , COUNTRY_NAME  3 DEPARTMENT_NAME , COUNTRY_NAME  4 REGION_NAME , DEPARTMENT_NAME
+SQL>
+SQL> SELECT DEPARTMENT_NAME , CITY FROM DEPARTMENTS INNER JOIN LOCATIONS USING(LOCATION_ID) INNER JOIN COUNTRIES USING(COUNTRY_ID);
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Seattle
+Marketing                      Toronto
+Shiping                        South San Francisco
+IT                             Southlake
+Sales                          Oxford
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+
+8 rows selected.
+
+SQL>
+SQL> SELECT CITY,COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES USING(COUNTRY_ID);
+
+CITY                           COUNTRY_NAME
+------------------------------ ----------------------------------------
+Southlake                      United States of America
+South San Francisco            United States of America
+Seattle                        United States of America
+Toronto                        Canada
+Oxford                         United Kingdom
+
+SQL>
+SQL> SELECT DEPARTMENT_NAME,COUNTRY_NAME FROM DEPARTMENTS INNER JOIN LOCATIONS USING(LOCATION_ID) INNER JOIN COUNTRIES USING(COUNTRY_ID);
+
+DEPARTMENT_NAME                COUNTRY_NAME
+------------------------------ ----------------------------------------
+Administration                 United States of America
+Marketing                      Canada
+Shiping                        United States of America
+IT                             United States of America
+Sales                          United Kingdom
+Executive                      United States of America
+Accounting                     United States of America
+Contracting                    United States of America
+
+8 rows selected.
+
+SQL>
+SQL> SELECT REGION_NAME,DEPARTMENT_NAME FROM DEPARTMENTS INNER JOIN LOCATIONS USING(LOCATION_ID) INNER JOIN COUNTRIES USING(COUNTRY_ID) INNER JOIN REGIONS USING(REGION_ID);
+
+REGION_NAME               DEPARTMENT_NAME
+------------------------- ------------------------------
+Americas                  Administration
+Americas                  Marketing
+Americas                  Shiping
+Americas                  IT
+Europe                    Sales
+Americas                  Executive
+Americas                  Accounting
+Americas                  Contracting
+
+8 rows selected.
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID
+-- ---------------------------------------- ----------
+CA Canada                                            2
+DE Germany                                           1
+UK United Kingdom                                    1
+US United States of America                          2
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+
+SQL> SELECT *
+  2  FROM COUNTRIES
+  3  NATURAL JOIN REGIONS;
+
+ REGION_ID CO COUNTRY_NAME                             REGION_NAME
+---------- -- ---------------------------------------- -------------------------
+         1 DE Germany                                  Europe
+         1 UK United Kingdom                           Europe
+         2 CA Canada                                   Americas
+         2 US United States of America                 Americas
+
+SQL> SELECT *
+  2  FROM REGIONS
+  3  NATURAL JOIN COUNTRIES;
+
+ REGION_ID REGION_NAME               CO COUNTRY_NAME
+---------- ------------------------- -- ----------------------------------------
+         2 Americas                  CA Canada
+         1 Europe                    DE Germany
+         1 Europe                    UK United Kingdom
+         2 Americas                  US United States of America
+
+SQL> SELECT *
+  2  FROM REGIONS
+  3  INNER JOIN COUNTRIES USING (REGION_ID);
+
+ REGION_ID REGION_NAME               CO COUNTRY_NAME
+---------- ------------------------- -- ----------------------------------------
+         2 Americas                  CA Canada
+         1 Europe                    DE Germany
+         1 Europe                    UK United Kingdom
+         2 Americas                  US United States of America
+
+SQL> SELECT *
+  2  FROM COUNTRIES
+  3  INNER JOIN REGIONS USING (REGION_ID);
+
+ REGION_ID CO COUNTRY_NAME                             REGION_NAME
+---------- -- ---------------------------------------- -------------------------
+         1 DE Germany                                  Europe
+         1 UK United Kingdom                           Europe
+         2 CA Canada                                   Americas
+         2 US United States of America                 Americas
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SET LINES 500
+SQL>
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  NATURAL JOIN DEPARTMENTS;
+
+MANAGER_ID DEPARTMENT_ID EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT DEPARTMENT_NAME                LOCATION_ID
+---------- ------------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ------------------------------ -----------
+       100            90         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                Executive                             1700
+       100            90         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                Executive                             1700
+       103            60         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                IT                                    1400
+       103            60         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                IT                                    1400
+       124            50         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                Shiping                               1500
+       124            50         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                Shiping                               1500
+       124            50         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                Shiping                               1500
+       124            50         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                Shiping                               1500
+       149            80         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3 Sales                                 2500
+       149            80         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3 Sales                                 2500
+       201            20         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                Marketing                             1800
+       205           110         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                Accounting                            1700
+
+12 rows selected.
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID , MANAGER_ID);
+
+DEPARTMENT_ID MANAGER_ID EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT DEPARTMENT_NAME                LOCATION_ID
+------------- ---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ------------------------------ -----------
+           90        100         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                Executive                             1700
+           90        100         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                Executive                             1700
+           60        103         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                IT                                    1400
+           60        103         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                IT                                    1400
+           50        124         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                Shiping                               1500
+           50        124         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                Shiping                               1500
+           50        124         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                Shiping                               1500
+           50        124         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                Shiping                               1500
+           80        149         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3 Sales                                 2500
+           80        149         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3 Sales                                 2500
+           20        201         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                Marketing                             1800
+          110        205         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                Accounting                            1700
+
+12 rows selected.
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (MANAGER_ID , DEPARTMENT_ID);
+
+MANAGER_ID DEPARTMENT_ID EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT DEPARTMENT_NAME                LOCATION_ID
+---------- ------------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ------------------------------ -----------
+       100            90         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                Executive                             1700
+       100            90         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                Executive                             1700
+       103            60         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                IT                                    1400
+       103            60         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                IT                                    1400
+       124            50         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                Shiping                               1500
+       124            50         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                Shiping                               1500
+       124            50         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                Shiping                               1500
+       124            50         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                Shiping                               1500
+       149            80         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3 Sales                                 2500
+       149            80         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3 Sales                                 2500
+       201            20         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                Marketing                             1800
+       205           110         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                Accounting                            1700
+
+12 rows selected.
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID);
+
+DEPARTMENT_ID EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------------------------ ---------- -----------
+           10         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101 Administration                        200        1700
+           20         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100 Marketing                             201        1800
+           20         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201 Marketing                             201        1800
+           50         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100 Shiping                               124        1500
+           50         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124 Shiping                               124        1500
+           50         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124 Shiping                               124        1500
+           50         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124 Shiping                               124        1500
+           50         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124 Shiping                               124        1500
+           60         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103 IT                                    103        1400
+           60         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103 IT                                    103        1400
+           60         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102 IT                                    103        1400
+           80         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149 Sales                                 149        2500
+           80         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100 Sales                                 149        2500
+           80         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149 Sales                                 149        2500
+           90         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100 Executive                             100        1700
+           90         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                           Executive                             100        1700
+           90         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100 Executive                             100        1700
+          110         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205 Accounting                            205        1700
+          110         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101 Accounting                            205        1700
+
+19 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  NATURAL JOIN DEPARTMENTS;
+
+DEPARTMENT_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- --------------- ------------------------------
+           90        100 Neena           Executive
+           90        100 Lex             Executive
+           60        103 Bruce           IT
+           60        103 Diana           IT
+           50        124 Trenna          Shiping
+           50        124 Curtis          Shiping
+           50        124 Randall         Shiping
+           50        124 Peter           Shiping
+           80        149 Ellen           Sales
+           80        149 Jonathon        Sales
+           20        201 Pat             Marketing
+          110        205 William         Accounting
+
+12 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENT USING (DEPARTMENT_ID , MANAGER_ID);
+INNER JOIN DEPARTMENT USING (DEPARTMENT_ID , MANAGER_ID)
+           *
+ERROR at line 3:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID , MANAGER_ID);
+
+DEPARTMENT_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- --------------- ------------------------------
+           90        100 Neena           Executive
+           90        100 Lex             Executive
+           60        103 Bruce           IT
+           60        103 Diana           IT
+           50        124 Trenna          Shiping
+           50        124 Curtis          Shiping
+           50        124 Randall         Shiping
+           50        124 Peter           Shiping
+           80        149 Ellen           Sales
+           80        149 Jonathon        Sales
+           20        201 Pat             Marketing
+          110        205 William         Accounting
+
+12 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID);
+SELECT DEPARTMENT_ID , MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+                       *
+ERROR at line 1:
+ORA-00918: column ambiguously defined
+
+
+SQL> SELECT DEPARTMENT_ID , EMPLOYEES.MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID);
+
+DEPARTMENT_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- --------------- ------------------------------
+           10        101 Jennifer        Administration
+           20        100 Michael         Marketing
+           20        201 Pat             Marketing
+           50        100 Kevin           Shiping
+           50        124 Peter           Shiping
+           50        124 Randall         Shiping
+           50        124 Curtis          Shiping
+           50        124 Trenna          Shiping
+           60        103 Diana           IT
+           60        103 Bruce           IT
+           60        102 Alexander       IT
+           80        149 Ellen           Sales
+           80        100 Eleni           Sales
+           80        149 Jonathon        Sales
+           90        100 Lex             Executive
+           90            Steven          Executive
+           90        100 Neena           Executive
+          110        205 William         Accounting
+          110        101 Shelley         Accounting
+
+19 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , EMPLOYEES.MANAGER_ID , DEPARTMENTS.MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID);
+
+DEPARTMENT_ID MANAGER_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- ---------- --------------- ------------------------------
+           10        101        200 Jennifer        Administration
+           20        100        201 Michael         Marketing
+           20        201        201 Pat             Marketing
+           50        100        124 Kevin           Shiping
+           50        124        124 Peter           Shiping
+           50        124        124 Randall         Shiping
+           50        124        124 Curtis          Shiping
+           50        124        124 Trenna          Shiping
+           60        103        103 Diana           IT
+           60        103        103 Bruce           IT
+           60        102        103 Alexander       IT
+           80        149        149 Ellen           Sales
+           80        100        149 Eleni           Sales
+           80        149        149 Jonathon        Sales
+           90        100        100 Lex             Executive
+           90                   100 Steven          Executive
+           90        100        100 Neena           Executive
+          110        205        205 William         Accounting
+          110        101        205 Shelley         Accounting
+
+19 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , E.MANAGER_ID , D.MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES E
+  3  INNER JOIN DEPARTMENTS D USING (DEPARTMENT_ID);
+
+DEPARTMENT_ID MANAGER_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- ---------- --------------- ------------------------------
+           10        101        200 Jennifer        Administration
+           20        100        201 Michael         Marketing
+           20        201        201 Pat             Marketing
+           50        100        124 Kevin           Shiping
+           50        124        124 Peter           Shiping
+           50        124        124 Randall         Shiping
+           50        124        124 Curtis          Shiping
+           50        124        124 Trenna          Shiping
+           60        103        103 Diana           IT
+           60        103        103 Bruce           IT
+           60        102        103 Alexander       IT
+           80        149        149 Ellen           Sales
+           80        100        149 Eleni           Sales
+           80        149        149 Jonathon        Sales
+           90        100        100 Lex             Executive
+           90                   100 Steven          Executive
+           90        100        100 Neena           Executive
+          110        205        205 William         Accounting
+          110        101        205 Shelley         Accounting
+
+19 rows selected.
+
+SQL> SELECT E.DEPARTMENT_ID , E.MANAGER_ID , D.MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES E
+  3  INNER JOIN DEPARTMENTS D USING (DEPARTMENT_ID);
+SELECT E.DEPARTMENT_ID , E.MANAGER_ID , D.MANAGER_ID , FIRST_NAME , DEPARTMENT_NAME
+       *
+ERROR at line 1:
+ORA-25154: column part of USING clause cannot have qualifier
+
+
+SQL> REM COLUMNS WHICH ARE DUPLICATE IN RESULT, MUST BE QUALIFIED WITH TABLENAME/TABLEALIAS.
+SQL>
+SQL> REM COLUMNS WHICH ARE NOT DUPLICATE IN RESULT, MUST NOT BE QUALIFIED.
+SQL>
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS ON DEPARTMENT_ID = DEPARTMENT_ID;
+INNER JOIN DEPARTMENTS ON DEPARTMENT_ID = DEPARTMENT_ID
+                                          *
+ERROR at line 3:
+ORA-00918: column ambiguously defined
+
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- ------------- ------------------------------ ---------- -----------
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10            10 Administration                        200        1700
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20            20 Marketing                             201        1800
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20            20 Marketing                             201        1800
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50            50 Shiping                               124        1500
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50            50 Shiping                               124        1500
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50            50 Shiping                               124        1500
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50            50 Shiping                               124        1500
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50            50 Shiping                               124        1500
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60            60 IT                                    103        1400
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60            60 IT                                    103        1400
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60            60 IT                                    103        1400
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80            80 Sales                                 149        2500
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80            80 Sales                                 149        2500
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80            80 Sales                                 149        2500
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90            90 Executive                             100        1700
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90            90 Executive                             100        1700
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90            90 Executive                             100        1700
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110           110 Accounting                            205        1700
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110           110 Accounting                            205        1700
+
+19 rows selected.
+
+SQL> REM 1 NATURAL JOIN REMOVES DUPLICATION OF ALL COMMON COLUMNS. WE CAN'T QUALIFY ANY COMMON COLUMN.
+SQL>
+SQL> REM 2 INNER JOIN 'USING' REMOVES DUPLICATION OF COMMON COLUMNS LISTED IN 'USING' CLAUSE. WE CAN'T QUALIFY ANY COMMON COLUMN LISTED IN 'USING' CLAUSE, BUT MUST HAVE TO QUALIFY COMMON COLUMN WHICH IS NOT LISTED 'USING' CLAUSE.
+SQL>
+SQL> REM 3 INNER JOIN 'ON' DOESN'T REMOVE ANY COMMON COLUMNS. SO WE MUST QUALIFY ALL COMMON COLUMNS.
+SQL>
+SQL>
+SQL> SELECT DEPARTMENT_ID , E.MANAGER_ID , FIRST_NAME
+  2  , DEPARTMENT_NAME
+  3  FROM EMPLOYEES E
+  4  INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+SELECT DEPARTMENT_ID , E.MANAGER_ID , FIRST_NAME
+       *
+ERROR at line 1:
+ORA-00918: column ambiguously defined
+
+
+SQL> SELECT E.DEPARTMENT_ID , E.MANAGER_ID , FIRST_NAME
+  2  , DEPARTMENT_NAME
+  3  FROM EMPLOYEES E
+  4  INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+DEPARTMENT_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- --------------- ------------------------------
+           10        101 Jennifer        Administration
+           20        100 Michael         Marketing
+           20        201 Pat             Marketing
+           50        100 Kevin           Shiping
+           50        124 Peter           Shiping
+           50        124 Randall         Shiping
+           50        124 Curtis          Shiping
+           50        124 Trenna          Shiping
+           60        103 Diana           IT
+           60        103 Bruce           IT
+           60        102 Alexander       IT
+           80        149 Ellen           Sales
+           80        100 Eleni           Sales
+           80        149 Jonathon        Sales
+           90        100 Lex             Executive
+           90            Steven          Executive
+           90        100 Neena           Executive
+          110        205 William         Accounting
+          110        101 Shelley         Accounting
+
+19 rows selected.
+
+SQL> SELECT D.DEPARTMENT_ID , E.MANAGER_ID , FIRST_NAME
+  2  , DEPARTMENT_NAME
+  3  FROM EMPLOYEES E
+  4  INNER JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+DEPARTMENT_ID MANAGER_ID FIRST_NAME      DEPARTMENT_NAME
+------------- ---------- --------------- ------------------------------
+           10        101 Jennifer        Administration
+           20        100 Michael         Marketing
+           20        201 Pat             Marketing
+           50        100 Kevin           Shiping
+           50        124 Peter           Shiping
+           50        124 Randall         Shiping
+           50        124 Curtis          Shiping
+           50        124 Trenna          Shiping
+           60        103 Diana           IT
+           60        103 Bruce           IT
+           60        102 Alexander       IT
+           80        149 Ellen           Sales
+           80        100 Eleni           Sales
+           80        149 Jonathon        Sales
+           90        100 Lex             Executive
+           90            Steven          Executive
+           90        100 Neena           Executive
+          110        205 William         Accounting
+          110        101 Shelley         Accounting
+
+19 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           50 Shiping                               124        1500
+           60 IT                                    103        1400
+           80 Sales                                 149        2500
+           90 Executive                             100        1700
+          110 Accounting                            205        1700
+          190 Contracting                                      1700
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID
+-- ---------------------------------------- ----------
+CA Canada                                            2
+DE Germany                                           1
+UK United Kingdom                                    1
+US United States of America                          2
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+
+SQL> REM 1 DEPARTMENT_NAME , CITY 2 COUNTRY_NAME , CITY , DEPARTMENT_NAME 3 CITY , REGION_NAME
+SQL>
+SQL> REM 1 NATURAL JOIN 2 INNER JOIN 'USING'  3 INNER JOIN 'ON'
+SQL>
+SQL>
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS D
+  3  INNER JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID;
+
+DEPARTMENT_NAME                CITY
+------------------------------ ------------------------------
+Administration                 Seattle
+Marketing                      Toronto
+Shiping                        South San Francisco
+IT                             Southlake
+Sales                          Oxford
+Executive                      Seattle
+Accounting                     Seattle
+Contracting                    Seattle
+
+8 rows selected.
+
+SQL> SELECT COUNTRY_NAME , CITY
+  2  FROM LOCATIONS L
+  3  JOIN COUNTRIES C
+  4
+SQL> SELECT COUNTRY_NAME , CITY , DEPARTMENT_NAME
+  2  FROM DEPARTMENTS D
+  3  JOIN LOCATIONS   L ON D.LOCATION_ID = L.LOCATION_ID
+  4  JOIN COUNTRIES   C ON L.COUNTRY_ID  = C.COUNTRY_ID;
+
+COUNTRY_NAME                             CITY                           DEPARTMENT_NAME
+---------------------------------------- ------------------------------ ------------------------------
+United States of America                 Seattle                        Administration
+Canada                                   Toronto                        Marketing
+United States of America                 South San Francisco            Shiping
+United States of America                 Southlake                      IT
+United Kingdom                           Oxford                         Sales
+United States of America                 Seattle                        Executive
+United States of America                 Seattle                        Accounting
+United States of America                 Seattle                        Contracting
+
+8 rows selected.
+
+SQL> SELECT CITY , REGION_NAME
+  2  FROM LOCATIONS L
+  3  JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID
+  4  JOIN REGIONS   R ON C.REGION_ID  = R.REGION_ID;
+
+CITY                           REGION_NAME
+------------------------------ -------------------------
+Southlake                      Americas
+South San Francisco            Americas
+Seattle                        Americas
+Toronto                        Americas
+Oxford                         Europe
+
+SQL> SPOOL OFF
+not spooling currently
+SQL>

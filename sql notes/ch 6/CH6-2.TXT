@@ -1,0 +1,319 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM INNER JOIN HAS 2 SYNTAXES :
+SQL> 
+SQL> REM 1 INNER JOIN SYNTAX 1 : FROM TABLE1 INNER JOIN TABLE2 USING ( COMMON COLUMN LIST, COMMA SEPARATED )
+SQL> 
+SQL> REM 2 INNER JOIN SYNTAX 1 : FROM TABLE1 INNER JOIN TABLE2 ON join condition(s)
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO                                                                           
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --                                                                           
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US                                                                           
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US                                                                           
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US                                                                           
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA                                                                           
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK                                                                           
+
+SQL> REM DEPARTMENT_NAME , CITY
+SQL> 
+SQL> REM DEPARTMENTS       LOCATIONS
+SQL> 
+SQL> REM E D L C R
+SQL> 
+SQL> REM   D L
+SQL> 
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS;
+INNER JOIN LOCATIONS
+                   *
+ERROR at line 3:
+ORA-00905: missing keyword 
+
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID);
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> REM 1 CITY , COUNTRY_NAME
+SQL> 
+SQL> REM 2 COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> 
+SQL> REM 1 NATURAL 2 INNER (USING)
+SQL> 
+SQL> 
+SQL> 
+SQL> REM EMPLOYEES : FIRST_NAME , LAST_NAME , JOB_ID , HIRE_DATE , SALARY
+SQL> 
+SQL> REM DEPARTMENTS : DEPARTMENT_ID , DEPARTMENT_NAME
+SQL> 
+SQL> REM LOCATIONS : LOCATION_ID , CITY , STATE_PROVINCE
+SQL> 
+SQL> REM COUNTRIES : COUNTRY_ID , COUNTRY_NAME
+SQL> 
+SQL> REM REGIONS : REGION_ID , REGION_NAME
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 CITY , COUNTRY_NAME
+SQL> 
+SQL> REM NATURAL JOIN
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME
+  2  FROM LOCATIONS
+  3  NATURAL JOIN COUNTRIES;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> REM INNER JOIN
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME
+  2  FROM LOCATIONS
+  3  INNER JOIN COUNTRIES USING (COUNTRY_ID);
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> REM 2 COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> REM NATURAL JOIN
+SQL> 
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES
+  3  NATURAL JOIN REGIONS;
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                    
+---------------------------------------- -------------------------                                                                                                                                      
+Germany                                  Europe                                                                                                                                                         
+United Kingdom                           Europe                                                                                                                                                         
+Canada                                   Americas                                                                                                                                                       
+United States of America                 Americas                                                                                                                                                       
+
+SQL> REM INNER JOIN
+SQL> 
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES
+  3  INNER JOIN REGIONS USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                    
+---------------------------------------- -------------------------                                                                                                                                      
+Germany                                  Europe                                                                                                                                                         
+United Kingdom                           Europe                                                                                                                                                         
+Canada                                   Americas                                                                                                                                                       
+United States of America                 Americas                                                                                                                                                       
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> REM EMPLOYEES : FIRST_NAME , LAST_NAME , JOB_ID , HIRE_DATE , SALARY
+SQL> 
+SQL> REM DEPARTMENTS : DEPARTMENT_ID , DEPARTMENT_NAME
+SQL> 
+SQL> REM LOCATIONS : LOCATION_ID , CITY , STATE_PROVINCE
+SQL> 
+SQL> REM COUNTRIES : COUNTRY_ID , COUNTRY_NAME
+SQL> 
+SQL> REM REGIONS : REGION_ID , REGION_NAME
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DEPARTMENT_NAME , CITY , COUNTRY_NAME
+SQL> 
+SQL> REM 2 CITY , COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 NATURAL JOIN 2 INNER JOIN
+SQL> 
+SQL> 
+SQL> REM 1 DEPARTMENT_NAME , CITY , COUNTRY_NAME
+SQL> 
+SQL> REM NATURAL JOIN
+SQL> 
+SQL> SELECT DEPARTMENT_NAME , CITY , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS
+  4  NATURAL JOIN COUNTRIES;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME                                                                                                                              
+------------------------------ ------------------------------ ----------------------------------------                                                                                                  
+Administration                 Seattle                        United States of America                                                                                                                  
+Marketing                      Toronto                        Canada                                                                                                                                    
+Shiping                        South San Francisco            United States of America                                                                                                                  
+IT                             Southlake                      United States of America                                                                                                                  
+Sales                          Oxford                         United Kingdom                                                                                                                            
+Executive                      Seattle                        United States of America                                                                                                                  
+Accounting                     Seattle                        United States of America                                                                                                                  
+Contracting                    Seattle                        United States of America                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  INNER JOIN COUNTRIES USING (COUNTRY_ID);
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME                                                                                                                              
+------------------------------ ------------------------------ ----------------------------------------                                                                                                  
+Administration                 Seattle                        United States of America                                                                                                                  
+Marketing                      Toronto                        Canada                                                                                                                                    
+Shiping                        South San Francisco            United States of America                                                                                                                  
+IT                             Southlake                      United States of America                                                                                                                  
+Sales                          Oxford                         United Kingdom                                                                                                                            
+Executive                      Seattle                        United States of America                                                                                                                  
+Accounting                     Seattle                        United States of America                                                                                                                  
+Contracting                    Seattle                        United States of America                                                                                                                  
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 2 CITY , COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS
+  3  NATURAL JOIN COUNTRIES
+  4  NATURAL JOIN REGIONS;
+
+CITY                           COUNTRY_NAME                             REGION_NAME                                                                                                                     
+------------------------------ ---------------------------------------- -------------------------                                                                                                       
+Southlake                      United States of America                 Americas                                                                                                                        
+South San Francisco            United States of America                 Americas                                                                                                                        
+Seattle                        United States of America                 Americas                                                                                                                        
+Toronto                        Canada                                   Americas                                                                                                                        
+Oxford                         United Kingdom                           Europe                                                                                                                          
+
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS
+  3  INNER JOIN COUNTRIES USING(COUNTRY_ID)
+  4  INNER JOIN REGIONS   USING (REGION_ID);
+
+CITY                           COUNTRY_NAME                             REGION_NAME                                                                                                                     
+------------------------------ ---------------------------------------- -------------------------                                                                                                       
+Southlake                      United States of America                 Americas                                                                                                                        
+South San Francisco            United States of America                 Americas                                                                                                                        
+Seattle                        United States of America                 Americas                                                                                                                        
+Toronto                        Canada                                   Americas                                                                                                                        
+Oxford                         United Kingdom                           Europe                                                                                                                          
+
+SQL> REM CITY , DEPARTMENT_NAME , REGION_NAME , STATE_PROVINCE , COUNTRY_NAME
+SQL> 
+SQL> REM 1 NJ 2 IJ USING
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT CITY , DEPARTMENT_NAME , REGION_NAME , STATE_PROVINCE , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS
+  4  NATURAL JOIN COUNTRIES
+  5  NATURAL JOIN REGIONS;
+
+CITY                           DEPARTMENT_NAME                REGION_NAME               STATE_PROVINCE            COUNTRY_NAME                                                                          
+------------------------------ ------------------------------ ------------------------- ------------------------- ----------------------------------------                                              
+Seattle                        Administration                 Americas                  Washington                United States of America                                                              
+Toronto                        Marketing                      Americas                  Ontario                   Canada                                                                                
+South San Francisco            Shiping                        Americas                  California                United States of America                                                              
+Southlake                      IT                             Americas                  Texas                     United States of America                                                              
+Oxford                         Sales                          Europe                    Oxford                    United Kingdom                                                                        
+Seattle                        Executive                      Americas                  Washington                United States of America                                                              
+Seattle                        Accounting                     Americas                  Washington                United States of America                                                              
+Seattle                        Contracting                    Americas                  Washington                United States of America                                                              
+
+8 rows selected.
+
+SQL> SELECT CITY , DEPARTMENT_NAME , REGION_NAME , STATE_PROVINCE , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  INNER JOIN COUNTRIES USING (COUNTRY_ID)
+  5  INNER JOIN REGIONS   USING (REGION_ID);
+
+CITY                           DEPARTMENT_NAME                REGION_NAME               STATE_PROVINCE            COUNTRY_NAME                                                                          
+------------------------------ ------------------------------ ------------------------- ------------------------- ----------------------------------------                                              
+Seattle                        Administration                 Americas                  Washington                United States of America                                                              
+Toronto                        Marketing                      Americas                  Ontario                   Canada                                                                                
+South San Francisco            Shiping                        Americas                  California                United States of America                                                              
+Southlake                      IT                             Americas                  Texas                     United States of America                                                              
+Oxford                         Sales                          Europe                    Oxford                    United Kingdom                                                                        
+Seattle                        Executive                      Americas                  Washington                United States of America                                                              
+Seattle                        Accounting                     Americas                  Washington                United States of America                                                              
+Seattle                        Contracting                    Americas                  Washington                United States of America                                                              
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> SPOOL OFF

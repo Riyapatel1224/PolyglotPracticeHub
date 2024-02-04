@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition</title>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 200px;
+            border: 5px solid teal;
+            /* transition-property: width,background-color,border; */
+            /* transition-property: all; */
+            /* transition: width 5s, height 10s,border 5s; */
+            /* transition-duration: 3s; */
+            /* transition-delay: 2s; */
+            /* transition-timing-function: ease-in; */
+            /* transition-timing-function: ease-out; */
+            /* transition-timing-function: linear; */
+            /* transition-timing-function: ease-in-out; */
+            transition: 3s;
+            }
+        .box1:hover{
+            width: 500px;
+            background-color: red;
+            border: 10px dashed gold;
+            height: 500px;
+        }
+        p{
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <p>Royal Tech </p>
+    </div>
+</body>
+
+</html>

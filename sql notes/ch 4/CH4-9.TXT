@@ -1,0 +1,640 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM TO_CHAR : TO CONVERT DATE TYPE VALUE INTO CHARACTER TYPE VALUE
+SQL> 
+SQL> REM TO_DATE : TO DISPLAY DATE VALUE IN USER DEFINED/NON-DEFAULT FORMAT
+SQL> 
+SQL> REM DATE DEFAULT DISPLAY FORMAT : DD-MON-RR
+SQL> 
+SQL> REM DATE CAN BE USED IN 3 TYPES OF FORMATS : 1 DEFAULT 2 COMPATIBLE 3 INCOMPATIBLE
+SQL> 
+SQL> REM DEFAULT : DD-MON-RR
+SQL> 
+SQL> REM COMPATIBLE : DD/MON/RR  DD/MON\RR  DDMON/RR  DDMONRR  DDmonRR  DDMonRR  DDmOnRR   DDMONTHRRRR  DDmonthRRRR  DDMonthRRRR  DDmOnThRRRR
+SQL> 
+SQL> REM INCOMPATIBLE : DD-MM-RR  MON-DD-RR  RR-MON-DD  (USING TO_DATE WE CAN USE THESE FORMATS)
+SQL> 
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : D DD DDD DY dy Dy DAY dy Day
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : MON mon Mon MONTH month Month MM RM rm Rm
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : Y YY YYY YYYY RR RRRR YEAR year Year yeAR
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : W WW Q J
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : AM am Am   PM pm Pm   A.M. a.m.   P.M. p.m.
+SQL> 
+SQL> 
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM DAY';
+
+Session altered.
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+20-SEPTEMBER-2023 02:12.16 PM WEDNESDAY                                                                                                                                                                 
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'D DD DDD DY dy Dy DAY dy Day') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'DDDDDDDYDYDYDAYDYDAY')                                                                                                                         
+--------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------                          
+20-SEPTEMBER-2023 02:15.17 PM WEDNESDAY 4 20 263 WED wed Wed WEDNESDAY wed Wednesday                                                                                                                    
+
+SQL> REM SUN = 1 , MON = 2 ... SAT = 7
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'D DD DDD DY DAY dy day Dy Day') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'DDDDDDDYDAYDYDAYDYDAY')                                                                                                                        
+--------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------  
+20-SEPTEMBER-2023 02:17.16 PM WEDNESDAY 4 20 263 WED WEDNESDAY wed wednesday Wed Wednesday                                                                                                              
+
+SQL> SELECT SYSDATE+2 , TO_CHAR(SYSDATE+2 , 'D DD DDD DY DAY dy day Dy Day') FROM DUAL;
+
+SYSDATE+2                               TO_CHAR(SYSDATE+2,'DDDDDDDYDAYDYDAYDYDAY')                                                                                                                      
+--------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------  
+22-SEPTEMBER-2023 02:17.38 PM FRIDAY    6 22 265 FRI FRIDAY    fri friday    Fri Friday                                                                                                                 
+
+SQL> REM WEDNESDAY : SPELLING LENGTH IS 9 WHICH IS MAXIMUM
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'MON mon Mon MONTH month Month MM RM rm Rm') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'MONMONMONMONTHMONTHMONTHMMRMRMRM')                                                                                                                                                     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+20-SEPTEMBER-2023 02:18.34 PM WEDNESDAY                                                                                                                                                                 
+SEP sep Sep SEPTEMBER september September 09 IX   ix   Ix                                                                                                                                               
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'MONTH month Month mOnTh mONTH MOnth') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'MONTHMONTHMONTHMONTHMONTHMONTH')                                                                                                                                                       
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+20-SEPTEMBER-2023 02:20.48 PM WEDNESDAY                                                                                                                                                                 
+SEPTEMBER september September september september SEPTEMBER                                                                                                                                             
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'MON mon Mon MONTH month Month MM RM rm Rm') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'MONMONMONMONTHMONTHMONTHMMRMRMRM')                                                                                                                                                     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+20-SEPTEMBER-2023 02:21.43 PM WEDNESDAY                                                                                                                                                                 
+SEP sep Sep SEPTEMBER september September 09 IX   ix   Ix                                                                                                                                               
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'MONTH month Month mOnTh mONTH MOnth MoNTH') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'MONTHMONTHMONTHMONTHMONTHMONTHMONTH')                                                                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+20-SEPTEMBER-2023 02:21.49 PM WEDNESDAY                                                                                                                                                                 
+SEPTEMBER september September september september SEPTEMBER September                                                                                                                                   
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'Y YY YYY YYYY RR RRRR YEAR year Year yeAR') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'YYYYYYYYYYRRRRRRYEARYEARYEARYEAR')                                                                                                                                                     
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------       
+20-SEPTEMBER-2023 02:23.47 PM WEDNESDAY                                                                                                                                                                 
+3 23 023 2023 23 2023 TWENTY TWENTY-THREE twenty twenty-three Twenty Twenty-Three twenty twenty-three                                                                                                   
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'YYYYsp RRRRsp YEAR year Year yeAR') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'YYYYSPRRRRSPYEARYEARYEARYEAR')                                                                                                                                                         
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+20-SEPTEMBER-2023 02:25.18 PM WEDNESDAY                                                                                                                                                                 
+TWO THOUSAND TWENTY-THREE TWO THOUSAND TWENTY-THREE TWENTY TWENTY-THREE twenty twenty-three Twenty Twenty-Three twenty twenty-three                                                                     
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'DD DDSP DDTH DDSPTH DDTHSP ddSPTH Ddspth dDSPTH') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'DDDDSPDDTHDDSPTHDDTHSPDDSPTHDDSPTHDDSPTH')                                                                                                     
+--------------------------------------- -----------------------------------------------------------------------------------------------                                                                 
+20-SEPTEMBER-2023 02:26.59 PM WEDNESDAY 20 TWENTY 20TH TWENTIETH TWENTIETH twentieth Twentieth twentieth                                                                                                
+
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'MM MMSP MMTH MMSPTH MMTHSP mmSPTH Mmspth mMSPTH') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'MMMMSPMMTHMMSPTHMMTHSPMMSPTHMMSPTHMMSPTH')                                                                                                     
+--------------------------------------- -----------------------------------------------------------                                                                                                     
+20-SEPTEMBER-2023 02:28.51 PM WEDNESDAY 09 NINE 09TH NINTH NINTH ninth Ninth ninth                                                                                                                      
+
+SQL> SELECT ADD_MONTHS(SYSDATE,-6) FROM DUAL;
+
+ADD_MONTHS(SYSDATE,-6)                                                                                                                                                                                  
+---------------------------------------                                                                                                                                                                 
+20-MARCH    -2023 02:30.04 PM MONDAY                                                                                                                                                                    
+
+SQL> SELECT ADD_MONTHS(SYSDATE,-6) , TO_CHAR(ADD_MONTHS(SYSDATE,-6),'DD-MONTH-RRRR HH:MI.SS AM DAY') FROM DUAL;
+
+ADD_MONTHS(SYSDATE,-6)                  TO_CHAR(ADD_MONTHS(SYSDATE,-6),'DD-MONTH-RRRRHH:MI.SSAMDAY')                                                                                                    
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+20-MARCH    -2023 02:31.09 PM MONDAY    20-MARCH    -2023 02:31.09 PM MONDAY                                                                                                                            
+
+SQL> SELECT ADD_MONTHS(SYSDATE,-6) , TO_CHAR(ADD_MONTHS(SYSDATE,-6),'FMDD-MONTH-RRRR HH:MI.SS AM DAY') FROM DUAL;
+
+ADD_MONTHS(SYSDATE,-6)                  TO_CHAR(ADD_MONTHS(SYSDATE,-6),'FMDD-MONTH-RRRRHH:MI.SSAMDAY')                                                                                                  
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+20-MARCH    -2023 02:31.16 PM MONDAY    20-MARCH-2023 2:31.16 PM MONDAY                                                                                                                                 
+
+SQL> SELECT ADD_MONTHS(SYSDATE,-6) , TO_CHAR(ADD_MONTHS(SYSDATE,-6),'DD-MONTH-RRRR FMHH:MI.SS AM DAY') FROM DUAL;
+
+ADD_MONTHS(SYSDATE,-6)                  TO_CHAR(ADD_MONTHS(SYSDATE,-6),'DD-MONTH-RRRRFMHH:MI.SSAMDAY')                                                                                                  
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+20-MARCH    -2023 02:32.01 PM MONDAY    20-MARCH    -2023 2:32.1 PM MONDAY                                                                                                                              
+
+SQL> SELECT ADD_MONTHS(SYSDATE,-6) , TO_CHAR(ADD_MONTHS(SYSDATE,-6),'FMDD-MONTH-RRRR FMHH:MI.SS AM DAY') FROM DUAL;
+
+ADD_MONTHS(SYSDATE,-6)                  TO_CHAR(ADD_MONTHS(SYSDATE,-6),'FMDD-MONTH-RRRRFMHH:MI.SSAMDAY')                                                                                                
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+20-MARCH    -2023 02:32.45 PM MONDAY    20-MARCH-2023 02:32.45 PM MONDAY                                                                                                                                
+
+SQL> REM FM : FILL MODE
+SQL> 
+SQL> REM FX : FORMAT EXACT/FIXED FORMAT
+SQL> 
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------                                                                                                                                                                                               
+20-SEP-23                                                                                                                                                                                               
+
+SQL> REM DISPLAY THOSE WHO WERE HIRED BEFORE YEAR 96
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY-96' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY-1996' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAnuaRY-1996' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01JAnuaRY1996' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01/JAnuaRY1996' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01/JAnuaRY\1996' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01''JAnuaRY''1996' ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < &hd;
+Enter value for hd: 01-JAN-96
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < &hd
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < 01-JAN-96
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < 01-JAN-96
+                                                                  *
+ERROR at line 1:
+ORA-00904: "JAN": invalid identifier 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd';
+Enter value for hd: 01-JAN-96
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96'
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> /
+Enter value for hd: 25-DEC-98
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '25-DEC-98'
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+16 rows selected.
+
+SQL> /
+Enter value for hd: 13-MAR-90
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '13-MAR-90'
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+SQL> /
+Enter value for hd: 13-MARCH-90
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '13-MARCH-90'
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+SQL> /
+Enter value for hd: 13-MARCH-1090
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '13-MARCH-1090'
+
+no rows selected
+
+SQL> /
+Enter value for hd: 13-MARCH-1990
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '13-MARCH-1990'
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+
+SQL> /
+Enter value for hd: 13-3-93
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '13-3-93'
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '13-3-93'
+                                                               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> /
+Enter value for hd: 
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '&hd'
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < ''
+
+no rows selected
+
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('&hd','DD-MON-RRRR');
+Enter value for hd: 31-MAR-95
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('&hd','DD-MON-RRRR')
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('31-MAR-95','DD-MON-RRRR')
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('&hd','FXDD-MON-RRRR');
+Enter value for hd: 31-MAR-95
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('&hd','FXDD-MON-RRRR')
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('31-MAR-95','FXDD-MON-RRRR')
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('31-MAR-95','FXDD-MON-RRRR')
+                                                                       *
+ERROR at line 1:
+ORA-01862: the numeric value does not match the length of the format item 
+
+
+SQL> /
+Enter value for hd: 31-MAR-1995
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('&hd','FXDD-MON-RRRR')
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('31-MAR-1995','FXDD-MON-RRRR')
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> /
+Enter value for hd: 31-mar-1995
+old   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('&hd','FXDD-MON-RRRR')
+new   1: SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('31-mar-1995','FXDD-MON-RRRR')
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : W WW Q J
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARACTERS : AM am Am   PM pm Pm   A.M. a.m.   P.M. p.m.
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE , 'W WW Q J') FROM DUAL;
+
+SYSDATE   TO_CHAR(SYSDAT                                                                                                                                                                                
+--------- --------------                                                                                                                                                                                
+20-SEP-23 3 38 3 2460208                                                                                                                                                                                
+
+SQL> REM 01-JAN4712BC TO 31-DEC-9999AD
+SQL> 
+SQL> SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL;
+Enter value for no: 1
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('1','J'),'JSP') FROM DUAL
+
+TO_                                                                                                                                                                                                     
+---                                                                                                                                                                                                     
+ONE                                                                                                                                                                                                     
+
+SQL> /
+Enter value for no: 12
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('12','J'),'JSP') FROM DUAL
+
+TO_CHA                                                                                                                                                                                                  
+------                                                                                                                                                                                                  
+TWELVE                                                                                                                                                                                                  
+
+SQL> /
+Enter value for no: 123
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('123','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('123','J                                                                                                                                                                                
+------------------------                                                                                                                                                                                
+ONE HUNDRED TWENTY-THREE                                                                                                                                                                                
+
+SQL> /
+Enter value for no: 1234
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('1234','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('1234','J'),'JSP')                                                                                                                                                                      
+------------------------------------                                                                                                                                                                    
+ONE THOUSAND TWO HUNDRED THIRTY-FOUR                                                                                                                                                                    
+
+SQL> /
+Enter value for no: 12345
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('12345','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('12345','J'),'JSP')                                                                                                                                                                     
+----------------------------------------                                                                                                                                                                
+TWELVE THOUSAND THREE HUNDRED FORTY-FIVE                                                                                                                                                                
+
+SQL> /
+Enter value for no: 99999
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('99999','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('99999','J'),'JSP')                                                                                                                                                                     
+---------------------------------------------                                                                                                                                                           
+NINETY-NINE THOUSAND NINE HUNDRED NINETY-NINE                                                                                                                                                           
+
+SQL> /
+Enter value for no: 100000
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('100000','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('1000                                                                                                                                                                                   
+---------------------                                                                                                                                                                                   
+ONE HUNDRED  THOUSAND                                                                                                                                                                                   
+
+SQL> /
+Enter value for no: 123456
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('123456','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('123456','J'),'JSP')                                                                                                                                                                    
+--------------------------------------------------------                                                                                                                                                
+ONE HUNDRED TWENTY-THREE THOUSAND FOUR HUNDRED FIFTY-SIX                                                                                                                                                
+
+SQL> /
+Enter value for no: 1234567
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('1234567','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('1234567','J'),'JSP')                                                                                                                                                                   
+---------------------------------------------------------------------                                                                                                                                   
+ONE MILLION TWO HUNDRED THIRTY-FOUR THOUSAND FIVE HUNDRED SIXTY-SEVEN                                                                                                                                   
+
+SQL> /
+Enter value for no: 12345678
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('12345678','J'),'JSP') FROM DUAL
+SELECT TO_CHAR(TO_DATE('12345678','J'),'JSP') FROM DUAL
+                       *
+ERROR at line 1:
+ORA-01830: date format picture ends before converting entire input string 
+
+
+SQL> SELECT TO_CHAR(TO_DATE('31-DEC-9999','DD-MON-RRRR'),'J') FROM DUAL;
+
+TO_CHAR                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+5373484                                                                                                                                                                                                 
+
+SQL> SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL;
+Enter value for no: 5373484
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('5373484','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('5373484','J'),'JSP')                                                                                                                                                                   
+--------------------------------------------------------------------------                                                                                                                              
+FIVE MILLION THREE HUNDRED SEVENTY-THREE THOUSAND FOUR HUNDRED EIGHTY-FOUR                                                                                                                              
+
+SQL> /
+Enter value for no: 5373485
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('5373485','J'),'JSP') FROM DUAL
+SELECT TO_CHAR(TO_DATE('5373485','J'),'JSP') FROM DUAL
+                       *
+ERROR at line 1:
+ORA-01854: julian date must be between 1 and 5373484 
+
+
+SQL> SPOOL OFF

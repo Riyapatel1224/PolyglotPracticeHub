@@ -1,0 +1,553 @@
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO                                                                           
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --                                                                           
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US                                                                           
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US                                                                           
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US                                                                           
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA                                                                           
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK                                                                           
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID                                                                                                                                                  
+-- ---------------------------------------- ----------                                                                                                                                                  
+CA Canada                                            2                                                                                                                                                  
+DE Germany                                           1                                                                                                                                                  
+UK United Kingdom                                    1                                                                                                                                                  
+US United States of America                          2                                                                                                                                                  
+
+SQL> SELECT DEPARTMENT_NAME , CITY , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS
+  4  INNER JOIN COUNTRIES USING (COUNTRY_ID);
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME                                                                                                                              
+------------------------------ ------------------------------ ----------------------------------------                                                                                                  
+Administration                 Seattle                        United States of America                                                                                                                  
+Marketing                      Toronto                        Canada                                                                                                                                    
+Shiping                        South San Francisco            United States of America                                                                                                                  
+IT                             Southlake                      United States of America                                                                                                                  
+Sales                          Oxford                         United Kingdom                                                                                                                            
+Executive                      Seattle                        United States of America                                                                                                                  
+Accounting                     Seattle                        United States of America                                                                                                                  
+Contracting                    Seattle                        United States of America                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY , COUNTRY_NAME
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  NATURAL JOIN COUNTRIES;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME                                                                                                                              
+------------------------------ ------------------------------ ----------------------------------------                                                                                                  
+Administration                 Seattle                        Canada                                                                                                                                    
+Administration                 Seattle                        Germany                                                                                                                                   
+Administration                 Seattle                        United Kingdom                                                                                                                            
+Administration                 Seattle                        United States of America                                                                                                                  
+Marketing                      Toronto                        Canada                                                                                                                                    
+Marketing                      Toronto                        Germany                                                                                                                                   
+Marketing                      Toronto                        United Kingdom                                                                                                                            
+Marketing                      Toronto                        United States of America                                                                                                                  
+Shiping                        South San Francisco            Canada                                                                                                                                    
+Shiping                        South San Francisco            Germany                                                                                                                                   
+Shiping                        South San Francisco            United Kingdom                                                                                                                            
+Shiping                        South San Francisco            United States of America                                                                                                                  
+IT                             Southlake                      Canada                                                                                                                                    
+IT                             Southlake                      Germany                                                                                                                                   
+IT                             Southlake                      United Kingdom                                                                                                                            
+IT                             Southlake                      United States of America                                                                                                                  
+Sales                          Oxford                         Canada                                                                                                                                    
+Sales                          Oxford                         Germany                                                                                                                                   
+Sales                          Oxford                         United Kingdom                                                                                                                            
+Sales                          Oxford                         United States of America                                                                                                                  
+Executive                      Seattle                        Canada                                                                                                                                    
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME                                                                                                                              
+------------------------------ ------------------------------ ----------------------------------------                                                                                                  
+Executive                      Seattle                        Germany                                                                                                                                   
+Executive                      Seattle                        United Kingdom                                                                                                                            
+Executive                      Seattle                        United States of America                                                                                                                  
+Accounting                     Seattle                        Canada                                                                                                                                    
+Accounting                     Seattle                        Germany                                                                                                                                   
+Accounting                     Seattle                        United Kingdom                                                                                                                            
+Accounting                     Seattle                        United States of America                                                                                                                  
+Contracting                    Seattle                        Canada                                                                                                                                    
+Contracting                    Seattle                        Germany                                                                                                                                   
+Contracting                    Seattle                        United Kingdom                                                                                                                            
+Contracting                    Seattle                        United States of America                                                                                                                  
+
+32 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY , COUNTRY_NAME , COUNTRY_ID
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  NATURAL JOIN COUNTRIES;
+
+DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             CO                                                                                               
+------------------------------ ------------------------------ ---------------------------------------- --                                                                                               
+Administration                 Seattle                        United States of America                 US                                                                                               
+Marketing                      Toronto                        Canada                                   CA                                                                                               
+Shiping                        South San Francisco            United States of America                 US                                                                                               
+IT                             Southlake                      United States of America                 US                                                                                               
+Sales                          Oxford                         United Kingdom                           UK                                                                                               
+Executive                      Seattle                        United States of America                 US                                                                                               
+Accounting                     Seattle                        United States of America                 US                                                                                               
+Contracting                    Seattle                        United States of America                 US                                                                                               
+
+8 rows selected.
+
+SQL> REM 1 FIRST_NAME , DEPARTMENT_NAME , CITY
+SQL> 
+SQL> REM 2 STATE_PROVINCE , COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> REM 3 CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+SQL> 
+SQL> REM 4 FIRST_NAME , COUNTRY_NAME , DEPARTMENT_NAME , CITY
+SQL> 
+SQL> REM 5 STATE_PROVINCE , FIRST_NAME , REGION_NAME
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 FIRST TIME NATURAL  2 LAST TIME NATURAL
+SQL> 
+SQL> 
+SQL> REM 1 FIRST_NAME , DEPARTMENT_NAME , CITY
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS
+  4  INNER JOIN EMPLOYEES USING (DEPARTMENT_ID);
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                                                                                                                                                     
+--------------- ------------------------------ ------------------------------                                                                                                                           
+Diana           IT                             Southlake                                                                                                                                                
+Bruce           IT                             Southlake                                                                                                                                                
+Alexander       IT                             Southlake                                                                                                                                                
+Kevin           Shiping                        South San Francisco                                                                                                                                      
+Peter           Shiping                        South San Francisco                                                                                                                                      
+Randall         Shiping                        South San Francisco                                                                                                                                      
+Curtis          Shiping                        South San Francisco                                                                                                                                      
+Trenna          Shiping                        South San Francisco                                                                                                                                      
+Jennifer        Administration                 Seattle                                                                                                                                                  
+Lex             Executive                      Seattle                                                                                                                                                  
+Steven          Executive                      Seattle                                                                                                                                                  
+Neena           Executive                      Seattle                                                                                                                                                  
+William         Accounting                     Seattle                                                                                                                                                  
+Shelley         Accounting                     Seattle                                                                                                                                                  
+Michael         Marketing                      Toronto                                                                                                                                                  
+Pat             Marketing                      Toronto                                                                                                                                                  
+Ellen           Sales                          Oxford                                                                                                                                                   
+Eleni           Sales                          Oxford                                                                                                                                                   
+Jonathon        Sales                          Oxford                                                                                                                                                   
+
+19 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  NATURAL JOIN LOCATIONS
+  5  
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , LOCATION_ID
+  2  FROM EMPLOYEES
+  3  INNER JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  NATURAL JOIN LOCATIONS;
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           LOCATION_ID                                                                                                               
+--------------- ------------------------------ ------------------------------ -----------                                                                                                               
+Diana           IT                             Southlake                             1400                                                                                                               
+Bruce           IT                             Southlake                             1400                                                                                                               
+Alexander       IT                             Southlake                             1400                                                                                                               
+Kevin           Shiping                        South San Francisco                   1500                                                                                                               
+Peter           Shiping                        South San Francisco                   1500                                                                                                               
+Randall         Shiping                        South San Francisco                   1500                                                                                                               
+Curtis          Shiping                        South San Francisco                   1500                                                                                                               
+Trenna          Shiping                        South San Francisco                   1500                                                                                                               
+Jennifer        Administration                 Seattle                               1700                                                                                                               
+Lex             Executive                      Seattle                               1700                                                                                                               
+Steven          Executive                      Seattle                               1700                                                                                                               
+Neena           Executive                      Seattle                               1700                                                                                                               
+William         Accounting                     Seattle                               1700                                                                                                               
+Shelley         Accounting                     Seattle                               1700                                                                                                               
+Michael         Marketing                      Toronto                               1800                                                                                                               
+Pat             Marketing                      Toronto                               1800                                                                                                               
+Ellen           Sales                          Oxford                                2500                                                                                                               
+Eleni           Sales                          Oxford                                2500                                                                                                               
+Jonathon        Sales                          Oxford                                2500                                                                                                               
+
+19 rows selected.
+
+SQL> REM 2 STATE_PROVINCE , COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> SELECT STATE_PROVINCE , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS
+  3  NATURAL JOIN COUNTRIES
+  4  JOIN REGIONS USING (REGION_ID);
+
+STATE_PROVINCE            COUNTRY_NAME                             REGION_NAME                                                                                                                          
+------------------------- ---------------------------------------- -------------------------                                                                                                            
+Texas                     United States of America                 Americas                                                                                                                             
+California                United States of America                 Americas                                                                                                                             
+Washington                United States of America                 Americas                                                                                                                             
+Ontario                   Canada                                   Americas                                                                                                                             
+Oxford                    United Kingdom                           Europe                                                                                                                               
+
+SQL> SELECT STATE_PROVINCE , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS
+  3  INNER JOIN COUNTRIES USING (COUNTRY_ID)
+  4  NATURAL JOIN REGIONS
+  5  
+SQL> SELECT STATE_PROVINCE , COUNTRY_NAME , REGION_NAME , REGION_ID
+  2  FROM LOCATIONS
+  3  INNER JOIN COUNTRIES USING (COUNTRY_ID)
+  4  NATURAL JOIN REGIONS;
+
+STATE_PROVINCE            COUNTRY_NAME                             REGION_NAME                REGION_ID                                                                                                 
+------------------------- ---------------------------------------- ------------------------- ----------                                                                                                 
+Texas                     United States of America                 Americas                           2                                                                                                 
+California                United States of America                 Americas                           2                                                                                                 
+Washington                United States of America                 Americas                           2                                                                                                 
+Ontario                   Canada                                   Americas                           2                                                                                                 
+Oxford                    United Kingdom                           Europe                             1                                                                                                 
+
+SQL> REM 3 CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+SQL> 
+SQL> SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+  2  FROM LOCATIONS
+  3  NATURAL JOIN COUNTRIES
+  4  INNER JOIN REGIONS USING (REGION_ID);
+SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+              *
+ERROR at line 1:
+ORA-00904: "DEPARTMENT_NAME": invalid identifier 
+
+
+SQL> SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS
+  4  NATURAL JOIN COUNTRIES
+  5  INNER JOIN REGIONS USING (REGION_ID);
+
+CITY                           DEPARTMENT_NAME                COUNTRY_NAME                             STATE_PROVINCE                                                                                   
+------------------------------ ------------------------------ ---------------------------------------- -------------------------                                                                        
+Seattle                        Administration                 United States of America                 Washington                                                                                       
+Toronto                        Marketing                      Canada                                   Ontario                                                                                          
+South San Francisco            Shiping                        United States of America                 California                                                                                       
+Southlake                      IT                             United States of America                 Texas                                                                                            
+Oxford                         Sales                          United Kingdom                           Oxford                                                                                           
+Seattle                        Executive                      United States of America                 Washington                                                                                       
+Seattle                        Accounting                     United States of America                 Washington                                                                                       
+Seattle                        Contracting                    United States of America                 Washington                                                                                       
+
+8 rows selected.
+
+SQL> SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  NATURAL JOIN COUNTRIES
+  5  NATURAL JOIN REGIONS
+  6  
+SQL> 
+SQL> SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE , COUNTRY_ID , REGION_ID
+  2  ROM DEPARTMENTS
+  3  NNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  ATURAL JOIN COUNTRIES
+  5  ATURAL JOIN REGIONS;
+ROM DEPARTMENTS
+    *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE , COUNTRY_ID , REGION_ID
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS USING (LOCATION_ID)
+  4  NATURAL JOIN COUNTRIES
+  5  NATURAL JOIN REGIONS
+  6  ;
+
+CITY                           DEPARTMENT_NAME                COUNTRY_NAME                             STATE_PROVINCE            CO  REGION_ID                                                          
+------------------------------ ------------------------------ ---------------------------------------- ------------------------- -- ----------                                                          
+Seattle                        Administration                 United States of America                 Washington                US          2                                                          
+Toronto                        Marketing                      Canada                                   Ontario                   CA          2                                                          
+South San Francisco            Shiping                        United States of America                 California                US          2                                                          
+Southlake                      IT                             United States of America                 Texas                     US          2                                                          
+Oxford                         Sales                          United Kingdom                           Oxford                    UK          1                                                          
+Seattle                        Executive                      United States of America                 Washington                US          2                                                          
+Seattle                        Accounting                     United States of America                 Washington                US          2                                                          
+Seattle                        Contracting                    United States of America                 Washington                US          2                                                          
+
+8 rows selected.
+
+SQL> REM 4 FIRST_NAME , COUNTRY_NAME , DEPARTMENT_NAME , CITY
+SQL> 
+SQL> SELECT FIRST_NAME , COUNTRY_NAME , DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS
+  4  INNER JOIN COUNTRIES USING (COUNTRY_ID)
+  5  INNER JOIN EMPLOYEES USING (DEPARTMENT_ID);
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                                                                                                            
+--------------- ---------------------------------------- ------------------------------ ------------------------------                                                                                  
+Michael         Canada                                   Marketing                      Toronto                                                                                                         
+Pat             Canada                                   Marketing                      Toronto                                                                                                         
+Ellen           United Kingdom                           Sales                          Oxford                                                                                                          
+Eleni           United Kingdom                           Sales                          Oxford                                                                                                          
+Jonathon        United Kingdom                           Sales                          Oxford                                                                                                          
+Diana           United States of America                 IT                             Southlake                                                                                                       
+Bruce           United States of America                 IT                             Southlake                                                                                                       
+Alexander       United States of America                 IT                             Southlake                                                                                                       
+Kevin           United States of America                 Shiping                        South San Francisco                                                                                             
+Peter           United States of America                 Shiping                        South San Francisco                                                                                             
+Randall         United States of America                 Shiping                        South San Francisco                                                                                             
+Curtis          United States of America                 Shiping                        South San Francisco                                                                                             
+Trenna          United States of America                 Shiping                        South San Francisco                                                                                             
+Jennifer        United States of America                 Administration                 Seattle                                                                                                         
+Lex             United States of America                 Executive                      Seattle                                                                                                         
+Steven          United States of America                 Executive                      Seattle                                                                                                         
+Neena           United States of America                 Executive                      Seattle                                                                                                         
+William         United States of America                 Accounting                     Seattle                                                                                                         
+Shelley         United States of America                 Accounting                     Seattle                                                                                                         
+
+19 rows selected.
+
+SQL> SELECT FIRST_NAME , COUNTRY_NAME , DEPARTMENT_NAME , CITY
+  2  FROM EMPLOYEES
+  3  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   USING (LOCATION_ID)
+  5  NATURAL JOIN COUNTRIES;
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                                                                                                            
+--------------- ---------------------------------------- ------------------------------ ------------------------------                                                                                  
+Steven          Canada                                   Executive                      Seattle                                                                                                         
+Steven          Germany                                  Executive                      Seattle                                                                                                         
+Steven          United Kingdom                           Executive                      Seattle                                                                                                         
+Steven          United States of America                 Executive                      Seattle                                                                                                         
+Neena           Canada                                   Executive                      Seattle                                                                                                         
+Neena           Germany                                  Executive                      Seattle                                                                                                         
+Neena           United Kingdom                           Executive                      Seattle                                                                                                         
+Neena           United States of America                 Executive                      Seattle                                                                                                         
+Lex             Canada                                   Executive                      Seattle                                                                                                         
+Lex             Germany                                  Executive                      Seattle                                                                                                         
+Lex             United Kingdom                           Executive                      Seattle                                                                                                         
+Lex             United States of America                 Executive                      Seattle                                                                                                         
+Alexander       Canada                                   IT                             Southlake                                                                                                       
+Alexander       Germany                                  IT                             Southlake                                                                                                       
+Alexander       United Kingdom                           IT                             Southlake                                                                                                       
+Alexander       United States of America                 IT                             Southlake                                                                                                       
+Bruce           Canada                                   IT                             Southlake                                                                                                       
+Bruce           Germany                                  IT                             Southlake                                                                                                       
+Bruce           United Kingdom                           IT                             Southlake                                                                                                       
+Bruce           United States of America                 IT                             Southlake                                                                                                       
+Diana           Canada                                   IT                             Southlake                                                                                                       
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                                                                                                            
+--------------- ---------------------------------------- ------------------------------ ------------------------------                                                                                  
+Diana           Germany                                  IT                             Southlake                                                                                                       
+Diana           United Kingdom                           IT                             Southlake                                                                                                       
+Diana           United States of America                 IT                             Southlake                                                                                                       
+Kevin           Canada                                   Shiping                        South San Francisco                                                                                             
+Kevin           Germany                                  Shiping                        South San Francisco                                                                                             
+Kevin           United Kingdom                           Shiping                        South San Francisco                                                                                             
+Kevin           United States of America                 Shiping                        South San Francisco                                                                                             
+Trenna          Canada                                   Shiping                        South San Francisco                                                                                             
+Trenna          Germany                                  Shiping                        South San Francisco                                                                                             
+Trenna          United Kingdom                           Shiping                        South San Francisco                                                                                             
+Trenna          United States of America                 Shiping                        South San Francisco                                                                                             
+Curtis          Canada                                   Shiping                        South San Francisco                                                                                             
+Curtis          Germany                                  Shiping                        South San Francisco                                                                                             
+Curtis          United Kingdom                           Shiping                        South San Francisco                                                                                             
+Curtis          United States of America                 Shiping                        South San Francisco                                                                                             
+Randall         Canada                                   Shiping                        South San Francisco                                                                                             
+Randall         Germany                                  Shiping                        South San Francisco                                                                                             
+Randall         United Kingdom                           Shiping                        South San Francisco                                                                                             
+Randall         United States of America                 Shiping                        South San Francisco                                                                                             
+Peter           Canada                                   Shiping                        South San Francisco                                                                                             
+Peter           Germany                                  Shiping                        South San Francisco                                                                                             
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                                                                                                            
+--------------- ---------------------------------------- ------------------------------ ------------------------------                                                                                  
+Peter           United Kingdom                           Shiping                        South San Francisco                                                                                             
+Peter           United States of America                 Shiping                        South San Francisco                                                                                             
+Eleni           Canada                                   Sales                          Oxford                                                                                                          
+Eleni           Germany                                  Sales                          Oxford                                                                                                          
+Eleni           United Kingdom                           Sales                          Oxford                                                                                                          
+Eleni           United States of America                 Sales                          Oxford                                                                                                          
+Ellen           Canada                                   Sales                          Oxford                                                                                                          
+Ellen           Germany                                  Sales                          Oxford                                                                                                          
+Ellen           United Kingdom                           Sales                          Oxford                                                                                                          
+Ellen           United States of America                 Sales                          Oxford                                                                                                          
+Jonathon        Canada                                   Sales                          Oxford                                                                                                          
+Jonathon        Germany                                  Sales                          Oxford                                                                                                          
+Jonathon        United Kingdom                           Sales                          Oxford                                                                                                          
+Jonathon        United States of America                 Sales                          Oxford                                                                                                          
+Jennifer        Canada                                   Administration                 Seattle                                                                                                         
+Jennifer        Germany                                  Administration                 Seattle                                                                                                         
+Jennifer        United Kingdom                           Administration                 Seattle                                                                                                         
+Jennifer        United States of America                 Administration                 Seattle                                                                                                         
+Michael         Canada                                   Marketing                      Toronto                                                                                                         
+Michael         Germany                                  Marketing                      Toronto                                                                                                         
+Michael         United Kingdom                           Marketing                      Toronto                                                                                                         
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                                                                                                            
+--------------- ---------------------------------------- ------------------------------ ------------------------------                                                                                  
+Michael         United States of America                 Marketing                      Toronto                                                                                                         
+Pat             Canada                                   Marketing                      Toronto                                                                                                         
+Pat             Germany                                  Marketing                      Toronto                                                                                                         
+Pat             United Kingdom                           Marketing                      Toronto                                                                                                         
+Pat             United States of America                 Marketing                      Toronto                                                                                                         
+Shelley         Canada                                   Accounting                     Seattle                                                                                                         
+Shelley         Germany                                  Accounting                     Seattle                                                                                                         
+Shelley         United Kingdom                           Accounting                     Seattle                                                                                                         
+Shelley         United States of America                 Accounting                     Seattle                                                                                                         
+William         Canada                                   Accounting                     Seattle                                                                                                         
+William         Germany                                  Accounting                     Seattle                                                                                                         
+William         United Kingdom                           Accounting                     Seattle                                                                                                         
+William         United States of America                 Accounting                     Seattle                                                                                                         
+
+76 rows selected.
+
+SQL> SELECT FIRST_NAME , COUNTRY_NAME , DEPARTMENT_NAME , CITY , REGION_ID
+  2  FROM EMPLOYEES
+  3  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   USING (LOCATION_ID)
+  5  NATURAL JOIN COUNTRIES;
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                            REGION_ID                                                                       
+--------------- ---------------------------------------- ------------------------------ ------------------------------ ----------                                                                       
+Steven          Canada                                   Executive                      Seattle                                 2                                                                       
+Steven          Germany                                  Executive                      Seattle                                 1                                                                       
+Steven          United Kingdom                           Executive                      Seattle                                 1                                                                       
+Steven          United States of America                 Executive                      Seattle                                 2                                                                       
+Neena           Canada                                   Executive                      Seattle                                 2                                                                       
+Neena           Germany                                  Executive                      Seattle                                 1                                                                       
+Neena           United Kingdom                           Executive                      Seattle                                 1                                                                       
+Neena           United States of America                 Executive                      Seattle                                 2                                                                       
+Lex             Canada                                   Executive                      Seattle                                 2                                                                       
+Lex             Germany                                  Executive                      Seattle                                 1                                                                       
+Lex             United Kingdom                           Executive                      Seattle                                 1                                                                       
+Lex             United States of America                 Executive                      Seattle                                 2                                                                       
+Alexander       Canada                                   IT                             Southlake                               2                                                                       
+Alexander       Germany                                  IT                             Southlake                               1                                                                       
+Alexander       United Kingdom                           IT                             Southlake                               1                                                                       
+Alexander       United States of America                 IT                             Southlake                               2                                                                       
+Bruce           Canada                                   IT                             Southlake                               2                                                                       
+Bruce           Germany                                  IT                             Southlake                               1                                                                       
+Bruce           United Kingdom                           IT                             Southlake                               1                                                                       
+Bruce           United States of America                 IT                             Southlake                               2                                                                       
+Diana           Canada                                   IT                             Southlake                               2                                                                       
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                            REGION_ID                                                                       
+--------------- ---------------------------------------- ------------------------------ ------------------------------ ----------                                                                       
+Diana           Germany                                  IT                             Southlake                               1                                                                       
+Diana           United Kingdom                           IT                             Southlake                               1                                                                       
+Diana           United States of America                 IT                             Southlake                               2                                                                       
+Kevin           Canada                                   Shiping                        South San Francisco                     2                                                                       
+Kevin           Germany                                  Shiping                        South San Francisco                     1                                                                       
+Kevin           United Kingdom                           Shiping                        South San Francisco                     1                                                                       
+Kevin           United States of America                 Shiping                        South San Francisco                     2                                                                       
+Trenna          Canada                                   Shiping                        South San Francisco                     2                                                                       
+Trenna          Germany                                  Shiping                        South San Francisco                     1                                                                       
+Trenna          United Kingdom                           Shiping                        South San Francisco                     1                                                                       
+Trenna          United States of America                 Shiping                        South San Francisco                     2                                                                       
+Curtis          Canada                                   Shiping                        South San Francisco                     2                                                                       
+Curtis          Germany                                  Shiping                        South San Francisco                     1                                                                       
+Curtis          United Kingdom                           Shiping                        South San Francisco                     1                                                                       
+Curtis          United States of America                 Shiping                        South San Francisco                     2                                                                       
+Randall         Canada                                   Shiping                        South San Francisco                     2                                                                       
+Randall         Germany                                  Shiping                        South San Francisco                     1                                                                       
+Randall         United Kingdom                           Shiping                        South San Francisco                     1                                                                       
+Randall         United States of America                 Shiping                        South San Francisco                     2                                                                       
+Peter           Canada                                   Shiping                        South San Francisco                     2                                                                       
+Peter           Germany                                  Shiping                        South San Francisco                     1                                                                       
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                            REGION_ID                                                                       
+--------------- ---------------------------------------- ------------------------------ ------------------------------ ----------                                                                       
+Peter           United Kingdom                           Shiping                        South San Francisco                     1                                                                       
+Peter           United States of America                 Shiping                        South San Francisco                     2                                                                       
+Eleni           Canada                                   Sales                          Oxford                                  2                                                                       
+Eleni           Germany                                  Sales                          Oxford                                  1                                                                       
+Eleni           United Kingdom                           Sales                          Oxford                                  1                                                                       
+Eleni           United States of America                 Sales                          Oxford                                  2                                                                       
+Ellen           Canada                                   Sales                          Oxford                                  2                                                                       
+Ellen           Germany                                  Sales                          Oxford                                  1                                                                       
+Ellen           United Kingdom                           Sales                          Oxford                                  1                                                                       
+Ellen           United States of America                 Sales                          Oxford                                  2                                                                       
+Jonathon        Canada                                   Sales                          Oxford                                  2                                                                       
+Jonathon        Germany                                  Sales                          Oxford                                  1                                                                       
+Jonathon        United Kingdom                           Sales                          Oxford                                  1                                                                       
+Jonathon        United States of America                 Sales                          Oxford                                  2                                                                       
+Jennifer        Canada                                   Administration                 Seattle                                 2                                                                       
+Jennifer        Germany                                  Administration                 Seattle                                 1                                                                       
+Jennifer        United Kingdom                           Administration                 Seattle                                 1                                                                       
+Jennifer        United States of America                 Administration                 Seattle                                 2                                                                       
+Michael         Canada                                   Marketing                      Toronto                                 2                                                                       
+Michael         Germany                                  Marketing                      Toronto                                 1                                                                       
+Michael         United Kingdom                           Marketing                      Toronto                                 1                                                                       
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                            REGION_ID                                                                       
+--------------- ---------------------------------------- ------------------------------ ------------------------------ ----------                                                                       
+Michael         United States of America                 Marketing                      Toronto                                 2                                                                       
+Pat             Canada                                   Marketing                      Toronto                                 2                                                                       
+Pat             Germany                                  Marketing                      Toronto                                 1                                                                       
+Pat             United Kingdom                           Marketing                      Toronto                                 1                                                                       
+Pat             United States of America                 Marketing                      Toronto                                 2                                                                       
+Shelley         Canada                                   Accounting                     Seattle                                 2                                                                       
+Shelley         Germany                                  Accounting                     Seattle                                 1                                                                       
+Shelley         United Kingdom                           Accounting                     Seattle                                 1                                                                       
+Shelley         United States of America                 Accounting                     Seattle                                 2                                                                       
+William         Canada                                   Accounting                     Seattle                                 2                                                                       
+William         Germany                                  Accounting                     Seattle                                 1                                                                       
+William         United Kingdom                           Accounting                     Seattle                                 1                                                                       
+William         United States of America                 Accounting                     Seattle                                 2                                                                       
+
+76 rows selected.
+
+SQL> SELECT FIRST_NAME , COUNTRY_NAME , DEPARTMENT_NAME , CITY , COUNTRY_ID
+  2  FROM EMPLOYEES
+  3  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   USING (LOCATION_ID)
+  5  NATURAL JOIN COUNTRIES;
+
+FIRST_NAME      COUNTRY_NAME                             DEPARTMENT_NAME                CITY                           CO                                                                               
+--------------- ---------------------------------------- ------------------------------ ------------------------------ --                                                                               
+Michael         Canada                                   Marketing                      Toronto                        CA                                                                               
+Pat             Canada                                   Marketing                      Toronto                        CA                                                                               
+Ellen           United Kingdom                           Sales                          Oxford                         UK                                                                               
+Eleni           United Kingdom                           Sales                          Oxford                         UK                                                                               
+Jonathon        United Kingdom                           Sales                          Oxford                         UK                                                                               
+Diana           United States of America                 IT                             Southlake                      US                                                                               
+Bruce           United States of America                 IT                             Southlake                      US                                                                               
+Alexander       United States of America                 IT                             Southlake                      US                                                                               
+Kevin           United States of America                 Shiping                        South San Francisco            US                                                                               
+Peter           United States of America                 Shiping                        South San Francisco            US                                                                               
+Randall         United States of America                 Shiping                        South San Francisco            US                                                                               
+Curtis          United States of America                 Shiping                        South San Francisco            US                                                                               
+Trenna          United States of America                 Shiping                        South San Francisco            US                                                                               
+Jennifer        United States of America                 Administration                 Seattle                        US                                                                               
+Lex             United States of America                 Executive                      Seattle                        US                                                                               
+Steven          United States of America                 Executive                      Seattle                        US                                                                               
+Neena           United States of America                 Executive                      Seattle                        US                                                                               
+William         United States of America                 Accounting                     Seattle                        US                                                                               
+Shelley         United States of America                 Accounting                     Seattle                        US                                                                               
+
+19 rows selected.
+
+SQL> SPOOL OFF

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAVEL SITE</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .a {
+        width: 100%;
+        display: flex;
+        padding: 25px;
+        background-color: rgb(210, 139, 210);
+      }
+       h1{
+        font-family: "Courier New", Courier, monospace;
+        color: purple;
+       }
+      .n {
+        color: black;
+        text-decoration: none;
+        font-family: "Courier New", Courier, monospace;
+        font: bold;
+        padding: 25px;
+        font-size: 20px;
+        transition: 1s;
+        border-radius: 20px;
+      }
+      .n:hover {
+        background-color: #fff4e630;
+      }
+
+      .box1 {
+        width: 500px;
+        height: 200px;
+        position: relative;
+        background-image: url("japan.jpeg");
+        background-size: cover;
+        margin: 20px 20px 20px 20px;
+      }
+      .box1::before {
+        content: "";
+        position: absolute;
+        background-color: rgba(216, 107, 107, 0.65);
+        width: 500px;
+        height: 100px;
+        transition: 2s;
+      }
+
+      .box1:hover::before {
+        height: 0;
+      }
+
+      .box1::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(216, 107, 107, 0.65);
+        width: 500px;
+        height: 100px;
+        bottom: 0;
+        transition: 2s;
+      }
+      .box1:hover::after {
+        height: 0;
+      }
+
+      .box2 {
+        width: 500px;
+        height: 200px;
+        position: relative;
+        background-image: url("india.jpeg");
+        background-size: cover;
+        margin: -220px 50px 200px 950px;
+      }
+      .box2::before {
+        content: "";
+        position: absolute;
+        background-color: rgba(224, 173, 173, 0.65);
+        width: 250px;
+        height: 200px;
+        transition: 2s;
+      }
+
+      .box2:hover::before {
+        width: 0;
+      }
+
+      .box2::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(224, 173, 173, 0.65);
+        width: 250px;
+        height: 200px;
+        right: 0;
+        transition: 2s;
+      }
+      .box2:hover::after {
+        width: 0;
+      }
+
+      .box3 {
+        width: 500px;
+        height: 200px;
+        position: relative;
+        background-image: url("paris.jpeg");
+        background-size: cover;
+        margin: -170px 20px 0px 20px;
+      }
+      .box3::before {
+        content: "";
+        position: absolute;
+        background-color: rgba(88, 143, 202, 0.65);
+        width: 500px;
+        height: 100px;
+        transition: 2s;
+      }
+
+      .box3:hover::before {
+        height: 0;
+      }
+
+      .box3::after {
+        content: "";
+        position: absolute;
+        background-color:  rgba(88, 143, 202, 0.65);
+        width: 500px;
+        height: 100px;
+        bottom: 0;
+        transition: 2s;
+      }
+      .box3:hover::after {
+        height: 0;
+      }
+
+      .box4 {
+        width: 500px;
+        height: 200px;
+        position: relative;
+        background-image: url("united-kingdom.jpg");
+        background-size: cover;
+        margin: -200px 0px 0px 950px;
+      }
+      .box4::before {
+        content: "";
+        position: absolute;
+        background-color: rgba(95, 195, 218, 0.65);
+        width: 250px;
+        height: 200px;
+        transition: 2s;
+      }
+
+      .box4:hover::before {
+        width: 0;
+      }
+
+      .box4::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(95, 195, 218, 0.65);
+        width: 250px;
+        height: 200px;
+        right: 0;
+        transition: 2s;
+      }
+      .box4:hover::after {
+        width: 0;
+      }
+
+      .box5 {
+        width: 500px;
+        height: 200px;
+        position: absolute;
+        background-image: url("swiss.jpeg");
+        background-size: cover;
+        margin: 20px 0px 0px 490px;
+
+      }
+      .box5::before {
+        content: "";
+        position: absolute;
+        background-color: rgba(89, 202, 163, 0.65);
+        width: 500px;
+        height: 200px;
+        transition: 2s;
+      }
+
+      .box5:hover::before {
+        width: 0;
+      }
+
+      .box5::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(89, 202, 163, 0.65);
+        width: 500px;
+        height: 200px;
+        top: 0;
+        transition: 2s;
+      }
+      .box5:hover::after {
+        height: 0;
+      }
+    </style>
+  </head>
+  <body bgcolor="#D8BFD8">
+    <div class="a">
+      <div><a class="n" href="">Home</a></div>
+      <div><a class="n" href="">Products</a></div>
+      <div><a class="n" href="">Services</a></div>
+      <div><a class="n" href="">About Us</a></div>
+      <div><a class="n" href="">Sign up</a></div>
+      <div><a class="n" href="">Log Out</a></div>
+    </div>
+    <h1><center>SELECT YOUR FAVOURATE COUNTRY</style></center></h1>
+
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
+  </body>
+</html>

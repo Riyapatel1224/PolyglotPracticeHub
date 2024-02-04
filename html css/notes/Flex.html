@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex</title>
+</head>
+<style>
+    .main{
+        width: 1300px;
+        height: 500px;
+        border: 5px solid gold;
+        display: flex;
+        /* flex-direction: column; */
+        /* flex-direction: row; */
+        /* flex-direction: row-reverse; */
+        /* flex-direction: column-reverse; */
+        /* justify-content:space-around; */
+        /* justify-content: space-between; */
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+    .box1{
+        width: 200px;
+        height: 200px;
+        border: 5px solid teal;
+    }
+    .box2{
+        width: 200px;
+        height: 200px;
+        border: 5px solid rgb(15, 185, 15);
+    }
+    .box3{
+        width: 200px;
+        height: 200px;
+        border: 5px solid rgb(228, 45, 12);
+    }
+    .box4{
+        width: 200px;
+        height: 200px;
+        border: 5px solid rgb(110, 29, 154);
+    }
+</style>
+
+<body>
+    <div class="main">
+        <div class="box1"> <h1>Box1</h1></div>
+        <div class="box2"><h1>Box2</h1></div>
+        <div class="box3"><h1>Box3</h1></div>
+        <div class="box4 "><h1>Box4</h1></div>
+    </div>
+</body>
+
+</html>

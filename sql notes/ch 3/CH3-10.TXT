@@ -1,0 +1,546 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 3rd TUESDAY.
+SQL> 
+SQL> REM FIND FIRST SALARY DATE AFTER JOINING THE COMPANY.
+SQL> 
+SQL> REM ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR DAY';
+SQL> Select first_name , hire_date , next_day(last_day(hire_date),'tuesday')+ (7*2) from employees;
+
+FIRST_NAME      HIRE_DATE NEXT_DAY(                                             
+--------------- --------- ---------                                             
+Steven          17-JUL-87 18-AUG-87                                             
+Neena           21-SEP-89 17-OCT-89                                             
+Lex             13-JAN-93 16-FEB-93                                             
+Alexander       03-JAN-90 20-FEB-90                                             
+Bruce           21-MAY-91 18-JUN-91                                             
+Diana           07-FEB-99 16-MAR-99                                             
+Kevin           16-NOV-99 21-DEC-99                                             
+Trenna          17-OCT-95 21-NOV-95                                             
+Curtis          29-JAN-97 18-FEB-97                                             
+Randall         15-MAR-98 21-APR-98                                             
+Peter           09-JUL-98 18-AUG-98                                             
+
+FIRST_NAME      HIRE_DATE NEXT_DAY(                                             
+--------------- --------- ---------                                             
+Eleni           29-JAN-00 15-FEB-00                                             
+Ellen           11-MAY-96 18-JUN-96                                             
+Jonathon        24-MAR-98 21-APR-98                                             
+Kimerely        24-MAY-99 15-JUN-99                                             
+Jennifer        17-SEP-87 20-OCT-87                                             
+Michael         17-FEB-96 19-MAR-96                                             
+Pat             17-AUG-97 16-SEP-97                                             
+Shelley         07-JUN-94 19-JUL-94                                             
+William         07-JUN-94 19-JUL-94                                             
+
+20 rows selected.
+
+SQL> SET LINES
+SP2-0267: linesize option 0 out of range (1 through 32767)
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR DAY';
+
+Session altered.
+
+SQL> 
+SQL> SET LINES 200 PAGES 24 SERVEROUT ON FORMAT WRA
+SQL> 
+SQL> /
+
+Session altered.
+
+SQL> Select first_name , hire_date , next_day(last_day(hire_date),'tuesday')+ (7*2) from employees;
+
+FIRST_NAME      HIRE_DATE           NEXT_DAY(LAST_DAY(H                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    18-AUG-87 TUESDAY                                                                                                                                                   
+Neena           21-SEP-89 THURSDAY  17-OCT-89 TUESDAY                                                                                                                                                   
+Lex             13-JAN-93 WEDNESDAY 16-FEB-93 TUESDAY                                                                                                                                                   
+Alexander       03-JAN-90 WEDNESDAY 20-FEB-90 TUESDAY                                                                                                                                                   
+Bruce           21-MAY-91 TUESDAY   18-JUN-91 TUESDAY                                                                                                                                                   
+Diana           07-FEB-99 SUNDAY    16-MAR-99 TUESDAY                                                                                                                                                   
+Kevin           16-NOV-99 TUESDAY   21-DEC-99 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   21-NOV-95 TUESDAY                                                                                                                                                   
+Curtis          29-JAN-97 WEDNESDAY 18-FEB-97 TUESDAY                                                                                                                                                   
+Randall         15-MAR-98 SUNDAY    21-APR-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  18-AUG-98 TUESDAY                                                                                                                                                   
+Eleni           29-JAN-00 SATURDAY  15-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  18-JUN-96 TUESDAY                                                                                                                                                   
+Jonathon        24-MAR-98 TUESDAY   21-APR-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    15-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  20-OCT-87 TUESDAY                                                                                                                                                   
+Michael         17-FEB-96 SATURDAY  19-MAR-96 TUESDAY                                                                                                                                                   
+Pat             17-AUG-97 SUNDAY    16-SEP-97 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   19-JUL-94 TUESDAY                                                                                                                                                   
+William         07-JUN-94 TUESDAY   19-JUL-94 TUESDAY                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE,NEXT_DAY(LAST_DAY(HIRE_DATE),'TUE')+(7*2) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           NEXT_DAY(LAST_DAY(H                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    18-AUG-87 TUESDAY                                                                                                                                                   
+Neena           21-SEP-89 THURSDAY  17-OCT-89 TUESDAY                                                                                                                                                   
+Lex             13-JAN-93 WEDNESDAY 16-FEB-93 TUESDAY                                                                                                                                                   
+Alexander       03-JAN-90 WEDNESDAY 20-FEB-90 TUESDAY                                                                                                                                                   
+Bruce           21-MAY-91 TUESDAY   18-JUN-91 TUESDAY                                                                                                                                                   
+Diana           07-FEB-99 SUNDAY    16-MAR-99 TUESDAY                                                                                                                                                   
+Kevin           16-NOV-99 TUESDAY   21-DEC-99 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   21-NOV-95 TUESDAY                                                                                                                                                   
+Curtis          29-JAN-97 WEDNESDAY 18-FEB-97 TUESDAY                                                                                                                                                   
+Randall         15-MAR-98 SUNDAY    21-APR-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  18-AUG-98 TUESDAY                                                                                                                                                   
+Eleni           29-JAN-00 SATURDAY  15-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  18-JUN-96 TUESDAY                                                                                                                                                   
+Jonathon        24-MAR-98 TUESDAY   21-APR-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    15-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  20-OCT-87 TUESDAY                                                                                                                                                   
+Michael         17-FEB-96 SATURDAY  19-MAR-96 TUESDAY                                                                                                                                                   
+Pat             17-AUG-97 SUNDAY    16-SEP-97 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   19-JUL-94 TUESDAY                                                                                                                                                   
+William         07-JUN-94 TUESDAY   19-JUL-94 TUESDAY                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE ,NEXT_DAY(LAST_DAY(HIRE_DATE),'TUESDAY')+(7*2) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           NEXT_DAY(LAST_DAY(H                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    18-AUG-87 TUESDAY                                                                                                                                                   
+Neena           21-SEP-89 THURSDAY  17-OCT-89 TUESDAY                                                                                                                                                   
+Lex             13-JAN-93 WEDNESDAY 16-FEB-93 TUESDAY                                                                                                                                                   
+Alexander       03-JAN-90 WEDNESDAY 20-FEB-90 TUESDAY                                                                                                                                                   
+Bruce           21-MAY-91 TUESDAY   18-JUN-91 TUESDAY                                                                                                                                                   
+Diana           07-FEB-99 SUNDAY    16-MAR-99 TUESDAY                                                                                                                                                   
+Kevin           16-NOV-99 TUESDAY   21-DEC-99 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   21-NOV-95 TUESDAY                                                                                                                                                   
+Curtis          29-JAN-97 WEDNESDAY 18-FEB-97 TUESDAY                                                                                                                                                   
+Randall         15-MAR-98 SUNDAY    21-APR-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  18-AUG-98 TUESDAY                                                                                                                                                   
+Eleni           29-JAN-00 SATURDAY  15-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  18-JUN-96 TUESDAY                                                                                                                                                   
+Jonathon        24-MAR-98 TUESDAY   21-APR-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    15-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  20-OCT-87 TUESDAY                                                                                                                                                   
+Michael         17-FEB-96 SATURDAY  19-MAR-96 TUESDAY                                                                                                                                                   
+Pat             17-AUG-97 SUNDAY    16-SEP-97 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   19-JUL-94 TUESDAY                                                                                                                                                   
+William         07-JUN-94 TUESDAY   19-JUL-94 TUESDAY                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 3rd TUESDAY.
+SQL> 
+SQL> REM FIND 4th MONTHLY SALARY DATE
+SQL> 
+SQL> Select first_name , hire_date , next_day(add_months(last_day(hire_date),'3'),'tuesday')+ (7*2) from employees;
+
+FIRST_NAME      HIRE_DATE           NEXT_DAY(ADD_MONTHS                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    17-NOV-87 TUESDAY                                                                                                                                                   
+Neena           21-SEP-89 THURSDAY  16-JAN-90 TUESDAY                                                                                                                                                   
+Lex             13-JAN-93 WEDNESDAY 18-MAY-93 TUESDAY                                                                                                                                                   
+Alexander       03-JAN-90 WEDNESDAY 15-MAY-90 TUESDAY                                                                                                                                                   
+Bruce           21-MAY-91 TUESDAY   17-SEP-91 TUESDAY                                                                                                                                                   
+Diana           07-FEB-99 SUNDAY    15-JUN-99 TUESDAY                                                                                                                                                   
+Kevin           16-NOV-99 TUESDAY   21-MAR-00 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   20-FEB-96 TUESDAY                                                                                                                                                   
+Curtis          29-JAN-97 WEDNESDAY 20-MAY-97 TUESDAY                                                                                                                                                   
+Randall         15-MAR-98 SUNDAY    21-JUL-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  17-NOV-98 TUESDAY                                                                                                                                                   
+Eleni           29-JAN-00 SATURDAY  16-MAY-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  17-SEP-96 TUESDAY                                                                                                                                                   
+Jonathon        24-MAR-98 TUESDAY   21-JUL-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    21-SEP-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  19-JAN-88 TUESDAY                                                                                                                                                   
+Michael         17-FEB-96 SATURDAY  18-JUN-96 TUESDAY                                                                                                                                                   
+Pat             17-AUG-97 SUNDAY    16-DEC-97 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   18-OCT-94 TUESDAY                                                                                                                                                   
+William         07-JUN-94 TUESDAY   18-OCT-94 TUESDAY                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE ,ADD_MONTHS(NEXT_DAY(LAST_DAY(HIRE_DATE),'TUESDAY')+(7*2) ,3) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           ADD_MONTHS(NEXT_DAY                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    18-NOV-87 WEDNESDAY                                                                                                                                                 
+Neena           21-SEP-89 THURSDAY  17-JAN-90 WEDNESDAY                                                                                                                                                 
+Lex             13-JAN-93 WEDNESDAY 16-MAY-93 SUNDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 20-MAY-90 SUNDAY                                                                                                                                                    
+Bruce           21-MAY-91 TUESDAY   18-SEP-91 WEDNESDAY                                                                                                                                                 
+Diana           07-FEB-99 SUNDAY    16-JUN-99 WEDNESDAY                                                                                                                                                 
+Kevin           16-NOV-99 TUESDAY   21-MAR-00 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   21-FEB-96 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 18-MAY-97 SUNDAY                                                                                                                                                    
+Randall         15-MAR-98 SUNDAY    21-JUL-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  18-NOV-98 WEDNESDAY                                                                                                                                                 
+Eleni           29-JAN-00 SATURDAY  15-MAY-00 MONDAY                                                                                                                                                    
+Ellen           11-MAY-96 SATURDAY  18-SEP-96 WEDNESDAY                                                                                                                                                 
+Jonathon        24-MAR-98 TUESDAY   21-JUL-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    15-SEP-99 WEDNESDAY                                                                                                                                                 
+Jennifer        17-SEP-87 THURSDAY  20-JAN-88 WEDNESDAY                                                                                                                                                 
+Michael         17-FEB-96 SATURDAY  19-JUN-96 WEDNESDAY                                                                                                                                                 
+Pat             17-AUG-97 SUNDAY    16-DEC-97 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   19-OCT-94 WEDNESDAY                                                                                                                                                 
+William         07-JUN-94 TUESDAY   19-OCT-94 WEDNESDAY                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE,ADD_MONTHS(NEXT_DAY(LAST_DAY(HIRE_DATE),'TUE')+(7*2),3) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           ADD_MONTHS(NEXT_DAY                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    18-NOV-87 WEDNESDAY                                                                                                                                                 
+Neena           21-SEP-89 THURSDAY  17-JAN-90 WEDNESDAY                                                                                                                                                 
+Lex             13-JAN-93 WEDNESDAY 16-MAY-93 SUNDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 20-MAY-90 SUNDAY                                                                                                                                                    
+Bruce           21-MAY-91 TUESDAY   18-SEP-91 WEDNESDAY                                                                                                                                                 
+Diana           07-FEB-99 SUNDAY    16-JUN-99 WEDNESDAY                                                                                                                                                 
+Kevin           16-NOV-99 TUESDAY   21-MAR-00 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   21-FEB-96 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 18-MAY-97 SUNDAY                                                                                                                                                    
+Randall         15-MAR-98 SUNDAY    21-JUL-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  18-NOV-98 WEDNESDAY                                                                                                                                                 
+Eleni           29-JAN-00 SATURDAY  15-MAY-00 MONDAY                                                                                                                                                    
+Ellen           11-MAY-96 SATURDAY  18-SEP-96 WEDNESDAY                                                                                                                                                 
+Jonathon        24-MAR-98 TUESDAY   21-JUL-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    15-SEP-99 WEDNESDAY                                                                                                                                                 
+Jennifer        17-SEP-87 THURSDAY  20-JAN-88 WEDNESDAY                                                                                                                                                 
+Michael         17-FEB-96 SATURDAY  19-JUN-96 WEDNESDAY                                                                                                                                                 
+Pat             17-AUG-97 SUNDAY    16-DEC-97 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   19-OCT-94 WEDNESDAY                                                                                                                                                 
+William         07-JUN-94 TUESDAY   19-OCT-94 WEDNESDAY                                                                                                                                                 
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 3rd THURSDAY. FIND 6th SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE,NEXT_DAY(ADD_MONTHS(LAST_DAY(HIRE_DATE),5),'TUE')+(7*2) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           NEXT_DAY(ADD_MONTHS                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    19-JAN-88 TUESDAY                                                                                                                                                   
+Neena           21-SEP-89 THURSDAY  20-MAR-90 TUESDAY                                                                                                                                                   
+Lex             13-JAN-93 WEDNESDAY 20-JUL-93 TUESDAY                                                                                                                                                   
+Alexander       03-JAN-90 WEDNESDAY 17-JUL-90 TUESDAY                                                                                                                                                   
+Bruce           21-MAY-91 TUESDAY   19-NOV-91 TUESDAY                                                                                                                                                   
+Diana           07-FEB-99 SUNDAY    17-AUG-99 TUESDAY                                                                                                                                                   
+Kevin           16-NOV-99 TUESDAY   16-MAY-00 TUESDAY                                                                                                                                                   
+Trenna          17-OCT-95 TUESDAY   16-APR-96 TUESDAY                                                                                                                                                   
+Curtis          29-JAN-97 WEDNESDAY 15-JUL-97 TUESDAY                                                                                                                                                   
+Randall         15-MAR-98 SUNDAY    15-SEP-98 TUESDAY                                                                                                                                                   
+Peter           09-JUL-98 THURSDAY  19-JAN-99 TUESDAY                                                                                                                                                   
+Eleni           29-JAN-00 SATURDAY  18-JUL-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  19-NOV-96 TUESDAY                                                                                                                                                   
+Jonathon        24-MAR-98 TUESDAY   15-SEP-98 TUESDAY                                                                                                                                                   
+Kimerely        24-MAY-99 MONDAY    16-NOV-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  15-MAR-88 TUESDAY                                                                                                                                                   
+Michael         17-FEB-96 SATURDAY  20-AUG-96 TUESDAY                                                                                                                                                   
+Pat             17-AUG-97 SUNDAY    17-FEB-98 TUESDAY                                                                                                                                                   
+Shelley         07-JUN-94 TUESDAY   20-DEC-94 TUESDAY                                                                                                                                                   
+William         07-JUN-94 TUESDAY   20-DEC-94 TUESDAY                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE ,NEXT_DAY(ADD_MONTHS(LAST_DAY(HIRE_DATE),5),'THURSDAY')+(7*2) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           NEXT_DAY(ADD_MONTHS                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    21-JAN-88 THURSDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  15-MAR-90 THURSDAY                                                                                                                                                  
+Lex             13-JAN-93 WEDNESDAY 15-JUL-93 THURSDAY                                                                                                                                                  
+Alexander       03-JAN-90 WEDNESDAY 19-JUL-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   21-NOV-91 THURSDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    19-AUG-99 THURSDAY                                                                                                                                                  
+Kevin           16-NOV-99 TUESDAY   18-MAY-00 THURSDAY                                                                                                                                                  
+Trenna          17-OCT-95 TUESDAY   18-APR-96 THURSDAY                                                                                                                                                  
+Curtis          29-JAN-97 WEDNESDAY 17-JUL-97 THURSDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    17-SEP-98 THURSDAY                                                                                                                                                  
+Peter           09-JUL-98 THURSDAY  21-JAN-99 THURSDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  20-JUL-00 THURSDAY                                                                                                                                                  
+Ellen           11-MAY-96 SATURDAY  21-NOV-96 THURSDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   17-SEP-98 THURSDAY                                                                                                                                                  
+Kimerely        24-MAY-99 MONDAY    18-NOV-99 THURSDAY                                                                                                                                                  
+Jennifer        17-SEP-87 THURSDAY  17-MAR-88 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  15-AUG-96 THURSDAY                                                                                                                                                  
+Pat             17-AUG-97 SUNDAY    19-FEB-98 THURSDAY                                                                                                                                                  
+Shelley         07-JUN-94 TUESDAY   15-DEC-94 THURSDAY                                                                                                                                                  
+William         07-JUN-94 TUESDAY   15-DEC-94 THURSDAY                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM TRUNC : WE CAN TRUNC DATE IN 3 STYLES : 1 MONTH 2 Q/QUARTER 3 YEAR
+SQL> 
+SQL> REM TRUNC DATE WITH MONTH : IF WE TRUNC DATE WITH MONTH, IT WILL RETURN FIRST DATE OF INPUT MONTH.
+SQL> 
+SQL> REM TRUNC DATE WITH Q/QUARTER : IF WE TRUNC DATE WITH Q, IT WILL RETURN FIRST DATE OF INPUT QUARTER.
+SQL> 
+SQL> REM Q1 : 01-JAN TO 31-MAR
+SQL> 
+SQL> REM Q2 : 01-APR TO 30-JUN
+SQL> 
+SQL> REM Q3 : 01-JUL TO 30-SEP
+SQL> 
+SQL> REM Q4 : 01-OCT TO 31-DEC
+SQL> 
+SQL> REM TRUNC DATE WITH YEAR : IF WE TRUNC DATE WITH YEAR, IT WILL RETURN FIRST DATE OF INPUT YEAR.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , TRUNC(HIRE_DATE,'MONTH') FROM EMPLOYEES
+  2  ;
+
+FIRST_NAME      HIRE_DATE           TRUNC(HIRE_DATE,'MO                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-JUL-87 WEDNESDAY                                                                                                                                                 
+Neena           21-SEP-89 THURSDAY  01-SEP-89 FRIDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                    
+Bruce           21-MAY-91 TUESDAY   01-MAY-91 WEDNESDAY                                                                                                                                                 
+Diana           07-FEB-99 SUNDAY    01-FEB-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-NOV-99 MONDAY                                                                                                                                                    
+Trenna          17-OCT-95 TUESDAY   01-OCT-95 SUNDAY                                                                                                                                                    
+Curtis          29-JAN-97 WEDNESDAY 01-JAN-97 WEDNESDAY                                                                                                                                                 
+Randall         15-MAR-98 SUNDAY    01-MAR-98 SUNDAY                                                                                                                                                    
+Peter           09-JUL-98 THURSDAY  01-JUL-98 WEDNESDAY                                                                                                                                                 
+Eleni           29-JAN-00 SATURDAY  01-JAN-00 SATURDAY                                                                                                                                                  
+Ellen           11-MAY-96 SATURDAY  01-MAY-96 WEDNESDAY                                                                                                                                                 
+Jonathon        24-MAR-98 TUESDAY   01-MAR-98 SUNDAY                                                                                                                                                    
+Kimerely        24-MAY-99 MONDAY    01-MAY-99 SATURDAY                                                                                                                                                  
+Jennifer        17-SEP-87 THURSDAY  01-SEP-87 TUESDAY                                                                                                                                                   
+Michael         17-FEB-96 SATURDAY  01-FEB-96 THURSDAY                                                                                                                                                  
+Pat             17-AUG-97 SUNDAY    01-AUG-97 FRIDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUN-94 WEDNESDAY                                                                                                                                                 
+William         07-JUN-94 TUESDAY   01-JUN-94 WEDNESDAY                                                                                                                                                 
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS MONTHLY SALARY ON FIRST DATE OF NEXT MONTH.
+SQL> 
+SQL> REM FIND FIRST SALARY DATE
+SQL> 
+SQL> REM 1 LAST_DAY  2 TRUNC
+SQL> 
+SQL> SELECT FIRST_NAME ,HIRE_DATE ,LAST_DAY(HIRE_DATE)+1 FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           LAST_DAY(HIRE_DATE)                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-FEB-93 MONDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-FEB-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    01-MAR-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                 
+Trenna          17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                 
+Peter           09-JUL-98 THURSDAY  01-AUG-98 SATURDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  01-JUN-96 SATURDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                 
+Kimerely        24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                    
+Pat             17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+William         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT FIRST_NAME ,HIRE_DATE ,ADD_MONTHS(TRUNC(HIRE_DATE,'MONTH'),1) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           ADD_MONTHS(TRUNC(HI                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-FEB-93 MONDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-FEB-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    01-MAR-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                 
+Trenna          17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                 
+Peter           09-JUL-98 THURSDAY  01-AUG-98 SATURDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  01-JUN-96 SATURDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                 
+Kimerely        24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                    
+Pat             17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+William         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+
+20 rows selected.
+
+SQL> select first_name , hire_date , last_day(hire_date) + 1 from employees;
+
+FIRST_NAME      HIRE_DATE           LAST_DAY(HIRE_DATE)                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-FEB-93 MONDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-FEB-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    01-MAR-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                 
+Trenna          17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                 
+Peter           09-JUL-98 THURSDAY  01-AUG-98 SATURDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  01-JUN-96 SATURDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                 
+Kimerely        24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                    
+Pat             17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+William         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+
+20 rows selected.
+
+SQL> select first_name , hire_date , add_months(trunc(hire_date,'month'),1) from employees;
+
+FIRST_NAME      HIRE_DATE           ADD_MONTHS(TRUNC(HI                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-FEB-93 MONDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-FEB-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    01-MAR-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                 
+Trenna          17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                 
+Peter           09-JUL-98 THURSDAY  01-AUG-98 SATURDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  01-JUN-96 SATURDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                 
+Kimerely        24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                    
+Pat             17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+William         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(TRUNC (HIRE_DATE,'MONTH'),1) FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           ADD_MONTHS(TRUNC(HI                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-FEB-93 MONDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-FEB-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    01-MAR-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                 
+Trenna          17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                 
+Peter           09-JUL-98 THURSDAY  01-AUG-98 SATURDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  01-JUN-96 SATURDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                 
+Kimerely        24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                    
+Pat             17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+William         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , LAST_DAY(HIRE_DATE) + 1 FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           LAST_DAY(HIRE_DATE)                                                                                                                                                 
+--------------- ------------------- -------------------                                                                                                                                                 
+Steven          17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                  
+Neena           21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                    
+Lex             13-JAN-93 WEDNESDAY 01-FEB-93 MONDAY                                                                                                                                                    
+Alexander       03-JAN-90 WEDNESDAY 01-FEB-90 THURSDAY                                                                                                                                                  
+Bruce           21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                  
+Diana           07-FEB-99 SUNDAY    01-MAR-99 MONDAY                                                                                                                                                    
+Kevin           16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                 
+Trenna          17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                 
+Curtis          29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                  
+Randall         15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                 
+Peter           09-JUL-98 THURSDAY  01-AUG-98 SATURDAY                                                                                                                                                  
+Eleni           29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                   
+Ellen           11-MAY-96 SATURDAY  01-JUN-96 SATURDAY                                                                                                                                                  
+Jonathon        24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                 
+Kimerely        24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                   
+Jennifer        17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                  
+Michael         17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                    
+Pat             17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                    
+Shelley         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+William         07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                    
+
+20 rows selected.
+
+SQL> REM FIND NUMBER OF DAYS WORKED IN JOINING MONTH
+SQL> 
+SQL> REM 1 LAST_DAY  2 TRUNC
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , LAST_DAY(HIRE_DATE)-HIRE_DATE+1 DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           DAYS_WORKED                                                                                                                                                         
+--------------- ------------------- -----------                                                                                                                                                         
+Steven          17-JUL-87 FRIDAY             15                                                                                                                                                         
+Neena           21-SEP-89 THURSDAY           10                                                                                                                                                         
+Lex             13-JAN-93 WEDNESDAY          19                                                                                                                                                         
+Alexander       03-JAN-90 WEDNESDAY          29                                                                                                                                                         
+Bruce           21-MAY-91 TUESDAY            11                                                                                                                                                         
+Diana           07-FEB-99 SUNDAY             22                                                                                                                                                         
+Kevin           16-NOV-99 TUESDAY            15                                                                                                                                                         
+Trenna          17-OCT-95 TUESDAY            15                                                                                                                                                         
+Curtis          29-JAN-97 WEDNESDAY           3                                                                                                                                                         
+Randall         15-MAR-98 SUNDAY             17                                                                                                                                                         
+Peter           09-JUL-98 THURSDAY           23                                                                                                                                                         
+Eleni           29-JAN-00 SATURDAY            3                                                                                                                                                         
+Ellen           11-MAY-96 SATURDAY           21                                                                                                                                                         
+Jonathon        24-MAR-98 TUESDAY             8                                                                                                                                                         
+Kimerely        24-MAY-99 MONDAY              8                                                                                                                                                         
+Jennifer        17-SEP-87 THURSDAY           14                                                                                                                                                         
+Michael         17-FEB-96 SATURDAY           13                                                                                                                                                         
+Pat             17-AUG-97 SUNDAY             15                                                                                                                                                         
+Shelley         07-JUN-94 TUESDAY            24                                                                                                                                                         
+William         07-JUN-94 TUESDAY            24                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(TRUNC(HIRE_DATE,'MONTH'),1)-HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE           DAYS_WORKED                                                                                                                                                         
+--------------- ------------------- -----------                                                                                                                                                         
+Steven          17-JUL-87 FRIDAY             15                                                                                                                                                         
+Neena           21-SEP-89 THURSDAY           10                                                                                                                                                         
+Lex             13-JAN-93 WEDNESDAY          19                                                                                                                                                         
+Alexander       03-JAN-90 WEDNESDAY          29                                                                                                                                                         
+Bruce           21-MAY-91 TUESDAY            11                                                                                                                                                         
+Diana           07-FEB-99 SUNDAY             22                                                                                                                                                         
+Kevin           16-NOV-99 TUESDAY            15                                                                                                                                                         
+Trenna          17-OCT-95 TUESDAY            15                                                                                                                                                         
+Curtis          29-JAN-97 WEDNESDAY           3                                                                                                                                                         
+Randall         15-MAR-98 SUNDAY             17                                                                                                                                                         
+Peter           09-JUL-98 THURSDAY           23                                                                                                                                                         
+Eleni           29-JAN-00 SATURDAY            3                                                                                                                                                         
+Ellen           11-MAY-96 SATURDAY           21                                                                                                                                                         
+Jonathon        24-MAR-98 TUESDAY             8                                                                                                                                                         
+Kimerely        24-MAY-99 MONDAY              8                                                                                                                                                         
+Jennifer        17-SEP-87 THURSDAY           14                                                                                                                                                         
+Michael         17-FEB-96 SATURDAY           13                                                                                                                                                         
+Pat             17-AUG-97 SUNDAY             15                                                                                                                                                         
+Shelley         07-JUN-94 TUESDAY            24                                                                                                                                                         
+William         07-JUN-94 TUESDAY            24                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SPOOL OFF

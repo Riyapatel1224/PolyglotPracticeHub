@@ -1,0 +1,693 @@
+SQL> 
+SQL> SQL> SELECT FIRST_NAME , salary , SUBSTR(TRANSLATE(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm',''),1,1) , DECODE(SUBSTR(TRANSLATE(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm','.'),1,1),'a', salary * 1.1, 'e' , salary * 1.2 , 'i' , salary *1.3 , 'o' , salary * 1.4, salary * 1.5) NEW_SALARY from employees;
+SP2-0734: unknown command beginning "SQL> SELEC..." - rest of line ignored.
+SQL> SELECT FIRST_NAME , salary , SUBSTR(TRANSLATE(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm',''),1,1) , DECODE(SUBSTR(TRANSLATE(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm','.'),1,1),'a', salary * 1.1, 'e' , salary * 1.2 , 'i' , salary *1.3 , 'o' , salary * 1.4, salary * 1.5) NEW_SALARY from employees;
+
+FIRST_NAME          SALARY SUBS NEW_SALARY                                                                                                                                                              
+--------------- ---------- ---- ----------                                                                                                                                                              
+Steven               24000           28800                                                                                                                                                              
+Neena                17000           20400                                                                                                                                                              
+Lex                  17000           20400                                                                                                                                                              
+Alexander             9000            9900                                                                                                                                                              
+Bruce                 6000            9000                                                                                                                                                              
+Diana                 4200            5460                                                                                                                                                              
+Kevin                 5800            6960                                                                                                                                                              
+Trenna                3500            4200                                                                                                                                                              
+Curtis                3100            4650                                                                                                                                                              
+Randall               2600            2860                                                                                                                                                              
+Peter                 2500            3000                                                                                                                                                              
+Eleni                10500           12600                                                                                                                                                              
+Ellen                11000           13200                                                                                                                                                              
+Jonathon              8600           12040                                                                                                                                                              
+Kimerely              7000            9100                                                                                                                                                              
+Jennifer              4400            5280                                                                                                                                                              
+Michael              13000           16900                                                                                                                                                              
+Pat                   6000            6600                                                                                                                                                              
+Shelley              12000           14400                                                                                                                                                              
+William               8300           10790                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES ORDER BY 2;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM SALARY RANGE : 0-6000 40% , 6001-9000 30% , 9001-13000 20% , REMAINING 10%
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+17-JUL-87                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+13-JAN-93                                                                                                                                                                                               
+03-JAN-90                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+07-FEB-99                                                                                                                                                                                               
+16-NOV-99                                                                                                                                                                                               
+17-OCT-95                                                                                                                                                                                               
+29-JAN-97                                                                                                                                                                                               
+15-MAR-98                                                                                                                                                                                               
+09-JUL-98                                                                                                                                                                                               
+29-JAN-00                                                                                                                                                                                               
+11-MAY-96                                                                                                                                                                                               
+24-MAR-98                                                                                                                                                                                               
+24-MAY-99                                                                                                                                                                                               
+17-SEP-87                                                                                                                                                                                               
+17-FEB-96                                                                                                                                                                                               
+17-AUG-97                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM CONVERSION FUNCTIONS :
+SQL> 
+SQL> REM CONVERSION FUNCTIONS : TO CONVERT A VALUE FROM ONE DATA TYPE TO ANOTHER DATA TYPE
+SQL> 
+SQL> SELECT 10000 + 2345.67 FROM DUAL;
+
+10000+2345.67                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+     12345.67                                                                                                                                                                                           
+
+SQL> SELECT 10000 + '2345.67' FROM DUAL;
+
+10000+'2345.67'                                                                                                                                                                                         
+---------------                                                                                                                                                                                         
+       12345.67                                                                                                                                                                                         
+
+SQL> REM IN ABOVE EXAMLE CHARACTER VALUE WAS CONVERTED IMPLICITLY/AUTOMATICALLY INTO NUMBER TYPE.
+SQL> 
+SQL> SELECT 10000 + '-2345.67' FROM DUAL;
+
+10000+'-2345.67'                                                                                                                                                                                        
+----------------                                                                                                                                                                                        
+         7654.33                                                                                                                                                                                        
+
+SQL> SELECT 10000 + '-2,345.67' FROM DUAL;
+SELECT 10000 + '-2,345.67' FROM DUAL
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + '$2345.67' FROM DUAL;
+SELECT 10000 + '$2345.67' FROM DUAL
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> REM IMPLICIT CONVERSION IS NOT RELIABLE.
+SQL> 
+SQL> REM IMPLICIT CONVERSION IS NOT PERFORMED EVERYTIME.
+SQL> 
+SQL> REM TYPES OF CONVERSTION : 1 IMPLICIT/AUTOMATIC 2 EXPLICITY/MANUAL
+SQL> 
+SQL> REM LIST OF CONVERSION FUNCTIONS : 1 TO_NUMBER 2 TO_DATE 3 TO_CHAR  ....      TO_DSINTERVAL TO_YMITERVAL
+SQL> 
+SQL> REM TO -> CONVERT IT TO
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TO_NUMBER : TO CONVERT CHARACTER TYPE VALUE INTO NUMBER TYPE VALUE
+SQL> 
+SQL> REM TO_DATE : TO CONVERT CHARACTER TYPE VALUE INTO DATE TYPE VALUE
+SQL> 
+SQL> REM TO_CHAR : TO CONVERT NUMBER OR DATE TYPE VALUE INTO CHARACTER VALUE
+SQL> 
+SQL> 
+SQL> 
+SQL> REM NUMBER TO DATE : TO_CHAR + TO_DATE
+SQL> 
+SQL> REM DATE TO NUMBER : TO_CHAR + TO_NUMBER
+SQL> 
+SQL> 
+SQL> REM TO_NUMBER : TO CONVERT CHARACTER TYPE VALUE INTO NUMBER TYPE VALUE
+SQL> 
+SQL> REM PURPOSES : 1 FOR CALCULATION 2 FOR COMPARISON
+SQL> 
+SQL> SELECT 10000 + '-2,345.67' FROM DUAL;
+SELECT 10000 + '-2,345.67' FROM DUAL
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> REM VALID FORMAT CHARACTER LIST FOR NUMBER TYPE VALUE : 9 0  . ,  D G  $ L U  S PR MI  EEEE or eeee  v
+SQL> 
+SQL> REM TO_NUMBER SYNTAX : TO_NUMBER( value , format characters )
+SQL> 
+SQL> SELECT 10000 + TO_NUMBER ('-2,345.67' , 'S9,999.99' ) FROM DUAL;
+
+10000+TO_NUMBER('-2,345.67','S9,999.99')                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                 7654.33                                                                                                                                                                
+
+SQL> SELECT 10000 + TO_NUMBER ('-2,345.67' , 'S0,000.00' ) FROM DUAL;
+
+10000+TO_NUMBER('-2,345.67','S0,000.00')                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                 7654.33                                                                                                                                                                
+
+SQL> SELECT 10000 + TO_NUMBER ('-2,345.67' , 'S0,990.09' ) FROM DUAL;
+
+10000+TO_NUMBER('-2,345.67','S0,990.09')                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                 7654.33                                                                                                                                                                
+
+SQL> SELECT 10000 + TO_NUMBER ('-2,345.67' , 'S90,990.09' ) FROM DUAL;
+
+10000+TO_NUMBER('-2,345.67','S90,990.09')                                                                                                                                                               
+-----------------------------------------                                                                                                                                                               
+                                  7654.33                                                                                                                                                               
+
+SQL> SELECT 10000 + TO_NUMBER ('-2,345.67' , 'S00,990.09' ) FROM DUAL;
+SELECT 10000 + TO_NUMBER ('-2,345.67' , 'S00,990.09' ) FROM DUAL
+                          *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER ('-02,345.67' , 'S00,990.09' ) FROM DUAL;
+
+10000+TO_NUMBER('-02,345.67','S00,990.09')                                                                                                                                                              
+------------------------------------------                                                                                                                                                              
+                                   7654.33                                                                                                                                                              
+
+SQL> SELECT 10000 + TO_NUMBER ('-02,345.67' , 'S00G990D09' ) FROM DUAL;
+
+10000+TO_NUMBER('-02,345.67','S00G990D09')                                                                                                                                                              
+------------------------------------------                                                                                                                                                              
+                                   7654.33                                                                                                                                                              
+
+SQL> SELECT 10000 + '$2345.67' FROM DUAL;
+SELECT 10000 + '$2345.67' FROM DUAL
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('$2345.67','$9999.99') FROM DUAL;
+
+10000+TO_NUMBER('$2345.67','$9999.99')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              12345.67                                                                                                                                                                  
+
+SQL> SELECT 10000 + TO_NUMBER('$2345.67','L9999.99') FROM DUAL;
+
+10000+TO_NUMBER('$2345.67','L9999.99')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              12345.67                                                                                                                                                                  
+
+SQL> SELECT 10000 + TO_NUMBER('$2345.67','U9999.99') FROM DUAL;
+
+10000+TO_NUMBER('$2345.67','U9999.99')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              12345.67                                                                                                                                                                  
+
+SQL> COL PARAMETER FORMAT A30
+SQL> COL VALUE FORMAT A30
+SQL> 
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT 10000 + TO_NUMBER('$2345.67','U9999D99') FROM DUAL;
+
+10000+TO_NUMBER('$2345.67','U9999D99')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              12345.67                                                                                                                                                                  
+
+SQL> 
+SQL> SELECT 10000 + TO_NUMBER('Rs.2345.67','$9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('Rs.2345.67','$9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('Rs.2345.67','l9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('Rs.2345.67','l9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('Rs.2345.67','U9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('Rs.2345.67','U9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> ALTER SESSION SET NLS_CURRENCY = 'Rs.';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   Rs.                                                                                                                                                                      
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT 10000 + TO_NUMBER('Rs.2345.67','L9999D99') FROM DUAL;
+
+10000+TO_NUMBER('RS.2345.67','L9999D99')                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                12345.67                                                                                                                                                                
+
+SQL> SELECT 10000 + TO_NUMBER('2345.67','$9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('2345.67','$9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('2345.67','L9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('2345.67','L9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('2345.67','U9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('2345.67','U9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> ALTER SESSION SET NLS_DUAL_CURRENCY = '';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   Rs.                                                                                                                                                                      
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY                                                                                                                                                                                      
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT 10000 + TO_NUMBER('2345.67','$9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('2345.67','$9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('2345.67','L9999D99') FROM DUAL;
+SELECT 10000 + TO_NUMBER('2345.67','L9999D99') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('2345.67','U9999D99') FROM DUAL;
+
+10000+TO_NUMBER('2345.67','U9999D99')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              12345.67                                                                                                                                                                  
+
+SQL> REM VALID FORMAT CHARACTER LIST FOR NUMBER TYPE VALUE : 9 0  . ,  D G  $ L U  S PR MI  EEEE or eeee  v
+SQL> 
+SQL> SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9|999.99' ) FROM DUAL;
+SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9|999.99' ) FROM DUAL
+                                        *
+ERROR at line 1:
+ORA-01481: invalid number format model 
+
+
+SQL> ALTER SESSION SET NLS_NUMERIC_CHARACTERS = '.|';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   Rs.                                                                                                                                                                      
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .|                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY                                                                                                                                                                                      
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9|999.99' ) FROM DUAL;
+SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9|999.99' ) FROM DUAL
+                                        *
+ERROR at line 1:
+ORA-01481: invalid number format model 
+
+
+SQL> SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9G999.99' ) FROM DUAL;
+SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9G999.99' ) FROM DUAL
+                                        *
+ERROR at line 1:
+ORA-01481: invalid number format model 
+
+
+SQL> SELECT 10000 + TO_NUMBER ('-2|345.67' , 'S9G999D99' ) FROM DUAL;
+
+10000+TO_NUMBER('-2|345.67','S9G999D99')                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+                                 7654.33                                                                                                                                                                
+
+SQL> REM VALID FORMAT CHARACTER LIST FOR NUMBER TYPE VALUE : 9 0  . ,  D G  $ L U  S PR MI  EEEE or eeee  v
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   Rs.                                                                                                                                                                      
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .|                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY                                                                                                                                                                                      
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> ALTER SESSION SET NLS_DUAL_CURRENCY = ''
+  2  
+SQL> REM 1 10000 + 9876.54
+SQL> 
+SQL> REM 2 10000 + '9876.54'
+SQL> 
+SQL> REM 3 10000 + '9,876.54'
+SQL> 
+SQL> REM 4 10000 + '$9876.54'
+SQL> 
+SQL> REM 5 10000 + '9|876^54'
+SQL> 
+SQL> REM 6 10000 + 'Rs.9|876^54'
+SQL> 
+SQL> REM 7 10#000.00 + 'Rs.9|876^54'
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 10000 + 9876.54
+SQL> 
+SQL> SELECT 10000 + 9876.54 FROM DUAL;
+
+10000+9876.54                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+     19876.54                                                                                                                                                                                           
+
+SQL> REM 2 10000 + '9876.54'
+SQL> 
+SQL> SELECT 10000 + '9876.54' FROM DUAL;
+
+10000+'9876.54'                                                                                                                                                                                         
+---------------                                                                                                                                                                                         
+       19876.54                                                                                                                                                                                         
+
+SQL> REM 3 10000 + '9,876.54'
+SQL> 
+SQL> SELECT 10000 + TO_NUMBER('9,876.54',9,090.09') FROM DUAL;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT 10000 + TO_NUMBER('9,876.54','9,090.09') FROM DUAL;
+
+10000+TO_NUMBER('9,876.54','9,090.09')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              19876.54                                                                                                                                                                  
+
+SQL> REM 4 10000 + '$9876.54'
+SQL> 
+SQL> SELECT 10000 + TO_NUMBER('$9876.54','$9,090.09') FROM DUAL;
+SELECT 10000 + TO_NUMBER('$9876.54','$9,090.09') FROM DUAL
+                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 10000 + TO_NUMBER('$9876.54','$9090.09') FROM DUAL;
+
+10000+TO_NUMBER('$9876.54','$9090.09')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              19876.54                                                                                                                                                                  
+
+SQL> REM 5 10000 + '9|876^54'
+SQL> 
+SQL> ALTER SESSION SET NLS_NUMERIC_CHARACTERS = '^|';
+
+Session altered.
+
+SQL> SELECT 10000 + TO_NUMBER('9|876^54','9G999D00') FROM DUAL;
+
+10000+TO_NUMBER('9|876^54','9G999D00')                                                                                                                                                                  
+--------------------------------------                                                                                                                                                                  
+                              19876^54                                                                                                                                                                  
+
+SQL> REM 6 10000 + 'Rs.9|876^54'
+SQL> 
+SQL> ALTER SESSION SET NLS_CURRENCY = 'Rs.';
+
+Session altered.
+
+SQL> SELECT 10000 + TO_NUMBER('Rs.9|876^54','L9G999D99') FROM DUAL;
+
+10000+TO_NUMBER('RS.9|876^54','L9G999D99')                                                                                                                                                              
+------------------------------------------                                                                                                                                                              
+                                  19876^54                                                                                                                                                              
+
+SQL> REM 7 10#000.00 + 'Rs.9|876^54'
+SQL> 
+SQL> ALTER SESSION SET NLS_DUAL_CURRENCY = '';
+
+Session altered.
+
+SQL> 
+SQL> REM ALT + 157 (FROM NUMERICAL KEY PAD) 
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT TO_CHAR('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.#') + TO_CHAR('Rs.9|876^54','L99G999D99',NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT TO_CHAR('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.#') + TO_CHAR('Rs.9|876^54','L99G999D99','NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+SELECT TO_CHAR('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.#') + TO_CHAR('Rs.9|876^54','L99G999D99','NLS_NUMERIC_CHARACTERS=^|') FROM DUAL
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_NUMBER('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54','L99G999D99','NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+
+TO_NUMBER('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.#')+TO_NUMBER('RS.9|876^54','L99G999D99','NLS_NUMERIC_CHARACTERS=^|')                                                                      
+----------------------------------------------------------------------------------------------------------------------------------                                                                      
+                                                                                                                          19876^54                                                                      
+
+SQL> ALTER SESSION NLS_CURRENCY = '$';
+ALTER SESSION NLS_CURRENCY = '$'
+              *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> ALTER SESSION SET NLS_CURRENCY = '$';
+
+Session altered.
+
+SQL> ALTER SESSION SET NLS_DUAL_CURRENCY = '$';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         ^|                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT TO_NUMBER('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.# NLS_DUAL_CURRENCY=') + TO_NUMBER('Rs.9|876^54','L99G999D99','NLS_CURRENCY = Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+
+TO_NUMBER('10#000.00','U99G999D99','NLS_NUMERIC_CHARACTERS=.#NLS_DUAL_CURRENCY=')+TO_NUMBER('RS.9|876^54','L99G999D99','NLS_CURRENCY=RS.NLS_NUMERIC_CHARACTERS=^|')                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------                                   
+                                                                                                                                                             19876^54                                   
+
+SQL> REM 7 10#000.00 + 'Rs.9|876^54'
+SQL> 
+SQL> SELECT TO_NUMBER('10#000.00', 'S10S000.00','NLS_CURRENCY =  NLS_NUMERIC_CHARACTERS = # ') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY = Rs. NLS_NUMERIC_CHARACTERS = |^') FROM DUAL;
+SELECT TO_NUMBER('10#000.00', 'S10S000.00','NLS_CURRENCY =  NLS_NUMERIC_CHARACTERS = # ') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY = Rs. NLS_NUMERIC_CHARACTERS = |^') FROM DUAL
+                                                                                                                                                                                              *
+ERROR at line 1:
+ORA-12702: invalid NLS parameter string used in SQL function 
+
+
+SQL> SELECT TO_NUMBER('10#000.00', 'L10G000G00','NLS_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+SELECT TO_NUMBER('10#000.00', 'L10G000G00','NLS_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL
+                                *
+ERROR at line 1:
+ORA-01481: invalid number format model 
+
+
+SQL> SELECT TO_NUMBER('10#000.00', 'L90G000G00','NLS_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+SELECT TO_NUMBER('10#000.00', 'L90G000G00','NLS_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL
+                 *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_NUMBER('10#000.00', 'L90G000D00','NLS_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54', 'L9G999D99' , 'NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+
+TO_NUMBER('10#000.00','L90G000D00','NLS_CURRENCY=NLS_NUMERIC_CHARACTERS=.#')+TO_NUMBER('RS.9|876^54','L9G999D99','NLS_CURRENCY=RS.NLS_NUMERIC_CHARACTERS=^|')                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------                                         
+                                                                                                                                                       19876^54                                         
+
+SQL> SELECT TO_NUMBER('10#000', 'l99G999', ' NLS_CURRENCY =  NLS_NUMERIC_CHARACTERS = .#') + TO_NUMBER('Rs.9|876^54', 'LG999D99', ' NLS_CURRENCY = Rs. NLS_NUMERIC_CHARACTERS = ^|') FROM DUAL;
+SELECT TO_NUMBER('10#000', 'l99G999', ' NLS_CURRENCY =  NLS_NUMERIC_CHARACTERS = .#') + TO_NUMBER('Rs.9|876^54', 'LG999D99', ' NLS_CURRENCY = Rs. NLS_NUMERIC_CHARACTERS = ^|') FROM DUAL
+                                                                                                                     *
+ERROR at line 1:
+ORA-01481: invalid number format model 
+
+
+SQL> SELECT TO_NUMBER('10#000.00', 'l99G999D00', 'NLS_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') + TO_NUMBER('Rs.9|876^54', 'L9G999D99', 'NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+
+TO_NUMBER('10#000.00','L99G999D00','NLS_CURRENCY=NLS_NUMERIC_CHARACTERS=.#')+TO_NUMBER('RS.9|876^54','L9G999D99','NLS_CURRENCY=RS.NLS_NUMERIC_CHARACTERS=^|')                                         
+---------------------------------------------------------------------------------------------------------------------------------------------------------------                                         
+                                                                                                                                                       19876^54                                         
+
+SQL> SELECT TO_NUMBER('10#000.00','U99G999D99','NLS_DUAL_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') +
+  2      ('Rs.9|876^54','L9G999D99','NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+    ('Rs.9|876^54','L9G999D99','NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL
+                    *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT TO_NUMBER('10#000.00','U99G999D99','NLS_DUAL_CURRENCY= NLS_NUMERIC_CHARACTERS=.#') +
+  2      TO_NUMBER('Rs.9|876^54','L9G999D99','NLS_CURRENCY=Rs. NLS_NUMERIC_CHARACTERS=^|') FROM DUAL;
+
+TO_NUMBER('10#000.00','U99G999D99','NLS_DUAL_CURRENCY=NLS_NUMERIC_CHARACTERS=.#')+TO_NUMBER('RS.9|876^54','L9G999D99','NLS_CURRENCY=RS.NLS_NUMERIC_CHARACTERS=^|')                                    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------                                    
+                                                                                                                                                            19876^54                                    
+
+SQL> SPOOL OFF

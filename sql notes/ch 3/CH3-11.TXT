@@ -1,0 +1,350 @@
+
+SQL> REM SYSDATE CURRENT_DATE   ADD_MONTHS MONTHS_BETWEEN LAST_DAY NEXT_DAY TRUNC ROUND
+SQL>
+SQL> REM TRUNC : WE CAN TRUNC DATE WITH MONTH/Q/YEAR.
+SQL>
+SQL> REM IF WE TRUNC DATE WITH MONTH, IT WILL RETURN SAME/INPUT MONTH'S FIRST DATE
+SQL>
+SQL> REM 1 YEAR = 12 MONTHS
+SQL>
+SQL> REM 1 YEAR = 4 QUARTERS
+SQL>
+SQL> REM Q1 : 01-JAN TO 31-MAR
+SQL>
+SQL> REM Q2 : 01-APR TO 30-JUN
+SQL>
+SQL> REM Q3 : 01-JUL TO 30-SEP
+SQL>
+SQL> REM Q4 : 01-OCT TO 31-DEC
+SQL>
+SQL> REM IF WE TRUNC DATE WITH Q/QUARTER, IT WILL RETURN SAME/INPUT QUARTER'S FIRST DATE
+SQL>
+SQL> REM IF WE TRUNC DATE WITH YEAR, IT WILL RETURN SAME/INPUT YEAR'S FIRST DATE
+SQL>
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'MONTH'), TRUNC(SYSDATE,'Q') , TRUNC(SYSDATE,'YEAR') FROM DUAL;
+
+SYSDATE   TRUNC(SYS TRUNC(SYS TRUNC(SYS
+--------- --------- --------- ---------
+07-AUG-23 01-AUG-23 01-JUL-23 01-JAN-23
+
+SQL>
+SQL> REM ROUND : WE CAN TRUNC DATE WITH MONTH/Q/YEAR.
+SQL>
+SQL> REM 1 MONTH = ?? DAYS (28/29/30/31)
+SQL>
+SQL> REM FIRST HALF : 1-15
+SQL>
+SQL> REM SECOND HALF : 16-.. (28/29/30/31)
+SQL>
+SQL> REM IF WE ROUND DATE WITH MONTH, IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME/INPUT MONTH'S FIRST DATE
+SQL>
+SQL> REM IF WE ROUND DATE WITH MONTH, IF DATE FALLS IN SECOND HALF, IT WILL RETURN NEXT MONTH'S FIRST DATE
+SQL>
+SQL> REM 1 YEAR = 12 MONTHS
+SQL>
+SQL> REM 1 YEAR = 4 QUARTERS
+SQL>
+SQL> REM Q1 : 01-JAN TO 31-MAR : FIRST HALF : 01-JAN TO 15-FEB  SECOND HALF : 16-FEB TO 31-MAR
+SQL>
+SQL> REM Q2 : 01-APR TO 30-JUN : FIRST HALF : 01-APR TO 15-MAY  SECOND HALF : 16-MAY TO 30-JUN
+SQL>
+SQL> REM Q3 : 01-JUL TO 30-SEP : FIRST HALF : 01-JUL TO 15-AUG  SECOND HALF : 16-AUG TO 30-SEP
+SQL>
+SQL> REM Q4 : 01-OCT TO 31-DEC : FIRST HALF : 01-OCT TO 15-NOV  SECOND HALF : 16-NOV TO 31-DEC
+SQL>
+SQL>
+SQL>
+SQL> REM IF WE ROUND DATE WITH Q/QUARTER, IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME/INPUT QUARTER'S FIRST DATE
+SQL>
+SQL> REM IF WE ROUND DATE WITH Q/QUARTER, IF DATE FALLS IN SECOND HALF, IT WILL RETURN NEXT QUARTER'S FIRST DATE
+SQL>
+SQL>
+SQL>
+SQL> REM 1 YEAR = 12 MONTHS
+SQL>
+SQL> REM FIRST HALF : 01-JAN TO 30-JUN
+SQL>
+SQL> REM SECOND HALF : 01-JUL TO 31-DEC
+SQL>
+SQL>
+SQL> REM IF WE ROUND DATE WITH YEAR, IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME/INPUT YEAR'S FIRST DATE
+SQL>
+SQL> REM IF WE ROUND DATE WITH YEAR, IF DATE FALLS IN SECOND HALF, IT WILL RETURN NEXT YEAR'S FIRST DATE
+SQL>
+SQL>
+SQL> SELECT SYSDATE , ROUND(SYSDATE,'MONTH'), ROUND(SYSDATE,'Q') , ROUND(SYSDATE,'YEAR') FROM DUAL;
+
+SYSDATE   ROUND(SYS ROUND(SYS ROUND(SYS
+--------- --------- --------- ---------
+07-AUG-23 01-AUG-23 01-JUL-23 01-JAN-24
+
+SQL> REM 1 FIND NUMBER OF DAYS WORKED IN JOINING MONTH
+SQL>
+SQL> REM 2 FIND DAY NUMBER OF JOINING QUARTER
+SQL>
+SQL> REM 3 FIND NUMBER OF DAYS WORKED IN JOINING QUARTER
+SQL>
+SQL> REM 4 FIND DAY NUMBER OF JOINING YEAR
+SQL>
+SQL> REM 5 FIND NUMBER OF DAYS WORKED IN JOINING YEAR
+SQL>
+SQL> REM 6 DISPLAY THOSE WHO WERE JOINED IN FIRST OF ANY MONTH/YEAR.
+SQL>
+SQL> REM 6 DISPLAY THOSE WHO WERE JOINED IN FIRST HALF OF ANY MONTH/YEAR.
+SQL>
+SQL> REM 7 DISPLAY ALL EXCEPT THOSE WHO WERE JOINED IN FIRST HALF OF ANY QUARTER.
+SQL>
+SQL> REM 8 DISPLAY THOSE WHO WERE JOINED IN FIRST HALF OF ANY YEAR.
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> REM 6 DISPLAY THOSE WHO WERE JOINED IN FIRST HALF OF ANY MONTH. (IGNORE YEAR)
+SQL>
+SQL> REM 7 DISPLAY ALL EXCEPT THOSE WHO WERE JOINED IN FIRST HALF OF ANY QUARTER.
+SQL>
+SQL> REM 8 DISPLAY THOSE WHO WERE JOINED IN FIRST HALF OF ANY YEAR.
+SQL>
+SQL> REM ABOVE 3 QUESTIONS IN TWO WAYS/STYLES.
+SQL>
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE
+---------
+17-JUL-87
+21-SEP-89
+13-JAN-93
+03-JAN-90
+21-MAY-91
+07-FEB-99
+16-NOV-99
+17-OCT-95
+29-JAN-97
+15-MAR-98
+09-JUL-98
+
+HIRE_DATE
+---------
+29-JAN-00
+11-MAY-96
+24-MAR-98
+24-MAY-99
+17-SEP-87
+17-FEB-96
+17-AUG-97
+07-JUN-94
+07-JUN-94
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE
+--------------- ---------
+Steven          17-JUL-87
+Neena           21-SEP-89
+Lex             13-JAN-93
+Alexander       03-JAN-90
+Bruce           21-MAY-91
+Diana           07-FEB-99
+Kevin           16-NOV-99
+Trenna          17-OCT-95
+Curtis          29-JAN-97
+Randall         15-MAR-98
+Peter           09-JUL-98
+
+FIRST_NAME      HIRE_DATE
+--------------- ---------
+Eleni           29-JAN-00
+Ellen           11-MAY-96
+Jonathon        24-MAR-98
+Kimerely        24-MAY-99
+Jennifer        17-SEP-87
+Michael         17-FEB-96
+Pat             17-AUG-97
+Shelley         07-JUN-94
+William         07-JUN-94
+
+20 rows selected.
+
+SQL> REM 1 FIND NUMBER OF DAYS WORKED IN JOINING MONTH
+SQL>
+SQL> SELECT FIRST_NAME , HIRE_DATE , TRUNC(ADD_MONTHS(HIRE_DATE,1),'MONTH')-HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED
+--------------- --------- -----------
+Steven          17-JUL-87          15
+Neena           21-SEP-89          10
+Lex             13-JAN-93          19
+Alexander       03-JAN-90          29
+Bruce           21-MAY-91          11
+Diana           07-FEB-99          22
+Kevin           16-NOV-99          15
+Trenna          17-OCT-95          15
+Curtis          29-JAN-97           3
+Randall         15-MAR-98          17
+Peter           09-JUL-98          23
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED
+--------------- --------- -----------
+Eleni           29-JAN-00           3
+Ellen           11-MAY-96          21
+Jonathon        24-MAR-98           8
+Kimerely        24-MAY-99           8
+Jennifer        17-SEP-87          14
+Michael         17-FEB-96          13
+Pat             17-AUG-97          15
+Shelley         07-JUN-94          24
+William         07-JUN-94          24
+
+20 rows selected.
+
+SQL> SET LINES 200 PAGES 24
+SQL>
+SQL> R
+  1* SELECT FIRST_NAME , HIRE_DATE , TRUNC(ADD_MONTHS(HIRE_DATE,1),'MONTH')-HIRE_DATE DAYS_WORKED FROM EMPLOYEES
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED
+--------------- --------- -----------
+Steven          17-JUL-87          15
+Neena           21-SEP-89          10
+Lex             13-JAN-93          19
+Alexander       03-JAN-90          29
+Bruce           21-MAY-91          11
+Diana           07-FEB-99          22
+Kevin           16-NOV-99          15
+Trenna          17-OCT-95          15
+Curtis          29-JAN-97           3
+Randall         15-MAR-98          17
+Peter           09-JUL-98          23
+Eleni           29-JAN-00           3
+Ellen           11-MAY-96          21
+Jonathon        24-MAR-98           8
+Kimerely        24-MAY-99           8
+Jennifer        17-SEP-87          14
+Michael         17-FEB-96          13
+Pat             17-AUG-97          15
+Shelley         07-JUN-94          24
+William         07-JUN-94          24
+
+20 rows selected.
+
+SQL> REM 2 FIND DAY NUMBER OF JOINING QUARTER
+SQL>
+SQL> SELECT FIRST_NAME , HIRE_DATE , HIRE_DATE - TRUNC(HIRE_DATE,'Q') + 1 DAYS_NO_QTR FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_NO_QTR
+--------------- --------- -----------
+Steven          17-JUL-87          17
+Neena           21-SEP-89          83
+Lex             13-JAN-93          13
+Alexander       03-JAN-90           3
+Bruce           21-MAY-91          51
+Diana           07-FEB-99          38
+Kevin           16-NOV-99          47
+Trenna          17-OCT-95          17
+Curtis          29-JAN-97          29
+Randall         15-MAR-98          74
+Peter           09-JUL-98           9
+Eleni           29-JAN-00          29
+Ellen           11-MAY-96          41
+Jonathon        24-MAR-98          83
+Kimerely        24-MAY-99          54
+Jennifer        17-SEP-87          79
+Michael         17-FEB-96          48
+Pat             17-AUG-97          48
+Shelley         07-JUN-94          68
+William         07-JUN-94          68
+
+20 rows selected.
+
+SQL> REM 3 FIND NUMBER OF DAYS WORKED IN JOINING QUARTER
+SQL>
+SQL> SELECT FIRST_NAME , HIRE_DATE , TRUNC(ADD_MONTHS(HIRE_DATE,3),'Q')-HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED
+--------------- --------- -----------
+Steven          17-JUL-87          76
+Neena           21-SEP-89          10
+Lex             13-JAN-93          78
+Alexander       03-JAN-90          88
+Bruce           21-MAY-91          41
+Diana           07-FEB-99          53
+Kevin           16-NOV-99          46
+Trenna          17-OCT-95          76
+Curtis          29-JAN-97          62
+Randall         15-MAR-98          17
+Peter           09-JUL-98          84
+Eleni           29-JAN-00          63
+Ellen           11-MAY-96          51
+Jonathon        24-MAR-98           8
+Kimerely        24-MAY-99          38
+Jennifer        17-SEP-87          14
+Michael         17-FEB-96          44
+Pat             17-AUG-97          45
+Shelley         07-JUN-94          24
+William         07-JUN-94          24
+
+20 rows selected.
+
+SQL> REM 4 FIND DAY NUMBER OF JOINING YEAR
+SQL>
+SQL> SELECT FIRST_NAME , HIRE_DATE, HIRE_DATE - TRUNC(HIRE_DATE,'YEAR') + 1 "DAY NO YEAR" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAY NO YEAR
+--------------- --------- -----------
+Steven          17-JUL-87         198
+Neena           21-SEP-89         264
+Lex             13-JAN-93          13
+Alexander       03-JAN-90           3
+Bruce           21-MAY-91         141
+Diana           07-FEB-99          38
+Kevin           16-NOV-99         320
+Trenna          17-OCT-95         290
+Curtis          29-JAN-97          29
+Randall         15-MAR-98          74
+Peter           09-JUL-98         190
+Eleni           29-JAN-00          29
+Ellen           11-MAY-96         132
+Jonathon        24-MAR-98          83
+Kimerely        24-MAY-99         144
+Jennifer        17-SEP-87         260
+Michael         17-FEB-96          48
+Pat             17-AUG-97         229
+Shelley         07-JUN-94         158
+William         07-JUN-94         158
+
+20 rows selected.
+
+SQL> REM 5 FIND NUMBER OF DAYS WORKED IN JOINING YEAR
+SQL>
+SQL> SELECT FIRST_NAME , HIRE_DATE , TRUNC(ADD_MONTHS(HIRE_DATE,12),'YEAR')-HIRE_DATE DAYS_WORKED_YEAR FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED_YEAR
+--------------- --------- ----------------
+Steven          17-JUL-87              168
+Neena           21-SEP-89              102
+Lex             13-JAN-93              353
+Alexander       03-JAN-90              363
+Bruce           21-MAY-91              225
+Diana           07-FEB-99              328
+Kevin           16-NOV-99               46
+Trenna          17-OCT-95               76
+Curtis          29-JAN-97              337
+Randall         15-MAR-98              292
+Peter           09-JUL-98              176
+Eleni           29-JAN-00              338
+Ellen           11-MAY-96              235
+Jonathon        24-MAR-98              283
+Kimerely        24-MAY-99              222
+Jennifer        17-SEP-87              106
+Michael         17-FEB-96              319
+Pat             17-AUG-97              137
+Shelley         07-JUN-94              208
+William         07-JUN-94              208
+
+20 rows selected.
+
+SQL> SPOOL OFF
+not spooling currently
+SQL>

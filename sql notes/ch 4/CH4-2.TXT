@@ -1,0 +1,1134 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM NVL :
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Eleni                       .2                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Jonathon                    .3                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> REM .12
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT , .12) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                             
+--------------- -------------- ------------                                                                                                                                                             
+Steven                                  .12                                                                                                                                                             
+Neena                                   .12                                                                                                                                                             
+Lex                                     .12                                                                                                                                                             
+Alexander                               .12                                                                                                                                                             
+Bruce                                   .12                                                                                                                                                             
+Diana                                   .12                                                                                                                                                             
+Kevin                                   .12                                                                                                                                                             
+Trenna                                  .12                                                                                                                                                             
+Curtis                                  .12                                                                                                                                                             
+Randall                                 .12                                                                                                                                                             
+Peter                                   .12                                                                                                                                                             
+Eleni                       .2           .2                                                                                                                                                             
+Ellen                       .3           .3                                                                                                                                                             
+Jonathon                    .3           .3                                                                                                                                                             
+Kimerely                   .15          .15                                                                                                                                                             
+Jennifer                                .12                                                                                                                                                             
+Michael                                 .12                                                                                                                                                             
+Pat                                     .12                                                                                                                                                             
+Shelley                                 .12                                                                                                                                                             
+William                                 .12                                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT * 2 , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT * 2 , 'NO') NEW_COMM_PCT FROM EMPLOYEES
+                                                              *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(TO_CHAR(COMMISSION_PCT * 2) , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                             
+--------------- -------------- ----------------------------------------                                                                                                                                 
+Steven                         NO                                                                                                                                                                       
+Neena                          NO                                                                                                                                                                       
+Lex                            NO                                                                                                                                                                       
+Alexander                      NO                                                                                                                                                                       
+Bruce                          NO                                                                                                                                                                       
+Diana                          NO                                                                                                                                                                       
+Kevin                          NO                                                                                                                                                                       
+Trenna                         NO                                                                                                                                                                       
+Curtis                         NO                                                                                                                                                                       
+Randall                        NO                                                                                                                                                                       
+Peter                          NO                                                                                                                                                                       
+Eleni                       .2 .4                                                                                                                                                                       
+Ellen                       .3 .6                                                                                                                                                                       
+Jonathon                    .3 .6                                                                                                                                                                       
+Kimerely                   .15 .3                                                                                                                                                                       
+Jennifer                       NO                                                                                                                                                                       
+Michael                        NO                                                                                                                                                                       
+Pat                            NO                                                                                                                                                                       
+Shelley                        NO                                                                                                                                                                       
+William                        NO                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM FIRST_NAME , SALARY , COMMISSION_PCT , COMM_AMOUNT , TOTAL_PAYMENT
+SQL> 
+SQL> REM IT SHOULD NOT DISPLAY NULL IN ANY COLUMN.
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , COMMISSION_PCT , NVL(SALARY * COMMISSION_PCT,0) "COMMISIION_AMOUNT" , SALARY + NVL(SALARY * COMMISSION_PCT,0) "TOTAL PAYEMNT" FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT COMMISIION_AMOUNT TOTAL PAYEMNT                                                                                                                               
+--------------- ---------- -------------- ----------------- -------------                                                                                                                               
+Steven               24000                                0         24000                                                                                                                               
+Neena                17000                                0         17000                                                                                                                               
+Lex                  17000                                0         17000                                                                                                                               
+Alexander             9000                                0          9000                                                                                                                               
+Bruce                 6000                                0          6000                                                                                                                               
+Diana                 4200                                0          4200                                                                                                                               
+Kevin                 5800                                0          5800                                                                                                                               
+Trenna                3500                                0          3500                                                                                                                               
+Curtis                3100                                0          3100                                                                                                                               
+Randall               2600                                0          2600                                                                                                                               
+Peter                 2500                                0          2500                                                                                                                               
+Eleni                10500             .2              2100         12600                                                                                                                               
+Ellen                11000             .3              3300         14300                                                                                                                               
+Jonathon              8600             .3              2580         11180                                                                                                                               
+Kimerely              7000            .15              1050          8050                                                                                                                               
+Jennifer              4400                                0          4400                                                                                                                               
+Michael              13000                                0         13000                                                                                                                               
+Pat                   6000                                0          6000                                                                                                                               
+Shelley              12000                                0         12000                                                                                                                               
+William               8300                                0          8300                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY , NVL(COMMISSION_PCT,0) , NVL(COMMISSION_PCT*SALARY,0) "COMMISSION_AMT" ,SALARY+ NVL((COMMISSION_PCT*SALARY),0) FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NVL(COMMISSION_PCT,0) COMMISSION_AMT SALARY+NVL((COMMISSION_PCT*SALARY),0)                                                                                                   
+--------------- ---------- --------------------- -------------- -------------------------------------                                                                                                   
+Steven               24000                     0              0                                 24000                                                                                                   
+Neena                17000                     0              0                                 17000                                                                                                   
+Lex                  17000                     0              0                                 17000                                                                                                   
+Alexander             9000                     0              0                                  9000                                                                                                   
+Bruce                 6000                     0              0                                  6000                                                                                                   
+Diana                 4200                     0              0                                  4200                                                                                                   
+Kevin                 5800                     0              0                                  5800                                                                                                   
+Trenna                3500                     0              0                                  3500                                                                                                   
+Curtis                3100                     0              0                                  3100                                                                                                   
+Randall               2600                     0              0                                  2600                                                                                                   
+Peter                 2500                     0              0                                  2500                                                                                                   
+Eleni                10500                    .2           2100                                 12600                                                                                                   
+Ellen                11000                    .3           3300                                 14300                                                                                                   
+Jonathon              8600                    .3           2580                                 11180                                                                                                   
+Kimerely              7000                   .15           1050                                  8050                                                                                                   
+Jennifer              4400                     0              0                                  4400                                                                                                   
+Michael              13000                     0              0                                 13000                                                                                                   
+Pat                   6000                     0              0                                  6000                                                                                                   
+Shelley              12000                     0              0                                 12000                                                                                                   
+William               8300                     0              0                                  8300                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT EMAIL FROM EMPLOYEES;
+
+EMAIL                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+SKING                                                                                                                                                                                                   
+NKOCHHAR                                                                                                                                                                                                
+LDEHAAN                                                                                                                                                                                                 
+AHUNOLD                                                                                                                                                                                                 
+BERNST                                                                                                                                                                                                  
+DLORENTZ                                                                                                                                                                                                
+KMOURGOS                                                                                                                                                                                                
+TRAJS                                                                                                                                                                                                   
+CDAVIES                                                                                                                                                                                                 
+RMATOS                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+EZLOTKEY                                                                                                                                                                                                
+EABEL                                                                                                                                                                                                   
+JTAYLOR                                                                                                                                                                                                 
+KGRANT                                                                                                                                                                                                  
+JWHALEN                                                                                                                                                                                                 
+MHARTSTE                                                                                                                                                                                                
+PFAY                                                                                                                                                                                                    
+SHIGGINS                                                                                                                                                                                                
+WGIETZ                                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> UPDATE EMPLOYEES SET EMAIL = NULL WHERE EMPLOYEE_ID = 144;
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM DISPLAY EMAIL IN SMALL CASE IF EXISTS, OTHERWISE IT SHOULD DISPLAY TODAY'S DATE. (SYSDATE)
+SQL> 
+SQL> SELECT EMAIL NVL(LOWER(EMAIL),SYSDATE) FROM EMPLOYEES;
+SELECT EMAIL NVL(LOWER(EMAIL),SYSDATE) FROM EMPLOYEES
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT EMAIL , NVL(LOWER(EMAIL),SYSDATE) FROM EMPLOYEES;
+
+EMAIL      NVL(LOWER(EMAIL),S                                                                                                                                                                           
+---------- ------------------                                                                                                                                                                           
+SKING      sking                                                                                                                                                                                        
+NKOCHHAR   nkochhar                                                                                                                                                                                     
+LDEHAAN    ldehaan                                                                                                                                                                                      
+AHUNOLD    ahunold                                                                                                                                                                                      
+BERNST     bernst                                                                                                                                                                                       
+DLORENTZ   dlorentz                                                                                                                                                                                     
+KMOURGOS   kmourgos                                                                                                                                                                                     
+TRAJS      trajs                                                                                                                                                                                        
+CDAVIES    cdavies                                                                                                                                                                                      
+RMATOS     rmatos                                                                                                                                                                                       
+           21-AUG-23                                                                                                                                                                                    
+EZLOTKEY   ezlotkey                                                                                                                                                                                     
+EABEL      eabel                                                                                                                                                                                        
+JTAYLOR    jtaylor                                                                                                                                                                                      
+KGRANT     kgrant                                                                                                                                                                                       
+JWHALEN    jwhalen                                                                                                                                                                                      
+MHARTSTE   mhartste                                                                                                                                                                                     
+PFAY       pfay                                                                                                                                                                                         
+SHIGGINS   shiggins                                                                                                                                                                                     
+WGIETZ     wgietz                                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM NVL2 : IT TAKES 3 ARGUMENTS.
+SQL> 
+SQL> REM IT CHECKS FOR FIRST ARGUMENT, IF IT IS NULL, IT WILL BE REPLACED WITH THIRD ARGUMENT.
+SQL> 
+SQL> REM IF IT IS NOT NULL, IT WILL BE REPLACED WITH SECOND ARGUMENT.
+SQL> 
+SQL> REM IF DATA TYPE OF SECOND ARGUMENT IS CHARCTER, DATA TYPE OF THIRD ARGUMENT MAY BE ANY.
+SQL> 
+SQL> REM IF DATA TYPE OF SECOND ARGUMENT IS NON-CHARCTER, DATA TYPES OF BOTH ARGUMENTS MUST MATCH.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM COMPANY DECIDES TO PAY DOUBLE TO THOSE WHO GETS COMMISSION AND .14 TO OTHERS.
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL (COMMISSION_PCT , COMMISSION_PCT * 2 , .14) NEW_COMM_PCT FROM EMPLOYEES;
+SELECT FIRST_NAME , COMMISSION_PCT , NVL (COMMISSION_PCT , COMMISSION_PCT * 2 , .14) NEW_COMM_PCT FROM EMPLOYEES
+                                     *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , COMMISSION_PCT * 2 , .14) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                             
+--------------- -------------- ------------                                                                                                                                                             
+Steven                                  .14                                                                                                                                                             
+Neena                                   .14                                                                                                                                                             
+Lex                                     .14                                                                                                                                                             
+Alexander                               .14                                                                                                                                                             
+Bruce                                   .14                                                                                                                                                             
+Diana                                   .14                                                                                                                                                             
+Kevin                                   .14                                                                                                                                                             
+Trenna                                  .14                                                                                                                                                             
+Curtis                                  .14                                                                                                                                                             
+Randall                                 .14                                                                                                                                                             
+Peter                                   .14                                                                                                                                                             
+Eleni                       .2           .4                                                                                                                                                             
+Ellen                       .3           .6                                                                                                                                                             
+Jonathon                    .3           .6                                                                                                                                                             
+Kimerely                   .15           .3                                                                                                                                                             
+Jennifer                                .14                                                                                                                                                             
+Michael                                 .14                                                                                                                                                             
+Pat                                     .14                                                                                                                                                             
+Shelley                                 .14                                                                                                                                                             
+William                                 .14                                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 1 YES / NO
+SQL> 
+SQL> REM 2 DOUBLE / NO
+SQL> 
+SQL> REM 3 YES / .14
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT,'YES','NO')  FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT NVL                                                                                                                                                                      
+--------------- -------------- ---                                                                                                                                                                      
+Steven                         NO                                                                                                                                                                       
+Neena                          NO                                                                                                                                                                       
+Lex                            NO                                                                                                                                                                       
+Alexander                      NO                                                                                                                                                                       
+Bruce                          NO                                                                                                                                                                       
+Diana                          NO                                                                                                                                                                       
+Kevin                          NO                                                                                                                                                                       
+Trenna                         NO                                                                                                                                                                       
+Curtis                         NO                                                                                                                                                                       
+Randall                        NO                                                                                                                                                                       
+Peter                          NO                                                                                                                                                                       
+Eleni                       .2 YES                                                                                                                                                                      
+Ellen                       .3 YES                                                                                                                                                                      
+Jonathon                    .3 YES                                                                                                                                                                      
+Kimerely                   .15 YES                                                                                                                                                                      
+Jennifer                       NO                                                                                                                                                                       
+Michael                        NO                                                                                                                                                                       
+Pat                            NO                                                                                                                                                                       
+Shelley                        NO                                                                                                                                                                       
+William                        NO                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT,'YES',.14)  FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT NVL                                                                                                                                                                      
+--------------- -------------- ---                                                                                                                                                                      
+Steven                         .14                                                                                                                                                                      
+Neena                          .14                                                                                                                                                                      
+Lex                            .14                                                                                                                                                                      
+Alexander                      .14                                                                                                                                                                      
+Bruce                          .14                                                                                                                                                                      
+Diana                          .14                                                                                                                                                                      
+Kevin                          .14                                                                                                                                                                      
+Trenna                         .14                                                                                                                                                                      
+Curtis                         .14                                                                                                                                                                      
+Randall                        .14                                                                                                                                                                      
+Peter                          .14                                                                                                                                                                      
+Eleni                       .2 YES                                                                                                                                                                      
+Ellen                       .3 YES                                                                                                                                                                      
+Jonathon                    .3 YES                                                                                                                                                                      
+Kimerely                   .15 YES                                                                                                                                                                      
+Jennifer                       .14                                                                                                                                                                      
+Michael                        .14                                                                                                                                                                      
+Pat                            .14                                                                                                                                                                      
+Shelley                        .14                                                                                                                                                                      
+William                        .14                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT,TO_CHAR(COMMISSION_PCT*2),'NO')  FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT NVL2(COMMISSION_PCT,TO_CHAR(COMMISSION_P                                                                                                                                 
+--------------- -------------- ----------------------------------------                                                                                                                                 
+Steven                         NO                                                                                                                                                                       
+Neena                          NO                                                                                                                                                                       
+Lex                            NO                                                                                                                                                                       
+Alexander                      NO                                                                                                                                                                       
+Bruce                          NO                                                                                                                                                                       
+Diana                          NO                                                                                                                                                                       
+Kevin                          NO                                                                                                                                                                       
+Trenna                         NO                                                                                                                                                                       
+Curtis                         NO                                                                                                                                                                       
+Randall                        NO                                                                                                                                                                       
+Peter                          NO                                                                                                                                                                       
+Eleni                       .2 .4                                                                                                                                                                       
+Ellen                       .3 .6                                                                                                                                                                       
+Jonathon                    .3 .6                                                                                                                                                                       
+Kimerely                   .15 .3                                                                                                                                                                       
+Jennifer                       NO                                                                                                                                                                       
+Michael                        NO                                                                                                                                                                       
+Pat                            NO                                                                                                                                                                       
+Shelley                        NO                                                                                                                                                                       
+William                        NO                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , TO_CHAR(NVL2(COMMISSION_PCT,'YES','NO')) FROM EMPLOYEES;
+
+FIRST_NAME      TO_                                                                                                                                                                                     
+--------------- ---                                                                                                                                                                                     
+Steven          NO                                                                                                                                                                                      
+Neena           NO                                                                                                                                                                                      
+Lex             NO                                                                                                                                                                                      
+Alexander       NO                                                                                                                                                                                      
+Bruce           NO                                                                                                                                                                                      
+Diana           NO                                                                                                                                                                                      
+Kevin           NO                                                                                                                                                                                      
+Trenna          NO                                                                                                                                                                                      
+Curtis          NO                                                                                                                                                                                      
+Randall         NO                                                                                                                                                                                      
+Peter           NO                                                                                                                                                                                      
+Eleni           YES                                                                                                                                                                                     
+Ellen           YES                                                                                                                                                                                     
+Jonathon        YES                                                                                                                                                                                     
+Kimerely        YES                                                                                                                                                                                     
+Jennifer        NO                                                                                                                                                                                      
+Michael         NO                                                                                                                                                                                      
+Pat             NO                                                                                                                                                                                      
+Shelley         NO                                                                                                                                                                                      
+William         NO                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME ,NVL2(COMMISSION_PCT, TO_CHAR(COMMISSION_PCT * 2) ,'NO') FROM EMPLOYEES;
+
+FIRST_NAME      NVL2(COMMISSION_PCT,TO_CHAR(COMMISSION_P                                                                                                                                                
+--------------- ----------------------------------------                                                                                                                                                
+Steven          NO                                                                                                                                                                                      
+Neena           NO                                                                                                                                                                                      
+Lex             NO                                                                                                                                                                                      
+Alexander       NO                                                                                                                                                                                      
+Bruce           NO                                                                                                                                                                                      
+Diana           NO                                                                                                                                                                                      
+Kevin           NO                                                                                                                                                                                      
+Trenna          NO                                                                                                                                                                                      
+Curtis          NO                                                                                                                                                                                      
+Randall         NO                                                                                                                                                                                      
+Peter           NO                                                                                                                                                                                      
+Eleni           .4                                                                                                                                                                                      
+Ellen           .6                                                                                                                                                                                      
+Jonathon        .6                                                                                                                                                                                      
+Kimerely        .3                                                                                                                                                                                      
+Jennifer        NO                                                                                                                                                                                      
+Michael         NO                                                                                                                                                                                      
+Pat             NO                                                                                                                                                                                      
+Shelley         NO                                                                                                                                                                                      
+William         NO                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME ,TO_CHAR(NVL2(COMMISSION_PCT, 'YES' ,'.14')) FROM EMPLOYEES;
+
+FIRST_NAME      TO_                                                                                                                                                                                     
+--------------- ---                                                                                                                                                                                     
+Steven          .14                                                                                                                                                                                     
+Neena           .14                                                                                                                                                                                     
+Lex             .14                                                                                                                                                                                     
+Alexander       .14                                                                                                                                                                                     
+Bruce           .14                                                                                                                                                                                     
+Diana           .14                                                                                                                                                                                     
+Kevin           .14                                                                                                                                                                                     
+Trenna          .14                                                                                                                                                                                     
+Curtis          .14                                                                                                                                                                                     
+Randall         .14                                                                                                                                                                                     
+Peter           .14                                                                                                                                                                                     
+Eleni           YES                                                                                                                                                                                     
+Ellen           YES                                                                                                                                                                                     
+Jonathon        YES                                                                                                                                                                                     
+Kimerely        YES                                                                                                                                                                                     
+Jennifer        .14                                                                                                                                                                                     
+Michael         .14                                                                                                                                                                                     
+Pat             .14                                                                                                                                                                                     
+Shelley         .14                                                                                                                                                                                     
+William         .14                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID FROM EMPLOYEES;
+
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                                                                                                                                 
+-------------- ---------- -------------                                                                                                                                                                 
+                                     90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      102            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      100            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+            .2        100            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+           .15        149                                                                                                                                                                               
+                      101            10                                                                                                                                                                 
+                      100            20                                                                                                                                                                 
+                      201            20                                                                                                                                                                 
+                      101           110                                                                                                                                                                 
+                      205           110                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT NVL2(COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID) FROM EMPLOYEES;
+
+NVL2(COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID)                                                                                                                                                           
+---------------------------------------------                                                                                                                                                           
+                                           90                                                                                                                                                           
+                                           90                                                                                                                                                           
+                                           90                                                                                                                                                           
+                                           60                                                                                                                                                           
+                                           60                                                                                                                                                           
+                                           60                                                                                                                                                           
+                                           50                                                                                                                                                           
+                                           50                                                                                                                                                           
+                                           50                                                                                                                                                           
+                                           50                                                                                                                                                           
+                                           50                                                                                                                                                           
+                                          100                                                                                                                                                           
+                                          149                                                                                                                                                           
+                                          149                                                                                                                                                           
+                                          149                                                                                                                                                           
+                                           10                                                                                                                                                           
+                                           20                                                                                                                                                           
+                                           20                                                                                                                                                           
+                                          110                                                                                                                                                           
+                                          110                                                                                                                                                           
+
+20 rows selected.
+
+SQL> REM NVL2 : TOTAL_PAYMENT
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , SALARY ,NVL2(COMMISSION_PCT,COMMISSION_PCT*SALARY+SALARY,SALARY) FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT     SALARY NVL2(COMMISSION_PCT,COMMISSION_PCT*SALARY+SALARY,SALARY)                                                                                                      
+--------------- -------------- ---------- --------------------------------------------------------                                                                                                      
+Steven                              24000                                                    24000                                                                                                      
+Neena                               17000                                                    17000                                                                                                      
+Lex                                 17000                                                    17000                                                                                                      
+Alexander                            9000                                                     9000                                                                                                      
+Bruce                                6000                                                     6000                                                                                                      
+Diana                                4200                                                     4200                                                                                                      
+Kevin                                5800                                                     5800                                                                                                      
+Trenna                               3500                                                     3500                                                                                                      
+Curtis                               3100                                                     3100                                                                                                      
+Randall                              2600                                                     2600                                                                                                      
+Peter                                2500                                                     2500                                                                                                      
+Eleni                       .2      10500                                                    12600                                                                                                      
+Ellen                       .3      11000                                                    14300                                                                                                      
+Jonathon                    .3       8600                                                    11180                                                                                                      
+Kimerely                   .15       7000                                                     8050                                                                                                      
+Jennifer                             4400                                                     4400                                                                                                      
+Michael                             13000                                                    13000                                                                                                      
+Pat                                  6000                                                     6000                                                                                                      
+Shelley                             12000                                                    12000                                                                                                      
+William                              8300                                                     8300                                                                                                      
+
+20 rows selected.
+
+SQL> REM NULLIF : IT TAKES EXACTLY TWO ARGUMENTS.
+SQL> 
+SQL> REM IT WILL CHECK FOR EQUALITY, IF THEY ARE EQUAL, WILL RETURN NULL, OTHERWISE WILL RETURN FIRST ARGUMENT.
+SQL> 
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME       SUBS SUBS                                                                                                                                                               
+--------------- --------------- ---- ----                                                                                                                                                               
+Steven          King            t    i                                                                                                                                                                  
+Neena           Kochhar         e    o                                                                                                                                                                  
+Lex             De Haan         e    e                                                                                                                                                                  
+Alexander       Hunold          l    u                                                                                                                                                                  
+Bruce           Ernst           r    r                                                                                                                                                                  
+Diana           Lorentz         i    o                                                                                                                                                                  
+Kevin           Mourgos         e    o                                                                                                                                                                  
+Trenna          Rajs            r    a                                                                                                                                                                  
+Curtis          Davies          u    a                                                                                                                                                                  
+Randall         Matos           a    a                                                                                                                                                                  
+Peter           Vargas          e    a                                                                                                                                                                  
+Eleni           Zlotkey         l    l                                                                                                                                                                  
+Ellen           Abel            l    b                                                                                                                                                                  
+Jonathon        Taylor          o    a                                                                                                                                                                  
+Kimerely        Grant           i    r                                                                                                                                                                  
+Jennifer        Whalen          e    h                                                                                                                                                                  
+Michael         Hartstein       i    a                                                                                                                                                                  
+Pat             Fay             a    a                                                                                                                                                                  
+Shelley         Higgins         h    i                                                                                                                                                                  
+William         Gietz           i    i                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) ,
+  2  NVL( SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) ) FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME       SUBS SUBS NVL(                                                                                                                                                          
+--------------- --------------- ---- ---- ----                                                                                                                                                          
+Steven          King            t    i    t                                                                                                                                                             
+Neena           Kochhar         e    o    e                                                                                                                                                             
+Lex             De Haan         e    e    e                                                                                                                                                             
+Alexander       Hunold          l    u    l                                                                                                                                                             
+Bruce           Ernst           r    r    r                                                                                                                                                             
+Diana           Lorentz         i    o    i                                                                                                                                                             
+Kevin           Mourgos         e    o    e                                                                                                                                                             
+Trenna          Rajs            r    a    r                                                                                                                                                             
+Curtis          Davies          u    a    u                                                                                                                                                             
+Randall         Matos           a    a    a                                                                                                                                                             
+Peter           Vargas          e    a    e                                                                                                                                                             
+Eleni           Zlotkey         l    l    l                                                                                                                                                             
+Ellen           Abel            l    b    l                                                                                                                                                             
+Jonathon        Taylor          o    a    o                                                                                                                                                             
+Kimerely        Grant           i    r    i                                                                                                                                                             
+Jennifer        Whalen          e    h    e                                                                                                                                                             
+Michael         Hartstein       i    a    i                                                                                                                                                             
+Pat             Fay             a    a    a                                                                                                                                                             
+Shelley         Higgins         h    i    h                                                                                                                                                             
+William         Gietz           i    i    i                                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) ,
+  2  NULLIF( SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) ) FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME       SUBS SUBS NULL                                                                                                                                                          
+--------------- --------------- ---- ---- ----                                                                                                                                                          
+Steven          King            t    i    t                                                                                                                                                             
+Neena           Kochhar         e    o    e                                                                                                                                                             
+Lex             De Haan         e    e                                                                                                                                                                  
+Alexander       Hunold          l    u    l                                                                                                                                                             
+Bruce           Ernst           r    r                                                                                                                                                                  
+Diana           Lorentz         i    o    i                                                                                                                                                             
+Kevin           Mourgos         e    o    e                                                                                                                                                             
+Trenna          Rajs            r    a    r                                                                                                                                                             
+Curtis          Davies          u    a    u                                                                                                                                                             
+Randall         Matos           a    a                                                                                                                                                                  
+Peter           Vargas          e    a    e                                                                                                                                                             
+Eleni           Zlotkey         l    l                                                                                                                                                                  
+Ellen           Abel            l    b    l                                                                                                                                                             
+Jonathon        Taylor          o    a    o                                                                                                                                                             
+Kimerely        Grant           i    r    i                                                                                                                                                             
+Jennifer        Whalen          e    h    e                                                                                                                                                             
+Michael         Hartstein       i    a    i                                                                                                                                                             
+Pat             Fay             a    a                                                                                                                                                                  
+Shelley         Higgins         h    i    h                                                                                                                                                             
+William         Gietz           i    i                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM COMPARE SECOND DIGIT AND SECOND LAST DIGIT OF HIRE_DATE.
+SQL> 
+SQL> SELECT HIRE_DATE, NULLIF(SUBSTR(HIRE_DATE,2,1), SUBSTR(HIRE_DATE,8,1)),SUBSTR(HIRE_DATE,2,1), SUBSTR(HIRE_DATE,8,1) FROM EMPLOYEES;
+
+HIRE_DATE NULL SUBS SUBS                                                                                                                                                                                
+--------- ---- ---- ----                                                                                                                                                                                
+17-JUL-87 7    7    8                                                                                                                                                                                   
+21-SEP-89 1    1    8                                                                                                                                                                                   
+13-JAN-93 3    3    9                                                                                                                                                                                   
+03-JAN-90 3    3    9                                                                                                                                                                                   
+21-MAY-91 1    1    9                                                                                                                                                                                   
+07-FEB-99 7    7    9                                                                                                                                                                                   
+16-NOV-99 6    6    9                                                                                                                                                                                   
+17-OCT-95 7    7    9                                                                                                                                                                                   
+29-JAN-97      9    9                                                                                                                                                                                   
+15-MAR-98 5    5    9                                                                                                                                                                                   
+09-JUL-98      9    9                                                                                                                                                                                   
+29-JAN-00 9    9    0                                                                                                                                                                                   
+11-MAY-96 1    1    9                                                                                                                                                                                   
+24-MAR-98 4    4    9                                                                                                                                                                                   
+24-MAY-99 4    4    9                                                                                                                                                                                   
+17-SEP-87 7    7    8                                                                                                                                                                                   
+17-FEB-96 7    7    9                                                                                                                                                                                   
+17-AUG-97 7    7    9                                                                                                                                                                                   
+07-JUN-94 7    7    9                                                                                                                                                                                   
+07-JUN-94 7    7    9                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , SUBSTR(HIRE_DATE, 2,1) , SUBSTR(HIRE_DATE, 8,1) , NULLIF (SUBSTR(HIRE_DATE, 2,1) , SUBSTR(HIRE_DATE, 8,1))FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE SUBS SUBS NULL                                                                                                                                                                
+--------------- --------- ---- ---- ----                                                                                                                                                                
+Steven          17-JUL-87 7    8    7                                                                                                                                                                   
+Neena           21-SEP-89 1    8    1                                                                                                                                                                   
+Lex             13-JAN-93 3    9    3                                                                                                                                                                   
+Alexander       03-JAN-90 3    9    3                                                                                                                                                                   
+Bruce           21-MAY-91 1    9    1                                                                                                                                                                   
+Diana           07-FEB-99 7    9    7                                                                                                                                                                   
+Kevin           16-NOV-99 6    9    6                                                                                                                                                                   
+Trenna          17-OCT-95 7    9    7                                                                                                                                                                   
+Curtis          29-JAN-97 9    9                                                                                                                                                                        
+Randall         15-MAR-98 5    9    5                                                                                                                                                                   
+Peter           09-JUL-98 9    9                                                                                                                                                                        
+Eleni           29-JAN-00 9    0    9                                                                                                                                                                   
+Ellen           11-MAY-96 1    9    1                                                                                                                                                                   
+Jonathon        24-MAR-98 4    9    4                                                                                                                                                                   
+Kimerely        24-MAY-99 4    9    4                                                                                                                                                                   
+Jennifer        17-SEP-87 7    8    7                                                                                                                                                                   
+Michael         17-FEB-96 7    9    7                                                                                                                                                                   
+Pat             17-AUG-97 7    9    7                                                                                                                                                                   
+Shelley         07-JUN-94 7    9    7                                                                                                                                                                   
+William         07-JUN-94 7    9    7                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM COMPARE SECOND ALPHABET OF FIRST_NAME AND SECOND LAST ALPHABET OF LAST_NAME. IF BOTH ARE SAME DISPLAY 'SAME' OTHERWISE 'DIFFERENT'.
+SQL> 
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,-2,1) ,
+  2  NVL2(NULLIF(SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,-2,1)),'DIFFERENT','SAME') FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME       SUBS SUBS NVL2(NULL                                                                                                                                                     
+--------------- --------------- ---- ---- ---------                                                                                                                                                     
+Steven          King            t    n    DIFFERENT                                                                                                                                                     
+Neena           Kochhar         e    a    DIFFERENT                                                                                                                                                     
+Lex             De Haan         e    a    DIFFERENT                                                                                                                                                     
+Alexander       Hunold          l    l    SAME                                                                                                                                                          
+Bruce           Ernst           r    s    DIFFERENT                                                                                                                                                     
+Diana           Lorentz         i    t    DIFFERENT                                                                                                                                                     
+Kevin           Mourgos         e    o    DIFFERENT                                                                                                                                                     
+Trenna          Rajs            r    j    DIFFERENT                                                                                                                                                     
+Curtis          Davies          u    e    DIFFERENT                                                                                                                                                     
+Randall         Matos           a    o    DIFFERENT                                                                                                                                                     
+Peter           Vargas          e    a    DIFFERENT                                                                                                                                                     
+Eleni           Zlotkey         l    e    DIFFERENT                                                                                                                                                     
+Ellen           Abel            l    e    DIFFERENT                                                                                                                                                     
+Jonathon        Taylor          o    o    SAME                                                                                                                                                          
+Kimerely        Grant           i    n    DIFFERENT                                                                                                                                                     
+Jennifer        Whalen          e    e    SAME                                                                                                                                                          
+Michael         Hartstein       i    i    SAME                                                                                                                                                          
+Pat             Fay             a    a    SAME                                                                                                                                                          
+Shelley         Higgins         h    n    DIFFERENT                                                                                                                                                     
+William         Gietz           i    t    DIFFERENT                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM COMPARE NUMBER OF VOWELS IN FIRST_NAME AND LAST_NAME.  'IDENTICAL' , 'DIFFERENT'
+SQL> 
+SQL> SELECT FIRST_NAME , TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#') FROM EMPLOYEES;
+
+FIRST_NAME      TRANSLATE(LOWER(FIRST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#')                                                                                                                               
+--------------- ------------------------------------------------------------                                                                                                                            
+Steven          ee                                                                                                                                                                                      
+Neena           eea                                                                                                                                                                                     
+Lex             e                                                                                                                                                                                       
+Alexander       aeae                                                                                                                                                                                    
+Bruce           ue                                                                                                                                                                                      
+Diana           iaa                                                                                                                                                                                     
+Kevin           ei                                                                                                                                                                                      
+Trenna          ea                                                                                                                                                                                      
+Curtis          ui                                                                                                                                                                                      
+Randall         aa                                                                                                                                                                                      
+Peter           ee                                                                                                                                                                                      
+Eleni           eei                                                                                                                                                                                     
+Ellen           ee                                                                                                                                                                                      
+Jonathon        oao                                                                                                                                                                                     
+Kimerely        iee                                                                                                                                                                                     
+Jennifer        eie                                                                                                                                                                                     
+Michael         iae                                                                                                                                                                                     
+Pat             a                                                                                                                                                                                       
+Shelley         ee                                                                                                                                                                                      
+William         iia                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')) FROM EMPLOYEES;
+
+FIRST_NAME      LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#'))                                                                                                                       
+--------------- -----------------------------------------------------------------                                                                                                                       
+Steven                                                                          2                                                                                                                       
+Neena                                                                           3                                                                                                                       
+Lex                                                                             1                                                                                                                       
+Alexander                                                                       4                                                                                                                       
+Bruce                                                                           2                                                                                                                       
+Diana                                                                           3                                                                                                                       
+Kevin                                                                           2                                                                                                                       
+Trenna                                                                          2                                                                                                                       
+Curtis                                                                          2                                                                                                                       
+Randall                                                                         2                                                                                                                       
+Peter                                                                           2                                                                                                                       
+Eleni                                                                           3                                                                                                                       
+Ellen                                                                           2                                                                                                                       
+Jonathon                                                                        3                                                                                                                       
+Kimerely                                                                        3                                                                                                                       
+Jennifer                                                                        3                                                                                                                       
+Michael                                                                         3                                                                                                                       
+Pat                                                                             1                                                                                                                       
+Shelley                                                                         2                                                                                                                       
+William                                                                         3                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , NVL2(NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#')) , LENGTH(TRANSLATE(LOWER(LAST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#'))),'DIFFERENT','SAME')FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME       NVL2(NULL                                                                                                                                                               
+--------------- --------------- ---------                                                                                                                                                               
+Steven          King            DIFFERENT                                                                                                                                                               
+Neena           Kochhar         DIFFERENT                                                                                                                                                               
+Lex             De Haan         DIFFERENT                                                                                                                                                               
+Alexander       Hunold          DIFFERENT                                                                                                                                                               
+Bruce           Ernst           SAME                                                                                                                                                                    
+Diana           Lorentz         DIFFERENT                                                                                                                                                               
+Kevin           Mourgos         DIFFERENT                                                                                                                                                               
+Trenna          Rajs            DIFFERENT                                                                                                                                                               
+Curtis          Davies          SAME                                                                                                                                                                    
+Randall         Matos           DIFFERENT                                                                                                                                                               
+Peter           Vargas          DIFFERENT                                                                                                                                                               
+Eleni           Zlotkey         DIFFERENT                                                                                                                                                               
+Ellen           Abel            DIFFERENT                                                                                                                                                               
+Jonathon        Taylor          DIFFERENT                                                                                                                                                               
+Kimerely        Grant           DIFFERENT                                                                                                                                                               
+Jennifer        Whalen          DIFFERENT                                                                                                                                                               
+Michael         Hartstein       DIFFERENT                                                                                                                                                               
+Pat             Fay             SAME                                                                                                                                                                    
+Shelley         Higgins         SAME                                                                                                                                                                    
+William         Gietz           DIFFERENT                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , LENGTH(TRANSLATE(LOWER(FIRST_NAME) , '#qwrtypsdfghjklzxcvbnm','#')) , LENGTH(TRANSLATE(LOWER(LAST_NAME) , '#qwrtypsdfghjklzxcvbnm','#')) ,NVL2(NULLIF( LENGTH(TRANSLATE(LOWER(FIRST_NAME) , '#qwrtypsdfghjklzxcvbnm','#'))),'DIFFERENT','SAME')FROM EMPLOYEES;
+SELECT FIRST_NAME , LAST_NAME , LENGTH(TRANSLATE(LOWER(FIRST_NAME) , '#qwrtypsdfghjklzxcvbnm','#')) , LENGTH(TRANSLATE(LOWER(LAST_NAME) , '#qwrtypsdfghjklzxcvbnm','#')) ,NVL2(NULLIF( LENGTH(TRANSLATE(LOWER(FIRST_NAME) , '#qwrtypsdfghjklzxcvbnm','#'))),'DIFFERENT','SAME')FROM EMPLOYEES
+                                                                                                                                                                               *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> SELECT FIRST_NAME , NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')),
+  2                             LENGTH(TRANSLATE(LOWER(LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#')))
+  3  FROM EMPLOYEES;
+
+FIRST_NAME      NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#')),LENGTH(TRANSLATE(LOWER(LAST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#')))                                              
+--------------- ------------------------------------------------------------------------------------------------------------------------------------------                                              
+Steven                                                                                                                                                   2                                              
+Neena                                                                                                                                                    3                                              
+Lex                                                                                                                                                      1                                              
+Alexander                                                                                                                                                4                                              
+Bruce                                                                                                                                                    2                                              
+Diana                                                                                                                                                    3                                              
+Kevin                                                                                                                                                    2                                              
+Trenna                                                                                                                                                   2                                              
+Curtis                                                                                                                                                   2                                              
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                    3                                              
+Ellen                                                                                                                                                                                                   
+Jonathon                                                                                                                                                 3                                              
+Kimerely                                                                                                                                                 3                                              
+Jennifer                                                                                                                                                 3                                              
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                  3                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')),
+  2                             LENGTH(TRANSLATE(LOWER(LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#'))) RESULT
+  3  FROM EMPLOYEES;
+
+FIRST_NAME          RESULT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven                   2                                                                                                                                                                              
+Neena                    3                                                                                                                                                                              
+Lex                      1                                                                                                                                                                              
+Alexander                4                                                                                                                                                                              
+Bruce                    2                                                                                                                                                                              
+Diana                    3                                                                                                                                                                              
+Kevin                    2                                                                                                                                                                              
+Trenna                   2                                                                                                                                                                              
+Curtis                   2                                                                                                                                                                              
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Eleni                    3                                                                                                                                                                              
+Ellen                                                                                                                                                                                                   
+Jonathon                 3                                                                                                                                                                              
+Kimerely                 3                                                                                                                                                                              
+Jennifer                 3                                                                                                                                                                              
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                  3                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')),
+  2                             LENGTH(TRANSLATE(LOWER(LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#'))) RESULT
+  3  FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME           RESULT                                                                                                                                                              
+--------------- --------------- ----------                                                                                                                                                              
+Steven          King                     2                                                                                                                                                              
+Neena           Kochhar                  3                                                                                                                                                              
+Lex             De Haan                  1                                                                                                                                                              
+Alexander       Hunold                   4                                                                                                                                                              
+Bruce           Ernst                    2                                                                                                                                                              
+Diana           Lorentz                  3                                                                                                                                                              
+Kevin           Mourgos                  2                                                                                                                                                              
+Trenna          Rajs                     2                                                                                                                                                              
+Curtis          Davies                   2                                                                                                                                                              
+Randall         Matos                                                                                                                                                                                   
+Peter           Vargas                                                                                                                                                                                  
+Eleni           Zlotkey                  3                                                                                                                                                              
+Ellen           Abel                                                                                                                                                                                    
+Jonathon        Taylor                   3                                                                                                                                                              
+Kimerely        Grant                    3                                                                                                                                                              
+Jennifer        Whalen                   3                                                                                                                                                              
+Michael         Hartstein                                                                                                                                                                               
+Pat             Fay                                                                                                                                                                                     
+Shelley         Higgins                                                                                                                                                                                 
+William         Gietz                    3                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , NVL2(NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')),
+  2                             LENGTH(TRANSLATE(LOWER(LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#'))),'DIFFERENT','IDENTICAL') RESULT
+  3  FROM EMPLOYEES;
+
+FIRST_NAME      RESULT                                                                                                                                                                                  
+--------------- ---------                                                                                                                                                                               
+Steven          DIFFERENT                                                                                                                                                                               
+Neena           DIFFERENT                                                                                                                                                                               
+Lex             DIFFERENT                                                                                                                                                                               
+Alexander       DIFFERENT                                                                                                                                                                               
+Bruce           DIFFERENT                                                                                                                                                                               
+Diana           DIFFERENT                                                                                                                                                                               
+Kevin           DIFFERENT                                                                                                                                                                               
+Trenna          DIFFERENT                                                                                                                                                                               
+Curtis          DIFFERENT                                                                                                                                                                               
+Randall         IDENTICAL                                                                                                                                                                               
+Peter           IDENTICAL                                                                                                                                                                               
+Eleni           DIFFERENT                                                                                                                                                                               
+Ellen           IDENTICAL                                                                                                                                                                               
+Jonathon        DIFFERENT                                                                                                                                                                               
+Kimerely        DIFFERENT                                                                                                                                                                               
+Jennifer        DIFFERENT                                                                                                                                                                               
+Michael         IDENTICAL                                                                                                                                                                               
+Pat             IDENTICAL                                                                                                                                                                               
+Shelley         IDENTICAL                                                                                                                                                                               
+William         DIFFERENT                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , NVL2(NULLIF(LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')),
+  2                             LENGTH(TRANSLATE(LOWER(LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#'))),'DIFFERENT','IDENTICAL') RESULT
+  3  FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME       RESULT                                                                                                                                                                  
+--------------- --------------- ---------                                                                                                                                                               
+Steven          King            DIFFERENT                                                                                                                                                               
+Neena           Kochhar         DIFFERENT                                                                                                                                                               
+Lex             De Haan         DIFFERENT                                                                                                                                                               
+Alexander       Hunold          DIFFERENT                                                                                                                                                               
+Bruce           Ernst           DIFFERENT                                                                                                                                                               
+Diana           Lorentz         DIFFERENT                                                                                                                                                               
+Kevin           Mourgos         DIFFERENT                                                                                                                                                               
+Trenna          Rajs            DIFFERENT                                                                                                                                                               
+Curtis          Davies          DIFFERENT                                                                                                                                                               
+Randall         Matos           IDENTICAL                                                                                                                                                               
+Peter           Vargas          IDENTICAL                                                                                                                                                               
+Eleni           Zlotkey         DIFFERENT                                                                                                                                                               
+Ellen           Abel            IDENTICAL                                                                                                                                                               
+Jonathon        Taylor          DIFFERENT                                                                                                                                                               
+Kimerely        Grant           DIFFERENT                                                                                                                                                               
+Jennifer        Whalen          DIFFERENT                                                                                                                                                               
+Michael         Hartstein       IDENTICAL                                                                                                                                                               
+Pat             Fay             IDENTICAL                                                                                                                                                               
+Shelley         Higgins         IDENTICAL                                                                                                                                                               
+William         Gietz           DIFFERENT                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM COALESCE : IT TAKES INFINITE ARGUMENTS,.
+SQL> 
+SQL> REM DATA TYPES OF ALL ARGUMENTS MUST MATCH.
+SQL> 
+SQL> REM IT CHECKS FROM LEFT TO RIGHT.
+SQL> 
+SQL> REM IT RETURNS FIRST NON-NULL VALUE FROM THE LIST OF ARGUMENTS.
+SQL> 
+SQL> 
+SQL> SELECT * FROM CONTACTNO;
+
+NAME                     MOBILE     OPHONE     RPHONE                                                                                                                                                   
+-------------------- ---------- ---------- ----------                                                                                                                                                   
+AMIT                 1234567890 9876543210 1122334455                                                                                                                                                   
+BIREN                6644882244            9876452316                                                                                                                                                   
+CHETAN                          2277554488                                                                                                                                                              
+DHIREN                                     6789054123                                                                                                                                                   
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , MOBILE CONTACTNO FROM EMPLOYEES;
+SELECT NAME , MOBILE CONTACTNO FROM EMPLOYEES
+              *
+ERROR at line 1:
+ORA-00904: "MOBILE": invalid identifier 
+
+
+SQL> SELECT NAME , MOBILE CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN                                                                                                                                                                                                  
+DHIREN                                                                                                                                                                                                  
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , COALESCE(MOBILE , OPHONE , RPHONE) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , COALESCE(MOBILE , RPHONE , OPHONE) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID FROM EMPLOYEES;
+
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                                                                                                                                 
+-------------- ---------- -------------                                                                                                                                                                 
+                                     90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      102            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      100            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+            .2        100            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+           .15        149                                                                                                                                                                               
+                      101            10                                                                                                                                                                 
+                      100            20                                                                                                                                                                 
+                      201            20                                                                                                                                                                 
+                      101           110                                                                                                                                                                 
+                      205           110                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT COALESCE(COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID) FROM EMPLOYEES;
+
+COALESCE(COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID)                                                                                                                                                       
+-------------------------------------------------                                                                                                                                                       
+                                               90                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              102                                                                                                                                                       
+                                              103                                                                                                                                                       
+                                              103                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                               .2                                                                                                                                                       
+                                               .3                                                                                                                                                       
+                                               .3                                                                                                                                                       
+                                              .15                                                                                                                                                       
+                                              101                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              201                                                                                                                                                       
+                                              101                                                                                                                                                       
+                                              205                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT NAME , COALESCE(MOBILE , OPHONE , RPHONE,1800300600) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                 1800300600                                                                                                                                                                         
+
+SQL> SPOOL OFF

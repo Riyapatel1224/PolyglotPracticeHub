@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 250px;
+            height: 250px;
+            border: 5px solid rgb(205, 29, 199);
+            padding: 2px 2px 2px 2px;
+            background-color: rgb(176, 129, 219);
+        }
+        .box::before{
+            content: 'Hello....';
+            position: relative;
+        }
+        .box:hover::before{
+            background-color: rgb(241, 13, 233);
+            color: whitesmoke;
+        }
+        
+        .box::after{
+            content: 'Bye....';
+            position: relative;
+        }
+        .box:hover::after{
+            background-color: rgb(241, 13, 233);
+            color: whitesmoke;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, omnis dolore illum velit necessitatibus molestias numquam natus in qui aperiam eveniet consectetur ipsam veniam fugiat labore inventore, enim neque cumque.
+    </div>
+</body>
+</html>

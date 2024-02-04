@@ -1,0 +1,314 @@
+SQL> CL SCR
+
+SQL> REM SELECT ... FROM ... WHERE ... GROUP BY ... | HAVING ... ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> REM SYNTACTICAL PRECEDENCE : SELECT ... FROM ... WHERE ... GROUP BY ... | HAVING ... ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> REM EXECUTION   PRECEDENCE : FROM ... WHERE ... GROUP BY ... HAVING ... COLUMN ALIAS ATTACHMENT ... ORDER BY ... OFFSET ... FETCH ... SELECT ...;
+SQL> 
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> REM FROM TO READ ALL DATA FROM TABLE AND PUT IT INTO RAM/MEMORY.
+SQL> 
+SQL> REM WHERE : TO REMOVE ROWS FROM MEMORY WHICH DOESN'T SATISFY CONDITION.
+SQL> 
+SQL> REM GROUP BY : TO GROUP ROWS AND DEVELOP SUMMARY ROW FOR EACH GROUP.
+SQL> 
+SQL> REM HAVING : TO REMOVE SUMMARY ROWS FROM MEMORY WHICH DOESN'T SATISFY CONDITION.
+SQL> 
+SQL> REM COLUMN ALIAS ATTACHMENT : WILL ATTACH COLUMN ALIAS, WHICH CAN BE REFERRED ONLY IN 'ORDER BY' CLAUSE.
+SQL> 
+SQL> REM ORDER BY : WILL SORT ROWS ON SINGLE/MULTIPLE COLUMNS IN ASCENDING/DESCENDING ORDER KEEPING NULL VALUES EITHER AT THE TOP/BOTTOM
+SQL> 
+SQL> REM OFFSET : WILL DECIDE FIRST ROW TO BE DISPLAYED IN RESULT
+SQL> 
+SQL> REM FETCH : WILL DECIDE NUMBER/COUNT OF ROWS TO BE DISPLAYED IN RESULT
+SQL> 
+SQL> REM SELECT : WILL DISPLAY RESULT ON SCREEN
+SQL> 
+SQL> 
+SQL> REM FROM TO READ ALL DATA FROM TABLE AND PUT IT INTO RAM/MEMORY.
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM WHERE : TO REMOVE ROWS FROM MEMORY WHICH DOESN'T SATISFY CONDITION.
+SQL> 
+SQL> SELECT * FROM EMPLOYEES WHERE SALARY < 10000;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+13 rows selected.
+
+SQL> REM GROUP BY : TO GROUP ROWS AND DEVELOP SUMMARY ROW FOR EACH GROUP.
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) FROM EMPLOYEES WHERE SALARY < 10000 GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID MAX(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+           20        6000                                                                                                                                                                               
+          110        8300                                                                                                                                                                               
+           50        5800                                                                                                                                                                               
+           80        8600                                                                                                                                                                               
+           60        9000                                                                                                                                                                               
+           10        4400                                                                                                                                                                               
+
+7 rows selected.
+
+SQL> REM HAVING : TO REMOVE SUMMARY ROWS FROM MEMORY WHICH DOESN'T SATISFY CONDITION.
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) FROM EMPLOYEES WHERE SALARY < 10000 GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) >= 6000;
+
+DEPARTMENT_ID MAX(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+           20        6000                                                                                                                                                                               
+          110        8300                                                                                                                                                                               
+           80        8600                                                                                                                                                                               
+           60        9000                                                                                                                                                                               
+
+SQL> REM COLUMN ALIAS ATTACHMENT : WILL ATTACH COLUMN ALIAS, WHICH CAN BE REFERRED ONLY IN 'ORDER BY' CLAUSE.
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) DEPT_MAX_SAL FROM EMPLOYEES WHERE SALARY < 10000 GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) >= 6000;
+
+DEPARTMENT_ID DEPT_MAX_SAL                                                                                                                                                                              
+------------- ------------                                                                                                                                                                              
+                      7000                                                                                                                                                                              
+           20         6000                                                                                                                                                                              
+          110         8300                                                                                                                                                                              
+           80         8600                                                                                                                                                                              
+           60         9000                                                                                                                                                                              
+
+SQL> REM ORDER BY : WILL SORT ROWS ON SINGLE/MULTIPLE COLUMNS IN ASCENDING/DESCENDING ORDER KEEPING NULL VALUES EITHER AT THE TOP/BOTTOM
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) DEPT_MAX_SAL FROM EMPLOYEES WHERE SALARY < 10000 GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) >= 6000 ORDER BY DEPT_MAX_SAL;
+
+DEPARTMENT_ID DEPT_MAX_SAL                                                                                                                                                                              
+------------- ------------                                                                                                                                                                              
+           20         6000                                                                                                                                                                              
+                      7000                                                                                                                                                                              
+          110         8300                                                                                                                                                                              
+           80         8600                                                                                                                                                                              
+           60         9000                                                                                                                                                                              
+
+SQL> REM OFFSET : WILL DECIDE FIRST ROW TO BE DISPLAYED IN RESULT
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) DEPT_MAX_SAL FROM EMPLOYEES WHERE SALARY < 10000 GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) >= 6000 ORDER BY DEPT_MAX_SAL OFFSET 1 ROW;
+
+DEPARTMENT_ID DEPT_MAX_SAL                                                                                                                                                                              
+------------- ------------                                                                                                                                                                              
+                      7000                                                                                                                                                                              
+          110         8300                                                                                                                                                                              
+           80         8600                                                                                                                                                                              
+           60         9000                                                                                                                                                                              
+
+SQL> REM FETCH : WILL DECIDE NUMBER/COUNT OF ROWS TO BE DISPLAYED IN RESULT
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) DEPT_MAX_SAL FROM EMPLOYEES WHERE SALARY < 10000 GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) >= 6000 ORDER BY DEPT_MAX_SAL OFFSET 1 ROW FETCH NEXT 3 ROWS ONLY;
+
+DEPARTMENT_ID DEPT_MAX_SAL                                                                                                                                                                              
+------------- ------------                                                                                                                                                                              
+                      7000                                                                                                                                                                              
+          110         8300                                                                                                                                                                              
+           80         8600                                                                                                                                                                              
+
+SQL> REM DISPLAY DEPARTMENT_ID WISE TOTAL SALARY  FOR THE DEPARTMENTS TO WHICH 20000 OR MORE TOTAL SALARY IS PAID
+SQL> 
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID WHERE SUM(SALARY) > 20000;
+SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID WHERE SUM(SALARY) > 20000
+                                                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES WHERE SUM(SALARY) > 20000 GROUP BY DEPARTMENT_ID;
+SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES WHERE SUM(SALARY) > 20000 GROUP BY DEPARTMENT_ID
+                                                        *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES HAVING SUM(SALARY) > 20000 GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING SUM(SALARY) > 20000;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+
+SQL> REM 'WHERE' DOESN'T SUPPORT SUMMARY ITEM
+SQL> 
+SQL> REM 'HAVING' SUPPORTS ALL SUMMARY ITEMS + THOSE NON-SUMMARY ITEMS WHICH ARE LISTED IN 'GROUP BY' CLAUSE.
+SQL> 
+SQL> 
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) > 10000;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+           20       19000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) , MAX(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) > 10000;
+
+DEPARTMENT_ID SUM(SALARY) MAX(SALARY)                                                                                                                                                                   
+------------- ----------- -----------                                                                                                                                                                   
+           90       58000       24000                                                                                                                                                                   
+           20       19000       13000                                                                                                                                                                   
+          110       20300       12000                                                                                                                                                                   
+           80       30100       11000                                                                                                                                                                   
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING MAX(SALARY) > 10000;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+           20       19000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+
+SQL> SELECT MANAGER_ID , COUNT(*)
+  2  FROM EMPLOYEES
+  3  HAVING SUM(SALARY) <= 15000
+  4  GROUP BY MANAGER_ID
+  5  ORDER BY 2 DESC;
+
+MANAGER_ID   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+       124          4                                                                                                                                                                                   
+       103          2                                                                                                                                                                                   
+       102          1                                                                                                                                                                                   
+       205          1                                                                                                                                                                                   
+       201          1                                                                                                                                                                                   
+
+SQL> REM 1 DISPLAY JOB_ID WISE LOWEST SALARY FOR THE JOBS TO WHICH 12000 OR MORE LOWEST SALARY IS PAID.
+SQL> 
+SQL> REM 2 DISPLAY DEPARTMENT_ID WISE HIGHEST SALARY FOR THE DEPARTMENT TO WHICH 10000 OR MORE AVERAGE SALARY IS PAID
+SQL> 
+SQL> REM 3 DISPLAY MANAGER_ID , LOWER SALARY , HIGHEST SALARY. DISPLAY ONLY THOSE MANAGER'S INFO TO WHICH 20000 OR MORE TOTAL SALARY IS PAID.
+SQL> 
+SQL> REM 4 DISPLAY HIRE YEAR WISE NUMBER OF EMPLOYEES HIRED FOR THE YEARS IN WHICH 2 OR MORE EMPLOYEES WERE HIRED.
+SQL> 
+SQL> REM 5 DISPLAY HIRE QUARTER WISE TOTAL SALARY FOR THE HIRE QUARTER IN WHICH LESS THAN 6 EMPLOYEES WHERE HIRED.
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY JOB_ID WISE LOWEST SALARY FOR THE JOBS TO WHICH 12000 OR MORE LOWEST SALARY IS PAID.
+SQL> 
+SQL> SELECT JOB_ID , MIN(SALARY) FROM EMPLOYEES GROUP BY JOB_ID HAVING MIN(SALARY) >= 12000;
+
+JOB_ID     MIN(SALARY)                                                                                                                                                                                  
+---------- -----------                                                                                                                                                                                  
+AC_MGR           12000                                                                                                                                                                                  
+AD_VP            17000                                                                                                                                                                                  
+MK_MAN           13000                                                                                                                                                                                  
+AD_PRES          24000                                                                                                                                                                                  
+
+SQL> REM 2 DISPLAY DEPARTMENT_ID WISE HIGHEST SALARY FOR THE DEPARTMENT TO WHICH 10000 OR MORE AVERAGE SALARY IS PAID
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MAX(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID HAVING AVG(SALARY) >= 10000;
+
+DEPARTMENT_ID MAX(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           90       24000                                                                                                                                                                               
+          110       12000                                                                                                                                                                               
+           80       11000                                                                                                                                                                               
+
+SQL> REM 3 DISPLAY MANAGER_ID , LOWER SALARY , HIGHEST SALARY. DISPLAY ONLY THOSE MANAGER'S INFO TO WHICH 20000 OR MORE TOTAL SALARY IS PAID.
+SQL> 
+SQL> SELECT MANAGER_ID , MIN(SALARY) , MAX(SALARY) FROM EMPLOYEES GROUP BY MANAGER_ID HAVING SUM(SALARY) >= 20000;
+
+MANAGER_ID MIN(SALARY) MAX(SALARY)                                                                                                                                                                      
+---------- ----------- -----------                                                                                                                                                                      
+                 24000       24000                                                                                                                                                                      
+       100        5800       17000                                                                                                                                                                      
+       149        7000       11000                                                                                                                                                                      
+
+SQL> REM 4 DISPLAY HIRE YEAR WISE NUMBER OF EMPLOYEES HIRED FOR THE YEARS IN WHICH 2 OR MORE EMPLOYEES WERE HIRED.
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'RRRR') YEAR , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'RRRR') HAVING COUNT(*) >= 2;
+
+YEAR   COUNT(*)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+1987          2                                                                                                                                                                                         
+1997          2                                                                                                                                                                                         
+1994          2                                                                                                                                                                                         
+1999          3                                                                                                                                                                                         
+1996          2                                                                                                                                                                                         
+1998          3                                                                                                                                                                                         
+
+6 rows selected.
+
+SQL> SELECT SUBSTR(HIRE_DATE,-2) YEAR , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,-2) HAVING COUNT(*) >= 2;
+
+YEAR       COUNT(*)                                                                                                                                                                                     
+-------- ----------                                                                                                                                                                                     
+99                3                                                                                                                                                                                     
+87                2                                                                                                                                                                                     
+97                2                                                                                                                                                                                     
+94                2                                                                                                                                                                                     
+98                3                                                                                                                                                                                     
+96                2                                                                                                                                                                                     
+
+6 rows selected.
+
+SQL> REM 5 DISPLAY HIRE QUARTER WISE TOTAL SALARY FOR THE HIRE QUARTER IN WHICH LESS THAN 6 EMPLOYEES WHERE HIRED.
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'Q') , SUM(SALARY) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_dATE,'Q') HAVING COUNT(*) < 6;
+
+T SUM(SALARY)                                                                                                                                                                                           
+- -----------                                                                                                                                                                                           
+3       53900                                                                                                                                                                                           
+2       44300                                                                                                                                                                                           
+4        9300                                                                                                                                                                                           
+
+SQL> SPOOL OFF

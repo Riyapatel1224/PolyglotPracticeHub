@@ -1,0 +1,77 @@
+Certainly! Here are examples of lambda functions for beginners, intermediate users, and advanced users.
+
+**Beginner Examples (5)**:
+
+1. **Add Two Numbers**:
+   ```python
+   add = lambda x, y: x + y
+   result = add(5, 3)
+   ```
+
+2. **Calculate the Square**:
+   ```python
+   square = lambda x: x ** 2
+   result = square(4)
+   ```
+
+3. **Check for Even Number**:
+   ```python
+   is_even = lambda x: x % 2 == 0
+   result = is_even(6)
+   ```
+
+4. **Find the Maximum of Two Numbers**:
+   ```python
+   max_num = lambda x, y: x if x > y else y
+   result = max_num(8, 12)
+   ```
+
+5. **Create a Repeater Function**:
+   ```python
+   repeat = lambda x, n: x * n
+   result = repeat("Hello", 3)
+   ```
+
+**Intermediate Examples (2)**:
+
+1. **Sort a List of Tuples by the Second Element**:
+   ```python
+   data = [(3, 9), (1, 5), (4, 2)]
+   sorted_data = sorted(data, key=lambda x: x[1])
+   ```
+
+2. **Filter Positive Numbers from a List**:
+   ```python
+   numbers = [-2, 5, 0, 7, -1]
+   positive_numbers = list(filter(lambda x: x > 0, numbers))
+   ```
+
+**Advanced Examples (3)**:
+
+1. **Function Composition**:
+   ```python
+   compose = lambda f, g: lambda x: f(g(x))
+   double = lambda x: x * 2
+   square = lambda x: x ** 2
+   composed_function = compose(square, double)
+   result = composed_function(4)  # (4 * 2)^2 = 64
+   ```
+
+2. **Currying with Lambda Functions**:
+   ```python
+   curry = lambda f: lambda x: lambda y: f(x, y)
+   add = lambda x, y: x + y
+   curried_add = curry(add)
+   add_3 = curried_add(3)
+   result = add_3(5)  # 3 + 5 = 8
+   ```
+
+3. **Simplify Map and Reduce Operations**:
+   ```python
+   from functools import reduce
+   data = [1, 2, 3, 4, 5]
+   result = reduce(lambda x, y: x + y, map(lambda x: x * 2, data))
+   # Double each element and then sum: (1*2) + (2*2) + (3*2) + (4*2) + (5*2) = 30
+   ```
+
+These lambda function examples cover a range of scenarios, from basic operations to more advanced functional programming concepts like function composition, currying, and simplifying map and reduce operations.

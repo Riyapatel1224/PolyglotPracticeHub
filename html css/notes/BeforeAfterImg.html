@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>before after img</title>
+</head>
+
+<style>
+    .box{
+        width: 300px;
+        height: 300px;
+        background-image: url('flower.jpg');
+        background-size: cover;
+        position: absolute;
+    }
+    .box::before{
+        content: '';
+        position: absolute;
+        background-color: rgba(0, 128, 128, 0.5);
+        width: 300px;
+        height: 150px;
+        transition: 3s;
+    }
+    .box::after{
+        content: '';
+        position: absolute;
+        background-color: rgba(0, 128, 128, 0.5);
+        width: 300px;
+        height: 150px;
+        bottom: 0;
+        transition: 3s;
+    }
+    .box:hover::before{
+        height: 0;
+    }
+    .box:hover::after{
+        height: 0;
+    }
+</style>
+<body>
+    <div class="box">
+         
+    </div>
+</body>
+</html>

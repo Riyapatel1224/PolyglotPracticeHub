@@ -1,0 +1,299 @@
+SQL> 
+SQL> CL SCR
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             !2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             !3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             !3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            !15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM IT_PROG_MIN_SAL    SA_REP_AVG_SAL    AD_VP_MAX_SAL   ST_CLERK_SUM_SAL
+SQL> 
+SQL> SELECT MIN(DECODE(JOB_ID), 'IT_PROG' , SALARY) IT_PROG_MIN_SAL ,
+  2               AVG(DECODE(JOB_ID), 'SA_REP' , SALARY) SA_REP_AVG_SAL ,
+  3              MIN(DECODE(JOB_ID), 'AD_VP' , SALARY) AD_VP_MAX_SAL,
+  4               SUM(DECODE(JOB_ID), 'ST_CLERK' , SALARY) ST_CLERK_SUM_SAL
+  5             FROM EMPLOYEES;
+SELECT MIN(DECODE(JOB_ID), 'IT_PROG' , SALARY) IT_PROG_MIN_SAL ,
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> SELECT MIN(DECODE(JOB_ID, 'IT_PROG' , SALARY)) IT_PROG_MIN_SAL ,
+  2         AVG(DECODE(JOB_ID, 'SA_REP' , SALARY)) SA_REP_AVG_SAL ,
+  3         MIN(DECODE(JOB_ID, 'AD_VP' , SALARY)) AD_VP_MAX_SAL,
+  4         SUM(DECODE(JOB_ID, 'ST_CLERK' , SALARY)) ST_CLERK_SUM_SAL
+  5  FROM EMPLOYEES;
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL AD_VP_MAX_SAL ST_CLERK_SUM_SAL                                                                                                                                           
+--------------- -------------- ------------- ----------------                                                                                                                                           
+           4200     8866!66667         17000            11700                                                                                                                                           
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> R
+  1  SELECT MIN(DECODE(JOB_ID, 'IT_PROG' , SALARY)) IT_PROG_MIN_SAL ,
+  2         AVG(DECODE(JOB_ID, 'SA_REP' , SALARY)) SA_REP_AVG_SAL ,
+  3         MIN(DECODE(JOB_ID, 'AD_VP' , SALARY)) AD_VP_MAX_SAL,
+  4         SUM(DECODE(JOB_ID, 'ST_CLERK' , SALARY)) ST_CLERK_SUM_SAL
+  5* FROM EMPLOYEES
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL AD_VP_MAX_SAL ST_CLERK_SUM_SAL                                                                                                                                           
+--------------- -------------- ------------- ----------------                                                                                                                                           
+           4200     8866.66667         17000            11700                                                                                                                                           
+
+SQL> RU
+  1  SELECT MIN(DECODE(JOB_ID, 'IT_PROG' , SALARY)) IT_PROG_MIN_SAL ,
+  2         AVG(DECODE(JOB_ID, 'SA_REP' , SALARY)) SA_REP_AVG_SAL ,
+  3         MIN(DECODE(JOB_ID, 'AD_VP' , SALARY)) AD_VP_MAX_SAL,
+  4         SUM(DECODE(JOB_ID, 'ST_CLERK' , SALARY)) ST_CLERK_SUM_SAL
+  5* FROM EMPLOYEES
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL AD_VP_MAX_SAL ST_CLERK_SUM_SAL                                                                                                                                           
+--------------- -------------- ------------- ----------------                                                                                                                                           
+           4200     8866.66667         17000            11700                                                                                                                                           
+
+SQL> RUN
+  1  SELECT MIN(DECODE(JOB_ID, 'IT_PROG' , SALARY)) IT_PROG_MIN_SAL ,
+  2         AVG(DECODE(JOB_ID, 'SA_REP' , SALARY)) SA_REP_AVG_SAL ,
+  3         MIN(DECODE(JOB_ID, 'AD_VP' , SALARY)) AD_VP_MAX_SAL,
+  4         SUM(DECODE(JOB_ID, 'ST_CLERK' , SALARY)) ST_CLERK_SUM_SAL
+  5* FROM EMPLOYEES
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL AD_VP_MAX_SAL ST_CLERK_SUM_SAL                                                                                                                                           
+--------------- -------------- ------------- ----------------                                                                                                                                           
+           4200     8866.66667         17000            11700                                                                                                                                           
+
+SQL> /
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL AD_VP_MAX_SAL ST_CLERK_SUM_SAL                                                                                                                                           
+--------------- -------------- ------------- ----------------                                                                                                                                           
+           4200     8866.66667         17000            11700                                                                                                                                           
+
+SQL> SELECT MIN(DECODE(JOB_ID, 'IT_PROG' , SALARY)) IT_PROG_MIN_SAL ,
+  2         AVG(DECODE(JOB_ID, 'SA_REP' , SALARY)) SA_REP_AVG_SAL ,
+  3         MIN(DECODE(JOB_ID, 'AD_VP' , SALARY)) AD_VP_MAX_SAL,
+  4         SUM(DECODE(JOB_ID, 'ST_CLERK' , SALARY)) ST_CLERK_SUM_SAL
+  5  FROM EMPLOYEES
+  6  
+SQL> 
+SQL> 
+SQL> SELECT MIN(CASE JOB_ID WHEN 'IT_PROG' THEN SALARY END) IT_PROG_MIN_SAL ,
+  2         AVG(CASE JOB_ID WHEN 'SA_REP' THEN SALARY END) SA_REP_AVG_SAL ,
+  3         MIN(CASE JOB_ID WHEN 'AD_VP' THEN SALARY END) AD_VP_MAX_SAL,
+  4         SUM(CASE JOB_ID WHEN 'ST_CLERK' THEN SALARY END) ST_CLERK_SUM_SAL
+  5  FROM EMPLOYEES;
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL AD_VP_MAX_SAL ST_CLERK_SUM_SAL                                                                                                                                           
+--------------- -------------- ------------- ----------------                                                                                                                                           
+           4200     8866.66667         17000            11700                                                                                                                                           
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DEPT_90_MIN_SAL  DEPT_60_AVG_SAL   DEPT_50_MAX_SAL   DEPT_80_SUM_SAL
+SQL> 
+SQL> REM 2 MGR_100_CNT   MGR_124_CNT    MGR_149_CNT
+SQL> 
+SQL> REM 3 HY_99_MIN_SAL   HY_98_AVG_SAL   HY_96_SUM_SAL
+SQL> 
+SQL> REM 4 HQ_1_CNT   HQ_2_CNT    TOTAL_CNT
+SQL> 
+SQL> REM 5 "0-4999_CNT"   "5000-9999_CNT"   "10000-14999_CNT"    TOTAL_CNT
+SQL> 
+SQL> 
+SQL> REM 1 CASE ... WHEN ... THEN ...    2 CASE WHEN ... THEN ...
+SQL> 
+SQL> REM 3000/5000 = .6  TRUNC(.9,0) = 0
+SQL> 
+SQL> REM 2000/5000 = .4  TRUNC(.4,0) = 0
+SQL> 
+SQL> REM 6000/5000 = 1.2  TRUNC(1.2,0) = 1
+SQL> 
+SQL> REM 14000/5000 = 2.8  TRUNC(2.8,0) = 2
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY ,
+  2  COUNT(CASE CEIL(SALARY/5000) WHEN 0 THEN '*' END),
+  3  COUNT(CASE CEIL(SALARY/5000) WHEN 1 THEN '*' END),
+  4  COUNT(CASE CEIL(SALARY/5000) WHEN 2 THEN '*' END),
+  5  COUNT(*)
+  6  FROM EMPLOYEES;
+SELECT FIRST_NAME , SALARY ,
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT COUNT(CASE CEIL(SALARY/5000) WHEN 0 THEN '*' END),
+  2  COUNT(CASE CEIL(SALARY/5000) WHEN 1 THEN '*' END),
+  3  COUNT(CASE CEIL(SALARY/5000) WHEN 2 THEN '*' END),
+  4  COUNT(*)
+  5  FROM EMPLOYEES;
+
+COUNT(CASECEIL(SALARY/5000)WHEN0THEN'*'END) COUNT(CASECEIL(SALARY/5000)WHEN1THEN'*'END) COUNT(CASECEIL(SALARY/5000)WHEN2THEN'*'END)   COUNT(*)                                                          
+------------------------------------------- ------------------------------------------- ------------------------------------------- ----------                                                          
+                                          0                                           6                                           7         20                                                          
+
+SQL> SELECT COUNT(CASE CEIL(SALARY/5000) WHEN 0 THEN '*' END) "0-4999_CNT",
+  2  COUNT(CASE CEIL(SALARY/5000) WHEN 1 THEN '*' END) "5000-9999_CNT",
+  3  COUNT(CASE CEIL(SALARY/5000) WHEN 2 THEN '*' END) "10000-14999_CNT"
+  4  COUNT(*) TOTAL_CNT
+  5  FROM EMPLOYEES;
+COUNT(*) TOTAL_CNT
+*
+ERROR at line 4:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT COUNT(CASE CEIL(SALARY/5000) WHEN 0 THEN '*' END) "0-4999_CNT",
+  2  COUNT(CASE CEIL(SALARY/5000) WHEN 1 THEN '*' END) "5000-9999_CNT",
+  3  COUNT(CASE CEIL(SALARY/5000) WHEN 2 THEN '*' END) "10000-14999_CNT",
+  4  COUNT(*) TOTAL_CNT
+  5  FROM EMPLOYEES;
+
+0-4999_CNT 5000-9999_CNT 10000-14999_CNT  TOTAL_CNT                                                                                                                                                     
+---------- ------------- --------------- ----------                                                                                                                                                     
+         0             6               7         20                                                                                                                                                     
+
+SQL> SELECT COUNT(CASE CEIL(SALARY/5000) WHEN 1 THEN '*' END) "0-4999_CNT",
+  2  COUNT(CASE CEIL(SALARY/5000) WHEN 2 THEN '*' END) "5000-9999_CNT",
+  3  COUNT(CASE CEIL(SALARY/5000) WHEN 3 THEN '*' END) "10000-14999_CNT",
+  4  COUNT(*) TOTAL_CNT
+  5  FROM EMPLOYEES;
+
+0-4999_CNT 5000-9999_CNT 10000-14999_CNT  TOTAL_CNT                                                                                                                                                     
+---------- ------------- --------------- ----------                                                                                                                                                     
+         6             7               4         20                                                                                                                                                     
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM W1_CNT   W2_CNT   W3_CNT    W4_CNT    W5_CNT
+SQL> 
+SQL> REM 1 TO_CHAR 2 WITHOUT USING TO_CHAR
+SQL> 
+SQL> SELECT COUNT(CASE TO_CHAR(HIRE_DATE,'W) WHEN 1 THEN '*' END) W1_CNT,
+  2         COUNT(CASE TO_CHAR(HIRE_DATE,'W) WHEN 1 THEN '*' END) W1_CNT,
+  3  
+SQL> 
+SQL> SELECT COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN 1 THEN '*' END) W1_CNT,
+  2         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN 2 THEN '*' END) W2_CNT,
+  3         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN 3 THEN '*' END) W3_CNT,
+  4         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN 4 THEN '*' END) W4_CNT,
+  5         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN 5 THEN '*' END) W5_CNT
+  6  FROM EMPLOYEES;
+       COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN 5 THEN '*' END) W5_CNT
+                                              *
+ERROR at line 5:
+ORA-00932: inconsistent datatypes: expected CHAR got NUMBER 
+
+
+SQL> SELECT COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN '1' THEN '*' END) W1_CNT,
+  2  
+SQL> SELECT COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN '1' THEN '*' END) W1_CNT,
+  2         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN '2' THEN '*' END) W2_CNT,
+  3         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN '3' THEN '*' END) W3_CNT,
+  4         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN '4' THEN '*' END) W4_CNT,
+  5         COUNT(CASE TO_CHAR(HIRE_DATE,'W') WHEN '5' THEN '*' END) W5_CNT
+  6  FROM EMPLOYEES;
+
+    W1_CNT     W2_CNT     W3_CNT     W4_CNT     W5_CNT                                                                                                                                                  
+---------- ---------- ---------- ---------- ----------                                                                                                                                                  
+         4          3          9          2          2                                                                                                                                                  
+
+SQL> SELECT COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 1 THEN '*' END W1_CNT,
+  2         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 2 THEN '*' END W2_CNT,
+  3         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 3 THEN '*' END W3_CNT,
+  4         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 4 THEN '*' END W4_CNT,
+  5         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 5 THEN '*' END W5_CNT
+  6  FROM EMPLOYEES;
+SELECT COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 1 THEN '*' END W1_CNT,
+                                                                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 1 THEN '*' END) W1_CNT,
+  2         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 2 THEN '*' END) W2_CNT,
+  3         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 3 THEN '*' END) W3_CNT,
+  4         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 4 THEN '*' END) W4_CNT,
+  5         COUNT(CASE CEIL(SUBSTR(HIRE_DATE,1,2)/7) WHEN 5 THEN '*' END) W5_CNT
+  6  FROM EMPLOYEES;
+
+    W1_CNT     W2_CNT     W3_CNT     W4_CNT     W5_CNT                                                                                                                                                  
+---------- ---------- ---------- ---------- ----------                                                                                                                                                  
+         4          3          9          2          2                                                                                                                                                  
+
+SQL> SPOOL OFF

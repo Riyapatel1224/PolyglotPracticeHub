@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WEBSITE</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .a {
+        width: 100%;
+        display: flex;
+        padding: 25px;
+        background-color: #3c2f2f;
+      }
+      .n {
+        color: wheat;
+        text-decoration: none;
+        font-family: "Courier New", Courier, monospace;
+        font: bold;
+        padding: 25px;
+        font-size: 20px;
+        transition: 1s;
+        border-radius: 20px;
+      }
+      .n:hover {
+        background-color: #fff4e630;
+      }
+
+      .main {
+        display: flex;
+        flex-direction: row;
+      }
+
+      
+      .box1 {
+        position: absolute;
+        width: 300px;
+        height: 500px;
+        border: 2px solid black;
+        background-color: rgb(107, 207, 213);
+        background-size: auto;
+        transition: 2s;
+        text-align: center;
+        margin-left: 550px;
+        margin-top: 150px;
+      }
+
+
+      .box1::after {
+        background-image: url(/gradiant/TLOB.jpg);
+        background-size: cover;
+        content: "";
+        font-size: 40px;
+        position: absolute;
+        /* background-image: linear-gradient(pink, black, grey); */
+        width: 300px;
+        height: 500px;
+        bottom: 0;
+        left: 0;
+        transition: 2s;
+
+      }
+      .box1:hover::after {
+        height: 300px;
+        background-image: url(/gradiant/TLOB.jpg);
+        background-size: cover;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="a">
+      <div><a class="n" href="">Home</a></div>
+      <div><a class="n" href="">Products</a></div>
+      <div><a class="n" href="">Services</a></div>
+      <div><a class="n" href="">About Us</a></div>
+      <div><a class="n" href="">Sign up</a></div>
+      <div><a class="n" href="">Log Out</a></div>
+    </div>
+    <div class="m">
+      <div class="box1"><h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, voluptatum quis! Mollitia id ratione sunt exercitationem fuga neque quo quam.ˀ</h1></div>
+      <!-- <div class="box2"><h1>RICH DAD POOR DAD</h1></div>
+      <div class="box3"><h1>LIFE OF BUDDHA</h1></div> -->
+    </div>
+  </body>
+</html>

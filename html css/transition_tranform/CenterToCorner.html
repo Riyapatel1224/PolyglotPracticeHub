@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition</title>
+    <style>
+        body{
+            background: rgb(210, 225, 210);
+        }
+        .box1{
+            position: relative;
+            border-radius: 20px;
+            width: 200px;
+            height: 200px;
+            margin-left: 42%;
+            margin-top: 250px;
+            border: 2px solid black;
+            background-color: #9FE2BF;
+            transition: 2s;
+            
+        }
+
+        .box1:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(-600px,-220px) rotate(180deg);
+        }
+        .box2{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            background-color: #FF8CC9;
+            border-radius: 20px;
+            transition: 2s;
+            margin-left: -2px;
+            margin-top: -2px;
+        }
+        .box2:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(-2px,-550px) rotate(-180deg);
+
+        }
+
+        .box3{
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            background-color: #C0392B;
+            border-radius: 20px;
+            transition: 2s;
+            position: absolute;
+            margin-top: -2px;
+            margin-left: -2px;
+        }
+        .box3:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(600%,2px) rotate(-180deg);
+        }
+        .box4{
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            background-color: #5D6D7E;
+            border-radius: 20px;
+            transition: 2s;
+            position: relative;
+            margin-top: -2px;
+            margin-left: -2px;
+
+        }
+        .box4:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(2px,550px) rotate(-180deg);
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="box2"><div class="box3"><div class="box4"></div></div></div>
+    </div>
+    
+    
+    
+</body>
+
+</html>

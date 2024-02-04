@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition</title>
+    <style>
+        body{
+            background: rgb(210, 225, 210);
+        }
+        .box1{
+            transition: background-color 0.5s;
+            border-radius: 20px;
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            float: left;
+            text-align: center;
+            background-color: #9FE2BF;
+            transition: 2s;
+        }
+
+        .box1:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(600px,200px) rotate(180deg);
+        }
+        .box2{
+            transition: background-color 0.5s;
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            float: right;
+            text-align: center;
+            background-color: #FF8CC9;
+            border-radius: 20px;
+            transition: 2s;
+
+        }
+        .box2:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(-600px,200px) rotate(180deg);
+        }
+
+        .box3{
+            transition: background-color 0.5s;
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            text-align: center;
+            float: left;
+            position: absolute;
+            top: 73%;
+            background-color: #C0392B;
+            border-radius: 20px;
+            transition: 2s;
+
+        }
+        .box3:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(600px,-300px) rotate(180deg);
+        }
+        .box4{
+            transition: background-color 0.5s;
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            text-align: center;
+            float: right;
+            position: relative;
+            top: 580px;
+            left: 204px;
+            background-color: #5D6D7E;
+            border-radius: 20px;
+            transition: 2s;
+
+        }
+        .box4:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(-600px,-300px) rotate(180deg);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+</body>
+
+</html>

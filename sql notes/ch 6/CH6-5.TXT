@@ -1,0 +1,569 @@
+SQL> 
+SQL> CL SCR
+SP2-1530: Command did not succeed
+SQL> REM E D L C R
+SQL> 
+SQL> REM   D L C R : NJ , IJ USING , IJ ON
+SQL> 
+SQL> 
+SQL> REM DEPARTMENT_NAME , CITY
+SQL> 
+SQL> REM NATURAL JOIN
+SQL> 
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  NATURAL JOIN LOCATIONS;
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  INER JOIN LOCATIONS  USING (LOCATION_ID);
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  INER JOIN LOCATIONS ON DEPARTMENTS.LOCATION_ID = LOCATIONS.LOCATION_ID;
+INER JOIN LOCATIONS ON DEPARTMENTS.LOCATION_ID = LOCATIONS.LOCATION_ID
+                       *
+ERROR at line 3:
+ORA-00904: "DEPARTMENTS"."LOCATION_ID": invalid identifier 
+
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  INNER JOIN LOCATIONS ON DEPARTMENTS.LOCATION_ID = LOCATIONS.LOCATION_ID;
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  JOIN LOCATIONS ON DEPARTMENTS.LOCATION_ID = LOCATIONS.LOCATION_ID;
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS
+  3  
+SQL> SELECT DEPARTMENT_NAME , CITY
+  2  FROM DEPARTMENTS D
+  3  JOIN LOCATIONS   L ON D.LOCATION_ID = L.LOCATION_ID;
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> REM 1 NJ 2 IJ USING 3 IJ ON TABLENAME 4 IJ ON TABLEALIAS
+SQL> 
+SQL> REM 1 CITY , COUNTRY_NAME
+SQL> 
+SQL> REM 2 COUNTRY_NAME , STATE_PROVINCE , DEPARTMENT_NAME
+SQL> 
+SQL> REM 3 CITY , REGION_NAME
+SQL> 
+SQL> REM 4 CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE , REGION_NAME
+SQL> 
+SQL> REM 5 REGION_NAME , DEPARTMENT_NAME
+SQL> 
+SQL> SELECT CITY,COUNTRY_NAME FROM LOCATIONS NATURAL JOIN COUNTRIES;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY, COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES USING(COUNTRY_ID);
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY, COUNTRY_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON C.COUNTRY_ID=L.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> 
+SQL> SELECT COUNTRY_NAME,STATE_PROVINCE,DEPARTMENT_NAME FROM COUNTRIES NATURAL JOIN LOCATIONS NATURAL JOIN DEPARTMENTS;
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT COUNTRY_NAME,STATE_PROVINCE,DEPARTMENT_NAME FROM COUNTRIES INNER JOIN LOCATIONS USING(COUNTRY_ID) INNER JOIN DEPARTMENTS USING(LOCATION_ID);
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT COUNTRY_NAME,STATE_PROVINCE,DEPARTMENT_NAME FROM COUNTRIES C INNER JOIN LOCATIONS L ON (C.COUNTRY_ID=L.COUNTRY_ID) INNER JOIN DEPARTMENTS D ON (L.LOCATION_ID=D.LOCATION_ID);
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS NATURAL JOIN COUNTRIES;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES USING(COUNTRY_ID);
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES ON LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID;SELECT CITY , COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES ON LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID;
+SELECT CITY , COUNTRY_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID;SELECT CITY , COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES ON LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID
+                                                                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT CITY , COUNTRY_NAME FROM LOCATIONS INNER JOIN COUNTRIES ON LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                             
+------------------------------ ----------------------------------------                                                                                                                                 
+Southlake                      United States of America                                                                                                                                                 
+South San Francisco            United States of America                                                                                                                                                 
+Seattle                        United States of America                                                                                                                                                 
+Toronto                        Canada                                                                                                                                                                   
+Oxford                         United Kingdom                                                                                                                                                           
+
+SQL> SELECT COUNTRY_NAME , STATE_PROVINCE ,DEPARTMENT_NAME FROM DEPARTMENTS NATURAL JOIN LOCATIONS NATURAL JOIN COUNTRIES;
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT COUNTRY_NAME , STATE_PROVINCE ,DEPARTMENT_NAME FROM DEPARTMENTS INNER JOIN LOCATIONS USING(LOCATION_ID)INNER JOIN COUNTRIES USING(COUNTRY_ID);
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT COUNTRY_NAME , STATE_PROVINCE ,DEPARTMENT_NAME FROM DEPARTMENTS INNER JOIN LOCATIONS ON DEPARTMENTS.LOCATION_ID = LOCATIONS.LOCATION_ID INNER JOIN COUNTRIES ON LOCATIONS.COUNTRY_ID = COUNTRIES.COUNTRY_ID;
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT COUNTRY_NAME , STATE_PROVINCE ,DEPARTMENT_NAME FROM DEPARTMENTS D INNER JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID;
+
+COUNTRY_NAME                             STATE_PROVINCE            DEPARTMENT_NAME                                                                                                                      
+---------------------------------------- ------------------------- ------------------------------                                                                                                       
+United States of America                 Washington                Administration                                                                                                                       
+Canada                                   Ontario                   Marketing                                                                                                                            
+United States of America                 California                Shiping                                                                                                                              
+United States of America                 Texas                     IT                                                                                                                                   
+United Kingdom                           Oxford                    Sales                                                                                                                                
+United States of America                 Washington                Executive                                                                                                                            
+United States of America                 Washington                Accounting                                                                                                                           
+United States of America                 Washington                Contracting                                                                                                                          
+
+8 rows selected.
+
+SQL> SELECT CITY , REGION_NAME FROM LOCATIONS NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS;
+
+CITY                           REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Southlake                      Americas                                                                                                                                                                 
+South San Francisco            Americas                                                                                                                                                                 
+Seattle                        Americas                                                                                                                                                                 
+Toronto                        Americas                                                                                                                                                                 
+Oxford                         Europe                                                                                                                                                                   
+
+SQL> SELECT CITY , REGION_NAME FROM LOCATIONS INNER JOIN COUNTRIES USING(COUNTRY_ID)
+  2  INNER JOIN REGIONS USING(REGION_ID);
+
+CITY                           REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Southlake                      Americas                                                                                                                                                                 
+South San Francisco            Americas                                                                                                                                                                 
+Seattle                        Americas                                                                                                                                                                 
+Toronto                        Americas                                                                                                                                                                 
+Oxford                         Europe                                                                                                                                                                   
+
+SQL> SELECT CITY , REGION_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_IDINNER JOIN REGIONS R ON C.REGION_ID =  R.REGION_ID;
+SELECT CITY , REGION_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_IDINNER JOIN REGIONS R ON C.REGION_ID =  R.REGION_ID
+                                                                                    *
+ERROR at line 1:
+ORA-00904: "C"."COUNTRY_IDINNER": invalid identifier 
+
+
+SQL> SELECT CITY , REGION_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID INNER JOIN REGIONS R ON C.REGION_ID =  R.REGION_ID;
+
+CITY                           REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Southlake                      Americas                                                                                                                                                                 
+South San Francisco            Americas                                                                                                                                                                 
+Seattle                        Americas                                                                                                                                                                 
+Toronto                        Americas                                                                                                                                                                 
+Oxford                         Europe                                                                                                                                                                   
+
+SQL> SELECT DEPARTMENT_NAME , CITY , STATE_PROVINCE , COUNTRY_NAME , REGION_NAME FROM DEPARTMENTS NATURAL JOIN LOCATIONS NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS;
+
+DEPARTMENT_NAME                CITY                           STATE_PROVINCE            COUNTRY_NAME                             REGION_NAME                                                            
+------------------------------ ------------------------------ ------------------------- ---------------------------------------- -------------------------                                              
+Administration                 Seattle                        Washington                United States of America                 Americas                                                               
+Marketing                      Toronto                        Ontario                   Canada                                   Americas                                                               
+Shiping                        South San Francisco            California                United States of America                 Americas                                                               
+IT                             Southlake                      Texas                     United States of America                 Americas                                                               
+Sales                          Oxford                         Oxford                    United Kingdom                           Europe                                                                 
+Executive                      Seattle                        Washington                United States of America                 Americas                                                               
+Accounting                     Seattle                        Washington                United States of America                 Americas                                                               
+Contracting                    Seattle                        Washington                United States of America                 Americas                                                               
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY , STATE_PROVINCE , COUNTRY_NAME , REGION_NAME FROM DEPARTMENTS
+  2      INNER JOIN LOCATIONS USING(LOCATION_ID) INNER JOIN COUNTRIES USING(COUNTRY_ID) INNER JOIN REGIONS USING(REGION_ID);
+
+DEPARTMENT_NAME                CITY                           STATE_PROVINCE            COUNTRY_NAME                             REGION_NAME                                                            
+------------------------------ ------------------------------ ------------------------- ---------------------------------------- -------------------------                                              
+Administration                 Seattle                        Washington                United States of America                 Americas                                                               
+Marketing                      Toronto                        Ontario                   Canada                                   Americas                                                               
+Shiping                        South San Francisco            California                United States of America                 Americas                                                               
+IT                             Southlake                      Texas                     United States of America                 Americas                                                               
+Sales                          Oxford                         Oxford                    United Kingdom                           Europe                                                                 
+Executive                      Seattle                        Washington                United States of America                 Americas                                                               
+Accounting                     Seattle                        Washington                United States of America                 Americas                                                               
+Contracting                    Seattle                        Washington                United States of America                 Americas                                                               
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , CITY , STATE_PROVINCE , COUNTRY_NAME , REGION_NAME FROM DEPARTMENTS D
+  2      INNER JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID INNER JOIN REGIONS R ON C.REGION_ID = R.REGION_ID;
+
+DEPARTMENT_NAME                CITY                           STATE_PROVINCE            COUNTRY_NAME                             REGION_NAME                                                            
+------------------------------ ------------------------------ ------------------------- ---------------------------------------- -------------------------                                              
+Administration                 Seattle                        Washington                United States of America                 Americas                                                               
+Marketing                      Toronto                        Ontario                   Canada                                   Americas                                                               
+Shiping                        South San Francisco            California                United States of America                 Americas                                                               
+IT                             Southlake                      Texas                     United States of America                 Americas                                                               
+Sales                          Oxford                         Oxford                    United Kingdom                           Europe                                                                 
+Executive                      Seattle                        Washington                United States of America                 Americas                                                               
+Accounting                     Seattle                        Washington                United States of America                 Americas                                                               
+Contracting                    Seattle                        Washington                United States of America                 Americas                                                               
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME ,  REGION_NAME FROM DEPARTMENTS NATURAL JOIN LOCATIONS NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS;
+
+DEPARTMENT_NAME                REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Administration                 Americas                                                                                                                                                                 
+Marketing                      Americas                                                                                                                                                                 
+Shiping                        Americas                                                                                                                                                                 
+IT                             Americas                                                                                                                                                                 
+Sales                          Europe                                                                                                                                                                   
+Executive                      Americas                                                                                                                                                                 
+Accounting                     Americas                                                                                                                                                                 
+Contracting                    Americas                                                                                                                                                                 
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , REGION_NAME FROM DEPARTMENTS
+  2      INNER JOIN LOCATIONS USING(LOCATION_ID) INNER JOIN COUNTRIES USING(COUNTRY_ID) INNER JOIN REGIONS USING(REGION_ID);
+
+DEPARTMENT_NAME                REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Administration                 Americas                                                                                                                                                                 
+Marketing                      Americas                                                                                                                                                                 
+Shiping                        Americas                                                                                                                                                                 
+IT                             Americas                                                                                                                                                                 
+Sales                          Europe                                                                                                                                                                   
+Executive                      Americas                                                                                                                                                                 
+Accounting                     Americas                                                                                                                                                                 
+Contracting                    Americas                                                                                                                                                                 
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME ,  REGION_NAME FROM DEPARTMENTS D
+  2      INNER JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID INNER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID INNER JOIN REGIONS R ON C.REGION_ID = R.REGION_ID;
+
+DEPARTMENT_NAME                REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Administration                 Americas                                                                                                                                                                 
+Marketing                      Americas                                                                                                                                                                 
+Shiping                        Americas                                                                                                                                                                 
+IT                             Americas                                                                                                                                                                 
+Sales                          Europe                                                                                                                                                                   
+Executive                      Americas                                                                                                                                                                 
+Accounting                     Americas                                                                                                                                                                 
+Contracting                    Americas                                                                                                                                                                 
+
+8 rows selected.
+
+SQL> SELECT CITY , REGION_NAME FROM LOCATIONS NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS;
+
+CITY                           REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Southlake                      Americas                                                                                                                                                                 
+South San Francisco            Americas                                                                                                                                                                 
+Seattle                        Americas                                                                                                                                                                 
+Toronto                        Americas                                                                                                                                                                 
+Oxford                         Europe                                                                                                                                                                   
+
+SQL> 
+SQL> SELECT CITY, REGION_NAME FROM LOCATIONS INNER JOIN COUNTRIES USING(COUNTRY_ID) INNER JOIN REGIONS USING(REGION_ID);
+
+CITY                           REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Southlake                      Americas                                                                                                                                                                 
+South San Francisco            Americas                                                                                                                                                                 
+Seattle                        Americas                                                                                                                                                                 
+Toronto                        Americas                                                                                                                                                                 
+Oxford                         Europe                                                                                                                                                                   
+
+SQL> 
+SQL> SELECT CITY, REGION_NAME FROM LOCATIONS L INNER JOIN COUNTRIES C ON(C.COUNTRY_ID=L.COUNTRY_ID) INNER JOIN REGIONS R ON(R.REGION_ID=C.REGION_ID);
+
+CITY                           REGION_NAME                                                                                                                                                              
+------------------------------ -------------------------                                                                                                                                                
+Southlake                      Americas                                                                                                                                                                 
+South San Francisco            Americas                                                                                                                                                                 
+Seattle                        Americas                                                                                                                                                                 
+Toronto                        Americas                                                                                                                                                                 
+Oxford                         Europe                                                                                                                                                                   
+
+SQL> SELECT CITY , DEPARTMENT_NAME, COUNTRY_NAME , STATE_PROVINCE, REGION_NAME FROM LOCATIONS NATURAL JOIN DEPARTMENTS NATURAL JOIN COUNTRIES NATURAL JOIN REGIONS;
+
+CITY                           DEPARTMENT_NAME                COUNTRY_NAME                             STATE_PROVINCE            REGION_NAME                                                            
+------------------------------ ------------------------------ ---------------------------------------- ------------------------- -------------------------                                              
+Seattle                        Administration                 United States of America                 Washington                Americas                                                               
+Toronto                        Marketing                      Canada                                   Ontario                   Americas                                                               
+South San Francisco            Shiping                        United States of America                 California                Americas                                                               
+Southlake                      IT                             United States of America                 Texas                     Americas                                                               
+Oxford                         Sales                          United Kingdom                           Oxford                    Europe                                                                 
+Seattle                        Executive                      United States of America                 Washington                Americas                                                               
+Seattle                        Accounting                     United States of America                 Washington                Americas                                                               
+Seattle                        Contracting                    United States of America                 Washington                Americas                                                               
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT CITY, DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE ,  REGION_NAME FROM LOCATIONS
+  2      INNER JOIN DEPARTMENTS USING(LOCATION_ID) INNER JOIN COUNTRIES USING(COUNTRY_ID) INNER JOIN REGIONS USING(REGION_ID);
+
+CITY                           DEPARTMENT_NAME                COUNTRY_NAME                             STATE_PROVINCE            REGION_NAME                                                            
+------------------------------ ------------------------------ ---------------------------------------- ------------------------- -------------------------                                              
+Seattle                        Administration                 United States of America                 Washington                Americas                                                               
+Toronto                        Marketing                      Canada                                   Ontario                   Americas                                                               
+South San Francisco            Shiping                        United States of America                 California                Americas                                                               
+Southlake                      IT                             United States of America                 Texas                     Americas                                                               
+Oxford                         Sales                          United Kingdom                           Oxford                    Europe                                                                 
+Seattle                        Executive                      United States of America                 Washington                Americas                                                               
+Seattle                        Accounting                     United States of America                 Washington                Americas                                                               
+Seattle                        Contracting                    United States of America                 Washington                Americas                                                               
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> SELECT CITY , DEPARTMENT_NAME , COUNTRY_NAME , STATE_PROVINCE , REGION_NAME FROM LOCATIONS L INNER JOIN DEPARTMENTS D ON(L.LOCATION_ID=D.LOCATION_ID) INNER JOIN COUNTRIES C ON(C.COUNTRY_ID=L.COUNTRY_ID) INNER JOIN REGIONS R ON(C.REGION_ID=R.REGION_ID);
+
+CITY                           DEPARTMENT_NAME                COUNTRY_NAME                             STATE_PROVINCE            REGION_NAME                                                            
+------------------------------ ------------------------------ ---------------------------------------- ------------------------- -------------------------                                              
+Seattle                        Administration                 United States of America                 Washington                Americas                                                               
+Toronto                        Marketing                      Canada                                   Ontario                   Americas                                                               
+South San Francisco            Shiping                        United States of America                 California                Americas                                                               
+Southlake                      IT                             United States of America                 Texas                     Americas                                                               
+Oxford                         Sales                          United Kingdom                           Oxford                    Europe                                                                 
+Seattle                        Executive                      United States of America                 Washington                Americas                                                               
+Seattle                        Accounting                     United States of America                 Washington                Americas                                                               
+Seattle                        Contracting                    United States of America                 Washington                Americas                                                               
+
+8 rows selected.
+
+SQL> SELECT REGION_NAME , DEPARTMENT_NAME FROM REGIONS NATURAL JOIN COUNTRIES NATURAL JOIN LOCATIONS NATURAL JOIN DEPARTMENTS;
+
+REGION_NAME               DEPARTMENT_NAME                                                                                                                                                               
+------------------------- ------------------------------                                                                                                                                                
+Americas                  Administration                                                                                                                                                                
+Americas                  Marketing                                                                                                                                                                     
+Americas                  Shiping                                                                                                                                                                       
+Americas                  IT                                                                                                                                                                            
+Europe                    Sales                                                                                                                                                                         
+Americas                  Executive                                                                                                                                                                     
+Americas                  Accounting                                                                                                                                                                    
+Americas                  Contracting                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> SPOOL OFF
