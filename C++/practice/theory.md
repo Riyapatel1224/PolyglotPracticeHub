@@ -35,3 +35,13 @@ TYPES OF Constructor:
 -------------------------------------------------------------------------------------------------------
 
 **enumeration** : an enum is a way to give names to numbers. It makes it easier to work with specific options or choices in your code, just like picking characters in a game.
+
+-------------------------------------------------------------------------------------------------------
+
+**Overloading** : If we create two or more members having the same name but different in number or type of parameter, it is known as C++ overloading.
+
+    function Overloading : Function Overloading is defined as the process of having two or more function with the same name, but different in parameters is known as function overloading
+
+
+-------------------------------------------------------------------------------------------------------
+**Overriding** : If derived class defines same function as defined in its base class, it is known as function overriding in C++. It is used to achieve runtime polymorphism.
