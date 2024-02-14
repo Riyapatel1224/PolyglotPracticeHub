@@ -38,10 +38,23 @@ TYPES OF Constructor:
 
 -------------------------------------------------------------------------------------------------------
 
+**friend function** : If a function is defined as a friend function in C++, then the protected and private data of a class can be accessed using the function.
+
+By using the keyword friend compiler knows the given function is a friend function.
+
+-------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------
+
 **Overloading** : If we create two or more members having the same name but different in number or type of parameter, it is known as C++ overloading.
 
     function Overloading : Function Overloading is defined as the process of having two or more function with the same name, but different in parameters is known as function overloading
 
-
 -------------------------------------------------------------------------------------------------------
+
 **Overriding** : If derived class defines same function as defined in its base class, it is known as function overriding in C++. It is used to achieve runtime polymorphism.
+
+
+
