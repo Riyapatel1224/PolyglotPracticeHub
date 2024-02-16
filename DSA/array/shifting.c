@@ -1,0 +1,34 @@
+#include <stdio.h>
+#define n 5
+int main()
+{
+    int ar[n], i, temp, shift, j;
+    printf("Enter the elements of array \n");
+    for (i = 0; i < 5; i++)
+        scanf("%d", &ar[i]);
+
+    printf("\nElements in original order are :\n");
+    for (i = 0; i < n; i++)
+        printf(" %d ", ar[i]);
+
+    printf("\nEnter how many times you want to shift array :\n");
+    scanf("%d", &shift);
+
+
+    while(shift)
+    {
+        temp = ar[0];  
+        for (i = 0; i < n-1; i++) 
+        {
+            ar[i] = ar[i + 1];
+        }
+        ar[n - 1] = temp;
+        shift--;
+    }
+
+    printf("\nElements after shifting %d positions to right :\n", shift);
+    for (i = 0; i < n; i++)
+        printf(" %d ", ar[i]);
+
+    return 0;
+}
