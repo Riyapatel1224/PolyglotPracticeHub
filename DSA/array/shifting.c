@@ -16,7 +16,7 @@ int main()
 
     while (shift)
     {
-        if(shift==5)
+        if(shift==n)
         {
             break;
         }
@@ -99,6 +99,7 @@ int main()
 //             shift--;
 //         }
 //     }
+// 
 
 //     printf("\nElements after shifting %d positions to right :\n", shift);
 //     for (i = 0; i < n; i++)
