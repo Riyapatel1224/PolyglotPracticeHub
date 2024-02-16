@@ -44,7 +44,17 @@ By using the keyword friend compiler knows the given function is a friend functi
 
 -------------------------------------------------------------------------------------------------------
 
+**inheritance** :  inheritance is a process in which one object acquires all the properties and behaviors of its parent object automatically. In such way, you can reuse, extend or modify the attributes and behaviors which are defined in other class.
 
+Single inheritance :  When one class inherits another class, it is known as single level inheritance.
+
+Multlevel inheritance : Multilevel inheritance is a process of deriving a class from another derived class.
+
+Hierarchical inheritance : 
+
+Multiple inheritance : Multiple inheritance is the process of deriving a new class that inherits the attributes from two or more classes.
+
+Hybrid inheritance
 
 -------------------------------------------------------------------------------------------------------
 
