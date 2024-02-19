@@ -50,11 +50,13 @@ Single inheritance :  When one class inherits another class, it is known as sing
 
 Multlevel inheritance : Multilevel inheritance is a process of deriving a class from another derived class.
 
-Hierarchical inheritance : 
+Hierarchical inheritance : Hierarchical inheritance is defined as the process of deriving more than one class from a base class.
 
 Multiple inheritance : Multiple inheritance is the process of deriving a new class that inherits the attributes from two or more classes.
 
-Hybrid inheritance
+Hybrid inheritance : Hybrid inheritance is a combination of more than one type of inheritance.
+
+
 
 -------------------------------------------------------------------------------------------------------
 
