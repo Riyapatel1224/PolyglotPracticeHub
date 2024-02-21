@@ -3,16 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>form</title>
-    <script src="./form.js"></script>
+    <title>LOG-IN FORM</title>
+    
+    <style>
+    </style>
 </head>
 <body>
-    Name: <input type="text" id="name"><br><br>
-    Email: <input type="email" id="email"><br><br>
-    lname: <input type="text" id="lname">
+    <div id="box">
+    <form>
+    First Name: <input type="text" id="fname">
+    <span id="nameError"></span><br><br>
 
+    Email: <input type="email" id="email">
+    <span id="emailError"></span><br><br>
+
+    Last Name: <input type="text" id="lname">
+    <span id="lnameError"></span><br>
+    <br>
+
+    </form>
     <button id="submit" onclick="formSubmit()">Click</button>
-
+    </div>
     <p id="output"></p>
+
+
+    <script>
+        function formSubmit()
+        {
+            var fname = document.getElementById("fname");
+            var email = document.getElementById("email");
+            var lname = document.getElementById("lname");
+            var output = document.getElementById("output");
+            var nameError = document.getElementById("nameError");
+            var emailError = document.getElementById("emailError");
+            var lnameError = document.getElementById("lnameError");
+
+            output.innerHTML = "";
+
+
+            if (fname.value.length <= 3 || fname.value!=NaN) {
+                document.getElementById("fname").style.outline = "1px solid red";
+                nameError.innerHTML = "Name has to be atleast 3 character";  
+            } else {
+                document.getElementById("fname").style.outline = "1px solid green";
+                nameError.innerHTML = "";  
+
+                
+
+            }
+
+            if(email.value.indexOf("@") == -1 || email.value.lastIndexOf(".") == -1){
+                document.getElementById('email').style.outline='1px solid red';
+                emailError.innerHTML= 'Please enter a valid e-mail address';
+            }else{
+               document.getElementById('email').style.outline='1px solid green';
+               emailError.innerHTML= '';  
+            }
+
+            if(lname.value==NaN){
+                document.getElementById('lname').style.outline='1px solid green';
+                lnameError.innerHTML= ''; 
+            }else{
+               document.getElementById('lname').style.outline='1px solid red';
+                lnameError.innerHTML= 'Please enter a valid e-mail address';
+            }
+            
+        }
+    </script>
 </body>
 </html>
