@@ -1,6 +1,6 @@
-#include <iostream>
-#include <string>
-using namespace std;
+// #include <iostream>
+// #include <string>
+// using namespace std;
 
 // int change(int i)
 // {
@@ -33,82 +33,82 @@ using namespace std;
 //     return p;
 // }
 
-int main()
-{
-    // int a=10;
-    // int *p = &a;
+// int main()
+// {
+//     int a=10;
+//     int *p = &a;
 
-    // cout << "value : " << *p << endl;
-    // cout << "address : " << p << endl;
+//     cout << "value : " << *p << endl;
+//     cout << "address : " << p << endl;
 
-    // cout << "value : " << a << endl;
-    // cout << "address : " << &a << endl;
+//     cout << "value : " << a << endl;
+//     cout << "address : " << &a << endl;
 
-    // p++;
+//     p++;
 
-    // cout << "value : " << *p << endl;
-    // cout << "address : " << p << endl;
+//     cout << "value : " << *p << endl;
+//     cout << "address : " << p << endl;
 
-    // array
+//     // array
 
-    // int a[5] = {1, 2, 3, 4, 5};  // 1 2 3 4 5
-    // int *p = a;
+//     int a[5] = {1, 2, 3, 4, 5};  // 1 2 3 4 5
+//     int *p = a;
 
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     cout << p[i] << endl;
-    // }
+//     for (int i = 0; i < 5; i++)
+//     {
+//         cout << p[i] << endl;
+//     }
 
-    // cout << p << endl;
+//     cout << p << endl;
 
-    // int a[5] = {1, 2, 3, 4, 5}; // 1 2 3 4 5
-    // int *p = a;
+//     int a[5] = {1, 2, 3, 4, 5}; // 1 2 3 4 5
+//     int *p = a;
 
-    // for (int i = 0; i < 5;i++)
-    // {
-    //     b[i] = a[i];
-    // }
+//     for (int i = 0; i < 5;i++)
+//     {
+//         b[i] = a[i];
+//     }
 
-    // for (int i = 0; i < 5;i++)
-    // {
-    //     cout << p[i] << endl;
-    // }
+//     for (int i = 0; i < 5;i++)
+//     {
+//         cout << p[i] << endl;
+//     }
 
-    // string name = "smit";
-    // string *cpyname = &name;
+//     string name = "smit";
+//     string *cpyname = &name;
 
-    // cout << "cpyname: " << *cpyname;
+//     cout << "cpyname: " << *cpyname;
 
-    // char name[10]="smit";
-    // char *p = name;
+//     char name[10]="smit";
+//     char *p = name;
 
-    // for (int i = 0; i < 4;i++)
-    // {
-    //     cout << "p: " << p[i] << endl;
-    // }
+//     for (int i = 0; i < 4;i++)
+//     {
+//         cout << "p: " << p[i] << endl;
+//     }
 
-    // function
+//     // function
 
-    // int i = 100;
-    // int j=change(i);
-    // cout << "i: " << j;
+//     int i = 100;
+//     int j=change(i);
+//     cout << "i: " << j;
 
-    // function to pointer
+//     // function to pointer
 
-    // int (*p)(int, int) = test;
-    // int (*p2)(int, int) = test2;
-    // p(10,20);
-    // p2(10,20);
+//     int (*p)(int, int) = test;
+//     int (*p2)(int, int) = test2;
+//     p(10,20);
+//     p2(10,20);
 
-    // pointer to function
+//     // pointer to function
 
-    // int x = 10; //001
-    // change(&x); //001
-    // cout<<"value of x is : "<<x;
+//     int x = 10; //001
+//     change(&x); //001
+//     cout<<"value of x is : "<<x;
 
-    // int *p = returnpointer();
+//     int *p = returnpointer();
 
-    // cout << *p << endl;
+//     cout << *p << endl;
 
-    // return 0;
-}
+//     return 0;
+// }
