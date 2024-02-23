@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+</head>
+<body>
+    <form onsubmit="submitHandler(event)">
+        <div>
+
+        <div>
+            <label for="id">ID: </label>
+            <input type="number" id="id">
+            <span id="idError"></span> <br><br>
+        </div>
+
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" id="name">
+            <span id="nameError"></span><br><br>
+        </div>
+
+        <div>
+            <label for="age">Age: </label>
+            <input type="number"  id="age">
+            <span id="ageError"></span><br><br>
+        </div>
+
+        <div>
+            <label for="salary">Salary: </label>
+            <input type="number" id="salary">
+            <span id="salaryError"></span><br><br>
+        </div>
+
+        <div>
+            <label for="blood group">Blood Group: </label>
+            <input type="text" id="bloodGroup">
+            <span id="BGError"></span><br><br>
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+
+        <div id="result"></div>
+        </div>
+    </form>
+
+
+
+
+    <script>
+        function submitHandler(event)
+        {
+            event.preventDefault();
+            
+            const id = document.getElementById("id");
+            const name = document.getElementById("name");
+            const age = document.getElementById("age");
+            const salary = document.getElementById("salary");
+            const bloodGroup = document.getElementById("bloodGroup");
+
+            const idError = document.getElementById("idError");
+            const nameError = document.getElementById("nameError");
+            const ageError = document.getElementById("ageError");
+            const salaryError = document.getElementById("salaryError");
+            const BGError = document.getElementById("BGError");
+
+            const result = document.getElementById("result");
+        
+
+        flag = true;
+        
+        if(isNull(id.value))
+        {
+            idError.innerHTML = "enter a valid ID.";
+            id.style.outline = "1px solid red"; 
+            flag = false;
+        }
+        else
+        {
+            idError.innerHTML="";
+            id.style.outline="1px solid green";
+        }
+
+        if(isNull(name.value))
+        {
+            nameError.innerHTML="enter valid name.";
+            name.style.outline = "1px solid red"; 
+            flag = false;
+        }
+        else
+        {
+            nameError.innerHTML="";
+            name.style.outline="1px solid green";   
+        }
+
+        if(isNull(age.value))
+        {
+            ageError.innerHTML="enter valid age.";
+            age.style.outline="1px solid red";
+            flag = false;
+        }
+        else
+        {
+            ageError.innerHTML="";
+            age.style.outline="1px  solid green";
+        }
+
+        if(isNull(salary.value))
+        {
+            salaryError.innerHTML="enter valid salary.";
+            salary.style.outline="1px solid red";
+            flag=false;
+        }
+        else{
+            salaryError.innerHTML="";
+            salary.style.outline="1px solid green";
+        }
+
+        if(isNull(bloodGroup.value))
+        {
+            BGError.innerHTML="enter valid blood group.";
+            bloodGroup.style.outline="1px solid red";
+            flag=false;
+        }
+        else
+        {
+            BGError.innerHTML="";
+            bloodGroup.style.outline="1px solid green";
+        }
+
+        if(flag)
+        {
+            result.innerHTML = `ID: ${id.value} <br/> Name: ${name.value} <br/> Age: ${age.value} <br/>  Salary: ${salary.value} <br/> Blood Group: ${bloodGroup.value}`;
+        }
+
+    }
+
+        const isNull=(param) => {
+            if(param===""||param===null||param===undefined)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        };
+    </script>
+
+
+</body>
+</html>
+
+<!-- id name age salary(min max) blood group -->

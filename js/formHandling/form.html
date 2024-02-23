@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+<body>
+    
+    <form onsubmit="submitHandler(event)">
+    <div>
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" id="name" >
+            <span id="nameError"></span><br/>
+        </div>
+
+         <div>
+            <label for="email: ">Email: </label>
+            <input type="email" id="email"  >
+            <span id="emailError"></span><br/>
+        </div>
+
+         <div>
+            <label for="age">Age: </label>
+            <input type="number" id="age"  >
+            <span id="ageError"></span><br/>
+        </div>
+
+        <div>
+            <button type="submit" value="submit">Submit</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+    </form>
+
+
+    <script>
+
+        function submitHandler (event){
+            
+            event.preventDefault(); 
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const age = document.getElementById("age");
+            const nameError = document.getElementById("nameError");
+            const emailError = document.getElementById("emailError");
+            const ageError = document.getElementById("ageError");
+            const result = document.getElementById("result");
+
+            flag = true;
+
+            if(isEmpty(name.value)){
+                nameError.innerHTML="name is required field";
+                name.style.outline="2px solid red";
+                flag=false;
+            }
+            else{
+                nameError.innerHTML="";
+                name.style.outline="2px solid green";
+                
+            }
+
+            if(isEmpty(age.value)){
+                ageError.innerHTML="age is required field";
+                age.style.outline="2px solid red";
+                flag=false;
+            }
+            else{
+                ageError.innerHTML="";
+                if(age<18)
+                {
+                    ageError.innerHTML="age must be  greater than 18";
+                    age.style.outline="2px solid red";
+                    flag=false;
+                }
+                else{
+                    age.style.outline="2px solid green";
+                    ageError.innerHTML="";
+                }
+            }
+
+            if(isEmpty(email.value)){
+                emailError.innerHTML="email is required field";
+                email.style.outline="1px solid red";
+                flag=false;
+            }
+            else{
+                emailError.innerHTML="";
+                email.style.outline="2px solid green";
+            }
+
+            if(flag)
+            {
+                result.innerHTML=`Name: ${name} <br/> Age: ${age} <br/> Email: ${email}`;
+            }
+
+        }
+
+        const isEmpty = (param) =>
+        {
+            if(param===""||param===null||param===undefined)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        };
+
+    </script>
+
+
+</body>
+</html>
