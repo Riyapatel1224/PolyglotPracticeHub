@@ -106,4 +106,38 @@ int main()
     // cout << &a << endl;
     // cout << *p << endl;
     // cout << p << endl;
+
+    //------------------------------------------------------------------
+
+    int num,pos,total;
+    cout << "enter how many elements you want: " << endl;
+    cin >> total;
+    int arr[total];
+    int *p = arr;
+    for (int i = 0; i < total; i++)
+    {
+        cin >> p[i];
+    }
+    cout<<"enter the position  of element to be inserted : ";
+    cin >> pos;
+    cout << "enter the element you want to insert: ";
+    cin >> num;
+    total += 1;
+    if (pos < 0 || pos > total)
+    {
+        cout << "INVALID" << endl;
+    }
+    else
+    {
+        for (int i = total;i>pos;i--)
+        {
+            p[i] = p[i - 1];
+        }
+        p[pos] = num;
+        cout << "the array after inserting is : ";
+        for(int i=0;i<total;i++)
+        {
+            cout << arr[i] << " ";
+        }
+    }
 }
