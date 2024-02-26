@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Details</title>
+
+    <style>
+        body{
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 200px 0px;
+   }
+   form{
+      border: 1px solid #ccc;
+      padding: 40px;
+      background-color: white;
+      border-radius: 10px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   }
+   div{
+      margin-bottom: 10px;
+   }
+   button{
+      width: 100%;
+      cursor: pointer;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   }
+   #result{
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+   }
+
+
+    </style>
 </head>
 <body>
     <form onsubmit="submitHandler(event)">
@@ -102,11 +134,18 @@
             age.style.outline="1px solid red";
             flag = false;
         }
-        else
-        {
-            ageError.innerHTML="";
-            age.style.outline="1px  solid green";
+        else{
+
+        if(age.value<18){
+            ageError.innerHTML = "Age should be grater than 18";
+            age.style.outline = "1px solid red";
         }
+        else{
+            ageError.innerHTML = "";
+            age.style.outline = "1px solid green";
+        }
+       
+    }
 
         if(isNull(salary.value))
         {
@@ -115,9 +154,17 @@
             flag=false;
         }
         else{
-            salaryError.innerHTML="";
-            salary.style.outline="1px solid green";
+        salaryError.innerHTML = "";
+        if(salary.value<1800){
+            salaryError.innerHTML = "Salary should not be less than 1800";
+            salary.style.outline = "1px solid red";
+            flag = false;
         }
+        else{
+            salaryError.innerHTML = "";
+            salary.style.outline = "1px solid green";
+        }
+    }
 
         if(isNull(bloodGroup.value))
         {
