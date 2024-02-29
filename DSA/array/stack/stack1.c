@@ -37,25 +37,29 @@ void display()
 
 void pop()
 {
-    int temp;
     if (top == -1)
     {
         printf("\nSTACK UNDERFLOW\n");
     }
     else
     {
-        temp = stack[top];
+        printf("%d pop: \n",stack[top]);
         top--;
     }
 }
 
+int peek()
+{
+    return  stack[top];
+}
+
 int main()
 {
-    int choice, num;
+    int choice, num,p;
 
     while (1)
     {
-        printf("\n\n1.PUSH\n2.POP\n3.DISPLAY\n4.Exit\n");
+        printf("\n\n1.PUSH\n2.POP\n3.DISPLAY\n4.PEEK\n5.Exit\n");
         scanf("%d", &choice);
 
         switch (choice)
@@ -75,6 +79,11 @@ int main()
             break;
 
         case 4:
+            p=peek();
+            printf("Peek element is %d\n", p);
+            break;
+
+        case 5:
             exit(0);
 
         default:
