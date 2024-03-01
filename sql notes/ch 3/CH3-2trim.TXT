@@ -1389,6 +1389,8 @@ HIRE_DATE RTRIM(HIRE_DATE,'8 TRIM('9'FROMTRIM('
 
 20 rows selected.
 
+🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴
+
 SQL> REM HIRE_DATE : REMOVE ALL 0 FROM BOTH THE SIDES : 2 STYLES
 SQL> 
 SQL> SELECT HIRE_DATE , TRIM('0' FROM HIRE_DATE) , LTRIM(RTRIM(HIRE_DATE,'0'),'0') FROM EMPLOYEES;

@@ -1,0 +1,57 @@
+CHAPTER 3 : 1 CHARACTER 2 NUMBER 3 DATE
+
+CHARACTER FUNCTIONS : TYPES OF CHARACTER FUNCTIONS : 
+								1 CASE MANIPULATION FUNCTIONS  
+								2 CHARACTER MANIPULATION FUNCTIONS
+
+1 CASE MANIPULATION FUNCTIONS: 
+
+	1. UPPER : SELECT UPPER('AMar ambAR anthony') FROM DUAL; 
+	2. LOWER : SELECT LOWER('AMar akbaR ANTHONY 123 $%^') FROM DUAL;
+					SELECT UPPER(LAST_NAME) || ' ' ||FIRST_NAME || ' '|| LOWER(EMAIL) "NAME AND 							EMAIL" FROM EMPLOYEES;
+	3.INITCAP : SELECT INITCAP('adu4MARcha^koTHmiR') FROM DUAL;
+					Adu4marcha^Kothmir  
+
+
+
+2 CHARACTER MANIPULATION FUNCTIONS : 
+
+	1.CONCAT : SELECT CONCAT(FIRST_NAME,' ' || LAST_NAME) FROM EMPLOYEES;
+
+	2.LPAD :IT WILL ADD SOME CHARACTERS TO THE LEFT OF INPUT
+			LPAD TAKES 3 ARGUMENTS.
+			FIRST TWO ARGUMENTS ARE MANDATORY, LAST ARGUMENT IS OPTIONAL.
+			
+			SELECT SALARY , LPAD(SALARY,10,'*') FROM EMPLOYEES;
+			O/P:  SALARY LPAD(SALARY,10,'*')                                                                                                                                                                          
+			  ---------- ----------------------------------------                                                                                                                                                     
+     			   24000 *****24000          
+
+	
+	RPAD : IT WILL ADD SOME CHARACTERS TO THE RIGHT OF INPUT
+		   RPAD TAKES 3 ARGUMENTS.
+		   FIRST TWO ARGUMENTS ARE MANDATORY, LAST ARGUMENT IS OPTIONAL.
+		   
+		   SELECT SALARY , LPAD(SALARY,10,'*') , RPAD(SALARY,10,'*') FROM EMPLOYEES;
+		   O/P:    24000            *****24000             4000*****    
+			
+	3.LTRIM : TO REMOVE CHARACTERS FROM LEFT OF THE INPUT.
+			   
+			  SELECT HIRE_DATE , LTRIM(HIRE_DATE,'1') FROM EMPLOYEES;
+			  O/P:   17-JUL-87         7-JUL-87  
+
+	  RTRIM : TO REMOVE CHARACTERS FROM RIGHT OF THE INPUT.
+
+			  SELECT HIRE_DATE , RTRIM(HIRE_DATE,'98') FROM EMPLOYEES;
+			  O/P: 	 21-SEP-89         21-SEP-   
+
+    4.LENGTH : SELECT LENGTH('R A M') FROM DUAL;
+				O/P:      5
+
+	5. TRAILING AND LEADING
+		
+		SELECT LENGTH(TRIM(TRAILING ' ' FROM '  R A M   ')) FROM DUAL;
+		SELECT LENGTH(TRIM(BOTH ' ' FROM '  R A M   ')) FROM DUAL;   
+
+
+TRANSLATE REPLACE   SUBSTR INSTR
