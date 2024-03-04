@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zomato time</title>
+</head>
+<body>
+    
+
+    <script>
+
+        var zOrder="burger";
+        order();
+        function order(zOrder,time){
+            console.log(zOrder);    
+            prepOrder(7000);
+            delivered();
+        }
+
+        function prepOrder(time)
+        {
+            console.log("Your order is in preparation period: ",time);
+            setTimeout(()=>{
+                console.log("Your order is ready and on the way");
+            },time)
+        }
+
+        delivered();
+
+        var count=0;
+        function delivered()
+        {
+            setTimeout(()=>{
+                console.log("Your order has been delivered");
+            },2000)
+        }
+
+    </script>
+</body>
+</html>

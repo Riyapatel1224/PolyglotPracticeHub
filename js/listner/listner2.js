@@ -1,12 +1,18 @@
-document.getElementsByName("circle")[0].addEventListener("click", () => {
-    document.getElementsByName("circle").style.background = "red";
+document.getElementsByName("box")[0].addEventListener("mouseover", () => {
+    document.getElementsByName("box")[0].style.backgroundColor = "red";
 })
 
-document.getElementsByName("circle")[1].addEventListener("dblclick", () => {
-    document.getElementsByName("circle").innerHTML = "Double Click";
+document.getElementsByName("box")[0].addEventListener("click", () => {
+    document.getElementsByName("box")[0].style.height = "200px";
+    document.getElementsByName("box")[0].style.width = "200px";
+    document.getElementsByName("box")[0].style.borderRadius = "0%"
+    document.getElementsByName("box")[0].style.backgroundColor = "teal";
+
 })
 
-document.getElementsByName("circle")[2].addEventListener("mouseover", () => {
-    document.getElementsByName("circle").style.height = 100;
+document.getElementsByName("box")[0].addEventListener("dblclick", () => {
+    document.getElementsByName("box")[0].style.height = "200px";
+    document.getElementsByName("box")[0].style.width = "200px";
+    document.getElementsByName("box")[0].style.borderRadius = "0%"
+    document.getElementsByName("box")[0].style.backgroundColor = "purple";
 })
-
