@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>zomato timeout</title>
+</head>
+<body>
+    <h1>Enter you item</h1><br>
+    <input type="text" id="itemName"><br><br>
+    <button onclick="placeOrder()">Place Order</button>
+    <p id="status">Status: </p>
+    <p id="orderPrep"></p>
+    <p id="delivery"></p>
+
+    <script>
+
+        const status =  document.getElementById("status");
+        const orderPrep =  document.getElementById("orderPrep");
+        const delivery =     document.getElementById("delivery");
+
+
+        function placeOrder(){
+            status.innerText = "Order placed!";
+            setTimeout(orderPreparation, 4000);
+            setTimeout(delivered, 9000)
+        };
+
+        
+        function orderPreparation()
+        {
+            orderPrep.innerText="Order is in preparation period";
+        }
+        
+        function delivered()
+        {
+            delivery.innerText="Order is on the way";
+
+        }
+
+    </script>
+</body>
+</html>
