@@ -60,11 +60,9 @@ int main()
             cout << "computer: " << c1 << endl;
             cout << "user: " << user << endl;
             cout << "continue" << endl;
-
             continue;
         }
     }
-
     return 0;
 }
 
