@@ -26,8 +26,8 @@ int main()
     int snum = 123, gnum, si, sj, sk, gi, gj, gk, bulls = 0, cows = 0;
     cout << "Enter your guess: " << endl;
     cin >> gnum;
-    seperate(gnum, si, sj, sk);
-    seperate(snum, gi, gj, gk);
+    seperate(gnum, gi, gj, gk);
+    seperate(snum, si, sj, sk);
 
     if (si == gi)
     {
@@ -40,8 +40,7 @@ int main()
     if (sk == gk)
     {
         bulls++;
-    }
-
+    }    
     if ((si == gj || si == gk) && si != gi)
     {
         cows++;
