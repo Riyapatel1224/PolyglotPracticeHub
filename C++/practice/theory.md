@@ -66,6 +66,14 @@ Hybrid inheritance : Hybrid inheritance is a combination of more than one type o
 
 -------------------------------------------------------------------------------------------------------
 
+**polymorphism** : one name many forms
+**virtual class**: it is situated in parent class and child class has to have this function.
+
+**abstract class** : the class that contais  at least one pure virtual function , we cannot create 
+                    object for an abstract class.
+**run time polymorphism** : parent class reference child class memory. (AKA polymorphic object)
+                            child class object created at run time. 
+
 **Overriding** : If derived class defines same function as defined in its base class, it is known as function overriding in C++. It is used to achieve runtime polymorphism.
 
 
