@@ -26,6 +26,19 @@ int allZero(int arr[], int n)
     return flag;
 }
 
+int miniElement(int arr[], int n)
+{
+    int min = arr[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] != 0 && (min == 0 || min > arr[i]))
+        {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
 int main()
 {
     int SIZE;
@@ -39,21 +52,14 @@ int main()
         scanf("%d", &arr[i]);
     }
 
-    int flag,count=0;
+    int flag,count=0,min;
     while (1)
     {
         flag = allZero(arr, SIZE);
         if (flag == 1)
         {
             count++;
-            int min = arr[0];
-            for (int i = 1; i < SIZE; i++)
-            {
-                if (arr[i] != 0 && (min == 0 || min > arr[i]))
-                {
-                    min = arr[i];
-                }
-            }
+            min = miniElement(arr, SIZE);
             printf("The minimum element is %d\n", min);
 
             subtract(arr, SIZE, min);
