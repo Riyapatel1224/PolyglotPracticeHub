@@ -70,11 +70,6 @@ void removeQ()
             f = -1;
             r = -1;
         }
-        else if(f==r)
-        {
-            f = -1;
-            r = -1;
-        }
         else if(f==SIZE-1)
         {
             f = 0;
