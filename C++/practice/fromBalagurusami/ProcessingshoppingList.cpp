@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-const m = 50;
+const int m = 50;
 
 class items
 {
@@ -20,8 +20,8 @@ void items::getitem(void)
 {
     cout << "Enter item code: ";
     cin >> itemCode[count];
-    cout << "Enter item code: ";
-    cin >> itemCode[count];
+    cout << "Enter item price: ";
+    cin >> itemPrice[count];
     count++;
 }
 
@@ -69,7 +69,7 @@ int main()
     int x;
     do
     {
-        cout << "\nYou can do the following;"
+        cout << "\nYou can do the following;\n"
              << "Enter appropiate number\n";
         cout << "\n1 : Add an item";
         cout << "\n2 : Display total value";
