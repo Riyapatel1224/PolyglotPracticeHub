@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        const generateQue = () =>{
+            console.log("questions are being generated")
+
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve(['1','2','3','4','5'])
+                },3000)
+            })
+        }
+
+        const giveExam=()=>{
+            console.log("Exam started")
+            generateQue().then((data)=>{
+                console.log(data)
+                console.log("exam ended")
+            })
+        }
+
+        giveExam()
+
+    </script>
+</body>
+</html>

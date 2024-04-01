@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+        const playVideo=()=>{
+            console.log('play video is in progress')
+
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve({
+                        status:"success",
+                        video:"abc.mp4",
+                        pay:'1000'
+                    });
+                },2000);
+            });
+        };
+
+        const paymentforvideo=()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve({
+                        status: "success",
+                        video: "abc.mp4",
+                        payment: '1000'
+                    });
+                },2000);
+            });
+        };
+
+        const youTube=()=>{
+            playVideo().then((videodata)=>{
+                console.log(videodata);
+                paymentforvideo.then((videodata)=>{
+                    console.log(data);
+                })
+            })
+        };
+
+    </script>
+</body>
+</html>
