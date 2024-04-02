@@ -1,15 +1,16 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class Student{
+class Student
+{
 
     int id;
     string name;
     int marks;
 
-    public:
-        void getStudentData(int id,string name, int marks);
-        void printStudentData();
+public:
+    void getStudentData(int id, string name, int marks);
+    void printStudentData();
 };
 
 void Student ::getStudentData(int id, string name, int marks)
@@ -19,7 +20,7 @@ void Student ::getStudentData(int id, string name, int marks)
     this->marks = marks;
 }
 
-void Student :: printStudentData()
+void Student ::printStudentData()
 {
     cout << "id: " << this->id << endl;
     cout << "name: " << this->name << endl;
