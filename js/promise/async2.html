@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+    <script>
+
+        const generatesongs = ()=>{
+
+            console.log("generating songs")
+            const songs = [
+                { title: 'song1', duration: 4 },
+                { title: 'song2', duration: 3 },
+                { title: 'song3', duration: 5 },
+            ]
+
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve(songs);
+                },2000)
+            })
+        }
+
+        const createPlayList=(songs)=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve({
+                        message: "Playlist Created",
+                        songs: songs
+                    })
+                },2000)
+            })
+        }
+
+        const playsongs = async()=>{
+            console.log("playsongs called")
+            const songs = await generatesongs()
+            console.log("songs: ",songs)
+
+            console.log("playlist called")
+            const createplaylist = await createPlayList(songs)
+            console.log("playlist: ", createplaylist)
+            
+        }
+
+        playsongs()
+
+
+
+
+
+    </script>
+</body>
+</html>
