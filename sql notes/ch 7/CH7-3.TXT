@@ -1,0 +1,388 @@
+SQL> 
+SQL> REM SUB QUERY CAN BE USED TO SOLVE QUESTION WHICH HAS HIDDEN QUESTION.
+SQL> 
+SQL> REM DISPLAY THOSE WHO GET SALARY HIGHER THAN Abel.
+SQL> 
+SQL> REM 1 STATIC 2 DYNAMIC
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT LAST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > 11000;
+
+LAST_NAME           SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+King                 24000                                                                                                                                                                              
+Kochhar              17000                                                                                                                                                                              
+De Haan              17000                                                                                                                                                                              
+Hartstein            13000                                                                                                                                                                              
+Higgins              12000                                                                                                                                                                              
+
+SQL> REM DYNAMIC APPROACH :
+SQL> 
+SQL> SELECT LAST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > (SELECT SALARY FROM EMPLOYEES WHERE LAST_NAME = 'Abel');
+
+LAST_NAME           SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+King                 24000                                                                                                                                                                              
+Kochhar              17000                                                                                                                                                                              
+De Haan              17000                                                                                                                                                                              
+Hartstein            13000                                                                                                                                                                              
+Higgins              12000                                                                                                                                                                              
+
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED BEFORE Hartstein
+SQL> 
+SQL> REM 2 DISPLAY THOSE WHO GETS HIGHER COMMISSION_PCT THAN Zlotkey
+SQL> 
+SQL> REM 3 DISPLAY THOSE WHO GET LOWER COMMISSION   A M O U N T  THAN Grant
+SQL> 
+SQL> REM 4 DISPLAY THOSE WHO GET SALARY IN THE RANGE OF SALARY PAID TO Shelley AND Bruce
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED BEFORE Hartstein
+SQL> 
+SQL> SELECT LAST_NAME , HIRE_DATE
+  2  FROM EMPLOYEES
+  3  WHERE HIRE_DATE < (SELECT HIRE_DATE FROM EMPLOYEES WHERE LAST_NAME = 'Hartstein');
+
+LAST_NAME       HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+King            17-JUL-87                                                                                                                                                                               
+Kochhar         21-SEP-89                                                                                                                                                                               
+De Haan         13-JAN-93                                                                                                                                                                               
+Hunold          03-JAN-90                                                                                                                                                                               
+Ernst           21-MAY-91                                                                                                                                                                               
+Rajs            17-OCT-95                                                                                                                                                                               
+Whalen          17-SEP-87                                                                                                                                                                               
+Higgins         07-JUN-94                                                                                                                                                                               
+Gietz           07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> REM 2 DISPLAY THOSE WHO GETS HIGHER COMMISSION_PCT THAN Zlotkey
+SQL> 
+SQL> SELECT LAST_NAME , COMMISSION_PCT
+  2  FROM EMPLOYEES
+  3  WHERE COMMISSION_PCT > (SELECT COMMISSION_PCT FROM EMPLOYEES WHERE LAST_NAME = 'Zlotkey');
+
+LAST_NAME       COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Abel                        .3                                                                                                                                                                          
+Taylor                      .3                                                                                                                                                                          
+
+SQL> REM 3 DISPLAY THOSE WHO GET LOWER COMMISSION   A M O U N T  THAN Grant
+SQL> 
+SQL> SELECT LAST_NAME , SALARY * COMMISSION_PCT
+  2  FROM EMPLOYEES
+  3  WHERE SALARY * COMMISSION_PCT > (SELECT SALARY * COMMISSION_PCT FROM EMPLOYEES WHERE LAST_NAME = 'Grant');
+
+LAST_NAME       SALARY*COMMISSION_PCT                                                                                                                                                                   
+--------------- ---------------------                                                                                                                                                                   
+Zlotkey                          2100                                                                                                                                                                   
+Abel                             3300                                                                                                                                                                   
+Taylor                           2580                                                                                                                                                                   
+
+SQL> REM 4 DISPLAY THOSE WHO GET SALARY IN THE RANGE OF SALARY PAID TO Shelley AND Bruce
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Shelley','Bruce')
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Shelley','Bruce')
+  5  
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Shelley','Bruce'))
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Shelley','Bruce'));
+
+no rows selected
+
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE FIRST_NAME IN ('Shelley','Bruce'))
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE FIRST_NAME IN ('Shelley','Bruce'));
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE FIRST_NAME IN ('Shelley','Bruce'))
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE FIRST_NAME IN ('Shelley','Bruce'))
+  5  ORDER BY 2;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+
+9 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM DISPLAY ALL WHO WERE HIRED OUTSIDE DATES OF : Pat and Lex
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE
+  2  FROM EMPLOYEES
+  3  WHERE HIRE_DATE NOT BETWEEN (SELECT MIN(HIRE_DATE) FROM EMPLOYEES WHERE FIRST_NAME IN ('Pat','Lex'))
+  4                          AND (SELECT MAX(HIRE_DATE) FROM EMPLOYEES WHERE FIRST_NAME IN ('Pat','Lex'))
+  5  ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+
+12 rows selected.
+
+SQL> SELECT * FROM JOB_GRADES;
+
+GRA LOWEST_SAL HIGHEST_SAL                                                                                                                                                                              
+--- ---------- -----------                                                                                                                                                                              
+A         1000        2999                                                                                                                                                                              
+B         3000        5999                                                                                                                                                                              
+C         6000        9999                                                                                                                                                                              
+D        10000       14999                                                                                                                                                                              
+E        15000       24999                                                                                                                                                                              
+F        25000       40000                                                                                                                                                                              
+
+6 rows selected.
+
+SQL> REM 1 DISPLAY THOSE WHO GET SALARY IN 'C' GRADE_LEVEL
+SQL> 
+SQL> REM 2 DISPLAY ALL EXCEPT THOSE WHO GET SALARY IN 'D' GRADE_LEVEL
+SQL> 
+SQL> REM 3 DISPLAY THOSE WHO GET SALARY IN EITHER 'B' OR 'E' GRADE_LEVEL
+SQL> 
+SQL> REM 4 DISPLAY ALL EXCEPT THOSE WHO GET SALARY IN EITHER 'C' OR 'A' GRADE_LEVEL
+SQL> 
+SQL> SELECT * FROM EMPLOYEES ORDER BY SALARY;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'C')
+  4                   AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'C');
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+6 rows selected.
+
+SQL> REM 2 DISPLAY ALL EXCEPT THOSE WHO GET SALARY IN 'D' GRADE_LEVEL
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY NOT BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'D')
+  4                       AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'D');
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+16 rows selected.
+
+SQL> REM 3 DISPLAY THOSE WHO GET SALARY IN EITHER 'B' OR 'E' GRADE_LEVEL
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT LOWEST_SAL FROM EMPLOYEES WHERE GRADE_LEVEL = 'B')
+  4                   AND (SELECT LOWEST_SAL FROM EMPLOYEES WHERE GRADE_LEVEL = 'B')
+  5  OR    SALARY BETWEEN (SELECT LOWEST_SAL FROM EMPLOYEES WHERE GRADE_LEVEL = 'E')
+  6                   AND (SELECT LOWEST_SAL FROM EMPLOYEES WHERE GRADE_LEVEL = 'E')
+  7  ORDER BY 2;
+WHERE SALARY BETWEEN (SELECT LOWEST_SAL FROM EMPLOYEES WHERE GRADE_LEVEL = 'B')
+                                                             *
+ERROR at line 3:
+ORA-00904: "GRADE_LEVEL": invalid identifier 
+
+
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'B')
+  4                   AND (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'B')
+  5  OR    SALARY BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'E')
+  6                   AND (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'E')
+  7  ORDER BY 2;
+
+no rows selected
+
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'B')
+  4                   AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'B')
+  5  OR    SALARY BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'E')
+  6                   AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'E')
+  7  ORDER BY 2;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+8 rows selected.
+
+SQL> REM 4 DISPLAY ALL EXCEPT THOSE WHO GET SALARY IN EITHER 'C' OR 'A' GRADE_LEVEL
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY NOT BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'C')
+  4                       AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'C')
+  5  AND   SALARY BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'A')
+  6                       AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'A')
+  7  ORDER BY 2
+  8  
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY NOT BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'C')
+  4                       AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'C')
+  5  AND   SALARY NOT BETWEEN (SELECT LOWEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'A')
+  6                       AND (SELECT HIGHEST_SAL FROM JOB_GRADES WHERE GRADE_LEVEL = 'A')
+  7  ORDER BY 2;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+12 rows selected.
+
+SQL> SPOOL OFF
