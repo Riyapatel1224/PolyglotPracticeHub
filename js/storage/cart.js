@@ -45,7 +45,6 @@ const loadProducts = () => {
 
         button.addEventListener("click", () => {
 
-            //alert("product added to cart ->"+products[i].name)
             localStorage.setItem("cart", JSON.stringify(products[i]))
             alert("product added to cart ->" + products[i].name)
         })
@@ -55,8 +54,6 @@ const loadProducts = () => {
         prodcutInfoDiv.appendChild(price)
         prodcutInfoDiv.appendChild(description)
         prodcutInfoDiv.appendChild(button)
-
-
         prodDiv.appendChild(prodcutInfoDiv)
         productContainer.appendChild(prodDiv)    
     }
