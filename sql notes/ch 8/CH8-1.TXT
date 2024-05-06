@@ -1,0 +1,286 @@
+SQL> 
+SQL> REM SET OPERATORS :
+SQL> 
+SQL> REM SET OPERATORS : TO VERTICALLY CLUB TWO RESULT SETS.
+SQL> 
+SQL> REM RESULT SET : THE COLUMNS AND ROWS WHICH WE GET AS RESULT OF ANY SELECT STATEMENT.
+SQL> 
+SQL> REM LIST OF SET OPERATORS : 1 UNION ALL 2 UNION 3 INTERSECT 4 MINUS
+SQL> 
+SQL> 
+SQL> REM SHORT SYNTAX FOR USING SET OPERATORS : SELECT ... SET OPERATOR SELECT ... SET OPERATOR SELECT ...
+SQL> 
+SQL> 
+SQL> REM LONG SYNTAX FOR USING SET OPERATORS : SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ... SET OPERATOR SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ...      ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> REM LONG SYNTAX FOR USING SET OPERATORS : (SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ... ORDER BY ... OFFSET ... FETCH ...) SET OPERATOR (SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ...  ORDER BY ... OFFSET ... FETCH ...)    ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> 
+SQL> 
+SQL> REM COMPOUND STATEMENT : WHEN WE USE SET OPERATOR, THE STAEMENT IS CALLED COMPOUND STATEMENT.
+SQL> 
+SQL> 
+SQL> REM UNION ALL : IT WILL SIMPLY CLUB BOTH THE RESULT SETS VERTICALLY. IT WILL KEEP DUPLICATE ROWS. IT WILL KEEP ROWS IN THE SAME ORDER.
+SQL> 
+SQL> REM REMAINING 3 SET OPERATORS PERFORM TWO COMMON TASKS : 1 REMOVES DUPLICATE ROWS 2 SORTS RESULT SET IN ASCENDING ORDER
+SQL> 
+SQL> 
+SQL> REM UNION : IT WILL PERFORM ONLY ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> REM INTERSECT : IT WILL FIRST PICK/CHOOSE/SELECT COMMON ROWS(ROWS WHICH ARE AVAILABLE IN BOTH THE RESULT SETS). + PERFORMS ABOVE TWO COMMON TASKS
+SQL> 
+SQL> REM MINUS : IT WILL FIRST REMOVE COMMON ROWS FROM FIRST RESULT SET. + PERFORMS ABOVE COMMON TASKS.
+SQL> 
+SQL> 
+SQL> SELECT * FROM MPSEMP;
+
+     EMPNO ENAME      JOB               MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                  
+---------- ---------- ---------- ---------- --------- ---------- ---------- ----------                                                                                                                  
+      7839 KING       PRESIDENT             17-NOV-81       7200                    10                                                                                                                  
+      7782 CLARK      MANAGER          7839 09-JUN-81       2450                    10                                                                                                                  
+      7566 JONES      MANAGER          7839 02-APR-81       3000                    20                                                                                                                  
+      7902 FORD       ANALYST          7566 04-DEC-81                  3000         20                                                                                                                  
+      7698 BLAKE      MANAGER          7839 01-MAY-91       2850                    30                                                                                                                  
+      7369 SMITH      CLERK            7902 17-DEC-80        800                    20                                                                                                                  
+      7499 ALLEN      SALESMAN         7698 20-FEB-81       1600        300         30                                                                                                                  
+      7521 WARD       MANAGER          7698 22-FEB-81       2800        500         30                                                                                                                  
+      7654 MARTIN     SALESMAN         7698 28-SEP-81       1399       1400         30                                                                                                                  
+      7788 SCOTT      ANALYST          7566 09-DEC-82       4719       2100         20                                                                                                                  
+      7844 TURNER     SALESMAN         7698 08-SEP-81       1800         30         30                                                                                                                  
+      7876 ADAMS      CLERK            7788 12-JAN-89       1100       1100         20                                                                                                                  
+      7900 JAMES      CLERK            7698 03-DEC-81        900        950         30                                                                                                                  
+      7934 MILLER     CLERK            7782 23-JAN-82       1300                    10                                                                                                                  
+
+14 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+ANALYST                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+CLERK                                                                                                                                                                                                   
+CLERK                                                                                                                                                                                                   
+
+14 rows selected.
+
+SQL> REM RESULT SET 1
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> REM RESULT SET 2
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> REM RESULT SET 3
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM UNION ALL : IT WILL SIMPLY CLUB BOTH THE RESULT SETS VERTICALLY. IT WILL KEEP DUPLICATE ROWS. IT WILL KEEP ROWS IN THE SAME ORDER.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION ALL
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> REM REMAINING 3 SET OPERATORS PERFORM TWO COMMON TASKS : 1 REMOVES DUPLICATE ROWS 2 SORTS RESULT SET IN ASCENDING ORDER
+SQL> 
+SQL> REM UNION : IT WILL PERFORM ONLY ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+PRESIDENT                                                                                                                                                                                               
+
+SQL> REM STEP 1 : PRESIDENT MANAGER CLERK ANALYST    STEP 2 : ANALYST CLERK MANAGER PRESIDENT
+SQL> 
+SQL> REM INTERSECT : IT WILL FIRST PICK/CHOOSE/SELECT COMMON ROWS(ROWS WHICH ARE AVAILABLE IN BOTH THE RESULT SETS). + PERFORMS ABOVE TWO COMMON TASKS
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  INTERSECT
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+
+SQL> REM STEP 1 : MANAGER MANAGER CLERK CLERK CLERK   STEP 2 : MANAGER CLERK     STEP 3 : CLERK MANAGER
+SQL> 
+SQL> REM MINUS : IT WILL FIRST REMOVE COMMON ROWS FROM FIRST RESULT SET. + PERFORMS ABOVE COMMON TASKS.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  MINUS
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  2  MINUS
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+
+SQL> SELECT JOB FROM MPSDEPT WHERE DEPTNO = 20;
+SELECT JOB FROM MPSDEPT WHERE DEPTNO = 20
+       *
+ERROR at line 1:
+ORA-00904: "JOB": invalid identifier 
+
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 20 UNION ALL 30 : COUNT :                   FIRST ROW :                    LAST ROW :
+SQL> 
+SQL> REM 20 UNION     30 : COUNT :                   FIRST ROW :                    LAST ROW :
+SQL> 
+SQL> REM 20 INTERSECT 30 : COUNT :                   FIRST ROW :                    LAST ROW :
+SQL> 
+SQL> REM 20 MINUS     30 : COUNT :                   FIRST ROW :                    LAST ROW :
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 20 UNION ALL 30 : COUNT : 11                FIRST ROW : MANAGER                   LAST ROW : CLERK
+SQL> 
+SQL> REM 20 UNION     30 : COUNT : 4                 FIRST ROW : ANALYST                   LAST ROW : SALESMAN
+SQL> 
+SQL> REM 20 INTERSECT 30 : COUNT : 2                 FIRST ROW : CLERK                     LAST ROW : MANAGER
+SQL> 
+SQL> REM 20 MINUS     30 : COUNT : 1                 FIRST ROW : ANALYST                   LAST ROW :
+SQL> 
+SQL> REM 30 MINUS     20 : COUNT : 1                 FIRST ROW : SALESMAN                  LAST ROW :
+SQL> 
+SQL> 
+SQL> SPOOL OFF
