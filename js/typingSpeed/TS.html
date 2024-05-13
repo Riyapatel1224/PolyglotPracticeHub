@@ -3,27 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .highlight {
-            color: green;
-        }
-        .highlightFalse {
-            color: red;
-        }
-    </style>
 </head>
 
 <body>
-    <h4 id="sentence">HI THIS IS INDIA</h4>
-    <label>Enter letters : </label>
-    <input type="text" name="" id="textMark" onkeyup="highlightWord()">
-    <button onsubmit="time()">submit</button>
-    <p id="result"></p>
 
+    <h4 id="text">hi i am india</h4>
+    <input type="text" id="input" onkeyup="showText()">
+    <input type="button" value="end" onclick="end()">
+    <p id="result"></p>
+    <p id="time"></p>
     <script src="./TS.js"></script>
 </body>
 
 </html>
-

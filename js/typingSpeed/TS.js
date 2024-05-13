@@ -1,50 +1,38 @@
-var correctCount = 0;
-var start,end;
+const text = document.getElementById("text").innerHTML;
+console.log(text);
+const textArray = text.split('');
+console.log(textArray);
 
-function highlightWord() {
+var startTime;
+var endTime;
+var count = 0;
 
-    var sentence = document.getElementById("sentence").textContent;
-    var textmark = document.getElementById("textMark").value.toUpperCase();
-    var result = document.getElementById("time");
-    var highlightedSentence = "";
+const showText = () => {
+    if (count == 0)
+    {
+        startTime = performance.now();  
+        console.log(startTime);
+    }
+    count++;
 
-    
-    for (var i = 0; i < sentence.length; i++) {
-        if (sentence[i] == textmark[i]) {
-            highlightedSentence += '<span class="highlight">' + sentence[i] + '</span>';
-            correctCount++;
+    var input = document.getElementById("input").value;
+    var inputArray = input.split('');
+
+    for (let i = 0; i < inputArray.length; i++)
+    {
+        if (inputArray[i] == textArray[i])
+        {
+            document.getElementById('text').innerHTML = '<span style="color:green;">' + textArray.slice(0, i + 1).join('') + '</span>' + textArray.slice(i + 1).join('');
 
         }
-        else {
-            highlightedSentence = highlightedSentence + sentence[i];
-        }
     }
-    console.log(correctCount);
+}
 
+const end = () => {
+    var time = document.getElementById("time");
+    var endTime = performance.now();
 
-    var sentence = document.getElementById("sentence");
-    sentence.innerHTML = highlightedSentence;
-
-
-
-   
-} 
-
-function time()
-{
-    if (correctCount == 0) {
-        var start = new Date().getTime();
-        console.log(start);
-    }
-
-    if (correctCount == sentence.length) {
-        end = new Date().getTime();
-        console.log(end);
-        var time = (end - start) / 1000;
-        console.log("Time taken:", time, "seconds");
-        var result = document.getElementById("result");
-        result.innerHTML = "You have completed the task in " + time + " seconds";
-    }
-
+    var difference = (endTime - startTime) / 1000;
+    time.innerHTML = (difference+ "sec");
 }
 
