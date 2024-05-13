@@ -31,22 +31,41 @@ void addNode(int num)
 
 void display()
 {
-    struct node *p;
-    int sum;
+        struct node *p;
+        for (p = head; p != NULL;p=p->next)
+        {
+            printf("%d ", p->data);
+        }
+        printf("\n");
+}
 
+
+
+void revDisplay()
+{
+    struct node *p;
+    for (p = last; p != NULL;p=p->prev)
+    {
+        printf(" %d", p->data);
+    }
+    printf("\n");
+}
+
+int addBeg(int num)
+{
+    struct node *temp;
     if (head == NULL)
     {
-        printf("list is empty");
+        addNode(num);
     }
     else
     {
-        p = head;
-        printf("\n");
-        while (p != NULL)
-        {
-            printf("%d ", p->data);
-            p = p->next;
-        }
+        temp = malloc(sizeof(struct node*));
+        temp->data = num;
+        temp->next = head;
+        temp->prev = NULL;
+        head->prev = temp;
+        head = temp;
     }
 }
 
@@ -56,6 +75,8 @@ int main()
     addNode(20);
     addNode(30);
     addNode(40);
+    addBeg(70);
     display();
+    revDisplay();
     return 0;
 }
