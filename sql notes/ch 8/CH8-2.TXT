@@ -1,0 +1,909 @@
+SQL> 
+SQL> REM SET OPERATORS : TO CLUB/COMBINE TWO RESULT SETS VERTICALLY
+SQL> 
+SQL> REM SHORT SYNTAX : SELECT ... SET OPERATOR ... SELECT ... SET OPERATOR SELECT ....
+SQL> 
+SQL> REM LONG SYNTAX : SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ...  SET OPERATOR SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ...     ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> REM LONG SYNTAX : (SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ... ORDER BY ... OFFSET ... FETCH ...) SET OPERATOR (SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ... ORDER BY ... OFFSET ... FETCH ...)     ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> 
+SQL> REM LIST OF SET OPERATORS : 1 UNION ALL 2 UNION 3 INTERSECT 4 MINUS
+SQL> 
+SQL> REM UNION ALL : IT WILL SIMPLY CLUB BOTH THE RESULT SETS VERTICALLY, KEEPING DUPLICATE ROWS AS IT IS AND IN THE SAME ORDER.
+SQL> 
+SQL> REM REMAINING 3 SET OPERATORS PERFORM 2 COMMON TASKS : 1 REMOVES DUPLICATE ROWS 2 SORTS RESULT SET IN ASCENDING ORDER
+SQL> 
+SQL> REM UNION : IT WILL PERFORM ONLY ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> REM INTERSECT : IT WILL FIRST PICK COMMON ROWS OF BOTH THE RESULT SETS. + PERFORMS ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> REM MINUS : IT WILL REMOVE COMMON ROWS FROM FIRST RESULT SET. + PERFORMS ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> 
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> SELECT * FROM MPSEMP;
+
+     EMPNO ENAME      JOB               MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                  
+---------- ---------- ---------- ---------- --------- ---------- ---------- ----------                                                                                                                  
+      7839 KING       PRESIDENT             17-NOV-81       7200                    10                                                                                                                  
+      7782 CLARK      MANAGER          7839 09-JUN-81       2450                    10                                                                                                                  
+      7566 JONES      MANAGER          7839 02-APR-81       3000                    20                                                                                                                  
+      7902 FORD       ANALYST          7566 04-DEC-81                  3000         20                                                                                                                  
+      7698 BLAKE      MANAGER          7839 01-MAY-91       2850                    30                                                                                                                  
+      7369 SMITH      CLERK            7902 17-DEC-80        800                    20                                                                                                                  
+      7499 ALLEN      SALESMAN         7698 20-FEB-81       1600        300         30                                                                                                                  
+      7521 WARD       MANAGER          7698 22-FEB-81       2800        500         30                                                                                                                  
+      7654 MARTIN     SALESMAN         7698 28-SEP-81       1399       1400         30                                                                                                                  
+      7788 SCOTT      ANALYST          7566 09-DEC-82       4719       2100         20                                                                                                                  
+      7844 TURNER     SALESMAN         7698 08-SEP-81       1800         30         30                                                                                                                  
+      7876 ADAMS      CLERK            7788 12-JAN-89       1100       1100         20                                                                                                                  
+      7900 JAMES      CLERK            7698 03-DEC-81        900        950         30                                                                                                                  
+      7934 MILLER     CLERK            7782 23-JAN-82       1300                    10                                                                                                                  
+
+14 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+ANALYST                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+CLERK                                                                                                                                                                                                   
+CLERK                                                                                                                                                                                                   
+
+14 rows selected.
+
+SQL> REM RESULT SET 1
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> REM RESULT SET 2
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> 
+SQL> REM RESULT SET 3
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM UNION ALL
+SQL> 
+SQL> REM UNION ALL : IT WILL SIMPLY CLUB BOTH THE RESULT SETS VERTICALLY, KEEPING DUPLICATE ROWS AS IT IS AND IN THE SAME ORDER.
+SQL> 
+SQL> REM RESULT SET 2
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION ALL
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  2  UNION ALL
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> REM REMAINING 3 SET OPERATORS PERFORM 2 COMMON TASKS : 1 REMOVES DUPLICATE ROWS 2 SORTS RESULT SET IN ASCENDING ORDER
+SQL> 
+SQL> REM UNION : IT WILL PERFORM ONLY ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+PRESIDENT                                                                                                                                                                                               
+
+SQL> REM STEP 1 : PRESIDENT MANAGER CLERK ANALYST         STEP 2 : ANALYST CLERK MANAGER PRESIDENT
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  2  UNION
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+PRESIDENT                                                                                                                                                                                               
+
+SQL> REM STEP 1 : MANAGER ANALYST CLERK PRESIDENT        STEP 2 : ANALYST CLERK MANAGER PRESIDENT
+SQL> 
+SQL> REM INTERSECT : IT WILL FIRST PICK COMMON ROWS OF BOTH THE RESULT SETS. + PERFORMS ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  INTERSECT
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+
+SQL> REM STEP 1 : MANAGER MANAGER CLERK CLERK CLERK    STEP 2 : MANAGER CLERK            STEP 3 : CLERK MANAGER
+SQL> 
+SQL> REM MINUS : IT WILL REMOVE COMMON ROWS FROM FIRST RESULT SET. + PERFORMS ABOVE TWO COMMON TASKS.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  MINUS
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+
+SQL> REM STEP 1 : PRESIDENT
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  2  MINUS
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+
+SQL> REM STEP 1 : ANALYST ANALYST          STEP 2 : ANALYST
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 20 UNION ALL 30 : 1 COUNT :              2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 20 UNION     30 : 1 COUNT :              2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 20 INTERSECT 30 : 1 COUNT :              2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 20 MINUS     30 : 1 COUNT :              2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 20 UNION ALL 30 : 1 COUNT : 11             2 FIRST ROW : MANAGER                   3 LAST ROW : CLERK
+SQL> 
+SQL> REM 20 UNION     30 : 1 COUNT : 4              2 FIRST ROW : ANALYST                   3 LAST ROW : SALESMAN
+SQL> 
+SQL> REM 20 INTERSECT 30 : 1 COUNT : 2              2 FIRST ROW : CLERK                     3 LAST ROW : MANAGER
+SQL> 
+SQL> REM 20 MINUS     30 : 1 COUNT : 1              2 FIRST ROW : ANALYST                   3 LAST ROW :
+SQL> 
+SQL> 
+SQL> 
+SQL> REM PRECEDENCE : TOP TO BOTTOM AND LEFT TO RIGHT
+SQL> 
+SQL> REM () CAN BE USED TO CHANGE THE PRECEDENCE.
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 UNION ALL 20 UNION ALL 30 : 1 COUNT :                2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION ALL 20 UNION     30 : 1 COUNT :                2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION ALL 20 INTERSECT 30 : 1 COUNT :                2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION ALL 20 MINUS     30 : 1 COUNT :                2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 UNION ALL 20 UNION ALL 30 : 1 COUNT : 14                2 FIRST ROW : PRESIDENT                  3 LAST ROW : CLERK
+SQL> 
+SQL> REM 10 UNION ALL 20 UNION     30 : 1 COUNT : 5                 2 FIRST ROW : ANALYST                    3 LAST ROW : SALESMAN
+SQL> 
+SQL> REM 10 UNION ALL 20 INTERSECT 30 : 1 COUNT : 2                 2 FIRST ROW : CLERK                      3 LAST ROW : MANAGER
+SQL> 
+SQL> REM 10 UNION ALL 20 MINUS     30 : 1 COUNT : 2                 2 FIRST ROW : ANALYST                    3 LAST ROW : PRESIDENT
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 UNION 20 UNION ALL 30 : 1 COUNT :                 2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION 20 UNION     30 : 1 COUNT :                 2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION 20 INTERSECT 30 : 1 COUNT :                 2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION 20 INTERSECT 30 : 1 COUNT :                 2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> REM 10 UNION 20 MINUS     30 : 1 COUNT :                 2 FIRST ROW :                   3 LAST ROW :
+SQL> 
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 UNION 20 UNION ALL 30 : 1 COUNT : 10                 2 FIRST ROW : ANALYST                  3 LAST ROW : CLERK
+SQL> 
+SQL> REM 10 UNION 20 UNION     30 : 1 COUNT : 5                  2 FIRST ROW : ANALYST                  3 LAST ROW : SALESMAN
+SQL> 
+SQL> REM 10 UNION 20 INTERSECT 30 : 1 COUNT : 2                  2 FIRST ROW : CLERK                    3 LAST ROW : MANAGER
+SQL> 
+SQL> REM 10 UNION 20 MINUS     30 : 1 COUNT : 2                  2 FIRST ROW : ANALYST                  3 LAST ROW : PRESIDENT
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 INTERSECT 20 UNION ALL 30 :  1 COUNT :                 2 FIRST ROW :                    3 LAST ROW :
+SQL> 
+SQL> REM 10 INTERSECT 20 UNION     30 :  1 COUNT :                 2 FIRST ROW :                    3 LAST ROW :
+SQL> 
+SQL> REM 10 INTERSECT 20 INTERSECT 30 :  1 COUNT :                 2 FIRST ROW :                    3 LAST ROW :
+SQL> 
+SQL> REM 10 INTERSECT 20 MINUS     30 :  1 COUNT :                 2 FIRST ROW :                    3 LAST ROW :
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 INTERSECT 20 UNION ALL 30 :  1 COUNT : 8                2 FIRST ROW : CLERK                   3 LAST ROW : CLERK
+SQL> 
+SQL> REM 10 INTERSECT 20 UNION     30 :  1 COUNT : 3                2 FIRST ROW : CLERK                   3 LAST ROW : SALESMAN
+SQL> 
+SQL> REM 10 INTERSECT 20 INTERSECT 30 :  1 COUNT : 2                2 FIRST ROW : CLERK                   3 LAST ROW : MANAGER
+SQL> 
+SQL> REM 10 INTERSECT 20 MINUS     30 :  1 COUNT : 0                2 FIRST ROW :                         3 LAST ROW :
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 1 10 MINUS 20 UNION ALL 30 : 1 COUNT :                    2 FIRST ROW :                       3 LAST ROW :
+SQL> 
+SQL> REM 2 10 MINUS 20 UNION     30 : 1 COUNT :                    2 FIRST ROW :                       3 LAST ROW :
+SQL> 
+SQL> REM 3 10 MINUS 20 INTERSECT 30 : 1 COUNT :                    2 FIRST ROW :                       3 LAST ROW :
+SQL> 
+SQL> REM 4 10 MINUS 20 MINUS     30 : 1 COUNT :                    2 FIRST ROW :                       3 LAST ROW :
+SQL> 
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 1 10 MINUS 20 UNION ALL 30 : 1 COUNT : 7                   2 FIRST ROW : PRESIDENT                       3 LAST ROW : CLERK
+SQL> 
+SQL> REM 1 10 MINUS 20 UNION     30 : 1 COUNT : 4                   2 FIRST ROW : CLERK                           3 LAST ROW : SALESMAN
+SQL> 
+SQL> REM 1 10 MINUS 20 INTERSECT 30 : 1 COUNT : 0                   2 FIRST ROW :                                 3 LAST ROW :
+SQL> 
+SQL> REM 4 10 MINUS 20 MINUS     30 : 1 COUNT : 1                   2 FIRST ROW : PRESIDENT                       3 LAST ROW :
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 1 10 UNION 20 INTERSECT 30 : COUNT :                       FIRST ROW :                          LAST ROW :
+SQL> 
+SQL> REM 2 10 INTERSECT 20 MINUS 30 : COUNT :                       FIRST ROW :                          LAST ROW :
+SQL> 
+SQL> REM 3 10 MINUS 20 UNION ALL 30 : COUNT :                       FIRST ROW :                          LAST ROW :
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 1 10 UNION 20 INTERSECT 30 : COUNT : 2                       FIRST ROW : CLERK                          LAST ROW : MANAGER
+SQL> 
+SQL> REM 2 10 INTERSECT 20 MINUS 30 : COUNT : 0                      FIRST ROW :                          LAST ROW :
+SQL> 
+SQL> REM 3 10 MINUS 20 UNION ALL 30 : COUNT : 7                      FIRST ROW : PRESIDENT                          LAST ROW : CLERK
+SQL> 
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION ALL
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  4  UNION
+  5  SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+PRESIDENT                                                                                                                                                                                               
+SALESMAN                                                                                                                                                                                                
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION ALL
+  3  (SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  4  UNION
+  5  SELECT JOB FROM MPSEMP WHERE DEPTNO = 30);
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+
+7 rows selected.
+
+SQL> (SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  2  UNION
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 30)
+  4  UNION ALL
+  5  SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION ALL
+  3  SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  4  UNION
+  5  SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+PRESIDENT                                                                                                                                                                                               
+SALESMAN                                                                                                                                                                                                
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10
+  2  UNION ALL
+  3  (SELECT JOB FROM MPSEMP WHERE DEPTNO = 20
+  4  UNION
+  5  SELECT JOB FROM MPSEMP WHERE DEPTNO = 30);
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+
+7 rows selected.
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 10;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 20;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+ANALYST                                                                                                                                                                                                 
+CLERK                                                                                                                                                                                                   
+
+SQL> SELECT JOB FROM MPSEMP WHERE DEPTNO = 30;
+
+JOB                                                                                                                                                                                                     
+----------                                                                                                                                                                                              
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+MANAGER                                                                                                                                                                                                 
+SALESMAN                                                                                                                                                                                                
+SALESMAN                                                                                                                                                                                                
+CLERK                                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> REM 10 UNION 20 INTERSECT 30 : 1 COUNT :            2 : FIRST ROW :                     3 : LAST ROW :
+SQL> 
+SQL> REM 10 UNION (20 INTERSECT 30) : 1 COUNT :            2 : FIRST ROW :                     3 : LAST ROW :
+SQL> 
+SQL> REM 10 INTERSECT (20 MINUS 30) : 1 COUNT :            2 : FIRST ROW :                     3 : LAST ROW :
+SQL> 
+SQL> REM 10 INTERSECT 20 MINUS 30 : 1 COUNT :            2 : FIRST ROW :                     3 : LAST ROW :
+SQL> 
+SQL> REM 10 UNION 20 MINUS 30 : 1 COUNT :            2 : FIRST ROW :                     3 : LAST ROW :
+SQL> 
+SQL> REM 10 UNION (20 MINUS 30) : 1 COUNT :            2 : FIRST ROW :                     3 : LAST ROW :
+SQL> 
+SQL> SPOOL OFF
