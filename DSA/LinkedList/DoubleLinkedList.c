@@ -25,6 +25,7 @@ void addNode(int num)
         tmp->data = num;
         tmp->prev = last;
         tmp->next = NULL;
+        last->next = tmp; 
         last = tmp;
     }
 }
@@ -69,14 +70,51 @@ int addBeg(int num)
     }
 }
 
+int insertAtAnyAfter(int key,int num)
+{
+    struct node *p = head;
+    struct node *tmp=NULL;
+    while (p != NULL)
+    {
+        if(p->data==key)
+        {
+            break;
+        }
+        p = p->next;
+    }
+    if(p==NULL)
+    {
+        printf("\nInvalid key");
+    }
+    else
+    {
+        tmp = malloc(sizeof(struct node));
+        tmp->data = num;
+        tmp->next = p->next;
+        tmp->prev = p;
+        p->next = tmp;
+        tmp->next->prev = tmp;
+
+    }
+}
+
+void delLast()
+{
+    struct node *p = last;
+    last = last->prev;
+    last->next = NULL;
+    free(p);
+}
+
 int main()
 {
     addNode(10);
     addNode(20);
     addNode(30);
     addNode(40);
-    addBeg(70);
+    insertAtAnyAfter(30, 60);
     display();
-    revDisplay();
+    delLast();
+    display();
     return 0;
 }
