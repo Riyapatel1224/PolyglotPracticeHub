@@ -6,3 +6,6 @@ class demo {
         System.out.println(10.10);
     }
 }
+
+//javap
+//java.lang.system
