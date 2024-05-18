@@ -1,10 +1,15 @@
 *{
     margin: 0;
-    padding: 0;
+    padding: 9px;
+}
+
+#h{
+    font-size: 60px;
+    font-style: oblique;
 }
 
 body{
-    background-color: bisque;
+    background-color: #CDE8E5;
     text-align: center;
 } 
 
@@ -34,12 +39,39 @@ body{
     box-shadow: 0 0 1rem rgba(0,0,0,0.3);
     font-size: 8vmin;
     color: black;
+    background-color: #EEF7FF;
 }
 
 #reset-btn{
     padding: 1rem;
     font-size: 1.25rem;
-    background-color: rgba(195, 162, 100, 0.831);
+    background-color: #7AB2B2;
     border-radius: 1rem;
     border: none;
+}
+
+#new-btn{
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #7AB2B2;
+    border-radius: 1rem;
+    border: none;
+}
+
+#msg{
+    color: #4D869C;
+    font-size: 5vmin;
+}
+
+.msg-container{
+    height: 100vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.hide{
+    display: none;
 }
