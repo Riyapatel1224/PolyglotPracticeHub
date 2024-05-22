@@ -7,6 +7,27 @@ struct node
 };
 struct node *head = NULL, *last = NULL;
 
+void display()
+{
+    struct node *p;
+    int sum;
+
+    if (head == NULL)
+    {
+        printf("list is empty");
+    }
+    else
+    {
+        p = head;
+        printf("\n");
+        while (p != NULL)
+        {
+            printf("%d ", p->data);
+            p = p->next;
+        }
+    }
+}
+
 void addnode(int num)
 {
     struct node *temp;
@@ -27,7 +48,7 @@ void addnode(int num)
     }
 }
 
-int addbeg(int num)
+void addbeg(int num)
 {
     struct node *temp;
     if (head == NULL)
@@ -70,32 +91,48 @@ void delLast()
 
 void swapTwo()
 {
-    struct node *p;
-    struct node *q;
-    struct node *temp;
-    p = head;
-    q = p->next;
+    if(head==NULL||head->next==NULL)
+    {
+        printf("\nCANNOT SWAP. LESS THAN ONE DATA\n");
+    }
+    else{
+        struct node *p=head;
+        struct node *q=head->next;
+        struct node *temp;
+        temp = malloc(sizeof(struct node));
+        while (p != NULL && q!=NULL)
+        {
+            temp->data = p->data;
+            p->data = q->data;
+            q->data = temp->data;
 
-    temp = p->data;//
-    p = q;//
-    q = temp;//
+            p = q->next;
+            if(p!=NULL){
+                q = p->next;
+            }
+        }
+
+        display();
+    }
+    
 }
-
-
 
 void rotate()
 {
+    // printf("%d",last->data);
     addbeg(last->data);
     delLast();
 }
 
 int main()
 {
-    addbeg(10);
+    addnode(10);
     addnode(20);
     addnode(30);
-    addnode(40);
+    // addnode(40);
     // rotate();
     swapTwo();
-    // printf("%d",head);
+    // printf("%d\n",head);
+    // printf("p", head);
+    // printf("%d", head->data);
 }
