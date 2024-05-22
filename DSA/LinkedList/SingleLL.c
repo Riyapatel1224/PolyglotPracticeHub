@@ -49,7 +49,7 @@ void addbeg(int num)
 
 void addAtAny(int key, int num)
 {
-    struct node *p, *temp;
+    struct node *p = head, *temp;
     while (p != NULL)
     {
         if (p->data == key)
@@ -61,14 +61,12 @@ void addAtAny(int key, int num)
 
     if (p == NULL)
     {
-        printf("\nKey not Found");
+        printf("\nKey not Found\n");
     }
     else
     {
-
         if (p == last)
         {
-
             addnode(num);
         }
         else
@@ -84,11 +82,10 @@ void addAtAny(int key, int num)
 void display()
 {
     struct node *p;
-    int sum;
 
     if (head == NULL)
     {
-        printf("list is empty");
+        printf("List is empty\n");
     }
     else
     {
@@ -99,6 +96,7 @@ void display()
             printf("%d ", p->data);
             p = p->next;
         }
+        printf("\n");
     }
 }
 
@@ -110,33 +108,40 @@ void sumoflinklist()
 
     while (p != NULL)
     {
-        sum = sum + p->data;
+        sum += p->data;
         p = p->next;
     }
-    // printf("%d  \n",sum);
+
     if (head == NULL)
     {
-        printf("list is empty");
+        printf("List is empty\n");
     }
     else
     {
         p = head;
         printf("\n");
-        while (p < last)
+        while (p != NULL)
         {
-            printf("%d + ", p->data);
+            printf("%d", p->data);
+            if (p->next != NULL)
+            {
+                printf(" + ");
+            }
             p = p->next;
         }
-        printf("\n%d", p->data);
-        printf("\n");
-        p = last;
-        printf("%d = %d", p->data, sum);
+        printf(" = %d\n", sum);
     }
 }
+
 void max()
 {
-    struct node *p;
-    p = head;
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+
+    struct node *p = head;
     int max = p->data;
 
     while (p != NULL)
@@ -147,47 +152,41 @@ void max()
         }
         p = p->next;
     }
-    printf("\n%d", max);
+    printf("\nMaximum value: %d\n", max);
 }
-
-// void delete(int key){
-//     struct node *p;
-//     p = head;
-//     while(p!= NULL){
-//         if( p->data =  key){
-//             free(p);
-//         }
-
-//     }
-// }
 
 void search(int num)
 {
-    struct node *p;
-    p = head;
+    struct node *p = head;
     int flag = 0;
 
     while (p != NULL)
     {
-        if (p->data = num)
+        if (p->data == num)
         {
             flag = 1;
+            break;
         }
         p = p->next;
     }
     if (flag == 1)
     {
-        printf("\nFound");
+        printf("\nFound\n");
     }
     else
     {
-        printf("\nNot Found");
+        printf("\nNot Found\n");
     }
 }
 
 void deleteBeg()
 {
-    struct node *p;
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    struct node *p = head;
     if (head->next == NULL)
     {
         free(head);
@@ -196,7 +195,6 @@ void deleteBeg()
     }
     else
     {
-        p = head;
         head = head->next;
         free(p);
     }
@@ -204,7 +202,11 @@ void deleteBeg()
 
 void delLast()
 {
-    struct node *p;
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
     if (head == last)
     {
         free(head);
@@ -213,7 +215,7 @@ void delLast()
     }
     else
     {
-        p = head;
+        struct node *p = head;
         while (p->next != last)
         {
             p = p->next;
@@ -226,7 +228,6 @@ void delLast()
 
 int main()
 {
-
     addnode(100);
     addnode(10);
     addnode(1);
@@ -235,8 +236,9 @@ int main()
     deleteBeg();
     delLast();
     display();
-    // sumoflinklist();
-    // max();
-    // search(0);
-    //  printf("%d %d %d",head->data,head->next->data,head->next->next->data);
+    sumoflinklist();
+    max();
+    search(10);
+    search(0);
+    return 0;
 }
