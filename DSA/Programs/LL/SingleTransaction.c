@@ -61,9 +61,9 @@ void SingleTransaction()
         struct node *q = p;
         while (q != NULL)
         {
-            // printf("%d q", q->data);
-            // printf("\n");
-            // printf("%d p", p->data);
+            printf("%d q", q->data);
+            printf("\n");
+            printf("%d p", p->data);
             int diff = q->data - p->data;
             // printf("diff %d\n", diff);
             if (diff > maxProfit)
