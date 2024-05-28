@@ -1,4 +1,4 @@
-package com.variable;
+package com.Variable;
 
 
 public class StaticNonStaticVar {
@@ -60,10 +60,10 @@ public class StaticNonStaticVar {
 		
 		int a=10;
 		//cannot creare static varibale inside method reason heap and stack 
-//		static int b; 
+//		static int b1; 
 		
 		System.out.println(a);
-		System.out.println(b);
+//		System.out.println(b1);
 		
 		
 		
