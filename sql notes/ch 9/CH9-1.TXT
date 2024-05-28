@@ -1,0 +1,1019 @@
+SQL> 
+SQL> REM CHAPTER 1 - 8 : SELECT ...
+SQL> 
+SQL> REM SQL SUB LANGUAGES : 1 DQL/DRL 2 DML 3 TCL 4 DDL 5 DCL
+SQL> 
+SQL> REM DQL/DRL : DATA QUERY/RETRIEVAL LANGUAGE : SELECT
+SQL> 
+SQL> REM DML : DATA MANIPULATION LANGUAGE : INSERT UPDATE DELETE        MERGE
+SQL> 
+SQL> REM TCL : TRANSACTION CONTROL LANGUAGE : COMMIT ROLLBACK SAVEPOINT
+SQL> 
+SQL> REM DDL : DATA DEFINITION LANGUAGE : CREATE ALTER DROP TRUNCATE PURGE FLASHBACK        RENAME COMMENT
+SQL> 
+SQL> REM DCL : DATA CONTROL LANGUAGE : GRANT REVOKE
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM CHAPTER 9 :
+SQL> 
+SQL> REM DML : DATA MANIPULATION LANGUAGE : INSERT UPDATE DELETE
+SQL> 
+SQL> REM TCL : TRANSACTION CONTROL LANGUAGE : COMMIT ROLLBACK SAVEPOINT
+SQL> 
+SQL> REM DDL : DATA DEFINITION LANGUAGE : ALTER DROP TRUNCATE PURGE FLASHBACK
+SQL> 
+SQL> REM VERSIONS QUERY : SELECT
+SQL> 
+SQL> REM CONCEPTS : 1 READ CONSISTANCY 2 CONCURRENCY 3 LOCKING 4 DEAD LOCK SITUATION
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DML STATEMENT :
+SQL> 
+SQL> REM INSERT : TO ADD NEW ROWS TO THE EXISTING TABLE
+SQL> 
+SQL> REM UPDATE : TO UPDATE/MODIFY/EDIT/CHANGE EXISTING ROW VALUES
+SQL> 
+SQL> REM DELETE : TO DELETE/REMOVE EXISTING ROWS OF THE TABLE
+SQL> 
+SQL> 
+SQL> 
+SQL> REM MANIPULATION : ANY TYPE OF CHANGES
+SQL> 
+SQL> 
+SQL> 
+SQL> REM SESSION : THE TIME PERIOD BETWEEN LOG-IN AND LOG-OUT
+SQL> 
+SQL> 
+SQL> 
+SQL> REM WITHIN ONE SESSION USER MAY EXECUTE MULTIPLE TRANSACTIONS.
+SQL> 
+SQL> 
+SQL> REM TRANSACTION : BUNCH/GROUP OF DML STATEMENTS EXECUTED ON SINGLE/MULTIPLE TABLES.
+SQL> 
+SQL> 
+SQL> REM ANY CHANGES DONE USING DML STAEMENTS ARE LIMITED TO RAM/MEMORY.
+SQL> 
+SQL> 
+SQL> REM TCL STATEMENTS :
+SQL> 
+SQL> REM COMMIT : TO SAVE THE CURRENT TRANSACTION CHANGES PERMANENTLY IN TABLE/DATABASE/STORAGE MEDIA
+SQL> 
+SQL> REM ROLLBACK : TO UNDO THE CURRENT TRANSACTION CHANGES FROM RAM/MEMORY.
+SQL> 
+SQL> REM SAVEPOINT : TO BREAK TRANSACTION INTO PARTS, SO AFTERWARDS WE CAN USE SAVEPOINT NAME TO UNDO TRANSACTION PARTIALLY.
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TRANSACTION STARTS WHEN WE EXECUTE FIRST DML STATEMENT.
+SQL> 
+SQL> REM TRANSACTION ENDS WHEN WE EXECUTE EITHER COMMIT OR ROLLBACK.
+SQL> 
+SQL> 
+SQL> 
+SQL> DROP TABLE R1;
+DROP TABLE R1
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys 
+
+
+SQL> DROP TABLE R1 CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> CREATE TABLE R1 AS SELECT * FROM REGIONS WHERE 1 = 2;
+
+Table created.
+
+SQL> DESC R1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ REGION_ID                                                                                                         NOT NULL NUMBER
+ REGION_NAME                                                                                                                VARCHAR2(25)
+
+SQL> SELECT * FROM R1;
+
+no rows selected
+
+SQL> REM BELOW DML STATEMENT WILL START NEW TRANSACTION.
+SQL> 
+SQL> REM RAM/MEMORY = 0 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> INSERT INTO R1 VALUES (1,'ASIA');
+
+1 row created.
+
+SQL> REM RAM/MEMORY = 1 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+
+SQL> INSERT INTO R1 VALUES (2,'AMERICA');
+
+1 row created.
+
+SQL> REM RAM/MEMORY = 2 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> REM ROLLBACK : TO UNDO THE CURRENT TRANSACTION CHANGES FROM RAM/MEMORY.
+SQL> 
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+no rows selected
+
+SQL> REM RAM/MEMORY = 0 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> REM ROLLBACK COMMAND HAS COMPLETED THE ABOVE TRANSACTION.
+SQL> 
+SQL> REM BELOW DML STATEMENT WILL START NEW TRANSACTION.
+SQL> 
+SQL> REM RAM/MEMORY = 0 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> INSERT INTO R1 VALUES (1,'ASIA');
+
+1 row created.
+
+SQL> REM RAM/MEMORY = 1 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+
+SQL> INSERT INTO R1 VALUES (2,'AMERICA');
+
+1 row created.
+
+SQL> REM RAM/MEMORY = 2 ROWS , TABLE = 0 ROWS
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> REM COMMIT : TO SAVE THE CURRENT TRANSACTION CHANGES PERMANENTLY IN TABLE/DATABASE/STORAGE MEDIA
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> REM COMMIT COMMAND HAS COMPLETED THE ABOVE TRANSACTION.
+SQL> 
+SQL> REM BELOW DML STATEMENT WILL START NEW TRANSACTION.
+SQL> 
+SQL> REM RAM/MEMORY = 0 ROWS , TABLE = 2 ROWS
+SQL> 
+SQL> INSERT INTO R1 VALUES (3,'AFRICA');
+
+1 row created.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+
+SQL> REM RAM/MEMORY = 1 ROWS , TABLE = 2 ROWS
+SQL> 
+SQL> SAVEPOINT A;
+
+Savepoint created.
+
+SQL> INSERT INTO R1 VALUES (4,'ANTARCTICA');
+
+1 row created.
+
+SQL> REM RAM/MEMORY = 2 ROWS , TABLE = 2 ROWS
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+         4 ANTARCTICA                                                                                                                                                                                   
+
+SQL> REM AT THIS MOMENT WE HAVE 3 CHOICES : 1 SAVE ALL CHANGES 2 UNDO ALL CHANGES 3 UNDO PARTIAL CHANGE AND SAVE REMAINING CHANGE
+SQL> 
+SQL> REM AT THIS MOMENT WE HAVE 3 CHOICES : 1 COMMIT           2 ROLLBACK         3 ROLLBACK TO A; COMMIT;
+SQL> 
+SQL> ROLLBACK TO A;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+
+SQL> REM RAM/MEMORY = 1 ROWS , TABLE = 2 ROWS
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM RAM/MEMORY = 0 ROWS , TABLE = 3 ROWS
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+
+SQL> ROLLBACK TO A;
+ROLLBACK TO A
+*
+ERROR at line 1:
+ORA-01086: savepoint 'A' never established in this session or is invalid 
+
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+
+SQL> REM RAM/MEMORY = 0 ROWS , TABLE = 3 ROWS
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 CREATE TABLE R1 AS SELECT * FROM REGIONS;
+SQL> 
+SQL> REM 2 INSERT A ROW
+SQL> 
+SQL> REM 3 INSERT ANOTHER ROW
+SQL> 
+SQL> REM 4 DISPLAY DATA
+SQL> 
+SQL> REM 5 UNDO THE CHANGES
+SQL> 
+SQL> REM 6 DISPLAY DATA
+SQL> 
+SQL> REM 7 INSERT A ROW
+SQL> 
+SQL> REM 8 INSERT ANOTHER ROW
+SQL> 
+SQL> REM 9 SAVE THE CHANGES
+SQL> 
+SQL> REM 10 DISPLAY DATA
+SQL> 
+SQL> REM 11 TRY TO UNDO THE CHANGES
+SQL> 
+SQL> REM 12 DISPLAY DATA
+SQL> 
+SQL> REM 13 INSERT A ROW
+SQL> 
+SQL> REM 14 CREATE SAVEPOINT NAMED A
+SQL> 
+SQL> REM 15 INSERT ANOTHER ROW
+SQL> 
+SQL> REM 16 DISPLAY DATA
+SQL> 
+SQL> REM 17 UNDO CHANGES PERFORMED AFTER CREATION OF SAVEPOINT A
+SQL> 
+SQL> REM 18 DISPLAY DATA
+SQL> 
+SQL> REM 19 SAVE REMAINING CHANGES
+SQL> 
+SQL> REM 20 DISPLAY DATA
+SQL> 
+SQL> REM 21 DROP TABLE R1;
+SQL> 
+SQL> 
+SQL> DROP TABLE R1;
+
+Table dropped.
+
+SQL> CREATE TABLE R1 AS SELECT * FROM REGIONS WHERE 1 = 2;
+
+Table created.
+
+SQL> REM 2 INSERT A ROW
+SQL> 
+SQL> INSERT INTO R1 VALUES (1,'ASIA');
+
+1 row created.
+
+SQL> REM 3 INSERT ANOTHER ROW
+SQL> 
+SQL> INSERT INTO R1 VALUES (2,'AMERICA');
+
+1 row created.
+
+SQL> REM 4 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> REM 5 UNDO THE CHANGES
+SQL> 
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> REM 6 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+no rows selected
+
+SQL> REM 7 INSERT A ROW
+SQL> 
+SQL> INSERT INTO R1 VALUES (1,'ASIA');
+
+1 row created.
+
+SQL> REM 8 INSERT ANOTHER ROW
+SQL> 
+SQL> INSERT INTO R1 VALUES (2,'AMERICA');
+
+1 row created.
+
+SQL> REM 9 SAVE THE CHANGES
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM 10 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> REM 11 TRY TO UNDO THE CHANGES
+SQL> 
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> REM 12 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+
+SQL> REM 13 INSERT A ROW
+SQL> 
+SQL> INSERT INTO R1 VALUES (3,'AFRICA');
+
+1 row created.
+
+SQL> REM 14 CREATE SAVEPOINT NAMED A
+SQL> 
+SQL> SAVEPOINT A;
+
+Savepoint created.
+
+SQL> REM 15 INSERT ANOTHER ROW
+SQL> 
+SQL> INSERT INTO R1 VALUES (4,'ANTARCTICA');
+
+1 row created.
+
+SQL> REM 16 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+         4 ANTARCTICA                                                                                                                                                                                   
+
+SQL> REM 17 UNDO CHANGES PERFORMED AFTER CREATION OF SAVEPOINT A
+SQL> 
+SQL> ROLLBACK TO A;
+
+Rollback complete.
+
+SQL> REM 18 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+
+SQL> REM 19 SAVE REMAINING CHANGES
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM 20 DISPLAY DATA
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AMERICA                                                                                                                                                                                      
+         3 AFRICA                                                                                                                                                                                       
+
+SQL> DROP TABLE R1;
+
+Table dropped.
+
+SQL> REM INSERT : TO ADD NEW ROWS TO THE EXISTING TABLE.
+SQL> 
+SQL> REM INSERT HAS TWO SYNTAXES : 1 INSERT ... VALUES ... 2 INSERT ... sub query
+SQL> 
+SQL> REM INSERT ... VALUES ... : TO ADD/INSERT SINGLE ROW AT A TIME.
+SQL> 
+SQL> REM INSERT INTO table_name (column list)  VALUES ( value list);
+SQL> 
+SQL> DROP TABLE D1;
+
+Table dropped.
+
+SQL> CREATE TABLE D1 AS SELECT * FROM DEPARTMENTS WHERE 1 = 2;
+
+Table created.
+
+SQL> DESC E1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMPLOYEE_ID                                                                                                       NOT NULL NUMBER(6)
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ LAST_NAME                                                                                                         NOT NULL VARCHAR2(15)
+ EMAIL                                                                                                                      VARCHAR2(10)
+ PHONE_NUMBER                                                                                                               VARCHAR2(20)
+ HIRE_DATE                                                                                                         NOT NULL DATE
+ JOB_ID                                                                                                            NOT NULL VARCHAR2(10)
+ SALARY                                                                                                                     NUMBER(8,2)
+ COMMISSION_PCT                                                                                                             NUMBER(2,2)
+ MANAGER_ID                                                                                                                 NUMBER(6)
+ DEPARTMENT_ID                                                                                                              NUMBER(4)
+
+SQL> DESC D1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DEPARTMENT_ID                                                                                                              NUMBER(4)
+ DEPARTMENT_NAME                                                                                                   NOT NULL VARCHAR2(30)
+ MANAGER_ID                                                                                                                 NUMBER(6)
+ LOCATION_ID                                                                                                                NUMBER(4)
+
+SQL> SELECT * FROM D1;
+
+no rows selected
+
+SQL> INSERT INTO D1 VALUES (10,'ACC',101,1500);
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+
+SQL> INSERT INTO D1 VALUES (20,'RES',NULL,1500);
+
+1 row created.
+
+SQL> INSERT INTO D1 VALUES (30,'SAL','',1500);
+
+1 row created.
+
+SQL> INSERT INTO D1 VALUES (30,'','',1500);
+INSERT INTO D1 VALUES (30,'','',1500)
+                          *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SCOTT"."D1"."DEPARTMENT_NAME") 
+
+
+SQL> INSERT INTO D1 VALUES (40,'HR','',DEFAULT);
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+
+SQL> INSERT INTO D1 VALUES (50,'XYZ',&MID,1500);
+Enter value for mid: 105
+old   1: INSERT INTO D1 VALUES (50,'XYZ',&MID,1500)
+new   1: INSERT INTO D1 VALUES (50,'XYZ',105,1500)
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+
+SQL> INSERT INTO D1 VALUES (&DID,'&DNM',&MID,&LID);
+Enter value for did: 60
+Enter value for dnm: NET
+Enter value for mid: 104
+Enter value for lid: 1500
+old   1: INSERT INTO D1 VALUES (&DID,'&DNM',&MID,&LID)
+new   1: INSERT INTO D1 VALUES (60,'NET',104,1500)
+
+1 row created.
+
+SQL> /
+Enter value for did: 60
+Enter value for dnm: SDFA
+Enter value for mid: 345
+Enter value for lid: 1234
+old   1: INSERT INTO D1 VALUES (&DID,'&DNM',&MID,&LID)
+new   1: INSERT INTO D1 VALUES (60,'SDFA',345,1234)
+
+1 row created.
+
+SQL> /
+Enter value for did: 45
+Enter value for dnm: DSFA
+Enter value for mid: 453
+Enter value for lid: 7654
+old   1: INSERT INTO D1 VALUES (&DID,'&DNM',&MID,&LID)
+new   1: INSERT INTO D1 VALUES (45,'DSFA',453,7654)
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+
+8 rows selected.
+
+SQL> INSERT INTO D1 VALUES (40,DEFAULT,'',DEFAULT);
+INSERT INTO D1 VALUES (40,DEFAULT,'',DEFAULT)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SCOTT"."D1"."DEPARTMENT_NAME") 
+
+
+SQL> REM VALUES : LITERAL , NULL , '' , DEFAULT , SUBSTITUTION VARIABLE , FORMULA , FUNCTION , FORMULA + FUNCTION , SCALAR SUB QUERY , PSEUDOCOLUMN
+SQL> 
+SQL> INSERT INTO D1 VALUES (40*2,INITCAP('&DNM'),100+SQRT(16),(SELECT LOCATIO_ID FROM LOCATIONS WHERE CITY = 'Toronto'));
+Enter value for dnm: networking
+old   1: INSERT INTO D1 VALUES (40*2,INITCAP('&DNM'),100+SQRT(16),(SELECT LOCATIO_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+new   1: INSERT INTO D1 VALUES (40*2,INITCAP('networking'),100+SQRT(16),(SELECT LOCATIO_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+INSERT INTO D1 VALUES (40*2,INITCAP('networking'),100+SQRT(16),(SELECT LOCATIO_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+                                                                       *
+ERROR at line 1:
+ORA-00904: "LOCATIO_ID": invalid identifier 
+
+
+SQL> INSERT INTO D1 VALUES (40*2,INITCAP('&DNM'),100+SQRT(16),(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto'));
+Enter value for dnm: networKING
+old   1: INSERT INTO D1 VALUES (40*2,INITCAP('&DNM'),100+SQRT(16),(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+new   1: INSERT INTO D1 VALUES (40*2,INITCAP('networKING'),100+SQRT(16),(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+
+9 rows selected.
+
+SQL> SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto';
+
+LOCATION_ID                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+       1800                                                                                                                                                                                             
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM INSERT ... sub query
+SQL> 
+SQL> REM INSERT ... sub query : TO ADD SINGLE OR MULTIPLE ROWS FROM EXISTING TABLE.
+SQL> 
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+
+9 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> INSERT INTO D1 SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = 190;
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+10 rows selected.
+
+SQL> INSERT INTO D1 SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID IN (90,60,20);
+
+3 rows created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+
+13 rows selected.
+
+SQL> INSERT INTO D1 SELECT * FROM DEPARTMENTS;
+
+8 rows created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+21 rows selected.
+
+SQL> INSERT INTO D1 SELECT * FROM DEPARTMENTS WHERE 1 = 2;
+
+0 rows created.
+
+SQL> INSERT INTO D1 SELECT * FROM DEPARTMENTS WHERE 1 = 1;
+
+8 rows created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+29 rows selected.
+
+SQL> SET PAGES 100
+SQL> 
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+29 rows selected.
+
+SQL> INSERT INTO R1 (DEPARATMENT_ID , DEPARTMENT_NAME) VALUES (111,'ADSFSA');
+INSERT INTO R1 (DEPARATMENT_ID , DEPARTMENT_NAME) VALUES (111,'ADSFSA')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO D1 (DEPARATMENT_ID , DEPARTMENT_NAME) VALUES (111,'ADSFSA');
+INSERT INTO D1 (DEPARATMENT_ID , DEPARTMENT_NAME) VALUES (111,'ADSFSA')
+                *
+ERROR at line 1:
+ORA-00904: "DEPARATMENT_ID": invalid identifier 
+
+
+SQL> INSERT INTO D1 (DEPARTMENT_ID , DEPARTMENT_NAME) VALUES (111,'ADSFSA');
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+          111 ADSFSA                                                                                                                                                                                    
+
+30 rows selected.
+
+SQL> INSERT INTO D1 (MANAGER_ID , DEPARTMENT_NAME) VALUES (222,'ADSFSA');
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+          111 ADSFSA                                                                                                                                                                                    
+              ADSFSA                                222                                                                                                                                                 
+
+31 rows selected.
+
+SQL> INSERT INTO D1 (LOCATION_ID , DEPARTMENT_NAME) SELECT LOCATION_ID , DEPARTMENT_NAME FROM DEPARTMENTS WHERE DEPARTMENT_NAME LIKE '%g';
+
+4 rows created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   101        1500                                                                                                                                     
+           20 RES                                              1500                                                                                                                                     
+           30 SAL                                              1500                                                                                                                                     
+           40 HR                                                                                                                                                                                        
+           50 XYZ                                   105        1500                                                                                                                                     
+           60 NET                                   104        1500                                                                                                                                     
+           60 SDFA                                  345        1234                                                                                                                                     
+           45 DSFA                                  453        7654                                                                                                                                     
+           80 Networking                            104        1800                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+          111 ADSFSA                                                                                                                                                                                    
+              ADSFSA                                222                                                                                                                                                 
+              Marketing                                        1800                                                                                                                                     
+              Shiping                                          1500                                                                                                                                     
+              Accounting                                       1700                                                                                                                                     
+              Contracting                                      1700                                                                                                                                     
+
+35 rows selected.
+
+SQL> SPOOL OFF
