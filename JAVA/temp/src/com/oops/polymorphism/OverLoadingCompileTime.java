@@ -12,7 +12,7 @@ class ParentOfChild{
 	}
 }
 
-public class OverLoadingCompileTime {
+public class OverLoadingCompileTime extends ParentOfChild{
 	
 	public void shape() {
 		System.out.println("default Shape of child");
