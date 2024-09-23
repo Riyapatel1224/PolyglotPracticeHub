@@ -1,0 +1,26 @@
+!SESSION 2024-09-12 14:04:13.366 -----------------------------------------------
+eclipse.buildId=4.31.0.20240307-1200
+java.version=22.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=en_IN
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/riya/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.java.product -keyring /Users/riya/.eclipse_keyring
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-12 14:04:14.254
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-12 14:04:22.115
+!MESSAGE Logback config file: /Users/riya/Desktop/PolyglotPracticeHub/JAVA/temp/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.0.20240217-1525.xml
+!SESSION 2024-09-12 14:04:35.500 -----------------------------------------------
+eclipse.buildId=4.31.0.20240307-1200
+java.version=22.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=en_IN
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/riya/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.java.product -keyring /Users/riya/.eclipse_keyring
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-12 14:04:36.504
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-12 14:04:39.709
+!MESSAGE Logback config file: /Users/riya/Desktop/PolyglotPracticeHub/JAVA/temp/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.0.20240217-1525.xml
