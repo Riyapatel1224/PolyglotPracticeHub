@@ -7,7 +7,7 @@ class Swiggy{
 		System.out.println("swiggy class default const called...");
 	}
 	public Swiggy(int fund) {
-		System.out.println("swiggy patam..."+fund);
+		System.out.println("swiggy param..."+fund);
 	}
 }
 public class Zomato extends Swiggy {
