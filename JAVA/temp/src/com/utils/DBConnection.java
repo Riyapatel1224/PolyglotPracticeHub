@@ -11,12 +11,16 @@ public class DBConnection {
 	private static String password = "";
 	private static String driverClass = "com.mysql.cj.jdbc.Driver";
 	
-	public static void getDbconnection(){
+	public static Connection getDbconnection(){
+		
+		Connection conn = null;
 		try {
 			Class.forName(driverClass);
 			
+			
+			
 			try {
-				Connection conn = DriverManager.getConnection(connectionURL,userName,password);
+				conn = DriverManager.getConnection(connectionURL, userName, password);
 				
 				if(conn!= null) {
 					System.out.println("Connected to database");
@@ -30,16 +34,15 @@ public class DBConnection {
 				e.printStackTrace();
 			}
 			
-			
-			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return conn;
 	}
 	
-	public static void main(String[] args) {
-		
-		getDbconnection();
-	}
+//	public static void main(String[] args) {
+//		
+//		getDbconnection();
+//	}
 }
