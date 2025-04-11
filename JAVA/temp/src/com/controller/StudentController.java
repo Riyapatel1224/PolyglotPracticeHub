@@ -148,11 +148,41 @@ public class StudentController {
 		}
 	}
 	
+	
+	public void callProcedure() {
+		Connection conn = DBConnection.getDbconnection();
+		
+		if(conn!= null) {
+			try {
+				java.sql.CallableStatement stmt = conn.prepareCall("{CALL GetStudentsByMarks(?,?)}");
+				stmt.setInt(1, 90);
+				stmt.setInt(2, 95);
+				
+				ResultSet rs = stmt.executeQuery();
+				
+				while(rs.next()) {
+					System.out.print(rs.getInt("id"));
+					System.out.print("\t"+rs.getString("name"));
+					System.out.print("\t"+rs.getString("age"));
+					System.out.print("\t"+rs.getInt("marks"));
+					System.out.println();
+				
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		StudentController sc = new StudentController();
 //		sc.addStudent();
 //		sc.deleteStudent(1);
 //		sc.addMulStudents();
-		sc.displayStudents();
+//		sc.displayStudents();
+		sc.callProcedure();
 	}
 }

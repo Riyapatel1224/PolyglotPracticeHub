@@ -2,9 +2,11 @@ package com.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.mysql.cj.jdbc.CallableStatement;
 import com.utils.DBConnection;
 
 
@@ -94,9 +96,36 @@ public class EmployeesController {
 		}
 	}
 	
+	public void callProcedure() {
+		Connection conn = DBConnection.getDbconnection();
+		
+		if(conn!= null) {
+			try {
+				java.sql.CallableStatement stmt = conn.prepareCall("{CALL GetEmployeeById(?)}");
+				stmt.setInt(1, 2);
+				
+				ResultSet rs = stmt.executeQuery();
+				
+				while(rs.next()) {
+					System.out.print(rs.getInt("id"));
+					System.out.print("\t"+rs.getString("name"));
+					System.out.print("\t"+rs.getString("age"));
+					System.out.print("\t"+rs.getInt("marks"));
+				
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		EmployeesController ec = new EmployeesController();
 //		ec.addEmployees();
-		ec.updateEmployees();
+//		ec.updateEmployees();
+		ec.callProcedure();
 	}
 }
