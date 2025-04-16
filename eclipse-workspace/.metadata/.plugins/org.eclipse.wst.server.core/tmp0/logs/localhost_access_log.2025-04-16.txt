@@ -1,0 +1,10 @@
+127.0.0.1 - - [16/Apr/2025:15:01:59 +0530] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:02:00 +0530] "GET /ExpenseTracker/addExpense.jsp HTTP/1.1" 200 2088
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:06:47 +0530] "GET /ExpenseTracker/addExpense.jsp HTTP/1.1" 200 2112
+127.0.0.1 - - [16/Apr/2025:15:16:12 +0530] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:16:13 +0530] "GET /ExpenseTracker/addExpense.jsp HTTP/1.1" 200 2112
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:16:21 +0530] "POST /ExpenseTracker/AddExpenseServlet HTTP/1.1" 404 788
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:17:09 +0530] "GET /ExpenseTracker/addExpense.jsp HTTP/1.1" 200 2113
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:17:16 +0530] "POST /ExpenseTracker/AddExpenseServelet HTTP/1.1" 500 1347
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:18:32 +0530] "POST /ExpenseTracker/AddExpenseServelet HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [16/Apr/2025:15:18:35 +0530] "POST /ExpenseTracker/AddExpenseServelet HTTP/1.1" 200 -

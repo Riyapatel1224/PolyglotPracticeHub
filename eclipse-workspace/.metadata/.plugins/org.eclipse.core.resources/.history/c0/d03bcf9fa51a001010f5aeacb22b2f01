@@ -1,0 +1,39 @@
+package com.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DbConnection {
+	
+	public static Connection getConnection() {
+		Connection con = null;
+		
+		String drivername = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/advjava";
+		
+		String username = "root";
+		String password = "";
+		
+		try {
+			Class.forName(drivername);
+			
+			try {
+				con = DriverManager.getConnection(url,username,password);
+				System.out.println("dbconnected..");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return con;
+		
+	}
+	
+	public static void main(String[] args) {
+		getConnection();
+		
+	}
+}

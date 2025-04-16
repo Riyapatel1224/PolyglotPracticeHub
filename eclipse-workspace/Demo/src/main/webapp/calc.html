@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+
+<style>
+	body {
+	    font-family: Arial, sans-serif;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    height: 100vh;
+	    background-color: #f4f4f4;
+	    margin: 0;
+	}
+
+	.container {
+	    background: white;
+	    padding: 20px;
+	    border-radius: 10px;
+	    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	    text-align: center;
+	    width: 300px;
+	}
+
+	h2 {
+	    margin-bottom: 15px;
+	    color: #333;
+	}
+
+	input[type="number"] {
+	    width: 90%;
+	    padding: 10px;
+	    margin: 10px 0;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    font-size: 16px;
+	}
+
+	.radio-group {
+	    text-align: left;
+	    margin: 10px 0;
+	}
+
+	.radio-group label {
+	    font-size: 16px;
+	    margin-right: 10px;
+	    cursor: pointer;
+	}
+
+	input[type="submit"] {
+	    width: 100%;
+	    padding: 10px;
+	    background-color: #28a745;
+	    border: none;
+	    color: white;
+	    font-size: 18px;
+	    cursor: pointer;
+	    border-radius: 5px;
+	    transition: background 0.3s;
+	}
+
+	input[type="submit"]:hover {
+	    background-color: #218838;
+	}
+</style>
+</head>
+<body>
+
+	<div class="container">
+        <h2>Simple Calculator</h2>
+        <form action="calcServlet" method="post">
+            <input type="number" name="num1" placeholder="Enter Number 1" ><br>
+            <input type="number" name="num2" placeholder="Enter Number 2" ><br>
+
+     
+            <div class="radio-group">
+                <input type="radio" id="add" name="operation" value="add" required>
+                <label for="add">Addition</label>
+				
+				<br>
+                <input type="radio" id="multiply" name="operation" value="multiply">
+                <label for="multiply">Multiplication</label>
+                
+                <br>
+
+                <input type="radio" id="subtract" name="operation" value="subtract">
+                <label for="subtract">Subtraction</label>
+                
+                <br>
+            </div>
+            
+            <input type="submit" value="Calculate">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+127.0.0.1 - - [28/Feb/2025:17:49:19 +0530] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:49:20 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 200 2574
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:49:20 +0530] "GET /Demo/design%20/script.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:49:20 +0530] "GET /Demo/design%20/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:49:26 +0530] "GET /Demo/design%20/Login? HTTP/1.1" 404 780
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:49:40 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:49:57 +0530] "GET /Demo/design%20/Signup? HTTP/1.1" 404 781
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:50:02 +0530] "GET /Demo/design%20/Signup? HTTP/1.1" 404 781
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:50:04 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:50:05 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:50:05 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:56:22 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 200 2652
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:56:26 +0530] "GET /Demo/design%20/Login?userName=riya&password=123 HTTP/1.1" 404 780
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:57:04 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 200 2679
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:57:11 +0530] "POST /Demo/design%20/Login HTTP/1.1" 404 780
+0:0:0:0:0:0:0:1 - - [28/Feb/2025:17:57:15 +0530] "GET /Demo/design%20/index.html HTTP/1.1" 304 -
