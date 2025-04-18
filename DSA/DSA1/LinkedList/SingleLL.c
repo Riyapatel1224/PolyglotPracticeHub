@@ -5,8 +5,7 @@ struct node
 {
     int data;
     struct node *next;
-};
-struct node *head = NULL, *last = NULL;
+};struct node *head = NULL, *last = NULL;
 
 void addnode(int num)
 {
