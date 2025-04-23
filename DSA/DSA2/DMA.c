@@ -1,5 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
+struct Student
+{
+    char name[30];
+    int eng, math, sci;
+    float marks;
+};
 
 void getData(int *p){
 
@@ -59,11 +65,23 @@ int main(){
     //     printf("\n%d", a[i]);
     // }
 
-    int *p;
-    p = calloc(5, sizeof(int));
-    getData(p);
-    printData(p);
-    oddSum(p);
+
+    //--------------------------------
+    // int *p;
+    // p = calloc(5, sizeof(int));
+    // getData(p);
+    // printData(p);
+    // oddSum(p);
+
+    //--------------------------------
+
+    struct Student *s;
+    s = malloc(sizeof(struct student*));
+
+    printf("\nEnter name , marks -> english,maths,sci and marks of the student");
+    scanf("%s%d%d%d%f", &s->name, &s->eng,&s->math,&s->sci,&s->marks);
+
+    printf("\nname %s, marks -> english %d ,maths %d ,sci %d and marks %f of the student", s->name, s->eng, s->math, s->sci, s->marks);
 
     return 0;
 }
