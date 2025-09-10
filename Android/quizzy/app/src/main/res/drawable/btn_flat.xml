@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Solid color (modern purple tone) -->
+    <solid android:color="#6200EE"/> <!-- You can change to your brand color -->
+
+    <!-- Rounded corners -->
+    <corners android:radius="25dp" />
+
+</shape>

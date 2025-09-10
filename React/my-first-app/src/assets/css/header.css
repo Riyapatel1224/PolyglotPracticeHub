@@ -1,0 +1,20 @@
+.header {
+  background: linear-gradient(90deg, #1e3c72, #2a5298); /* smooth gradient */
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 10;
+  z-index: 1000;
+  width: 100%; /* make it full width */
+  border-radius: 0 0 12px 12px; /* rounded bottom for aesthetic */
+  transition: all 0.3s ease;
+}
+
+.header:hover {
+  background: linear-gradient(90deg, #2a5298, #1e3c72); /* hover effect */
+}

@@ -1,0 +1,58 @@
+how to add servlet.jar in your project?
+	right click project -> properties -> java buildpath -> 
+	libraries tab -> class path tap -> add external jar -> 
+	browse -> appachetomcat/lib/servlet-api.jar -> open ->
+	order and export tab -> select all -> apply and close 
+	
+
+----------------------------------------------------------------------------------------
+
+database -> driver -> 
+	step1: 
+			jar file 
+			mysql 		
+		
+		extract that zip file -> then inside the folder 
+			you will get jar file that need to copy into 
+			project->WEB-INF/lib folder 
+		link-->
+		project->right click->properties-> 
+		javabuildpath -> libraries -> class path click -> 
+		right side -> add jar click -> project->web-inf/lib-> select -> 
+		order and export tab click -> select all -> apply and close.
+			
+	step2: 
+			jdbc connection 
+			util -> 		
+			create a class DbConnection 
+			public static Connection getConnection()
+			
+			
+----------------------------------------------------------------------------------------
+			
+
+maven based project installation
+
+select maven project 
+file > new >
+
+uncheck create a simple project 
+location : you can select where you want to create project 
+rest u need to ignore just click on next
+
+in catalog select internal 
+then select maven-archetype-webapp in second box then next
+			
+uncheck create a simple project 
+location : you can select where you want to create project 
+rest u need to ignore just click on next
+
+check for console , whe it says Y:  then press Y
+
+change groupid and artifact Id with project name , in package write only com  then finish
+
+
+			
+			
+			
+			

@@ -1,0 +1,174 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/tvGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_john_doe"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/let_s_start"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/tvYourExams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_exams"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="12dp" />
+
+    <!-- JAVA Exam Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardJavaExam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Exam Title -->
+            <TextView
+                android:id="@+id/tvExamTitleNA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JAVA"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <!-- Not Attempted -->
+            <TextView
+                android:id="@+id/tvExamStatusNA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvExamTitleNA"
+                android:layout_marginTop="6dp"
+                android:text="Not Attempted"
+                android:textSize="14sp"
+                android:textColor="#FF9800"
+                android:fontFamily="sans-serif-medium" />
+
+            <!-- Hidden Progress -->
+            <TextView
+                android:id="@+id/tvProgressNA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvExamTitleNA"
+                android:layout_marginTop="4dp"
+                android:text="Progress: 0%"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressBarNA"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_below="@id/tvProgressNA"
+                android:layout_marginTop="6dp"
+                android:progress="0"
+                android:progressTint="#00A896"
+                android:backgroundTint="#E0E0E0"
+                android:max="100"
+                android:visibility="gone" />
+
+            <!-- Arrow -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_media_next"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:tint="@android:color/darker_gray" />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!-- Python Exam Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPythonExam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Exam Title -->
+            <TextView
+                android:id="@+id/tvExamTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PYTHON"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <!-- Progress Label -->
+            <TextView
+                android:id="@+id/tvProgress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvExamTitle1"
+                android:text="Progress: 64%"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="4dp" />
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_below="@id/tvProgress1"
+                android:layout_marginTop="6dp"
+                android:progress="64"
+                android:progressTint="#00A896"
+                android:backgroundTint="#E0E0E0"
+                android:max="100" />
+
+            <!-- Arrow -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_media_next"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:tint="@android:color/darker_gray" />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

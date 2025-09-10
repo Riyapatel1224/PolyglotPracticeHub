@@ -1,0 +1,40 @@
+<resources>
+    <!-- Brand Colors -->
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="blue_primary">#1565C0</color>
+    <color name="blue_accent">#1E88E5</color>
+    <color name="pink_accent">#FF4081</color>
+
+    <!-- Light / Pastel Backgrounds -->
+<!--    <color name="gradient_start_light">#E3F2FD</color> -->
+<!--    <color name="gradient_center_light">#EDE7F6</color> -->
+<!--    <color name="gradient_end_light">#FCE4EC</color>  -->
+
+    <color name="gradient_start_light">#E6F9E8</color> <!-- Very Light Green -->
+    <color name="gradient_center_light">#C8F0C6</color> <!-- Soft Green -->
+    <color name="gradient_end_light">#A9E79D</color>   <!-- Light Green -->
+
+    <!-- Vibrant Backgrounds -->
+    <color name="gradient_start_vibrant">#6A11CB</color> <!-- Violet -->
+    <color name="gradient_center_vibrant">#2575FC</color> <!-- Blue -->
+    <color name="gradient_end_vibrant">#00C6FF</color>   <!-- Aqua Blue -->
+
+    <color name="gradient_start_dark">#9CA6B0</color> <!-- Grayish Blue -->
+    <color name="gradient_center_dark">#B28DAD</color> <!-- Soft Purple -->
+    <color name="gradient_end_dark">#E37BA9</color>   <!-- Pink -->
+
+    <color name="btn_start">#6A11CB</color>  <!-- Deep Purple -->
+    <color name="btn_end">#FF6FD8</color>    <!-- Vibrant Pink -->
+
+    <color name="gradient_start">#FF6200EE</color> <!-- purple -->
+    <color name="gradient_center">#B28DAD</color>
+    <color name="gradient_end">#FF03DAC5</color>   <!-- teal -->
+
+    <!-- Basic Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_light">#BDBDBD</color>
+    <color name="gray_dark">#424242</color>
+</resources>

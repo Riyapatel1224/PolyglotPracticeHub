@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Agnihotra</string>
+    <string name="latitude">Latitude: --</string>
+    <string name="longitude">Longitude: --</string>
+    <string name="sunrise">Sunrise: --</string>
+    <string name="sunset">Sunset: --</string>
+</resources>
