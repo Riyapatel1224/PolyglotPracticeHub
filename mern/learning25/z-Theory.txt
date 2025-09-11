@@ -1,0 +1,8 @@
+react-hooks : useState,useRef,useMemo,useeffect
+
+hook-form -> register object that will pass on the values 
+             handlesubmit register will pass the data to this function
+             onSubmit={handleSubmit(submitHandler)} : here submitHandler can be named any thing.
+                                                      handleSubmit helps sumbmithandler pass the value and print it 
+                                                      (src/Form/reactHook.jsx)
+
