@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Default color (purple, will be overridden in code) -->
+    <solid android:color="#9C27B0" />
+
+    <!-- Border stroke -->
+    <stroke
+        android:width="2dp"
+        android:color="#888888" />
+</shape>

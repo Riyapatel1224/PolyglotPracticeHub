@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top App Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="16dp">
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_media_previous"
+                android:contentDescription="Back"
+                android:tint="#333333"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Habit"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#333333"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Habit Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etHabitName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Habit name..."
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textSize="16sp"/>
+
+        <!-- Description -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/etHabitDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Short habit description..."
+            android:maxLength="40"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textSize="16sp"/>
+
+        <!-- Color Picker -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Color"
+                android:textSize="16sp"
+                android:textColor="#000000" />
+
+            <View
+                android:id="@+id/colorPreview"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/color_circle" />
+
+        </LinearLayout>
+
+
+        <!-- Frequency -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frequency"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Every Day"
+            android:textColor="#7B1FA2"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:gravity="center_vertical"/>
+
+        <!-- Reminders -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reminders"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvReminders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="19:00"
+            android:textColor="#7B1FA2"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:gravity="center_vertical"/>
+
+        <!-- Start Date -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12.09.2025"
+            android:textColor="#7B1FA2"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <!-- End Date -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Date"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No End"
+            android:textColor="#7B1FA2"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:backgroundTint="#7B1FA2"
+            android:layout_marginTop="24dp"/>
+    </LinearLayout>
+</ScrollView>
