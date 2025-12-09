@@ -1,6 +1,8 @@
 import { Height } from '@mui/icons-material'
 import { Box, CssBaseline, Grid, Typography } from '@mui/material'
 import React from 'react'
+import { DashboardCharts } from './DashboardCharts'
+import { LineChart } from './LineChart'
 
 export const UserDashboard = () => {
 
@@ -38,12 +40,13 @@ export const UserDashboard = () => {
         <Grid size={{ xs: 12, md: 9, sm: 12, lg: 9 }}
           sx={{ ...cardGridStyle, backgroundColor: "white", color: "black", border: "1px solid black", height: "350px" }}
         >
+          <LineChart/>
 
         </Grid>
         <Grid size={{ xs: 12, md: 3, sm: 12, lg: 3 }}
           sx={{ ...cardGridStyle, backgroundColor: "white", color: "black", border: "1px solid black", height: "350px" }}
         >
-          {/* <DashboardCharts /> */}
+          <DashboardCharts />
         </Grid>
 
       </Grid>
