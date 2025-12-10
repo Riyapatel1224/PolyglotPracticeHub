@@ -1,0 +1,22 @@
+<resources>
+    <!-- Background Gradient -->
+    <color name="gradient_start">#4A00E0</color>
+    <color name="gradient_end">#8E2DE2</color>
+
+    <!-- Primary Accent -->
+    <color name="accent">#9C27B0</color> <!-- Purple -->
+
+    <!-- Surfaces / Backgrounds -->
+    <color name="card_bg">#FFFFFF</color>
+    <color name="background">#FDF7FF</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#55FFFFFF</color>
+    <color name="onSurface">#1C1B1F</color>
+    <color name="onSurfaceVariant">#49454F</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primary">#6750A4</color>
+</resources>
