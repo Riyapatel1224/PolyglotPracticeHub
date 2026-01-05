@@ -16,6 +16,18 @@ router.get("/user/:id", (req, res) => {
     })
 })
 
+//req.query
+router.get("/search", (req, res) => {
+    const age = req.query.age
+    const name = req.query.name
+
+    res.json({
+        message: "Query received",
+        age: age,
+        name : name 
+    })
+})
+
 
 // POST /user
 router.post("/user/:id", (req, res) => {
