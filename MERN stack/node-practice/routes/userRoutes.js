@@ -2,22 +2,23 @@ const express = require("express")
 const router = express.Router()
 
 // GET /user API
-router.get("/user", (req, res) => {
+router.get("/user/:id", (req, res) => {
+    const userId = req.params.id
     const user = {
-        id: 1,
+        id: userId,
         name: "riya",
         age: 22
     }
 
     res.json({
-        message: "user api called.",
-        data: user
+        message: "user ID received.",
+        data: { userId ,user}
     })
 })
 
 
 // POST /user
-router.post("/user", (req, res) => {
+router.post("/user/:id", (req, res) => {
     const userData = req.body
     console.log(req.body)
 
