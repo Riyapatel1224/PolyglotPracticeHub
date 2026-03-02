@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon node-practice/FileUpload/app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "joi": "^18.0.2",
+    "mongoose": "^8.23.0",
+    "multer": "^2.1.0",
+    "nodemon": "^3.1.14",
+    "zod": "^4.3.6"
+  }
+}
